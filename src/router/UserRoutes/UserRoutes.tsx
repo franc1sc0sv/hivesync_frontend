@@ -2,6 +2,7 @@ import { RouteObject } from "react-router-dom";
 import { AuthDetector } from "../../components/auth/AuthDetector";
 
 import { ChatPage } from "../../pages/User/Chat/ChatPage";
+import { AddFriends } from "../../pages/User/Chat/addFriends";
 import { ComunityPage } from "../../pages/User/Comunity/ComunityPage";
 import { IndexUserPage } from "../../pages/User/IndexUser/IndexUserPage";
 import { ComunityIndividualPage } from "../../pages/User/ComunityIndividual/ComunityIndividualPage";
@@ -13,6 +14,7 @@ export const UserRoutes: RouteObject = {
   element: <AuthDetector />,
   children: [
     { index: true, element: <IndexUserPage /> }, // Mensajes directos
+    {path: "add-friends", element: <AddFriends />},
     { path: ":id", element: <ChatPage /> }, //Chats individuales
 
     { path: "comunity", element: <ComunityPage /> },
