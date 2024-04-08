@@ -6,15 +6,14 @@ export interface IconProps {
 }
 
 export const UserStatusIcon: React.FC<IconProps> = ({ isActive, pictureRoute }) => {
-    const id = 1;
     return (
         <>
-            <Link to={`:${id}`} className="relative mx-2">
+            <div className="relative">
                 <img className="w-12 h-12 rounded-full object-cover object-center" src={pictureRoute} alt="Profile picture" />
 
                 <span className={`bottom-0 left-7 absolute  w-3.5 h-3.5 
                 ${isActive ? `bg-green-400` : `bg-overlay_2`}  border-2 border-white dark:border-gray-800 rounded-full`}></span>
-            </Link>
+            </div>
         </>
     );
 }
