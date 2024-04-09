@@ -9,7 +9,7 @@ const temporaryRoute = "https://static.fundacion-affinity.org/cdn/farfuture/PVbb
 export const NavBar: React.FC = () => {
     return (
         <>
-            <div className="md:hidden lg:hidden p-4 mx-5 my-2 rounded-lg bg-overlay_2 flex flex-row justify-around items-center">
+            <div className="md:hidden lg:hidden p-4 mx-5 my-5 rounded-lg bg-overlay_2 flex flex-row justify-around items-center">
                 <Link to={"comunity"}>
                     <HiUserGroup className="text-custom_white text-3xl" />
                 </Link>

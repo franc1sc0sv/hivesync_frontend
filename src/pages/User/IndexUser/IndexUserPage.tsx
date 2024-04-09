@@ -32,17 +32,17 @@ const friends: MessageProps[] = [
 
 export const IndexUserPage = () => {
 
-  const id: number = 1;
+  const id = 1;
 
   return (
     <>
-      <div className="h-screen w-full bg-overlay_1 flex flex-col justify-between">
+      <div className="h-screen w-full bg-overlay_1 flex flex-col">
 
         {/* header container */}
         <div className="w-full flex flex-row justify-between items-center">
 
           <div className="w-1/3 p-2">
-            <UserHeader titulo="Mensajes" />
+            <UserHeader title="Mensajes" />
           </div>
 
           <div className="w-auto p-2">
@@ -55,7 +55,7 @@ export const IndexUserPage = () => {
         </div>
 
         {/* active friends container */}
-        <div className="md:hidden lg:hidden p-4 mx-5 rounded-lg bg-overlay_2 flex flex-row items-center  overflow-x-auto">
+        <div className="md:hidden lg:hidden p-5 mx-5 rounded-lg bg-overlay_2 flex flex-row items-center  overflow-x-auto">
           <div className="flex flex-shrink-0 gap-5">
 
             {friends.length === 0 ? (
@@ -81,22 +81,24 @@ export const IndexUserPage = () => {
         </div>
 
         {/*inbox*/}
-        <div className="md:hidden lg:hidden h-[60vh] bg-overlay_2 m-5 rounded-lg overflow-y-auto">
-          {friends.map((friend, index) => (
-            <Link to={`:${id}`} key={index}>
-              <InboxMessage pictureRoute={friend.pictureRoute} isActive={friend.isActive} username={friend.username} messagePreview={friend.messagePreview} timeAgo={friend.timeAgo} />
 
-            </Link>
-          ))}
-        </div>
+          <div className="md:hidden lg:hidden m-5 rounded-lg overflow-y-auto">
+            {friends.map((friend, index) => (
+              <Link to={`:${id}`} key={index}>
+                <InboxMessage pictureRoute={friend.pictureRoute} isActive={friend.isActive} username={friend.username} messagePreview={friend.messagePreview} timeAgo={friend.timeAgo} />
+
+              </Link>
+            ))}
+          </div>
+
 
         {/* Navigation bar */}
-        <div className="my-10">
           <NavBar />
-        </div>
 
       </div>
 
     </>
   );
 };
+
+
