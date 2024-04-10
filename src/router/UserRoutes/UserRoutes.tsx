@@ -7,7 +7,7 @@ import { ComunityPage } from "../../pages/User/Comunity/ComunityPage";
 import { IndexUserPage } from "../../pages/User/IndexUser/IndexUserPage";
 import { ComunityIndividualPage } from "../../pages/User/ComunityIndividual/ComunityIndividualPage";
 import { ServerPage } from "../../pages/User/Servers/ServerPage";
-import { ProfilePage } from "../../pages/User/settings/Profile";
+import { ProfilePage } from "../../pages/User/Profile/Profile";
 
 export const UserRoutes: RouteObject = {
   caseSensitive: true,
