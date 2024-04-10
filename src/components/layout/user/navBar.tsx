@@ -7,25 +7,26 @@ const temporaryRoute = "https://static.fundacion-affinity.org/cdn/farfuture/PVbb
 
 
 export const NavBar: React.FC = () => {
+    const id = 1;
+    const baseRoute = "/app/";
     return (
         <>
             <div className="md:hidden lg:hidden p-4 mx-5 my-5 rounded-lg bg-overlay_2 flex flex-row justify-around items-center">
-                <Link to={"comunity"}>
+                <Link to={`${baseRoute}comunity`}>
                     <HiUserGroup className="text-custom_white text-3xl" />
                 </Link>
 
-                <Link to={"/app"}>
+                <Link to={`${baseRoute}`}>
                     <HiChatBubbleLeftRight className="text-custom_white text-3xl" />
                 </Link>
 
-                <Link to={"/app"}>
+                <Link to={`${baseRoute}`}>
                     <HiMiniBell className="text-custom_white text-3xl" />
                 </Link>
 
-
-                <div className="flex flex-shrink-0">
+                <Link to={`${baseRoute}profile/:${id}`} className="flex flex-shrink-0">
                     <UserStatusIcon pictureRoute={temporaryRoute} isActive={true} />
-                </div>
+                </Link>
             </div>
         </>
     );

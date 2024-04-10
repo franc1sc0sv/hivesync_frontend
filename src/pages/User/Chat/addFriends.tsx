@@ -4,7 +4,7 @@ import { SearchBar } from "../../../components/forms/SearchBar";
 import { HiUserAdd } from "react-icons/hi";
 
 
-export const AddFriends: React.FC = () => {
+export const AddFriendsPage: React.FC = () => {
 
   return (
     <>
@@ -13,7 +13,7 @@ export const AddFriends: React.FC = () => {
         <UserHeader title="Añadir amigos" />
 
 
-        <div className="bg-overlay_2 h-1/3 mx-5 rounded flex flex-col items-center justify-evenly rounded-lg"
+        <div className="bg-overlay_2 h-1/3 mx-5 flex flex-col items-center justify-evenly rounded-lg"
         >
           <HiUserAdd className="text-6xl text-custom_white" />
 
