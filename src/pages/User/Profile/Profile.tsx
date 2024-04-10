@@ -2,6 +2,9 @@ import { NavBar } from "../../../components/layout/user/navBar";
 import { FaAngleDown } from "react-icons/fa";
 import { EditProfileOption } from "../../../components/buttons/EditProfileOption";
 import { ProfileConnections } from "./ProfileConnections";
+import { HiCog } from "react-icons/hi";
+import { Link } from "react-router-dom";
+
 
 
 // testing data
@@ -34,7 +37,10 @@ export const ProfilePage: React.FC = () => {
                 <div className="max-w-2xl mx-4 sm:max-w-sm md:max-w-sm lg:max-w-sm xl:max-w-sm sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto my-5 rounded-lg text-gray-900">
 
                     {/* cover  */}
-                    <div className="rounded-xl h-36 overflow-hidden bg-primary">
+                    <div className="relative rounded-xl h-36 overflow-hidden bg-primary">
+                        <div className="absolute top-0 right-0 p-3">
+                            <HiCog className="text-custom_white text-3xl" />
+                        </div>
                     </div>
 
                     {/* icon */}
