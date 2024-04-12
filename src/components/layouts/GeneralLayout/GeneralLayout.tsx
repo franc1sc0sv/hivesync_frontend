@@ -40,7 +40,7 @@ export const GeneralLayout: React.FC<PropsGeneralLayout> = ({
   showHeader = true
 }) => {
   return (
-    <main className="flex flex-col w-full h-screen p-5 bg-overlay_1">
+    <main className="flex gap-4 flex-col w-full justify-around h-screen p-5 bg-overlay_1">
       {showHeader && <Header title={title} RightComponent={RightComponent} />}
       {children}
       <NavBar links={links} profilePicture={profilePicture} />

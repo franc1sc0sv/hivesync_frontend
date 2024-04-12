@@ -1,4 +1,4 @@
-import { IconProps } from "../../../../components/layout/user/userStatusIcon";
+import { IconProps } from "../../../../components/Icons/userStatusIcon";
 
 interface MessageProps extends IconProps {
   username: string;

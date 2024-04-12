@@ -1,9 +1,6 @@
-import { NavBar } from "../../../components/layouts/GeneralLayout/Components/NavBar";
-import { FaAngleDown } from "react-icons/fa";
 import { EditProfileOption } from "../../../components/buttons/EditProfileOption";
-import { ProfileConnections } from "./ProfileConnections";
+import { ProfileConnections } from "./Components/ProfileConnections";
 import { HiCog } from "react-icons/hi";
-import { Link } from "react-router-dom";
 import { GeneralLayout } from "../../../components/layouts/GeneralLayout/GeneralLayout";
 
 // testing data
@@ -13,13 +10,15 @@ const temporaryRoute =
 interface User {
   username: string;
   about: string;
+  name: string;
   memberSince: string;
   spotify: boolean;
   github: boolean;
 }
 
 const user: User = {
-  username: "Trabis",
+  name: "FJ",
+  username: "franc1sc0_sv",
   about: "En efecto, es una prueba",
   memberSince: "21 de septiembre de 2005",
   spotify: true,
@@ -30,7 +29,7 @@ export const ProfilePage: React.FC = () => {
   return (
     <GeneralLayout>
       {/* cover */}
-      <div className="max-w-2xl mx-4 sm:max-w-sm md:max-w-sm lg:max-w-sm xl:max-w-sm sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto my-5 rounded-lg text-gray-900">
+      <div className="max-w-2xl sm:max-w-sm md:max-w-sm lg:max-w-sm xl:max-w-sm sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto rounded-lg text-gray-900">
         {/* cover  */}
         <div className="relative rounded-xl h-36 overflow-hidden bg-primary">
           <div className="absolute top-0 right-0 p-3">
@@ -52,31 +51,27 @@ export const ProfilePage: React.FC = () => {
       <div className="h-[60%] flex flex-col gap-5 overflow-y-auto">
         {/* Main profile options */}
 
-        <div className="flex flex-col bg-overlay_2 mx-5 rounded-lg ">
-          <div className="flex flex-row items-center gap-3 p-3 mx-3">
-            <h1 className="text-2xl text-custom_white ">{user.username}</h1>
-            <FaAngleDown className="text-custom_white text-xl" />
+        <div className="flex flex-col bg-overlay_2 rounded-lg p-3 gap-2 ">
+          <div className="flex gap-1 flex-col">
+            <p className="text-2xl text-custom_white ">{user.name}</p>
+            <p className="text-sm text-gray ">{user.username}</p>
+
           </div>
 
-          <div className="my-3 w-full flex flex-row justify-evenly items-center">
-            <div className="w-auto">
-              <EditProfileOption title="Añadir estado" option={true} />
-            </div>
-
-            <div className="w-auto">
-              <EditProfileOption title="Editar perfil" option={false} />
-            </div>
+          <div className="w-full flex flex-row justify-between items-center">
+            <EditProfileOption title="Añadir estado" option={true} />
+            <EditProfileOption title="Editar perfil" option={false} />
           </div>
         </div>
 
         {/* user info */}
-        <div className="flex flex-col bg-overlay_2 mx-5 rounded-lg ">
-          <div className="flex flex-col  gap-3 p-3 mx-3 text-custom_white">
+        <div className="flex flex-col bg-overlay_2 rounded-lg p-3 gap-3">
+          <div className="flex flex-col  text-custom_white">
             <h3 className="text-lg">Sobre mi</h3>
             <p className="text-gray">{user.about}</p>
           </div>
 
-          <div className="flex flex-col  gap-3 p-3 mx-3 text-custom_white">
+          <div className="flex flex-col  text-custom_white">
             <h3 className="text-lg">Miembro de HiveSync desde</h3>
             <p className="text-gray">{user.memberSince}</p>
           </div>
@@ -91,7 +86,7 @@ export const ProfilePage: React.FC = () => {
         />
 
         {/* your friends */}
-        <div className="flex flex-row bg-overlay_2 justify-around items-center mx-5 rounded-lg p-3">
+        <div className="flex flex-row bg-overlay_2 justify-between items-center rounded-lg p-3">
           <h1 className="text-custom_white">Tus amigos</h1>
 
           <div className="flex -space-x-4 rtl:space-x-reverse">

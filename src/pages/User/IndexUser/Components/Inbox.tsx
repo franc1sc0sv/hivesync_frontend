@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import { InboxMessage } from "../../../../components/layout/user/inboxMessage";
+import { InboxMessage } from "./InboxMessage";
 import { MessageProps } from "../types/Messages";
 
 export const Inbox = ({ friends = [] }: { friends: MessageProps[] }) => {
   const id = 1;
 
   return (
-    <div className="m-5 overflow-y-auto rounded-lg md:hidden lg:hidden">
+    <div className="overflow-y-auto rounded-lg md:hidden lg:hidden flex flex-col gap-4">
       {friends?.map((friend, index) => (
         <Link to={`:${id}`} key={index}>
           <InboxMessage
