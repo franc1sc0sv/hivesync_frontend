@@ -15,7 +15,7 @@ export const PasswordInput: React.FC = () => {
     if (inputRef.current) {
       const passwordInput = inputRef.current;
       passwordInput.type = showPassword ? "password" : "text";
-    } 
+    }
 
   };
 
@@ -31,7 +31,7 @@ export const PasswordInput: React.FC = () => {
         />
         <div className="absolute inset-y-0 right-0 flex items-center pr-3">
           <button type="submit">
-            {!showPassword ? <RiEyeCloseLine className="text-xl text-custom_white " onClick={passwordVisibility} /> : <RiEyeLine className="text-xl text-custom_white " onClick={passwordVisibility}/>}
+            {!showPassword ? <RiEyeCloseLine className="text-xl text-custom_white " onClick={passwordVisibility} /> : <RiEyeLine className="text-xl text-custom_white " onClick={passwordVisibility} />}
           </button>
         </div>
       </div>

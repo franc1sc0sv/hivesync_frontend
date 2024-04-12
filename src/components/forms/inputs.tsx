@@ -4,8 +4,8 @@ type InputInformation = {
     type?: "text" | "email"
 
 }
- 
-export const InputsForms: React.FC <InputInformation> = ({title,placeholder,type}) => {
+
+export const InputsForms: React.FC<InputInformation> = ({ title, placeholder, type }) => {
     return (<>
         <div className="flex flex-col gap-4 w-3/5">
             <h3 className="text-lg text-custom_white font-almarai font-bold ">{title}</h3>
