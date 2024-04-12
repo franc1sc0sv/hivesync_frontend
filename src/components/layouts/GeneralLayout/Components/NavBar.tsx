@@ -10,7 +10,7 @@ import {
 
 export const NavBar: React.FC<PropsLinksNav> = ({ links, profilePicture }) => {
   return (
-    <nav className="flex flex-row items-center justify-around w-full max-w-sm p-2 transform bottom-4 left-1/2 rounded-3xl md:hidden lg:hidden bg-overlay_2">
+    <nav className="flex fixed flex-row items-center justify-around w-full max-w-sm p-2 transform bottom-4 rounded-3xl md:hidden lg:hidden bg-overlay_2">
       <LinksNav links={links} />
       <UserProfile
         pictureRoute={profilePicture.pictureRoute}
