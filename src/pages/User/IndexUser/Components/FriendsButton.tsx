@@ -5,7 +5,7 @@ export const FriendsButton = () => {
   return (
     <div className="w-auto p-2">
       <Link
-        to={"add-friends"}
+        to={"/app/add-friends"}
         className="flex flex-row items-center justify-end gap-2 md:hidden lg:hidden sm:h-1/4 bg-overlay_1"
       >
         <HiUserAdd className="text-3xl text-custom_white" />
