@@ -8,15 +8,15 @@ import { ArrayLinks, PropsProfilePicture } from "./types/GeneralLayout";
 const links: ArrayLinks = [
   {
     Icon: HiUserGroup,
-    url: "/app/",
+    url: "/app/d853c1ef-e3b6-4f04-942d-62226325536a/d853c1ef-e3b6-4f04-942d-62226325536a",
   },
   {
     Icon: HiChatBubbleLeftRight,
-    url: "/app/",
+    url: "/app/@me",
   },
   {
     Icon: HiMiniBell,
-    url: "/app/",
+    url: "/app/notifications",
   },
 ];
 
@@ -29,7 +29,7 @@ const profilePicture: PropsProfilePicture = {
 type PropsGeneralLayout = {
   title?: string;
   RightComponent?: React.FC;
-  showHeader?: boolean
+  showHeader?: boolean;
   children?: React.ReactNode;
 };
 
@@ -37,10 +37,10 @@ export const GeneralLayout: React.FC<PropsGeneralLayout> = ({
   title = "Mensajes",
   RightComponent = () => <></>,
   children,
-  showHeader = true
+  showHeader = true,
 }) => {
   return (
-    <main className="flex gap-4 flex-col w-full justify-around h-screen p-5 bg-overlay_1">
+    <main className="flex flex-col w-full h-screen gap-4 p-5 overflow-hidden bg-overlay_1">
       {showHeader && <Header title={title} RightComponent={RightComponent} />}
       {children}
       <NavBar links={links} profilePicture={profilePicture} />

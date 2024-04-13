@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import { UserStatusIcon } from "../../../Icons/userStatusIcon";
 import {
@@ -7,10 +7,11 @@ import {
   PropsLinksNav,
   PropsProfilePicture,
 } from "../types/GeneralLayout";
+import { Link } from "react-router-dom";
 
 export const NavBar: React.FC<PropsLinksNav> = ({ links, profilePicture }) => {
   return (
-    <nav className="flex flex-row items-center justify-around w-full max-w-sm p-2 transform bottom-4 rounded-3xl md:hidden lg:hidden bg-overlay_2">
+    <nav className="flex flex-row items-center self-end justify-around w-full max-w-sm p-2 m-auto transform bottom-4 rounded-overlay md:hidden lg:hidden bg-overlay_2">
       <LinksNav links={links} />
       <UserProfile
         pictureRoute={profilePicture.pictureRoute}
@@ -28,9 +29,12 @@ const LinksNav: React.FC<PropsLinks> = ({ links }) => {
 
 const LinkNavBar: React.FC<Links> = ({ Icon, url }) => {
   return (
-    <Link to={`${url}`}>
-      <Icon size={40} className="text-3xl text-custom_white" />
-    </Link>
+    <NavLink
+      className={({ isActive }) => (isActive ? " text-white" : "text-gray")}
+      to={`${url}`}
+    >
+      <Icon size={40} className="text-3xl " />
+    </NavLink>
   );
 };
 

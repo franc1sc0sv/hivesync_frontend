@@ -1,4 +1,10 @@
+import { GeneralLayout } from "../../../components/layouts/GeneralLayout/GeneralLayout";
+import { ServerLayout } from "../../../components/layouts/ServerLayout/ServerLayout.jsx";
+
 export const ServerPage = () => {
-  const currentUrl = window.location.href;
-  return <p>{currentUrl}-Server-page</p>;
+  return (
+    <GeneralLayout showHeader={false}>
+      <ServerLayout />
+    </GeneralLayout>
+  );
 };

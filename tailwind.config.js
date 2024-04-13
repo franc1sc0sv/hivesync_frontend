@@ -15,8 +15,11 @@ export default {
         custom_white: "#FFFFFE",
         gray: "#8C8C8C",
         overlay_1: "#19161D",
-        overlay_2: "#2E2934",
+        overlay_2: "#28242C",
         overlay_3: "#141414",
+      },
+      borderRadius: {
+        overlay: "0.75rem",
       },
     },
   },
