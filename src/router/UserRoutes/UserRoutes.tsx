@@ -8,16 +8,18 @@ import { IndexUserPage } from "../../pages/User/IndexUser/IndexUserPage";
 import { ComunityIndividualPage } from "../../pages/User/ComunityIndividual/ComunityIndividualPage";
 import { ServerPage } from "../../pages/User/Servers/ServerPage";
 import { ProfilePage } from "../../pages/User/Profile/Profile";
+import { SettingsPage } from "../../pages/UserSettings/Settings";
 
 export const UserRoutes: RouteObject = {
   caseSensitive: true,
   path: "/app",
   element: <AuthDetector />,
   children: [
-    { path: "/app/@me", index: true, element: <IndexUserPage /> }, // Mensajes directos
+    { path: "/app/@me", index: true, element: <IndexUserPage /> }, // Mensajes directos,
     { path: "add-friends", element: <AddFriendsPage /> },
     { path: ":id", element: <ChatPage /> }, //Chats individuales
     { path: "profile/:id", element: <ProfilePage /> },
+    { path: "profile/:id/settings", element: <SettingsPage /> }, //ajustes del usuario
     { path: "comunity", element: <ComunityPage /> },
     { path: "comunity/:id", element: <ComunityIndividualPage /> },
     { path: ":id/:id", element: <ServerPage /> }, // Servers - /server_id/channel_id

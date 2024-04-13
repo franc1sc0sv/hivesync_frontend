@@ -8,7 +8,7 @@ interface SearchProps {
 
 export const SearchBar: React.FC<SearchProps> = ({ placeholder }) => {
 
-    const [searchedFriend, setSearchedFriend] = useState<string>("");
+    const [searchResults, setSearchResults] = useState<string>("");
 
     const handleSearch = (event: FormEvent) => {
         event.preventDefault();
@@ -17,11 +17,11 @@ export const SearchBar: React.FC<SearchProps> = ({ placeholder }) => {
 
     return (
         <>
-            <form onSubmit={handleSearch} className="relative mx-auto w-[90%] max-w-md">
+            <form onSubmit={handleSearch} className="relative mx-auto w-full max-w-md">
                 <input
                     type="text"
-                    value={searchedFriend}
-                    onChange={(e) => setSearchedFriend(e.target.value)}
+                    value={searchResults}
+                    onChange={(e) => setSearchResults(e.target.value)}
                     className="bg-overlay_2 w-full border-primary-500 rounded-md py-2 px-4 pr-10 placeholder-custom_white text-custom_white focus:outline-none focus:ring-4 focus:ring-primary focus:border-primary transition duration-300"
                     placeholder={placeholder}
                 />

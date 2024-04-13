@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 export const NavBar: React.FC<PropsLinksNav> = ({ links, profilePicture }) => {
   return (
-    <nav className="flex flex-row items-center self-end justify-around w-full max-w-sm p-2 m-auto transform bottom-4 rounded-overlay md:hidden lg:hidden bg-overlay_2">
+    <nav className="flex flex-row items-center self-end justify-around w-full max-w-sm p-2 m-auto transform bottom-0 rounded-overlay md:hidden lg:hidden bg-overlay_2">
       <LinksNav links={links} />
       <UserProfile
         pictureRoute={profilePicture.pictureRoute}
