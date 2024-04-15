@@ -17,6 +17,7 @@ export default {
         overlay_1: "#19161D",
         overlay_2: "#28242C",
         overlay_3: "#141414",
+        overlay_4: "#2E2934",
       },
       borderRadius: {
         overlay: "0.75rem",

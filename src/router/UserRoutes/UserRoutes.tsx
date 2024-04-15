@@ -14,7 +14,7 @@ export const UserRoutes: RouteObject = {
   path: "/app",
   element: <AuthDetector />,
   children: [
-    { path: "/app/@me", index: true, element: <IndexUserPage /> }, // Mensajes directos
+    { path: "@me", index: true, element: <IndexUserPage /> }, // Mensajes directos
     { path: "add-friends", element: <AddFriendsPage /> },
     { path: ":id", element: <ChatPage /> }, //Chats individuales
     { path: "profile/:id", element: <ProfilePage /> },

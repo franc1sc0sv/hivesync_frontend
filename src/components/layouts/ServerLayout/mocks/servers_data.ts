@@ -5,10 +5,10 @@ function generateRandomNumber(): number {
 export const serverDataIcons: ServerDataIcons = [
   [
     {
-      IconServerURL: `https://picsum.photos/${generateRandomNumber()}`,
+      IconServerURL: ``,
       url: "/app/8a5439be-821a-488d-97af-28b951da01d4/85b70973-9e7c-436d-9249-f6e5d1abc575",
-      active: true,
-      name: "Sexo Server",
+      active: false,
+      name: "A Server",
     },
     {
       IconServerURL: `https://picsum.photos/${generateRandomNumber()}`,
@@ -26,11 +26,11 @@ export const serverDataIcons: ServerDataIcons = [
   {
     IconServerURL: `https://picsum.photos/${generateRandomNumber()}`,
     url: "/app/8a5439be-821a-488d-97af-28b951da01d4/85b70973-9e7c-436d-9249-f6e5d1abc575",
-    active: false,
+    active: true,
     name: "Sexo Server",
   },
   {
-    IconServerURL: `https://picsum.photos/${generateRandomNumber()}`,
+    IconServerURL: ``,
     url: "/app/8a5439be-821a-488d-97af-28b951da01d4/85b70973-9e7c-436d-9249-f6e5d1abc575",
     active: false,
     name: "Sexo Server",

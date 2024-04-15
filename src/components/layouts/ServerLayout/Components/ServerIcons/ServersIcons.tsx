@@ -9,7 +9,7 @@ export const ServerIcons: React.FC<PropsServerIcons> = ({
   serverDataIcons,
 }) => {
   return (
-    <section className="flex flex-col items-center w-48 h-full gap-4 px-1 py-4 overflow-y-auto bg-overlay_2 rounded-overlay">
+    <section className="flex flex-col items-center w-40 h-full gap-4 py-4 overflow-y-auto bg-overlay_2 rounded-overlay">
       <Icons serverDataIcons={serverDataIcons} />
     </section>
   );

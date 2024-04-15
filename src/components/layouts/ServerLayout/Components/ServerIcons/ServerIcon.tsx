@@ -15,19 +15,19 @@ export const ServerIcon: React.FC<PropsServerIcons> = ({
   const firstLetterName = name[0].toUpperCase();
 
   const imgBG = !isIconUrlEmpty ? `url(${IconServerURL})` : "";
-  const borderStyleActive = active ? "rounded-2xl" : "rounded-full";
+  const borderStyleActive = active ? "rounded-xl" : "rounded-full";
   const letterIconStyles = isIconUrlEmpty
-    ? "grid place-items-center text-2xl text-white bg-secondary"
+    ? "grid place-items-center  text-white bg-secondary font-medium"
     : "";
-  const folderStyles = isFolder ? "w-6 h-6 " : "w-16 h-16";
+  const folderStyles = isFolder ? "w-5 h-5 text-sm " : "w-14 h-14 text-4xl";
 
   return (
     <Link
       to={url}
       style={{ backgroundImage: imgBG }}
-      className={`${folderStyles} ${borderStyleActive} ${letterIconStyles} `}
+      className={` font-almarai ${folderStyles} ${borderStyleActive} ${letterIconStyles} `}
     >
-      {isIconUrlEmpty ?? firstLetterName}
+      {isIconUrlEmpty && firstLetterName}
     </Link>
   );
 };
