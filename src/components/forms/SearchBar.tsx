@@ -3,11 +3,10 @@ import { IoSearch } from "react-icons/io5";
 
 interface SearchProps {
   placeholder: string;
-  inverted?: boolean;
-  classNameInput?: string;
+  bg_color?: string
 }
 
-export const SearchBar: React.FC<SearchProps> = ({ placeholder }) => {
+export const SearchBar: React.FC<SearchProps> = ({ placeholder, bg_color = "bg-overlay_2" }) => {
   const [searchedFriend, setSearchedFriend] = useState<string>("");
 
   const handleSearch = (event: FormEvent) => {
@@ -25,7 +24,7 @@ export const SearchBar: React.FC<SearchProps> = ({ placeholder }) => {
           type="text"
           value={searchedFriend}
           onChange={(e) => setSearchedFriend(e.target.value)}
-          className="w-full px-4 py-2 pr-10 transition duration-300 rounded-overlay bg-overlay_1 border-primary-500 placeholder-custom_white text-custom_white focus:outline-none focus:ring-4 focus:ring-primary focus:border-primary"
+          className={`${bg_color} w-full px-4 py-2 pr-10 transition duration-300 rounded-overlay  border-primary-500 placeholder-custom_white text-custom_white focus:outline-none focus:ring-4 focus:ring-primary focus:border-primary`}
           placeholder={placeholder}
         />
 

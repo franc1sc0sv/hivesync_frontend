@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 interface PropsServerIcons extends ServerInfoIcons {
   isFolder?: boolean;
 }
@@ -22,12 +20,11 @@ export const ServerIcon: React.FC<PropsServerIcons> = ({
   const folderStyles = isFolder ? "w-5 h-5 text-sm " : "w-14 h-14 text-4xl";
 
   return (
-    <Link
-      to={url}
+    <div
       style={{ backgroundImage: imgBG }}
       className={` font-almarai ${folderStyles} ${borderStyleActive} ${letterIconStyles} `}
     >
       {isIconUrlEmpty && firstLetterName}
-    </Link>
+    </div>
   );
 };

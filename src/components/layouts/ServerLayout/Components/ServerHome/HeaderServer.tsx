@@ -13,8 +13,8 @@ export const HeaderServer = ({ name }: { name: string }) => {
         <FaGear size={24} className="fill-custom_white" />
       </div>
       <div className="flex gap-2">
-        <SearchBar placeholder="Buscar" />
-        <button className="p-2 rounded-full w-max bg-overlay_1">
+        <SearchBar bg_color="bg-overlay_1" placeholder="Buscar" />
+        <button className="p-2  rounded-full w-max bg-overlay_1">
           <HiUserAdd size={24} className="fill-white" />
         </button>
       </div>

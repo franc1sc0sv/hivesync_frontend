@@ -1,9 +1,8 @@
 import { ChannelListProvider } from "../../Context/ChannelListContext";
 import { ChannelList } from "./ChannelsList";
-import { specific_server_data } from "../../mocks/specific_server_data";
 import { HeaderServer } from "./HeaderServer";
 
-export const ServerHome = () => {
+export const ServerHome = ({ specific_server_data }: { specific_server_data: SpecificServer }) => {
   return (
     <section className="h-full w-[85%] bg-overlay_2 rounded-overlay p-4 gap-6 flex flex-col ">
       <HeaderServer name={specific_server_data.name} />

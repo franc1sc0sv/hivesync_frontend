@@ -16,7 +16,7 @@ const links: ArrayLinks = [
   },
   {
     Icon: HiMiniBell,
-    url: "/app/notifications",
+    url: "/app/@notifications",
   },
 ];
 
@@ -40,7 +40,7 @@ export const GeneralLayout: React.FC<PropsGeneralLayout> = ({
   showHeader = true,
 }) => {
   return (
-    <main className="flex flex-col w-full h-screen gap-4 p-5 overflow-hidden bg-overlay_1">
+    <main className="flex flex-col w-full h-screen gap-4 p-5 overflow-hidden bg-overlay_1 justify-between">
       {showHeader && <Header title={title} RightComponent={RightComponent} />}
       {children}
       <NavBar links={links} profilePicture={profilePicture} />
