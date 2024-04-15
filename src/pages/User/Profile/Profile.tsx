@@ -2,6 +2,7 @@ import { EditProfileOption } from "../../../components/buttons/EditProfileOption
 import { ProfileConnections } from "./Components/ProfileConnections";
 import { HiCog } from "react-icons/hi";
 import { GeneralLayout } from "../../../components/layouts/GeneralLayout/GeneralLayout";
+import { Link } from "react-router-dom";
 
 // testing data
 const temporaryRoute =
@@ -33,9 +34,10 @@ export const ProfilePage: React.FC = () => {
         <div className="max-w-2xl text-gray-900 rounded-lg sm:max-w-sm md:max-w-sm lg:max-w-sm xl:max-w-sm sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto">
           {/* cover  */}
           <div className="relative overflow-hidden rounded-xl h-36 bg-primary">
-            <div className="absolute top-0 right-0 p-3">
+            {/* settings icon */}
+            <Link to={`settings`} className="absolute top-0 right-0 p-3">
               <HiCog className="text-3xl text-custom_white" />
-            </div>
+            </Link>
           </div>
 
           {/* icon */}
