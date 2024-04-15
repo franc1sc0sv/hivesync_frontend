@@ -8,7 +8,7 @@ import { IndexUserPage } from "../../pages/User/IndexUser/IndexUserPage";
 import { ComunityIndividualPage } from "../../pages/User/ComunityIndividual/ComunityIndividualPage";
 import { ServerPage } from "../../pages/User/Servers/ServerPage";
 import { ProfilePage } from "../../pages/User/Profile/Profile";
-import { SettingsPage } from "../../pages/UserSettings/Settings";
+import { SettingsPage } from "../../pages/User/UserSettings/Settings";
 
 export const UserRoutes: RouteObject = {
   caseSensitive: true,

@@ -1,5 +1,6 @@
-import { GeneralLayout } from "../../components/layouts/GeneralLayout/GeneralLayout";
+import { GeneralLayout } from "../../../components/layouts/GeneralLayout/GeneralLayout";
 import { MenuOptions } from "./Components/OptionsMenu";
+
 
 export const SettingsPage: React.FC = () => {
     return(

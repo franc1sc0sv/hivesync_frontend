@@ -1,4 +1,4 @@
-import { SearchBar } from "../../../components/forms/SearchBar";
+import { SearchBar } from "../../../../components/forms/SearchBar";
 import { HiUser, HiShieldCheck, HiUsers, HiOutlineLightBulb } from "react-icons/hi";
 import { FaPaperclip } from "react-icons/fa6";
 import { FaMicrophone } from "react-icons/fa";
