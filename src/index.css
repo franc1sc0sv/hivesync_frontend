@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.max-h-screen-overlay {
-  height: calc(100vh - 5rem);
+.screen_overlay {
+  height: calc(100vh - 8rem);
 }

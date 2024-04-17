@@ -7,10 +7,10 @@ import { specific_server_data } from "./mocks/specific_server_data";
 
 export const ServerLayout = () => {
   return (
-    <main className="flex w-[180%] h-full gap-3 overflow-hidden">
+    <article className="flex w-[180%] gap-3 h-full">
       <ServerIcons server_data_icons={serverDataIcons} />
       <ServerHome specific_server_data={specific_server_data} />
       <Channel />
-    </main>
+    </article>
   );
 };

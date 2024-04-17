@@ -29,7 +29,7 @@ const user: User = {
 export const ProfilePage: React.FC = () => {
   return (
     <GeneralLayout showHeader={false}>
-      <section className="flex flex-col justify-around h-ful">
+      <section className="flex flex-col justify-around h-full">
         {/* cover */}
         <div className="max-w-2xl text-gray-900 rounded-lg sm:max-w-sm md:max-w-sm lg:max-w-sm xl:max-w-sm sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto">
           {/* cover  */}

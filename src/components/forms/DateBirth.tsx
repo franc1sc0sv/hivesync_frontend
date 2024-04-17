@@ -1,7 +1,7 @@
 import { useState, ReactElement, useEffect, useRef } from 'react';
 import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css'; 
-import { RiCalendarLine } from 'react-icons/ri'; 
+import 'react-calendar/dist/Calendar.css';
+import { RiCalendarLine } from 'react-icons/ri';
 
 // el fokin error del onChange no supe como solucionarlo asi q sdhjajks
 
@@ -38,7 +38,7 @@ export const DateOfBirthInput = (): ReactElement => {
 
         // Agrega un event listener para los clics en el cuerpo del documento
         document.body.addEventListener('click', handleClickOutside);
-        
+
         // Limpia el event listener al desmontar el componente para evitar fugas de memoria
         return () => {
             document.body.removeEventListener('click', handleClickOutside);
@@ -47,20 +47,20 @@ export const DateOfBirthInput = (): ReactElement => {
 
     return (
         <div className="flex flex-col gap-4 w-3/5">
-            <h3 className="text-lg text-custom_white font-almarai font-bold p-2">Fecha de Nacimiento</h3>
+            <h3 className="text-lg text-custom_white font-almarai font-bold">Fecha de Nacimiento</h3>
             <div className="relative mx-auto w-full max-w-md" ref={calendarRef}>
                 <input
-                    type="text" 
+                    type="text"
                     className="bg-overlay_2 w-full p-3 rounded-xl text-custom_white focus:outline-none focus:ring-4 focus:ring-primary focus:border-primary transition duration-300"
-                    placeholder="Ingrese su fecha de nacimiento"
-                    readOnly 
+                    placeholder="Fecha de nacimiento"
+                    readOnly
                     onClick={toggleDatePicker} // Abre o cierra el calendario al hacer clic en el campo de entrada
                     value={selectedDate ? selectedDate.toLocaleDateString() : ''}
                 />
                 {showDatePicker && ( // Muestra el calendario si showDatePicker es true
                     <div className="absolute top-full left-0 z-10">
-                        <Calendar 
-                            onChange={handleDateChange} 
+                        <Calendar
+                            onChange={handleDateChange}
                             value={selectedDate || undefined}
                             className="bg-custom_white p-2 rounded-xl"
                         />
