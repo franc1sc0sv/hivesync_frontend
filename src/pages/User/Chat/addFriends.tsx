@@ -1,4 +1,4 @@
-import { SearchBar } from "../../../components/forms/SearchBar";
+import { SearchBar } from "../../../components/forms/Inputs/SearchBar";
 import { GeneralLayout } from "../../../components/layouts/GeneralLayout/GeneralLayout";
 import { CardFriends } from "./Components/RightComponent";
 

@@ -20,7 +20,7 @@ export const PasswordInput: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col gap-2 w-3/5 ">
+    <div className="flex flex-col gap-2">
       <h3 className="text-lg text-custom_white font-almarai font-bold">Contraseña</h3>
       <div className="relative mx-auto w-full max-w-md">
         <input

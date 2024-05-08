@@ -1,7 +1,7 @@
 import { FaGear } from "react-icons/fa6";
 import { HiUserAdd } from "react-icons/hi";
 
-import { SearchBar } from "../../../../forms/SearchBar";
+import { SearchBar } from "../../../../forms/Inputs/SearchBar";
 
 export const HeaderServer = ({ name }: { name: string }) => {
   return (
