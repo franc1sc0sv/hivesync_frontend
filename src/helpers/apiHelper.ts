@@ -1,9 +1,19 @@
-import { AxiosError } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
+import { API_RESPONSE_ERROR } from "../types/api_response";
+import { API_RESPONSE_ERROR_CLASS } from "../class/api_responses_instances";
 
-export const throwError = (error: AxiosError) => {
+export const throwError = (error: AxiosError | any) => {
   if (error instanceof AxiosError) {
-    throw error.response?.data;
+    if (error.response?.data) {
+      const err: API_RESPONSE_ERROR = error.response?.data;
+      throw new API_RESPONSE_ERROR_CLASS({ ...err });
+    }
   }
+  throw new Error("Error desconocido");
+};
+
+export const format_api_response = (response: AxiosResponse) => {
+  return response.data.DATA;
 };
 
 export const headers = () => {

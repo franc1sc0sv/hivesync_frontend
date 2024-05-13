@@ -1,38 +1,42 @@
-import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
 import { useState } from "react";
-import { useRef } from "react";
+import { FieldValues, UseFormRegister } from "react-hook-form";
 
+import { InputsForms } from "./inputs";
+import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
 
+type Props = {
+  register: UseFormRegister<FieldValues>;
+};
 
-
-export const PasswordInput: React.FC = () => {
-
+export const PasswordInput: React.FC<Props> = ({ register }) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const inputRef = useRef<HTMLInputElement>(null);
 
-  const passwordVisibility = () => {
-    setShowPassword(prevState => !prevState);
-    if (inputRef.current) {
-      const passwordInput = inputRef.current;
-      passwordInput.type = showPassword ? "password" : "text";
-    }
-
+  const handlePassworwd = () => {
+    setShowPassword((prevState) => !prevState);
   };
 
+  const iconStyles =
+    "absolute right-0 flex items-center pr-3 text-xl cursor-pointer top-1/2 text-custom_white ";
+
   return (
-    <div className="flex flex-col gap-2">
-      <h3 className="text-lg text-custom_white font-almarai font-bold">Contraseña</h3>
-      <div className="relative mx-auto w-full max-w-md">
-        <input
-          ref={inputRef}
-          type="password"
-          className="bg-overlay_2 w-full p-3 rounded-xl text-custom_white focus:outline-none focus:ring-4 focus:ring-primary focus:border-primary transition duration-300"
-          placeholder="Contraseña"
+    <div className="relative w-full max-w-[320px]">
+      <InputsForms
+        register={register}
+        name="password"
+        title="Contraseña"
+        placeholder="Digite su contraseña"
+        type={showPassword ? "text" : "password"}
+      />
+
+      {!showPassword ? (
+        <RiEyeCloseLine
+          size={36}
+          className={iconStyles}
+          onClick={handlePassworwd}
         />
-        <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-          {!showPassword ? <RiEyeCloseLine className="text-xl text-custom_white " onClick={passwordVisibility} /> : <RiEyeLine className="text-xl text-custom_white " onClick={passwordVisibility} />}
-        </div>
-      </div>
+      ) : (
+        <RiEyeLine size={36} className={iconStyles} onClick={handlePassworwd} />
+      )}
     </div>
-  )
-}
+  );
+};

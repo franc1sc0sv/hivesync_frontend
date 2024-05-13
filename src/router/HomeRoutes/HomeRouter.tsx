@@ -6,10 +6,12 @@ import { ComunityIndividualPage } from "../../pages/Home/ComunityIndividual/Comu
 import { LoginPage } from "../../pages/Auth/Login/LoginPage";
 import { SingUpPage } from "../../pages/Auth/SingUp/SingUpPage";
 import { RecoverPage } from "../../pages/Auth/Recover/RecoverPage";
+import { UnsecureRoutes } from "../../components/auth/UnsecureRoutes";
 
 export const HomeRoutes: RouteObject = {
   caseSensitive: true,
   path: "/",
+  element: <UnsecureRoutes />,
   children: [
     { index: true, element: <IndexPage /> },
 

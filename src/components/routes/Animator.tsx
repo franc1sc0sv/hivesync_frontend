@@ -12,7 +12,6 @@ export const Animator = () => {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.4 }}
-
         key={location.pathname}
         style={{ position: "absolute", width: "100%" }}
       >

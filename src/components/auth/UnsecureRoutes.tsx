@@ -3,12 +3,12 @@ import { useSession } from "../../store/user";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const AuthDetector: React.FC = () => {
+export const UnsecureRoutes: React.FC = () => {
   const { user } = useSession();
   const navigate = useNavigate();
   useEffect(() => {
-    if (!user?.id) {
-      navigate("/");
+    if (user?.id) {
+      navigate("/app/@me");
     }
   }, []);
   return <Outlet />;
