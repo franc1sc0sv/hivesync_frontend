@@ -9,4 +9,5 @@ type Notifications = {
   notifications: NotificationItem[];
   setNotifications: (notification: NotificationItem) => void;
   removeNotification: (id: number) => void;
+  clearNotifications: () => void;
 };
