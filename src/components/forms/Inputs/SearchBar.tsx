@@ -18,7 +18,7 @@ export const SearchBar: React.FC<SearchProps> = ({ placeholder, bg_color = "bg-o
     <>
       <form
         onSubmit={handleSearch}
-        className="relative mx-auto w-[90%] max-w-md"
+        className="relative mx-auto w-full max-w-md"
       >
         <input
           type="text"

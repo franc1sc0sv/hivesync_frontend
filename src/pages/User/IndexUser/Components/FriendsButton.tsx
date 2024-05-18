@@ -1,16 +1,20 @@
 import { HiUserAdd } from "react-icons/hi";
-import { Link } from "react-router-dom";
+import { useModal } from "../../../../store/useModal";
+import { AddFriendsModal } from "../../../../components/modals/userModals/addFriendsModal";
 
 export const FriendsButton = () => {
+
+  const { toggleModal } = useModal()
+
   return (
-    <div className="w-auto p-2">
-      <Link
-        to={"/app/add-friends"}
-        className="flex flex-row items-center justify-end gap-2 md:hidden lg:hidden sm:h-1/4 bg-overlay_1"
-      >
+    <div>
+      <div className="flex flex-row items-center justify-end gap-2 md:hidden lg:hidden sm:h-1/4 bg-overlay_1" onClick={() => toggleModal(true)}>
         <HiUserAdd className="text-3xl text-custom_white" />
         <h2 className="text-custom_white text-md">Añadir amigos</h2>
-      </Link>
+      </div>
+
+      <AddFriendsModal />
     </div>
+
   );
 };

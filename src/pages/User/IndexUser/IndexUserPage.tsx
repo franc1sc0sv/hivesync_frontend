@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { GeneralLayout } from "../../../components/layouts/GeneralLayout/GeneralLayout";
 
 import { FriendsButton } from "./Components/FriendsButton";
