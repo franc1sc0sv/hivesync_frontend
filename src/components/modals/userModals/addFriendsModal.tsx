@@ -3,7 +3,7 @@ import { AddFriendsPage } from "../../../pages/User/Chat/addFriends";
 
 export const AddFriendsModal: React.FC = () => {
     return (
-        <ModalTemplate>
+        <ModalTemplate identificator="addFriends">
             <AddFriendsPage />
         </ModalTemplate>
     );

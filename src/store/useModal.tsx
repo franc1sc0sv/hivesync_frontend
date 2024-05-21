@@ -1,11 +1,11 @@
-import { create} from 'zustand';
+import { create } from 'zustand';
 
 interface ModalState {
-  modalState: boolean;
-  toggleModal: (value: boolean) => void;
+  modalId: string,
+  setModalId: (value: string) => void
 }
 
 export const useModal = create<ModalState>((set) => ({
-  modalState: false,
-  toggleModal: (value: boolean) => set({ modalState: value }),
+  modalId: "",
+  setModalId: (value) => set({ modalId: value }),
 }));

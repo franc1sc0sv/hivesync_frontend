@@ -9,13 +9,14 @@ import {
 } from "framer-motion";
 
 interface ModalTemplateProps {
+  identificator: string,
   children: ReactNode
 }
 
-export const ModalTemplate:React.FC<ModalTemplateProps> = ({ children }) => {
+export const ModalTemplate: React.FC<ModalTemplateProps> = ({ identificator, children }) => {
   const [scope, animate] = useAnimate();
   const [drawerRef, { height }] = useMeasure();
-  const { toggleModal, modalState } = useModal()
+  const { modalId, setModalId } = useModal()
 
   const y = useMotionValue(0);
   const controls = useDragControls();
@@ -31,12 +32,12 @@ export const ModalTemplate:React.FC<ModalTemplateProps> = ({ children }) => {
       y: [yStart, height],
     });
 
-    toggleModal(false);
+    setModalId("");
   };
 
   return (
     <>
-      {modalState && (
+      {modalId === identificator && (
         <motion.div
           ref={scope}
           initial={{ opacity: 0 }}
@@ -72,8 +73,9 @@ export const ModalTemplate:React.FC<ModalTemplateProps> = ({ children }) => {
               bottom: 0.5,
             }}
           >
-            <div className="absolute left-0 right-0 top-0 z-10 flex justify-center p-4">
+            <div className="absolute left-0 right-0 top-0 z-10 flex justify-center items-center p-4 bg-overlay_1">
               <button
+                onClick={() => handleClose()}
                 onPointerDown={(e) => {
                   controls.start(e);
                 }}
@@ -83,6 +85,7 @@ export const ModalTemplate:React.FC<ModalTemplateProps> = ({ children }) => {
             <div className="relative z-0 h-full overflow-y-scroll p-4 pt-12">
               {children}
             </div>
+
           </motion.div>
         </motion.div>
       )}
