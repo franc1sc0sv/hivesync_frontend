@@ -1,5 +1,5 @@
 import { EditProfileOption } from "../../../../components/buttons/EditProfileOption";
-import { EditProfileOptionModals } from "../../../../components/modals/userModals/EditProfileOptionModal";
+import { EditProfileOptionModals } from "../../../../components/modals/userModals/profile/EditProfileOptionModal";
 import { ProfileConnections } from "./ProfileConnections";
 import { MyFriends } from "./YourFriends";
 

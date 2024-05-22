@@ -1,11 +1,12 @@
-import { ModalTemplate } from "../ModalTemplate"
+import { ModalTemplate } from "../../ModalTemplate"
+import { AddStatusModal } from "./AddStatusModal"
 
 export const EditProfileOptionModals: React.FC = () => {
     return (
         <div>
             <ModalTemplate identificator="añadirEstado">
                 <div className="h-full flex justify-center items-center">
-                    <h1 className="text-custom_white text-5xl">Añadir estado</h1>
+                    <AddStatusModal />
                 </div>
             </ModalTemplate>
 
