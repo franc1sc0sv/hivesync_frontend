@@ -33,9 +33,9 @@ export const UserInformation = () => {
                     <p className="text-sm text-gray ">{user.username}</p>
                 </div>
 
-                <div className="flex items-center gap-5 w-full">
-                    <EditProfileOption title="Añadir estado" option={true} modalId="añadirEstado"/>
-                    <EditProfileOption title="Editar perfil" option={false} modalId="editarPerfil"/>
+                <div className="flex justify-center items-center gap-5 w-full">
+                    <EditProfileOption title="Añadir estado" option={true} modalId="añadirEstado" />
+                    <EditProfileOption title="Editar perfil" option={false} modalId="editarPerfil" />
                 </div>
             </div>
 

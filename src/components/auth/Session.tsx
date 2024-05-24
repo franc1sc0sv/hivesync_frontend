@@ -1,6 +1,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import { get_profile } from "../../api/auth";
 import { useSession } from "../../store/user";
+import { LoadingPage } from "./LoadingPage";
 
 export const SessionDetector = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(true);
@@ -21,7 +22,7 @@ export const SessionDetector = ({ children }: { children: ReactNode }) => {
     perfil();
   }, []);
 
-  if (loading) return <p>Cargando . . . .</p>;
+  if (loading) return <LoadingPage />;
 
   return <>{children}</>;
 };
