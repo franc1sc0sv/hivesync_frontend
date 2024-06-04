@@ -4,12 +4,10 @@ import {
   HiShieldCheck,
   HiUsers,
   HiOutlineLightBulb,
-  HiOutlineLogin,
 } from "react-icons/hi";
 import { FaPaperclip } from "react-icons/fa6";
 import { FaMicrophone } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useSession } from "../../../../store/user";
 
 interface MenuProps {
   icon: React.ReactNode;
@@ -20,22 +18,19 @@ interface MenuProps {
 const MenuOptions1: MenuProps[] = [
   { icon: <HiUser />, optionName: "Cuenta", optionLink: "" },
   { icon: <HiShieldCheck />, optionName: "Privacidad", optionLink: "" },
-  { icon: <HiUsers />, optionName: "Solicitudes de amistad", optionLink: "" },
+  // { icon: <HiUsers />, optionName: "Solicitudes de amistad", optionLink: "" },
   { icon: <FaPaperclip />, optionName: "Conexiones", optionLink: "" },
 ];
 
 const MenuOptions2: MenuProps[] = [
   { icon: <FaMicrophone />, optionName: "Voz", optionLink: "" },
-  { icon: <HiOutlineLightBulb />, optionName: "Voz", optionLink: "" },
+  // { icon: <HiOutlineLightBulb />, optionName: "Voz", optionLink: "" },
 ];
 
 export const MenuOptions: React.FC = () => {
-  const { logout } = useSession();
   return (
     <div className="flex flex-col gap-5 h-[80vh] overflow-y-auto">
-      <div className="p-2 my-3">
-        <SearchBar placeholder="Buscar opción" />
-      </div>
+      <SearchBar placeholder="Buscar opción" />
 
       {/* account options */}
       <div>
@@ -82,14 +77,6 @@ export const MenuOptions: React.FC = () => {
           ))}
         </div>
       </div>
-
-      <button
-        onClick={logout}
-        className="flex items-center justify-center w-full h-12 gap-2 text-lg bg-red-600 rounded-xl font-amiko text-custom_white place-items-center"
-      >
-        <HiOutlineLogin size={36} />
-        <p>Cerrar Sesion</p>
-      </button>
     </div>
   );
 };

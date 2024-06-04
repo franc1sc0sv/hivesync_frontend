@@ -14,3 +14,5 @@ export const ServerLayout = () => {
     </article>
   );
 };
+
+const JSONResponse = {};
