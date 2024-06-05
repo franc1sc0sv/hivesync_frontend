@@ -99,8 +99,6 @@ const EditProfileForm: React.FC = () => {
 
             <InputsForms title="Nombre" register={register} name="name" placeholder="Nombre a mostrar" />
 
-            <InputsForms title="Usuario" register={register} name="username" placeholder="Usuario a mostrar" />
-
             <TextArea title="Sobre mí" name="aboutMe" placeholder="Agrega una genial descripción" register={register} />
 
             <SubmitButton text="Guardar cambios" isLoading={isLoading} />

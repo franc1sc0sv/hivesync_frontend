@@ -6,6 +6,7 @@ import { useCustomForm } from "../../../hooks/useForm";
 import { InputsForms } from "../../forms/Inputs/inputs";
 import { SubmitButton } from "../../forms/Inputs/Button";
 import { TextArea } from "../../forms/Inputs/TextArea";
+import { DateInput } from "../../forms/Inputs/DateBirth";
 
 export const AddEventModal: React.FC = () => {
     return (
@@ -37,6 +38,10 @@ const AddEventForm: React.FC = () => {
                 <InputsForms title="Tema del evento" register={register} name="name" placeholder="¿De qué trata tu evento?" />
 
                 <TextArea title="Descripción del evento" placeholder="Cuéntales a los miembros del servidor de qué trata el evento." name="eventDescription" register={register} />
+
+                <div className="w-full">
+                    <DateInput title="Fecha del evento" placeholder="Selecciona la fecha de tu evento" />
+                </div>
 
                 <SubmitButton text="Guardar " isLoading={isLoading} />
             </form>

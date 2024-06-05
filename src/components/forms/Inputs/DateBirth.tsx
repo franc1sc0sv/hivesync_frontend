@@ -1,27 +1,33 @@
 import { useState, ReactElement, useEffect, useRef } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { RiCalendarLine } from 'react-icons/ri';
+import { HiCalendarDays } from "react-icons/hi2";
 
-// el fokin error del onChange no supe como solucionarlo asi q sdhjajks
+interface DateProps {
+    title?: string,
+    placeholder: string
+}
 
-export const DateOfBirthInput = (): ReactElement => {
-    // Estado para almacenar la fecha seleccionada
+export const DateInput: React.FC<DateProps> = ({title, placeholder}): ReactElement => {
+
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
-    // Estado para controlar la visibilidad del calendario
     const [showDatePicker, setShowDatePicker] = useState<boolean>(false);
 
     // Referencia al contenedor que envuelve el campo de entrada y el calendario
     const calendarRef = useRef<HTMLDivElement>(null);
 
-    // Función para manejar el cambio de fecha
-    const handleDateChange = (date: Date): void => {
-        setSelectedDate(date);
-        setShowDatePicker(false); // Oculta el calendario después de seleccionar una fecha
+    const handleDateChange = (date: Date | Date[] | null): void => {
+        if (date instanceof Date) {
+            setSelectedDate(date);
+        } else if (Array.isArray(date) && date.length > 0 && date[0] instanceof Date) {
+            setSelectedDate(date[0]);
+        } else {
+            setSelectedDate(null);
+        }
+        setShowDatePicker(false);
     };
 
-    // Función para alternar la visibilidad del calendario
     const toggleDatePicker = (): void => {
         setShowDatePicker(!showDatePicker);
     };
@@ -43,34 +49,38 @@ export const DateOfBirthInput = (): ReactElement => {
         return () => {
             document.body.removeEventListener('click', handleClickOutside);
         };
-    }, []); // Se ejecuta solo una vez al montar el componente
+    }, []); 
 
     return (
-        <div className="flex flex-col gap-4 w-3/5">
-            <h3 className="text-lg text-custom_white font-almarai font-bold">Fecha de Nacimiento</h3>
+        <div className="flex flex-col gap-4 max-w-[320px] mx-auto">
+            <h3 className="text-lg text-custom_white font-almarai font-bold">{title}</h3>
+
             <div className="relative mx-auto w-full max-w-md" ref={calendarRef}>
                 <input
                     type="text"
                     className="bg-overlay_2 w-full p-3 rounded-xl text-custom_white focus:outline-none focus:ring-4 focus:ring-primary focus:border-primary transition duration-300"
-                    placeholder="Fecha de nacimiento"
-                    readOnly
-                    onClick={toggleDatePicker} // Abre o cierra el calendario al hacer clic en el campo de entrada
+                    placeholder={placeholder}
+                    onClick={toggleDatePicker}
                     value={selectedDate ? selectedDate.toLocaleDateString() : ''}
+                    readOnly
                 />
+
                 {showDatePicker && ( // Muestra el calendario si showDatePicker es true
-                    <div className="absolute top-full left-0 z-10">
+                    <div className="absolute top-full left-0 right-0 z-10 mt-2">
                         <Calendar
-                            onChange={handleDateChange}
                             value={selectedDate || undefined}
-                            className="bg-custom_white p-2 rounded-xl"
+                            onChange={handleDateChange} // Añade el evento onChange
+                            className="rounded-xl"
                         />
                     </div>
                 )}
+
                 <div className="absolute inset-y-0 right-0 flex items-center pr-3">
                     <button type="button" onClick={toggleDatePicker}>
-                        <RiCalendarLine className="text-xl text-custom_white" />
+                        <HiCalendarDays className="text-xl text-custom_white" />
                     </button>
                 </div>
+
             </div>
         </div>
     );

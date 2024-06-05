@@ -93,7 +93,7 @@ const NoEvents: React.FC = () => {
 
             <div className="flex flex-col items-center rounded-lg bg-overlay_2 h-1/3 justify-evenly gap-5 p-4">
                 <HiCalendarDays className="text-6xl text-custom_white" />
-                <h1 className="text-3xl text-custom_white font-almarai">
+                <h1 className="text-3xl text-custom_white font-almarai text-center">
                     No hay eventos próximamente
                 </h1>
                 <p className="text-xl text-center text-custom_white">

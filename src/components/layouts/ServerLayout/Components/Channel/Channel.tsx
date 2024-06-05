@@ -1,42 +1,73 @@
-import { useState } from 'react';
-import { useSwipeable } from 'react-swipeable';
-import FakePageTemplate from '../../../../modals/FakePageTemplate';
-import { AnimatePresence } from 'framer-motion';
-
+// import { useSwipeable } from 'react-swipeable';
+import FakePageTemplate from '../../../../../fakePages/FakePageTemplate';
+import useFakePages from '../../../../../store/useFakePage';
+import { useSwipeHandler } from '../../hooks/useFakePageSwipeHandler';
 
 export const Channel: React.FC = () => {
-  const [fakePages, setFakePages] = useState<number[]>([]);
 
-  const openFakePage = () => setFakePages((prev) => [...prev, prev.length]);
-  const closeFakePage = () => setFakePages((prev) => prev.slice(0, -1));
+  const { fakePages, addFakePage, removeFakePage } = useFakePages();
 
-  const handlers = useSwipeable({
-    onSwipedLeft: () => openFakePage(),
-    preventScrollOnSwipe: true,
-    trackMouse: true,
-  });
+  const handler = useSwipeHandler({
+    onSwipedLeft: () => addFakePage({ title: "su", children: <ElChildren /> }),
+  })
 
   return (
     <div className='flex flex-row justify-center items-center w-full max-h-fit bg-overlay_2 screen_overlay rounded-tl-lg rounded-bl-lg'>
-      <AnimatePresence>
-        {fakePages.map((_, index) => (
-          <FakePageTemplate
-            key={index}
-            isOpen={true}
-            onClose={closeFakePage}
-            onOpenNew={openFakePage}
-            index={index}
-          />
-        ))}
-      </AnimatePresence>
+      {fakePages.map((page) => (
+        <FakePageTemplate
+          key={page.id}
+          isOpen={true}
+          onClose={() => removeFakePage(page.id)}
+          index={page.id}
+          title={page.title}
+          children={page.children}
+        />
+      ))}
 
-      <div 
-        {...handlers} 
-        className='w-full h-full rounded-tl-lg  bg-overlay_2 rounded-bl-lg ml-auto screen_overlay'
-        onClick={openFakePage}
-      ></div>
+      <div
+        {...handler}
+        className='w-full h-full rounded-tl-lg bg-overlay_2 rounded-bl-lg ml-auto screen_overlay'
+        onClick={() => addFakePage({ title: "Primer children", children: <ElChildren /> })}
+      >
+      </div>
     </div>
   );
 };
 
+const ElChildren: React.FC = () => {
+  const { addFakePage } = useFakePages();
 
+  return (
+    <div className='flex flex-col justify-center items-center gap-10'>
+      <p className='text-custom_white text-2xl'>este es el primer children  </p>
+
+      <button onClick={() => addFakePage({title: "Segundo children", children: <Children2 />})} className='text-2xl text-white bg-primary'>Llamemos a una segunda fake page</button>
+    </div>
+  );
+}
+
+const Children2: React.FC = () => {
+
+  const { addFakePage } = useFakePages();
+
+  return (
+    <div className='flex flex-col justify-center items-center gap-10'>
+      <p className='text-custom_white text-2xl'>este es el segundo children su </p>
+
+      <button onClick={() => addFakePage({title: "Tercer children", children: <Children3 />})} className='text-2xl text-white bg-primary'>Llamemos a una tercera fake page</button>
+    </div>
+  );
+}
+
+
+const Children3: React.FC = () => {
+  const { addFakePage } = useFakePages();
+
+  return (
+    <div className='flex flex-col justify-center items-center gap-10'>
+      <p className='text-custom_white text-2xl'>este es el tercer children wowowowo </p>
+
+      <button onClick={() => addFakePage({title: "tercer children", children: <Children3 />})} className='text-2xl text-white bg-primary'>Llamemos a una cuarta fake page</button>
+    </div>
+  );
+}
