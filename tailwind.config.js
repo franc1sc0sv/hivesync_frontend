@@ -14,6 +14,7 @@ export default {
         light_blue: "#486CFF",
         custom_white: "#FFFFFE",
         gray: "#8C8C8C",
+        green: "#25DE21",
         overlay_1: "#19161D",
         overlay_2: "#28242C",
         overlay_3: "#141414",
