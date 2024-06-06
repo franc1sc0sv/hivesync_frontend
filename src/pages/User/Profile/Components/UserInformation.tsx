@@ -1,7 +1,12 @@
 import { EditProfileOption } from "../../../../components/buttons/EditProfileOption";
-import { EditProfileOptionModals } from "../../../../components/modals/userModals/profile/EditProfileOptionModal";
+import { AddStatusModal } from "../../../../components/modals/userModals/profile/AddStatusModal";
 import { ProfileConnections } from "./ProfileConnections";
 import { MyFriends } from "./YourFriends";
+
+import useFakePages from "../../../../store/useFakePage";
+import FakePageTemplate from "../../../../fakePages/FakePageTemplate";
+import { EditProfileFakePage } from "../../../../fakePages/user/editProfileFakePage";
+
 
 interface User {
   username: string;
@@ -22,6 +27,9 @@ const user: User = {
 };
 
 export const UserInformation = () => {
+
+  const { fakePages, addFakePage, removeFakePage } = useFakePages()
+
   return (
     <div className="h-[60%] flex flex-col gap-5 overflow-y-auto">
       {/* Main profile options */}
@@ -38,11 +46,27 @@ export const UserInformation = () => {
             option={true}
             modalId="añadirEstado"
           />
-          <EditProfileOption
-            title="Editar perfil"
-            option={false}
-            modalId="editarPerfil"
-          />
+
+          {/* edit profile buttom */}
+          <div onClick={() => addFakePage({ title: "Editar perfil", children: <EditProfileFakePage /> })}>
+            <EditProfileOption
+              title="Editar perfil"
+              option={false}
+              modalId=""
+            />
+          </div>
+
+          {/* edit profile fake page */}
+          {fakePages.map((page) => (
+            <FakePageTemplate
+              key={page.id}
+              isOpen={true}
+              onClose={() => removeFakePage(page.id)}
+              index={page.id}
+              title={page.title}
+              children={page.children}
+            />
+          ))}
         </div>
       </div>
 
@@ -68,7 +92,7 @@ export const UserInformation = () => {
       {/* your friends */}
       <MyFriends />
 
-      <EditProfileOptionModals />
+      <AddStatusModal />
     </div>
   );
 };

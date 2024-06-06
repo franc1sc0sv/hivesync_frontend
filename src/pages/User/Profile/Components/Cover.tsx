@@ -18,9 +18,9 @@ export const ProfileCover: React.FC = () => {
             </div>
 
             {/* icon */}
-            <div className="relative w-32 h-32 mx-auto -mt-20 overflow-hidden border-4 rounded-full border-overlay_2">
+            <div className="relative w-28 h-28 ml-5 -mt-20 overflow-hidden rounded-2xl">
                 <img
-                    className="object-cover object-center w-full h-full rounded-full"
+                    className="object-cover object-center w-full h-full rounded-2xl"
                     src={temporaryRoute}
                     alt="Profile picture"
                 />

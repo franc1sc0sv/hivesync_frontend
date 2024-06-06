@@ -1,13 +1,15 @@
 import { HiUserAdd } from "react-icons/hi"
 
 export const CardFriends = () => {
-    return <div className="flex flex-col items-center rounded-lg bg-overlay_2 h-1/3 justify-evenly">
-        <HiUserAdd className="text-6xl text-custom_white" />
 
-        <h1 className="text-3xl text-custom_white">Buscar amigos</h1>
 
-        <p className="text-xl text-center text-custom_white">
-            ¡Construye conexiones significativas!.
-        </p>
+    return <div className="w-full flex flex-col items-center rounded-lg justify-evenly">
+
+        <div className="flex flex-row gap-2 items-center justify-center">
+            <HiUserAdd className="text-6xl text-custom_white" />
+            <p className="text-xl text-center text-custom_white font-almarai">
+                ¿A quién quieres añadir como amigo?
+            </p>
+        </div>
     </div>
 }

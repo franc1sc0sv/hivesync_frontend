@@ -33,22 +33,22 @@ const FakePageTemplate: React.FC<FakePageProps> = ({ onClose, isOpen, index, tit
             {isOpen && !isClosing && (
                 <motion.div
                     {...handler}
-                    className="fixed inset-0 flex justify-center bg-overlay_2 z-50"
+                    className="fixed inset-0 flex justify-center bg-overlay_1 z-50"
                     initial={{ x: "100%" }}
                     animate={{ x: 0 }}
                     exit={{ x: "100%" }}
                     transition={{ type: "spring", stiffness: 300, damping: 30, mass: 1.2 }}
                     style={{ zIndex: 100 + index }}
                 >
-                    <div className="text-center w-full max-w-md">
+                    <div className="text-center w-full">
 
-                        <div className='flex flex-row justify-between items-center text-custom_white mt-5'>
+                        <div className='flex flex-row justify-between items-center text-custom_white p-3'>
                             <div onClick={handleClose}> <GoBackTriangle /> </div>
                             <span className="text-2xl font-bold">{title}</span>
                             <span></span>
                         </div>
 
-                        <div className='h-screen w-full flex items-center justify-center'>
+                        <div className='overflow-y-auto h-screen w-full flex items-center justify-center'>
                             {children}
                         </div>
 

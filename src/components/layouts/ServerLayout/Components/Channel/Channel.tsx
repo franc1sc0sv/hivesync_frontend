@@ -1,4 +1,3 @@
-// import { useSwipeable } from 'react-swipeable';
 import FakePageTemplate from '../../../../../fakePages/FakePageTemplate';
 import useFakePages from '../../../../../store/useFakePage';
 import { useSwipeHandler } from '../../hooks/useFakePageSwipeHandler';

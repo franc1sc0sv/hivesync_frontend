@@ -1,9 +1,23 @@
 import { FaFaceSmileWink } from "react-icons/fa6";
+
+import { ModalTemplate } from "../../ModalTemplate";
+
 import { TextArea } from "../../../forms/Inputs/TextArea";
 import { SubmitButton } from "../../../forms/Inputs/Button";
 import { useCustomForm } from "../../../../hooks/useForm";
 
+
 export const AddStatusModal: React.FC = () => {
+    return (
+        <ModalTemplate identificator="añadirEstado">
+            <div className="flex items-center justify-center h-full">
+                <StatusForm />
+            </div>
+        </ModalTemplate>
+    )
+}
+
+const StatusForm: React.FC = () => {
 
     const api_login = () => console.log("hola, *llama a la api épicamente*");
 
@@ -36,3 +50,4 @@ export const AddStatusModal: React.FC = () => {
         </div>
     )
 }
+
