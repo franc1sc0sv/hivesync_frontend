@@ -1,22 +1,23 @@
 import { HiUserAdd } from "react-icons/hi";
 
-
 import useFakePages from "../../../../store/useFakePage";
 import { AddFriendsFakePage } from "../../../../fakePages/user/AddFriendsFakePage";
-import FakePageTemplate from "../../../../fakePages/FakePageTemplate";
+import { ShowFakePages } from "../../../../fakePages/ShowFakePages";
 
 export const FriendsButton = () => {
 
-  const { addFakePage} = useFakePages()
+  const { addFakePage } = useFakePages()
 
   return (
-    <div onClick={() => addFakePage({ title: "Agregar amigos", children: <AddFriendsFakePage /> })}>
-      <div
-        className="flex flex-row items-center justify-end gap-2 md:hidden lg:hidden sm:h-1/4 bg-overlay_1"
+    <div>
+      <button
+        onClick={() => addFakePage({ title: "Añadir amigos", children: <AddFriendsFakePage /> })}
+        className="flex flex-row items-center justify-end gap-2 sm:h-1/4 bg-overlay_1"
       >
-        <HiUserAdd className="text-3xl text-custom_white" />
+        <HiUserAdd size={30} fill="white" />
         <h2 className="text-custom_white text-md">Añadir amigos</h2>
-      </div>
+      </button>
+      <ShowFakePages />
     </div>
   );
 };

@@ -44,7 +44,6 @@ export const EditProfileFakePage: React.FC = () => {
                 <ProfileCover />
                 <UserInformation />
                 <EditProfileForm />
-                
                 <EditPictureOrCoverModal />
             </div>
         </div>
@@ -56,7 +55,6 @@ export const EditProfileFakePage: React.FC = () => {
 const ProfileCover: React.FC = () => {
 
     const {setModalId} = useModal();
-    const [file, setFile] = useState<File | undefined>(undefined)
 
     return (
 
@@ -67,7 +65,7 @@ const ProfileCover: React.FC = () => {
                 <EditCoverThemeButton />
             </div>
 
-            {/* icon */}
+            {/* edit profile picture modal */}
             <div 
             className="relative w-24 h-24 ml-5 -mt-20 overflow-hidden rounded-2xl" 
             onClick={() => setModalId("editProfilePicture")}

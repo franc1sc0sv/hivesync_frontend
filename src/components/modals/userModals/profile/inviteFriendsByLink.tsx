@@ -1,4 +1,4 @@
-import { ModalTemplate } from "../ModalTemplate";
+import { ModalTemplate } from "../../ModalTemplate";
 
 export const InviteByLinkModal: React.FC = () => {
     return (

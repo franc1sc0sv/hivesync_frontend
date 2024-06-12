@@ -1,30 +1,56 @@
-import { CardFriends } from "../../pages/User/Chat/Components/RightComponent"
+import { MdOutlineIosShare } from "react-icons/md";
+import { FaPaperclip } from "react-icons/fa6";
+
 import { SearchBar } from "../../components/forms/Inputs/SearchBar"
 import { SubmitButton } from "../../components/forms/Inputs/Button"
 
 import { useModal } from "../../store/useModal"
-import { InviteByLinkModal } from "../../components/modals/userModals/inviteFriendsByLink"
+import { InviteByLinkModal } from "../../components/modals/userModals/profile/inviteFriendsByLink"
 
 export const AddFriendsFakePage: React.FC = () => {
 
-    const {setModalId} = useModal()
-
     return (
-        <div className="h-full p-4">
-            <form className="w-full h-[20%] flex flex-col gap-10 p-4">
-                <CardFriends />
-                <SearchBar placeholder="Busca un nombre de usuario" />
-            </form>
-
-            <div className="w-full h-[70%] flex flex-col items-end justify-end ">
-
-                <SubmitButton text="Enviar solicitud de amistad" isLoading={false} />
-
-                <button onClick={() => setModalId("inviteByLink")} className="flex h-14 w-full max-w-[320px] p-3 font-bold rounded-xl text-custom_white font-almarai mx-auto">Inviar por medio de link</button>
-            </div>
-
+        <div className="h-full w-full">
+            <ShareLinkButtons />
+            <Form />
             <InviteByLinkModal />
         </div>
 
+    )
+}
+
+const ShareLinkButtons: React.FC = () => {
+    return (
+        <div className="w-full flex flex-row justify-center items-center gap-5 mt-2">
+            <button className="flex flex-col items-center sm:h-1/4 gap-2">
+                <div className="rounded-full bg-overlay_2 p-4">
+                    <MdOutlineIosShare size={25} fill="white" />
+                </div>
+                <h2 className="text-custom_white text-md">Compartir invitación</h2>
+            </button>
+
+            <button className="flex flex-col items-center sm:h-1/4 gap-2">
+                <div className="rounded-full bg-overlay_2 p-4">
+                    <FaPaperclip size={25} fill="white" />
+                </div>
+                <h2 className="text-custom_white text-md">Compartir invitación</h2>
+            </button>
+
+
+        </div>
+    )
+}
+
+const Form: React.FC = () => {
+    return (
+        <form className="w-full h-4/5 flex flex-col justify-evenly  gap-10">
+            <div className="flex flex-row items-center p-5 gap-2">
+                <SearchBar placeholder="Busca un nombre de usuario" />
+            </div>
+
+            <div className="w-full h-full md:p-0 py-10 flex flex-col items-end justify-end ">
+                <SubmitButton text="Enviar solicitud de amistad" isLoading={false} />
+            </div>
+        </form>
     )
 }

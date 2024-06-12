@@ -1,10 +1,10 @@
-import FakePageTemplate from '../../../../../fakePages/FakePageTemplate';
 import useFakePages from '../../../../../store/useFakePage';
+import { ShowFakePages } from '../../../../../fakePages/ShowFakePages';
 import { useSwipeHandler } from '../../hooks/useFakePageSwipeHandler';
 
 export const Channel: React.FC = () => {
 
-  const { fakePages, addFakePage, removeFakePage } = useFakePages();
+  const {addFakePage} = useFakePages();
 
   const handler = useSwipeHandler({
     onSwipedLeft: () => addFakePage({ title: "su", children: <ElChildren /> }),
@@ -12,23 +12,13 @@ export const Channel: React.FC = () => {
 
   return (
     <div className='flex flex-row justify-center items-center w-full max-h-fit bg-overlay_2 screen_overlay rounded-tl-lg rounded-bl-lg'>
-      {fakePages.map((page) => (
-        <FakePageTemplate
-          key={page.id}
-          isOpen={true}
-          onClose={() => removeFakePage(page.id)}
-          index={page.id}
-          title={page.title}
-          children={page.children}
-        />
-      ))}
-
       <div
         {...handler}
         className='w-full h-full rounded-tl-lg bg-overlay_2 rounded-bl-lg ml-auto screen_overlay'
         onClick={() => addFakePage({ title: "Primer children", children: <ElChildren /> })}
       >
       </div>
+      <ShowFakePages />
     </div>
   );
 };
