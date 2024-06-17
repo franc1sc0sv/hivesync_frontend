@@ -1,5 +1,5 @@
 import useFakePages from '../../../../../store/useFakePage';
-import { ShowFakePages } from '../../../../../fakePages/ShowFakePages';
+import { ShowFakePages } from '../../../../fakePages/ShowFakePages';
 import { useSwipeHandler } from '../../hooks/useFakePageSwipeHandler';
 
 export const Channel: React.FC = () => {

@@ -1,6 +1,6 @@
-import { HiUserAdd } from "react-icons/hi";
-import { HiCalendarDays } from "react-icons/hi2";
-import { HiChevronRight } from "react-icons/hi2";
+import { UserAddIcon } from "../../../../Icons/userAdd";
+import { CalendarIcon } from "../../../../Icons/calendar";
+import { RightTriangleIcon } from "../../../../Icons/rightTriangle";
 
 import { useModal } from "../../../../../store/useModal";
 import { ServerInfoModal } from "../../../../modals/serverModals/serverInfoModal";
@@ -19,7 +19,7 @@ export const HeaderServer = ({ name }: { name: string }) => {
         <p className="text-2xl font-bold text-custom_white font-almarai ">
           {name}
         </p>
-        <HiChevronRight size={20} className="fill-white" />
+        <RightTriangleIcon size={20} color="white" />
       </div>
 
       <div className="flex gap-2">
@@ -27,12 +27,12 @@ export const HeaderServer = ({ name }: { name: string }) => {
 
         <button className="p-2  rounded-full w-max bg-overlay_1"
           onClick={() => setModalId("addServerMembers")}>
-          <HiUserAdd size={24} className="fill-white" />
+          <UserAddIcon size={24} color="white" />
         </button>
 
         <button className="p-2  rounded-full w-max bg-overlay_1"
           onClick={() => setModalId("events")}>
-          <HiCalendarDays size={24} className="fill-white" />
+          <CalendarIcon size={24} color="white" />
         </button>
       </div>
 

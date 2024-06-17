@@ -1,7 +1,7 @@
 import { useState, ReactElement, useEffect, useRef } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { HiCalendarDays } from "react-icons/hi2";
+import { CalendarIcon } from '../../Icons/calendar';
 
 interface DateProps {
     title?: string,
@@ -77,7 +77,7 @@ export const DateInput: React.FC<DateProps> = ({title, placeholder}): ReactEleme
 
                 <div className="absolute inset-y-0 right-0 flex items-center pr-3">
                     <button type="button" onClick={toggleDatePicker}>
-                        <HiCalendarDays className="text-xl text-custom_white" />
+                        <CalendarIcon size={25} color='white' />
                     </button>
                 </div>
 

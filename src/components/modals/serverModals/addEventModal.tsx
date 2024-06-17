@@ -1,6 +1,6 @@
 import { ModalTemplate } from "../ModalTemplate";
 
-import { HiCalendarDays } from "react-icons/hi2";
+import { CalendarIcon } from "../../Icons/calendar";
 
 import { useCustomForm } from "../../../hooks/useForm";
 import { InputsForms } from "../../forms/Inputs/inputs";
@@ -29,7 +29,7 @@ const AddEventForm: React.FC = () => {
         <div className="h-full flex flex-col gap-10 justify-center items-center">
 
             <div className="flex flex-row p-4 gap-5 justify-center items-center">
-                <HiCalendarDays className="text-custom_white text-4xl" />
+                <CalendarIcon size={40} color="white" />
                 <p className="text-2xl text-custom_white text-center">Detalles sobre tu evento</p>
             </div>
 

@@ -1,5 +1,6 @@
-import { FaFaceSmileWink } from "react-icons/fa6";
-import { HiPencil } from "react-icons/hi";
+import { PencilIcon } from "../Icons/pencil";
+import { FaceSmilinIcon } from "../Icons/faceSmiling";
+
 import { useModal } from "../../store/useModal";
 
 interface EditOptionProps {
@@ -20,9 +21,9 @@ export const EditProfileOption: React.FC<EditOptionProps> = ({
       onClick={() => setModalId(modalId)}
     >
       {option ? (
-        <FaFaceSmileWink size={20} />
+        <FaceSmilinIcon size={20} color="white" />
       ) : (
-        <HiPencil size={25} />
+        <PencilIcon size={25} color="white" />
       )}
       <p className="text-md">{title}</p>
     </div>

@@ -1,11 +1,10 @@
 import { MdOutlineIosShare } from "react-icons/md";
 import { FaPaperclip } from "react-icons/fa6";
 
-import { SearchBar } from "../../components/forms/Inputs/SearchBar"
-import { SubmitButton } from "../../components/forms/Inputs/Button"
+import { SearchBar } from "../../../forms/Inputs/SearchBar";
+import { SubmitButton } from "../../../forms/Inputs/Button";
 
-import { useModal } from "../../store/useModal"
-import { InviteByLinkModal } from "../../components/modals/userModals/profile/inviteFriendsByLink"
+import { InviteByLinkModal } from "../../../modals/userModals/profile/inviteFriendsByLink";
 
 export const AddFriendsFakePage: React.FC = () => {
 
@@ -33,7 +32,7 @@ const ShareLinkButtons: React.FC = () => {
                 <div className="rounded-full bg-overlay_2 p-4">
                     <FaPaperclip size={25} fill="white" />
                 </div>
-                <h2 className="text-custom_white text-md">Compartir invitación</h2>
+                <h2 className="text-custom_white text-md">Copiar link de invitación</h2>
             </button>
 
 

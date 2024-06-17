@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import { IoSearch } from "react-icons/io5";
+import { SearchIcon } from "../../Icons/search";
 
 interface SearchProps {
   placeholder: string;
@@ -30,7 +30,7 @@ export const SearchBar: React.FC<SearchProps> = ({ placeholder, bg_color = "bg-o
 
         <div className="absolute inset-y-0 right-0 flex items-center pr-3">
           <button type="submit">
-            <IoSearch className="text-xl text-custom_white" />
+            <SearchIcon size={20} color="white" />
           </button>
         </div>
       </form>

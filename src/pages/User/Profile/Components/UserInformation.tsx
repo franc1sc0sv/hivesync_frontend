@@ -3,9 +3,9 @@ import { AddStatusModal } from "../../../../components/modals/userModals/profile
 import { ProfileConnections } from "./ProfileConnections";
 
 import useFakePages from "../../../../store/useFakePage";
-import { ShowFakePages } from "../../../../fakePages/ShowFakePages";
-import { EditProfileFakePage } from "../../../../fakePages/user/editProfileFakePage";
-import { UserFriendsFakePage } from "../../../../fakePages/user/FriendsFakePage";
+import { ShowFakePages } from "../../../../components/fakePages/ShowFakePages";
+import { EditProfileFakePage } from "../../../../components/fakePages/user/profile/editProfileFakePage";
+import { UserFriendsFakePage } from "../../../../components/fakePages/user/friends/FriendsFakePage";
 
 const temporaryRoute =
   "https://static.fundacion-affinity.org/cdn/farfuture/PVbbIC-0M9y4fPbbCsdvAD8bcjjtbFc0NSP3lRwlWcE/mtime:1643275542/sites/default/files/los-10-sonidos-principales-del-perro.jpg";
@@ -115,7 +115,7 @@ const UserFriends = () => {
       <div 
       onClick={() => addFakePage({title: "Mis amigos", children: <UserFriendsFakePage />})}
       className="flex flex-row items-center justify-between p-3 rounded-lg bg-overlay_2">
-        <h1 className="text-custom_white">Tus amigos</h1>
+        <h1 className="text-custom_white">Mis amigos</h1>
 
         <div className="flex -space-x-4 rtl:space-x-reverse">
           {friendsMiniPictures.map((friend, index) => (

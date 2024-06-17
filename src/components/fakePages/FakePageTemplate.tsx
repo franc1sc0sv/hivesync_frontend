@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { GoBackTriangle } from '../components/buttons/goBackTriangle';
-import { useSwipeHandler } from '../components/layouts/ServerLayout/hooks/useFakePageSwipeHandler';
+import { GoBackTriangle } from '../Icons/goBackTriangle';
+import { useSwipeHandler } from '../layouts/ServerLayout/hooks/useFakePageSwipeHandler';
 
 interface FakePageProps {
     onClose: () => void,
@@ -43,7 +43,7 @@ const FakePageTemplate: React.FC<FakePageProps> = ({ onClose, isOpen, index, tit
                     <div className="text-center w-full">
 
                         <div className='flex flex-row justify-between items-center text-custom_white p-3'>
-                            <div onClick={handleClose}> <GoBackTriangle /> </div>
+                            <div onClick={handleClose}> <GoBackTriangle size={30} color='white' /> </div>
                             <span className="text-2xl font-bold">{title}</span>
                             <span></span>
                         </div>

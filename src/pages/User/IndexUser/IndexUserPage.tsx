@@ -4,6 +4,8 @@ import { FriendsButton } from "./Components/FriendsButton";
 import { FriendsPanel } from "./Components/FriendsPanel";
 import { Inbox } from "./Components/Inbox";
 
+import { ShowFakePages } from "../../../components/fakePages/ShowFakePages";
+
 import { friends } from "./data";
 import { MessageProps } from "./types/Messages";
 
@@ -14,6 +16,7 @@ export const IndexUserPage = () => {
         <FriendsPanel friends={friends as MessageProps[]} />
         <Inbox friends={friends as MessageProps[]} />
       </article>
+      <ShowFakePages />
     </GeneralLayout>
   );
 };

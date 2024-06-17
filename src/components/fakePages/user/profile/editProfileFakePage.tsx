@@ -1,16 +1,17 @@
 //modal utils
-import { useModal } from "../../store/useModal";
-import { EditPictureOrCoverModal } from "../../components/modals/userModals/profile/EditPictureOrCoverModal";
+import { useModal } from "../../../../store/useModal";
+import { EditPictureOrCoverModal } from "../../../modals/userModals/profile/EditPictureOrCoverModal";
+
+import { useState } from "react";
 
 //form utils
-import { useCustomForm } from "../../hooks/useForm";
-import { SubmitButton } from "../../components/forms/Inputs/Button";
-import { InputsForms } from "../../components/forms/Inputs/inputs";
-import { TextArea } from "../../components/forms/Inputs/TextArea";
+import { useCustomForm } from "../../../../hooks/useForm";
+import { SubmitButton } from "../../../forms/Inputs/Button";
+import { InputsForms } from "../../../forms/Inputs/inputs";
+import { TextArea } from "../../../forms/Inputs/TextArea";
 
 //icons
-import { useState } from "react";
-import { HiPencil } from "react-icons/hi";
+import { PencilIcon } from "../../../Icons/pencil";
 
 
 const temporaryRoute =
@@ -77,7 +78,7 @@ const ProfileCover: React.FC = () => {
                 />
                 <span className="absolute bottom-0 right-0 left-15 w-10 h-10 transition duration-300 bg-overlay_2 hover:bg-primary border border-white dark:border-gray-800 rounded-full z-10">
                     <div className="absolute bottom-1 right-1 cursor-pointer">
-                        <HiPencil className="text-3xl text-custom_white" />
+                        <PencilIcon size={30} color="white" />
                     </div>
                 </span>
             </div>
@@ -91,7 +92,7 @@ const EditCoverThemeButton: React.FC = () => {
     const {setModalId} = useModal();
     return (
         <div className="absolute top-0 right-0 p-3" onClick={() => setModalId("editCoverTheme")}>
-            <HiPencil className="text-4xl text-custom_white" />
+            <PencilIcon size={30} color="white" />
         </div>
     )
 }
@@ -125,7 +126,7 @@ const EditProfilePicture: React.FC = () => {
                         className="hidden"
                         onChange={(e) => { setFile(e.target.files?.[0]); }}
                     />
-                    <HiPencil className="text-3xl text-custom_white" />
+                    <PencilIcon size={30} color="white" />
                 </label>
             </span>
         </div>
