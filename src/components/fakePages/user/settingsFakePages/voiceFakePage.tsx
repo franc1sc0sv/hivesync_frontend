@@ -1,4 +1,4 @@
-export const VoiceFakePage: React.FC = () => {
+export const VoiceSettingsFakePage: React.FC = () => {
     return (
         <></>
     )

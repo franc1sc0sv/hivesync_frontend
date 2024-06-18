@@ -1,4 +1,4 @@
-export const PrivacyFakePage: React.FC = () => {
+export const PrivacySettingsFakePage: React.FC = () => {
     return (
         <></>
     )

@@ -1,4 +1,4 @@
-export const ConnectionsFakePage: React.FC = () => {
+export const ConnectionsSettingsFakePage: React.FC = () => {
     return (
         <></>
     )

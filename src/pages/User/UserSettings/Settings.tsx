@@ -2,6 +2,7 @@ import { HiOutlineLogin } from "react-icons/hi";
 import { GeneralLayout } from "../../../components/layouts/GeneralLayout/GeneralLayout";
 import { useSession } from "../../../store/user";
 import { MenuOptions } from "./Components/OptionsMenu";
+import { ShowFakePages } from "../../../components/fakePages/ShowFakePages";
 
 export const SettingsPage: React.FC = () => {
   const { logout } = useSession();
@@ -16,6 +17,7 @@ export const SettingsPage: React.FC = () => {
         <HiOutlineLogin size={36} />
         <p>Cerrar Sesion</p>
       </button>
+      <ShowFakePages />
     </GeneralLayout>
   );
 };

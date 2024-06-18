@@ -1,4 +1,4 @@
-import { IoIosColorPalette } from "react-icons/io";
+import { ColorPaletteIcon } from "../../Icons/colorPalette";
 import { useState } from "react";
 
 export const ColorPickerInput: React.FC = () => {
@@ -11,7 +11,7 @@ export const ColorPickerInput: React.FC = () => {
             <label htmlFor="dropzone-file" className="flex flex-col gap-5 items-center  w-full h-64 border-4 border-custom_white border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
 
                 <div className="flex flex-col gap-5 items-center p-5">
-                    <IoIosColorPalette size={80} />
+                    <ColorPaletteIcon size={80} color="white" />
 
                     <div className="flex flex-row gap-5">
 

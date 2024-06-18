@@ -1,82 +1,124 @@
 import { SearchBar } from "../../../../components/forms/Inputs/SearchBar";
-import {
-  HiUser,
-  HiShieldCheck,
-  HiUsers,
-  HiOutlineLightBulb,
-} from "react-icons/hi";
-import { FaPaperclip } from "react-icons/fa6";
-import { FaMicrophone } from "react-icons/fa";
-import { Link } from "react-router-dom";
+
+import { UserIcon } from "../../../../components/Icons/user";
+import { ShieldIcon } from "../../../../components/Icons/shield";
+import { ClipIcon } from "../../../../components/Icons/clip";
+import { MicrophoneIcon } from "../../../../components/Icons/microphone";
+import { ColorPaletteIcon } from "../../../../components/Icons/colorPalette";
+
+import useFakePages from "../../../../store/useFakePage";
+import { AccountSettingsFakePage } from "../../../../components/fakePages/user/settingsFakePages/userAccountFakePage";
+import { PrivacySettingsFakePage } from "../../../../components/fakePages/user/settingsFakePages/privacyFakePage";
+import { ConnectionsSettingsFakePage } from "../../../../components/fakePages/user/settingsFakePages/connectionsFakePage";
+import { VoiceSettingsFakePage } from "../../../../components/fakePages/user/settingsFakePages/voiceFakePage";
+import { AppearanceSettingsFakePage } from "../../../../components/fakePages/user/settingsFakePages/AppearanceFakePage";
 
 interface MenuProps {
   icon: React.ReactNode;
-  optionName: string;
-  optionLink: string;
+  name: string;
+  page: React.ReactNode;
 }
 
-const MenuOptions1: MenuProps[] = [
-  { icon: <HiUser />, optionName: "Cuenta", optionLink: "" },
-  { icon: <HiShieldCheck />, optionName: "Privacidad", optionLink: "" },
+const accountOptions: MenuProps[] = [
+  {
+    icon: <UserIcon size={30} color="white" />,
+    name: "Cuenta",
+    page: <AccountSettingsFakePage />
+  },
+  {
+    icon: <ShieldIcon size={30} color="white" />,
+    name: "Privacidad",
+    page: <PrivacySettingsFakePage />
+  },
   // { icon: <HiUsers />, optionName: "Solicitudes de amistad", optionLink: "" },
-  { icon: <FaPaperclip />, optionName: "Conexiones", optionLink: "" },
+  {
+    icon: <ClipIcon size={30} color="white" />,
+    name: "Conexiones",
+    page: <ConnectionsSettingsFakePage />
+  },
 ];
 
-const MenuOptions2: MenuProps[] = [
-  { icon: <FaMicrophone />, optionName: "Voz", optionLink: "" },
+const appOptions: MenuProps[] = [
+  {
+    icon: <MicrophoneIcon size={30} color="white" />,
+    name: "Voz",
+    page: <VoiceSettingsFakePage />
+  },
+  {
+    icon: <ColorPaletteIcon size={30} color="white" />,
+    name: "Apariencia",
+    page: <AppearanceSettingsFakePage />
+  }
   // { icon: <HiOutlineLightBulb />, optionName: "Voz", optionLink: "" },
 ];
 
 export const MenuOptions: React.FC = () => {
+
   return (
     <div className="flex flex-col gap-5 h-[80vh] overflow-y-auto">
       <SearchBar placeholder="Buscar opción" />
-
       {/* account options */}
       <div>
         <h1 className="my-2 text-2xl text-custom_white">Mi cuenta</h1>
-
-        <div className="flex flex-col gap-3 p-3 bg-overlay_2 rounded-xl">
-          {MenuOptions1.map((option, index) => (
-            <Link
-              to={option.optionLink}
-              className="flex flex-row items-center gap-3"
-              key={index}
-            >
-              <div>
-                <div className="p-2 text-3xl bg-gray text-custom_white rounded-xl">
-                  {option.icon}
-                </div>
-              </div>
-              <p className="text-custom_white">{option.optionName}</p>
-            </Link>
-          ))}
-        </div>
+        <AccountSettings />
       </div>
 
       {/* style and connections */}
       <div>
         <h1 className="my-2 text-2xl text-custom_white rounded-xl">
-          Conexión y estilos
+          Ajustes avanzados
         </h1>
-
-        <div className="flex flex-col gap-3 p-3 bg-overlay_2 rounded-xl">
-          {MenuOptions2.map((option, index) => (
-            <Link
-              to={option.optionLink}
-              className="flex flex-row items-center gap-3"
-              key={index}
-            >
-              <div>
-                <div className="p-2 text-3xl bg-gray text-custom_white rounded-xl">
-                  {option.icon}
-                </div>
-              </div>
-              <p className="text-custom_white">{option.optionName}</p>
-            </Link>
-          ))}
-        </div>
+        <AppSettings />
       </div>
     </div>
   );
 };
+
+const AccountSettings: React.FC = () => {
+
+  const { addFakePage } = useFakePages();
+
+  return (
+    <div className="flex flex-col gap-3 p-3 bg-overlay_2 rounded-xl">
+      {accountOptions.map((option, index) => (
+        <button
+          onClick={() => addFakePage({ title: option.name, children: option.page })}
+          className="flex flex-row items-center gap-3"
+          key={index}
+        >
+          <div>
+            <div className="p-2 bg-gray rounded-xl">
+              {option.icon}
+            </div>
+          </div>
+          <p className="text-custom_white">{option.name}</p>
+        </button>
+      ))}
+    </div>
+  )
+}
+
+const AppSettings: React.FC = () => {
+
+  const { addFakePage } = useFakePages();
+
+  return (
+    <div className="flex flex-col gap-3 p-3 bg-overlay_2 rounded-xl">
+      {appOptions.map((option, index) => (
+        <button
+          onClick={() => addFakePage({ title: option.name, children: option.page })}
+          className="flex flex-row items-center gap-3"
+          key={index}
+        >
+          <div>
+            <div className="p-2 bg-gray rounded-xl">
+              {option.icon}
+            </div>
+          </div>
+          <p className="text-custom_white">{option.name}</p>
+        </button>
+      ))}
+    </div>
+  )
+}
+
