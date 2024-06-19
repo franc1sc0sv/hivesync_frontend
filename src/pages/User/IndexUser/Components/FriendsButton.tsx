@@ -17,7 +17,6 @@ export const FriendsButton = () => {
         <UserAddIcon size={30} color="white" />
         <h2 className="text-custom_white text-md">Añadir amigos</h2>
       </button>
-      {/* <ShowFakePages /> */}
     </div>
   );
 };

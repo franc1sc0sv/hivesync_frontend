@@ -2,31 +2,67 @@ import { ModalTemplate } from "../ModalTemplate";
 import { AddServerMembersModal } from "./addServerMemberModal";
 import { useModal } from "../../../store/useModal";
 
-import { HiUserAdd } from "react-icons/hi";
-import { HiMiniBell } from "react-icons/hi2";
-import { HiCog } from "react-icons/hi";
-
-import { MdCreateNewFolder } from "react-icons/md";
-import { BiSolidCategory } from "react-icons/bi";
-import { HiCalendarDays } from "react-icons/hi2";
-import { IoIosWarning } from "react-icons/io";
-
+import { UserAddIcon } from "../../Icons/userAdd";
+import { BellIcon } from "../../Icons/bell";
+import { SettingsIcon } from "../../Icons/settings";
+import { CalendarIcon } from "../../Icons/calendar";
+import { WarningIcon } from "../../Icons/warning";
+import { FolderIcon } from "../../Icons/folder";
+import { CategoryIcon } from "../../Icons/category";
 
 interface MenuProps {
     icon: React.ReactNode;
-    optionName: string;
-    goTo: () => void
+    name: string;
+    // modal: React.ReactNode
 }
 
-const MenuOptions1: MenuProps[] = [
-    { icon: <MdCreateNewFolder />, optionName: "Crear canal", goTo: () => console.log("función")},
-    { icon: <BiSolidCategory />, optionName: "Crear categoría", goTo: () => ("función") },
-    { icon: <HiCalendarDays />, optionName: "Crear evento", goTo: () => console.log("función") }
+const quickOptions: MenuProps[] = [
+    {
+        icon: <UserAddIcon size={30} color="white" />,
+        name: "Invitar miembros",
+        // modal: <AddServerMembersModal />
+    },
+    {
+        icon: <BellIcon size={30} color="white" />,
+        name: "Notificaciones",
+        // modal: <AddServerMembersModal />
+    },
+    {
+        icon: <SettingsIcon size={30} color="white" />,
+        name: "Ajustes",
+        // modal: <AddServerMembersModal />
+    }
 ];
 
-const MenuOptions2: MenuProps[] = [
-    { icon: <IoIosWarning />, optionName: "Denunciar ataque", goTo: () => console.log("función") },
-    { icon: <IoIosWarning />, optionName: "Denunciar servidor", goTo: () => console.log("función") },
+const serverOptions: MenuProps[] = [
+    {
+        icon: <FolderIcon size={30} color="white" />,
+        name: "Crear canal",
+        // modal: <AddServerMembersModal />
+    },
+    {
+        icon: <CategoryIcon size={30} color="white" />,
+        name: "Crear categoría",
+        // modal: <AddServerMembersModal />
+    },
+    {
+        icon: <CalendarIcon size={30} color="white" />,
+        name: "Crear evento",
+        // modal: <AddServerMembersModal />
+    }
+];
+
+const serverReports: MenuProps[] = [
+    {
+        icon: <WarningIcon size={30} color="white" />,
+        name: "Denunciar ataque",
+        // modal: <AddServerMembersModal />
+    },
+    {
+        icon: <WarningIcon size={30} color="white" />,
+        name: "Denunciar servidor",
+        // modal: <AddServerMembersModal />
+    },
 ];
 
 const temporaryRoute =
@@ -46,7 +82,7 @@ const ServerInfo: React.FC = () => {
         <div className="flex flex-col gap-10">
             <ServerCover />
             <ServerDetails />
-            <ServerButtons />
+            {/* <ServerButtons /> */}
             <ServerOptions />
         </div>
     )
@@ -94,76 +130,62 @@ const ServerDetails: React.FC = () => {
     )
 }
 
-const ServerButtons: React.FC = () => {
-
-    const { setModalId } = useModal();
-
-    return (
-        <div className="flex flex-row gap-10 justify-center items-center">
-            <div className="flex flex-col gap-2 justify-center items-center">
-                <button className="p-2  rounded-full w-max bg-overlay_1" onClick={() => setModalId("addServerMembers")}>
-                    <HiUserAdd size={45} className="fill-white bg-primary p-1 rounded-lg" />
-                </button>
-                <p className="font-almarai text-sm text-center text-custom_white">Invitar</p>
-            </div>
-
-            <div className="flex flex-col gap-2 justify-center items-center">
-                <button className="p-2  rounded-full w-max bg-overlay_1">
-                    <HiMiniBell size={45} className="fill-white bg-primary p-1 rounded-lg" />
-                </button>
-                <p className="font-almarai text-sm text-center text-custom_white">Notificaciones</p>
-            </div>
-
-            <div className="flex flex-col gap-2 justify-center items-center">
-                <button className="p-2  rounded-full w-max bg-overlay_1">
-                    <HiCog size={45} className="fill-white bg-primary p-1 rounded-lg" />
-                </button>
-                <p className="font-almarai text-sm text-center text-custom_white">Ajustes</p>
-            </div>
-
-            <AddServerMembersModal />
-        </div>
-    )
-}
-
 const ServerOptions = () => {
     return (
         (
             <div className="flex flex-col gap-5">
 
                 <div className="flex flex-col gap-3 p-3 bg-overlay_2 rounded-xl">
-                    {MenuOptions1.map((option, index) => (
+                    {quickOptions.map((option, index) => (
                         <div
                             className="flex flex-row items-center gap-3"
                             key={index}
-                            onClick={option.goTo}
+                            // onClick={option.modal}
                         >
                             <div>
-                                <div className="p-2 text-3xl bg-gray text-custom_white rounded-xl">
+                                <div className="p-2 text-3xl text-custom_white rounded-xl">
                                     {option.icon}
                                 </div>
                             </div>
-                            <p className="text-custom_white">{option.optionName}</p>
+                            <p className="text-custom_white">{option.name}</p>
                         </div>
                     ))}
                 </div>
 
                 <div className="flex flex-col gap-3 p-3 bg-overlay_2 rounded-xl">
-                    {MenuOptions2.map((option, index) => (
+                    {serverOptions.map((option, index) => (
                         <div
                             className="flex flex-row items-center gap-3"
                             key={index}
-                            onClick={option.goTo}
+                            // onClick={option.modal}
                         >
                             <div>
-                                <div className="p-2 text-3xl bg-gray text-custom_white rounded-xl">
+                                <div className="p-2 text-3xl text-custom_white rounded-xl">
                                     {option.icon}
                                 </div>
                             </div>
-                            <p className="text-custom_white">{option.optionName}</p>
+                            <p className="text-custom_white">{option.name}</p>
                         </div>
                     ))}
                 </div>
+
+                <div className="flex flex-col gap-3 p-3 bg-overlay_2 rounded-xl">
+                    {serverReports.map((option, index) => (
+                        <div
+                            className="flex flex-row items-center gap-3"
+                            key={index}
+                            // onClick={option.modal}
+                        >
+                            <div>
+                                <div className="p-2 text-3xl text-custom_white rounded-xl">
+                                    {option.icon}
+                                </div>
+                            </div>
+                            <p className="text-custom_white">{option.name}</p>
+                        </div>
+                    ))}
+                </div>
+
             </div>
         )
     )

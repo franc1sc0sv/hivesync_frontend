@@ -140,12 +140,12 @@ const EditProfileForm: React.FC = () => {
 
     const post_success_function = () => console.log("la api se llamó exitosamente")
 
-    const { register, isLoading } = useCustomForm(api_function, post_success_function, "")
-
-
+    const {onSubmit, register, isLoading } = useCustomForm(api_function, post_success_function, "")
     return (
 
-        <form className="w-full flex flex-col gap-5 overflow-y-auto px-1 text-start ">
+        <form 
+        onSubmit={onSubmit}
+        className="w-full flex flex-col gap-5 overflow-y-auto px-1 text-start ">
             <InputsForms title="Nombre" register={register} name="name" placeholder="Nombre a mostrar" />
             <TextArea title="Sobre mí" name="aboutMe" placeholder="Agrega una genial descripción" register={register} />
             <SubmitButton text="Guardar cambios" isLoading={isLoading} />

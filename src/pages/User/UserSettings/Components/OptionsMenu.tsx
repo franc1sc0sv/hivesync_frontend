@@ -1,3 +1,4 @@
+import { useCustomForm } from "../../../../hooks/useForm";
 import { SearchBar } from "../../../../components/forms/Inputs/SearchBar";
 
 import { UserIcon } from "../../../../components/Icons/user";
@@ -54,9 +55,23 @@ const appOptions: MenuProps[] = [
 
 export const MenuOptions: React.FC = () => {
 
+  const api = () => console.log("hola, *llama a la api épicamente*");
+  const success = () => console.log("success");
+
+  const { onSubmit, register } = useCustomForm(api, success, "");
+
   return (
     <div className="flex flex-col gap-5 h-[80vh] overflow-y-auto">
-      <SearchBar placeholder="Buscar opción" />
+
+      <form
+        className="p-1"
+        onSubmit={onSubmit}>
+        <SearchBar
+          name="setting"
+          register={register}
+          placeholder="Buscar una opción de ajuste" />
+      </form>
+
       {/* account options */}
       <div>
         <h1 className="my-2 text-2xl text-custom_white">Mi cuenta</h1>
@@ -87,7 +102,7 @@ const AccountSettings: React.FC = () => {
           key={index}
         >
           <div>
-            <div className="p-2 bg-gray rounded-xl">
+            <div className="p-2 rounded-xl">
               {option.icon}
             </div>
           </div>
@@ -111,7 +126,7 @@ const AppSettings: React.FC = () => {
           key={index}
         >
           <div>
-            <div className="p-2 bg-gray rounded-xl">
+            <div className="p-2 rounded-xl">
               {option.icon}
             </div>
           </div>

@@ -21,9 +21,7 @@ const StatusForm: React.FC = () => {
 
     const api_login = () => console.log("hola, *llama a la api épicamente*");
 
-    const success = () => {
-        console.log("success");
-    }
+    const success = () => console.log("success");
 
     const { onSubmit, register, isLoading } = useCustomForm(
         api_login,
@@ -41,8 +39,13 @@ const StatusForm: React.FC = () => {
 
             <div className="mx-auto">
 
-                <form onSubmit={onSubmit} className="flex flex-col gap-10 items-center">
-                    <TextArea placeholder="¡Añade un estado genial!" name="status" register={register} />
+                <form 
+                onSubmit={onSubmit} 
+                className="flex flex-col gap-10 items-center">
+                    <TextArea 
+                    placeholder="¡Añade un estado genial!" 
+                    name="status" 
+                    register={register} />
 
                     <SubmitButton text="Guardar" isLoading={isLoading} />
                 </form>

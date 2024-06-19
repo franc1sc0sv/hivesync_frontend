@@ -1,6 +1,9 @@
 import { MdOutlineIosShare } from "react-icons/md";
 import { FaPaperclip } from "react-icons/fa6";
 
+import { useCustomForm } from "../../../../hooks/useForm";
+
+
 import { SearchBar } from "../../../forms/Inputs/SearchBar";
 import { SubmitButton } from "../../../forms/Inputs/Button";
 
@@ -41,14 +44,25 @@ const ShareLinkButtons: React.FC = () => {
 }
 
 const Form: React.FC = () => {
+
+    const api = () => console.log("hola, *llama a la api épicamente*");
+    const success = () => console.log("success");
+
+    const { onSubmit, register, isLoading } = useCustomForm(api, success, "");
+
     return (
-        <form className="w-full h-4/5 flex flex-col justify-evenly  gap-10">
+        <form
+            onSubmit={onSubmit}
+            className="w-full h-4/5 flex flex-col justify-evenly  gap-10">
             <div className="flex flex-row items-center p-5 gap-2">
-                <SearchBar placeholder="Busca un nombre de usuario" />
+                <SearchBar
+                    name="friend"
+                    register={register}
+                    placeholder="Busca un nombre de usuario" />
             </div>
 
             <div className="w-full h-full md:p-0 py-10 flex flex-col items-end justify-end ">
-                <SubmitButton text="Enviar solicitud de amistad" isLoading={false} />
+                <SubmitButton text="Enviar solicitud de amistad" isLoading={isLoading} />
             </div>
         </form>
     )

@@ -2,6 +2,7 @@ import { CalendarIcon } from "../../Icons/calendar";
 import { TaskIcon } from "../../Icons/task";
 import { ClockIcon } from "../../Icons/clock";
 import { AddIcon } from "../../Icons/add";
+import { CheckIcon } from "../../Icons/check";
 
 
 import { SubmitButton } from "../../forms/Inputs/Button";
@@ -60,13 +61,13 @@ export const Events: React.FC = () => {
 
     return (
         <div className="flex flex-col gap-10">
-            <div className="flex p-4 gap-5 justify-around items-center">
+            <div className="flex gap-5 justify-around items-center">
 
                 <div className="flex flex-row justify-center items-center gap-5">
                     <CalendarIcon size={40} color="white" />
                     <p className="text-2xl text-custom_white">Tus eventos</p>
                 </div>
-                
+
                 {/* add event button */}
                 <div onClick={() => setModalId("addEvent")} >
                     <AddIcon size={40} color="white" />
@@ -74,11 +75,19 @@ export const Events: React.FC = () => {
             </div>
             {
                 events && events.map((event, index) => (
-                    <div className="flex flex-col bg-overlay_2 p-3 rounded-xl w-4/5 mx-auto gap-5" key={index}>
+                    <div className="w-full flex flex-col bg-overlay_2 p-3 rounded-xl  mx-auto gap-5" key={index}>
 
-                        <div className="flex flex-row items-center gap-5">
-                            <TaskIcon size={20} color="white" />
-                            <p className="text-xl text-custom_white font-almarai">{event.name}</p>
+                        <div className="flex flex-row items-center justify-between gap-5">
+
+                            <div className="flex flex-row justify-center items-center gap-5">
+                                <TaskIcon size={20} color="white" />
+                                <p className="text-xl text-custom_white font-almarai">{event.name}</p>
+                            </div>
+
+                            <div className="flex justify-center items-center ">
+                                <SubmitButton text="Finalizar" isLoading={false} />
+
+                            </div>
                         </div>
 
                         <div className="w-full flex flex-row items-center">
@@ -87,9 +96,6 @@ export const Events: React.FC = () => {
                                 <ClockIcon size={20} color="white" />
                                 <p className="text-xl text-custom_white font-almarai">{event.eventDate}</p>
                             </div>
-
-                            <SubmitButton text="Finalizar evento" isLoading={false} />
-
                         </div>
                     </div>
                 ))

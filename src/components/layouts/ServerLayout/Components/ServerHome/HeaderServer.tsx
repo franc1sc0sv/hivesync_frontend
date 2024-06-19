@@ -1,15 +1,24 @@
-import { UserAddIcon } from "../../../../Icons/userAdd";
 import { CalendarIcon } from "../../../../Icons/calendar";
 import { RightTriangleIcon } from "../../../../Icons/rightTriangle";
+import { UsersGroupIcon } from "../../../../Icons/usersGroup";
+
+
+import { useCustomForm } from "../../../../../hooks/useForm";
 
 import { useModal } from "../../../../../store/useModal";
 import { ServerInfoModal } from "../../../../modals/serverModals/serverInfoModal";
+import { MembersListModal } from "../../../../modals/serverModals/membersListModal";
 import { AddServerMembersModal } from "../../../../modals/serverModals/addServerMemberModal";
 import { EventsModal } from "../../../../modals/serverModals/eventsModal";
 
 import { SearchBar } from "../../../../forms/Inputs/SearchBar";
 
 export const HeaderServer = ({ name }: { name: string }) => {
+
+  const api = () => console.log("hola, *llama a la api épicamente*");
+  const success = () => console.log("success");
+
+  const { onSubmit, register} = useCustomForm(api, success, "")
 
   const { setModalId } = useModal();
 
@@ -23,11 +32,14 @@ export const HeaderServer = ({ name }: { name: string }) => {
       </div>
 
       <div className="flex gap-2">
-        <SearchBar bg_color="bg-overlay_1" placeholder="Buscar" />
+        <form
+          onSubmit={onSubmit}>
+          <SearchBar register={register} name="searchInServer" bg_color="bg-overlay_1" placeholder="Buscar" />
+        </form>
 
         <button className="p-2  rounded-full w-max bg-overlay_1"
-          onClick={() => setModalId("addServerMembers")}>
-          <UserAddIcon size={24} color="white" />
+          onClick={() => setModalId("membersList")}>
+          <UsersGroupIcon size={24} color="white" />
         </button>
 
         <button className="p-2  rounded-full w-max bg-overlay_1"
@@ -37,6 +49,7 @@ export const HeaderServer = ({ name }: { name: string }) => {
       </div>
 
       <ServerInfoModal />
+      <MembersListModal />
       <AddServerMembersModal />
       <EventsModal />
     </article>
