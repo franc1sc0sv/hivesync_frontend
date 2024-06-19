@@ -47,9 +47,9 @@ const Form = () => {
     >
       <InputsForms
         register={register}
-        name="email"
-        title="Email"
-        placeholder="Digite su email"
+        name="user"
+        title="Usuario"
+        placeholder="Digite su email o nombre de usuario"
         type="text"
       />
       <PasswordInput register={register} />
