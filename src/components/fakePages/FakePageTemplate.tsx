@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { GoBackTriangle } from '../Icons/goBackTriangle';
 import { useSwipeHandler } from '../layouts/ServerLayout/hooks/useFakePageSwipeHandler';
 
+import { useModal } from '../../store/useModal';
+
 interface FakePageProps {
     onClose: () => void,
     isOpen: boolean,
@@ -12,6 +14,8 @@ interface FakePageProps {
 }
 
 const FakePageTemplate: React.FC<FakePageProps> = ({ onClose, isOpen, index, title, children }) => {
+
+    const {modalId} = useModal();
 
     const [isClosing, setIsClosing] = useState(false);
 
@@ -24,8 +28,12 @@ const FakePageTemplate: React.FC<FakePageProps> = ({ onClose, isOpen, index, tit
     };
 
     const handler = useSwipeHandler({
-        onSwipedRight: () => handleClose(),
-      });
+        onSwipedRight: () => {
+            if (modalId == "") {
+                handleClose()
+            } 
+        }
+    });
 
 
     return (
