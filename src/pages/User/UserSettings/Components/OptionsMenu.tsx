@@ -61,7 +61,7 @@ export const MenuOptions: React.FC = () => {
   const { onSubmit, register } = useCustomForm(api, success, "");
 
   return (
-    <div className="flex flex-col gap-5 h-[80vh] overflow-y-auto">
+    <div className="w-full lg:w-4/5 mx-auto flex flex-col gap-5 h-[80vh] overflow-y-auto">
 
       <form
         className="p-1"

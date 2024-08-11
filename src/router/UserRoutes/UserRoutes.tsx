@@ -1,9 +1,9 @@
 import { RouteObject } from "react-router-dom";
 import { AuthDetector } from "../../components/auth/AuthDetector";
 
+import { DirectMessagesPage } from "../../pages/User/DirectMessages/DM";
 import { ChatPage } from "../../pages/User/Chat/ChatPage";
 import { ComunityPage } from "../../pages/User/Comunity/ComunityPage";
-import { IndexUserPage } from "../../pages/User/IndexUser/IndexUserPage";
 import { ComunityIndividualPage } from "../../pages/User/ComunityIndividual/ComunityIndividualPage";
 import { ServerPage } from "../../pages/User/Servers/ServerPage";
 import { ProfilePage } from "../../pages/User/Profile/Profile";
@@ -15,7 +15,7 @@ export const UserRoutes: RouteObject = {
   path: "/app",
   element: <AuthDetector />,
   children: [
-    { path: "@me", index: true, element: <IndexUserPage /> }, // Mensajes directos,
+    { path: "@me", element: <DirectMessagesPage /> }, // Mensajes directos,
     { path: "@notifications", element: <NotificationsPage /> }, //Chats individuales
 
     { path: ":id", element: <ChatPage /> }, //Chats individuales

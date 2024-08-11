@@ -1,10 +1,10 @@
-import { UserAddIcon } from "../../../../components/Icons/userAdd";
+import { UserAddIcon } from "../Icons/userAdd";
 
-import useFakePages from "../../../../store/useFakePage";
-import { AddFriendsFakePage } from "../../../../components/fakePages/user/friends/AddFriendsFakePage";
-import { ShowFakePages } from "../../../../components/fakePages/ShowFakePages";
+import useFakePages from "../../store/useFakePage";
+import { AddFriendsFakePage } from "../fakePages/user/friends/AddFriendsFakePage";
 
-export const FriendsButton = () => {
+
+export const AddFriendsButton = () => {
 
   const { addFakePage } = useFakePages()
 

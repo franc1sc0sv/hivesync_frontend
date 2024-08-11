@@ -1,5 +1,5 @@
 import { ModalTemplate } from "../ModalTemplate";
-import { AddServerMembersModal } from "./addServerMemberModal";
+import { AddServerMembersModal } from "./members/addServerMemberModal";
 import { useModal } from "../../../store/useModal";
 
 import { UserAddIcon } from "../../Icons/userAdd";

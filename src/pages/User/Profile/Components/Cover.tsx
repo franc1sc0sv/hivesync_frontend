@@ -10,7 +10,7 @@ const temporaryRoute =
 export const ProfileCover: React.FC = () => {
 
     return (
-        <div className="max-w-2xl text-gray-900 rounded-lg sm:max-w-sm md:max-w-sm lg:max-w-sm xl:max-w-sm sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto">
+        <div className="w-full lg:w-4/5 mx-auto text-gray-900 rounded-lg">
             {/* cover  */}
             <div className="relative overflow-hidden rounded-xl h-36 bg-primary">
                 {/* settings icon */}

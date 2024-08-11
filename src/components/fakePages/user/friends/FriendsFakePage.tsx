@@ -1,7 +1,7 @@
 import { useCustomForm } from "../../../../hooks/useForm";
 import { SearchBar } from "../../../forms/Inputs/SearchBar";
 
-import { FriendsButton } from "../../../../pages/User/IndexUser/Components/FriendsButton";
+import { AddFriendsButton } from "../../../buttons/AddFriendsButton";
 
 import { useModal } from "../../../../store/useModal";
 import { ExternalProfileModal } from "../../../modals/generalModals/externalProfileModal";
@@ -55,7 +55,7 @@ const Header = () => {
                 name="friend"
                 placeholder="Buscar" />
             </form>
-            <FriendsButton />
+            <AddFriendsButton />
         </div>
     )
 }

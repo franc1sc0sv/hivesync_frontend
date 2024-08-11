@@ -1,12 +1,13 @@
-import { ModalTemplate } from "../ModalTemplate";
+import { ModalTemplate } from "../../ModalTemplate";
 
-import { CalendarIcon } from "../../Icons/calendar";
+import { CalendarIcon } from "../../../Icons/calendar";
 
-import { useCustomForm } from "../../../hooks/useForm";
-import { InputsForms } from "../../forms/Inputs/inputs";
-import { SubmitButton } from "../../forms/Inputs/Button";
-import { TextArea } from "../../forms/Inputs/TextArea";
-import { DateInput } from "../../forms/Inputs/DateBirth";
+import { useCustomForm } from "../../../../hooks/useForm";
+import { InputsForms } from "../../../forms/Inputs/inputs";
+import { SubmitButton } from "../../../forms/Inputs/Button";
+import { TextArea } from "../../../forms/Inputs/TextArea";
+import { DateInput } from "../../../forms/Inputs/DateBirth";
+
 
 export const AddEventModal: React.FC = () => {
     return (
@@ -15,7 +16,6 @@ export const AddEventModal: React.FC = () => {
         </ModalTemplate>
     );
 }
-
 
 const AddEventForm: React.FC = () => {
 

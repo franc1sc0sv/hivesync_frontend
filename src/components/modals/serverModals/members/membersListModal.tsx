@@ -1,12 +1,12 @@
-import { ModalTemplate } from "../ModalTemplate"
+import { ModalTemplate } from "../../ModalTemplate"
 
-import { UserAddIcon } from "../../Icons/userAdd"
-import { ChatIcon } from "../../Icons/chat"
-import { PhoneIcon } from "../../Icons/phone"
+import { UserAddIcon } from "../../../Icons/userAdd"
+import { ChatIcon } from "../../../Icons/chat"
+import { PhoneIcon } from "../../../Icons/phone"
 
 
-import { useCustomForm } from "../../../hooks/useForm"
-import { SearchBar } from "../../forms/Inputs/SearchBar"
+import { useCustomForm } from "../../../../hooks/useForm"
+import { SearchBar } from "../../../forms/Inputs/SearchBar"
 
 const temporaryRoute =
     "https://static.fundacion-affinity.org/cdn/farfuture/PVbbIC-0M9y4fPbbCsdvAD8bcjjtbFc0NSP3lRwlWcE/mtime:1643275542/sites/default/files/los-10-sonidos-principales-del-perro.jpg";

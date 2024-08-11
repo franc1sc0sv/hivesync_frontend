@@ -40,7 +40,7 @@ export const UserInformation = () => {
 
 
   return (
-    <div className="h-[60%] flex flex-col gap-5 overflow-y-auto">
+    <div className="h-3/5 w-full lg:w-4/5 mx-auto flex flex-col gap-5 overflow-y-auto">
       {/* Main profile options */}
 
       <MainInformation />
@@ -51,6 +51,7 @@ export const UserInformation = () => {
                 githubLinked={true}
                 githubUsername="Trabis_github"
             /> */}
+
 
       {/* your friends */}
       <UserFriends />
@@ -71,7 +72,7 @@ const MainInformation: React.FC = () => {
         <p className="text-sm text-gray ">{user.username}</p>
       </div>
 
-      <div className="flex items-center justify-center w-full gap-5">
+      <div className="w-full flex items-center justify-center lg:justify-start gap-5">
         <EditProfileOption
           title="Añadir estado"
           option={true}

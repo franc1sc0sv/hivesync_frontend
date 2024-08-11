@@ -16,7 +16,7 @@ export const ColorPickerInput: React.FC = () => {
                     <div className="flex flex-row gap-5">
 
                         <p className="text-xl font-almarai text-gray-500 dark:text-gray-400">
-                            Personaliza tu portada con un genial color
+                            ¡Elige un color genial!
                         </p>
                     </div>
 

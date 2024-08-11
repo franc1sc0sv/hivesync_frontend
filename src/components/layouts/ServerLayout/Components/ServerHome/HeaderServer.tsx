@@ -7,9 +7,9 @@ import { useCustomForm } from "../../../../../hooks/useForm";
 
 import { useModal } from "../../../../../store/useModal";
 import { ServerInfoModal } from "../../../../modals/serverModals/serverInfoModal";
-import { MembersListModal } from "../../../../modals/serverModals/membersListModal";
-import { AddServerMembersModal } from "../../../../modals/serverModals/addServerMemberModal";
-import { EventsModal } from "../../../../modals/serverModals/eventsModal";
+import { MembersListModal } from "../../../../modals/serverModals/members/membersListModal";
+import { AddServerMembersModal } from "../../../../modals/serverModals/members/addServerMemberModal";
+import { EventsModal } from "../../../../modals/serverModals/events/eventsModal";
 
 import { SearchBar } from "../../../../forms/Inputs/SearchBar";
 

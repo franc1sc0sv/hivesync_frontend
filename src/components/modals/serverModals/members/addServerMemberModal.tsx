@@ -1,9 +1,9 @@
-import { ModalTemplate } from "../ModalTemplate"
+import { ModalTemplate } from "../../ModalTemplate"
 
-import { UserAddIcon } from "../../Icons/userAdd"
+import { UserAddIcon } from "../../../Icons/userAdd"
 
-import { SearchBar } from "../../forms/Inputs/SearchBar"
-import { useCustomForm } from "../../../hooks/useForm"
+import { SearchBar } from "../../../forms/Inputs/SearchBar"
+import { useCustomForm } from "../../../../hooks/useForm"
 
 export const AddServerMembersModal: React.FC = () => {
     return (
