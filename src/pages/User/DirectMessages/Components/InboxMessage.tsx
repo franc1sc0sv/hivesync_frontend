@@ -15,10 +15,12 @@ export const InboxMessage: React.FC<UserProps> = ({
   messagePreview,
   timeAgo,
 }) => {
-  const id = 1;
+
+  const id = "d853c1ef-e3b6-4f04-942d-62226325536a";
+
   return (
     <Link
-      to={`:${id}`}
+      to={`/app/${id}`}
       className="flex flex-row items-center justify-around"
     >
 

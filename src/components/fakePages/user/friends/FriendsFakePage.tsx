@@ -6,9 +6,6 @@ import { AddFriendsButton } from "../../../buttons/AddFriendsButton";
 import { useModal } from "../../../../store/useModal";
 import { ExternalProfileModal } from "../../../modals/generalModals/externalProfileModal";
 
-import useFakePages from "../../../../store/useFakePage";
-import { AddFriendsFakePage } from "./AddFriendsFakePage";
-
 import { ChatIcon } from "../../../Icons/chat";
 import { PhoneIcon } from "../../../Icons/phone";
 

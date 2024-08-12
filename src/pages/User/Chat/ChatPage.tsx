@@ -1,4 +1,13 @@
+import { ChatHeader } from "./Components/chatHeader";
+import { Conversation } from "./Components/conversation";
+import { MessageInput } from "./Components/messageInput";
+
 export const ChatPage = () => {
-  const currentUrl = window.location.href;
-  return <p>{currentUrl}-Chat-Page</p>;
+  return (
+    <div className="w-full h-screen flex flex-col justify-between bg-overlay_1">
+      <ChatHeader username="Leopardo Meci" />
+      <Conversation />
+      <MessageInput />
+    </div>
+  );
 };

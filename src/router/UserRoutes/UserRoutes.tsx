@@ -15,10 +15,10 @@ export const UserRoutes: RouteObject = {
   path: "/app",
   element: <AuthDetector />,
   children: [
-    { path: "@me", element: <DirectMessagesPage /> }, // Mensajes directos,
-    { path: "@notifications", element: <NotificationsPage /> }, //Chats individuales
-
+    { path: "@me", element: <DirectMessagesPage /> }, // Bandeja entrada DM
     { path: ":id", element: <ChatPage /> }, //Chats individuales
+
+    { path: "@notifications", element: <NotificationsPage /> }, //Notificaciones
 
     { path: "profile/:id", element: <ProfilePage /> },
     { path: "profile/:id/settings", element: <SettingsPage /> }, //ajustes del usuario
