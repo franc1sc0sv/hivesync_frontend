@@ -1,7 +1,16 @@
+import { FieldValues, UseFormRegister } from "react-hook-form";
+
 import { ColorPaletteIcon } from "../../Icons/colorPalette";
 import { useState } from "react";
 
-export const ColorPickerInput: React.FC = () => {
+interface ColorPickerProps {
+    register: UseFormRegister<FieldValues>,
+    name: string,
+    inputValue?: string
+}
+
+
+export const ColorPickerInput: React.FC<ColorPickerProps> = ({ register, name, inputValue }) => {
 
     const [color, setColor] = useState("#45156B");
 
@@ -14,13 +23,18 @@ export const ColorPickerInput: React.FC = () => {
                     <ColorPaletteIcon size={80} color="white" />
 
                     <div className="flex flex-row gap-5">
-
                         <p className="text-xl font-almarai text-gray-500 dark:text-gray-400">
                             ¡Elige un color genial!
                         </p>
                     </div>
 
-                    <input id="dropzone-file" onChange={(e) => setColor(e.target.value)} type="color" value={color} className="w-full" />
+                    <input
+                        {...register(name)}
+                        id="dropzone-file"
+                        onChange={(e) => setColor(e.target.value)}
+                        type="color"
+                        defaultValue={inputValue ? inputValue : color}
+                        className="w-full" />
                 </div>
             </label>
 

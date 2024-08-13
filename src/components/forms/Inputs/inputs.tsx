@@ -6,6 +6,7 @@ type InputInformation = {
   type?: string;
   name: string;
   register: UseFormRegister<FieldValues>;
+  inputValue?: string
 };
 
 export const InputsForms: React.FC<InputInformation> = ({
@@ -14,17 +15,20 @@ export const InputsForms: React.FC<InputInformation> = ({
   type = "text",
   register,
   name,
+  inputValue
 }) => {
   return (
     <div className="flex flex-col w-full max-w-[320px] gap-2">
       <p className="text-lg font-bold text-custom_white font-almarai ">
         {title}
       </p>
+      
       <input
         {...register(name)}
         className="w-full p-3 transition duration-300 bg-overlay_2 rounded-xl focus:outline-none focus:ring-4 focus:ring-primary focus:border-primary text-custom_white"
         type={type}
         placeholder={placeholder}
+        defaultValue={inputValue}
       />
     </div>
   );

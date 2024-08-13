@@ -3,6 +3,11 @@ import { ImgInput } from "../../../forms/Inputs/ImgInput";
 import { ColorPickerInput } from "../../../forms/Inputs/ColorPicker";
 import { SubmitButton } from "../../../forms/Inputs/Button";
 
+import { useCustomForm } from "../../../../hooks/useForm";
+
+const theme = localStorage.getItem('themeColor');
+const verifyTheme = theme ? theme : "#45156B";
+
 export const EditPictureOrCoverModal = () => {
     return (
         <div>
@@ -28,10 +33,26 @@ const EditProfilePicture = () => {
 }
 
 const EditCoverTheme = () => {
+
+    const api_function = async (data: any) => {
+        const theme = data.themeColor;
+
+        localStorage.setItem("themeColor", theme);
+    }
+
+    const post_success_function = () => {
+        location.reload();
+        console.log("la api se llamó exitosa y épicamente");
+    }
+
+    const { onSubmit, register, isLoading } = useCustomForm(api_function, post_success_function, "")
+    
     return (
-        <div className="h-full w-full lg:w-1/2 mx-auto text-white flex flex-col items-center justify-center p-4 gap-5">
-            <ColorPickerInput />
-            <SubmitButton text="Guardar cambios" isLoading={false} />
-        </div>
+        <form 
+        onSubmit={onSubmit}
+        className="h-full w-full lg:w-1/2 mx-auto text-white flex flex-col items-center justify-center p-4 gap-5">
+            <ColorPickerInput register={register} name="themeColor" inputValue={verifyTheme} />
+            <SubmitButton text="Guardar cambios" isLoading={isLoading} />
+        </form>
     )
 }

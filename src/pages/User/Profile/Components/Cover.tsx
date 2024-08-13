@@ -6,13 +6,19 @@ import { HiCog } from "react-icons/hi";
 const temporaryRoute =
     "https://static.fundacion-affinity.org/cdn/farfuture/PVbbIC-0M9y4fPbbCsdvAD8bcjjtbFc0NSP3lRwlWcE/mtime:1643275542/sites/default/files/los-10-sonidos-principales-del-perro.jpg";
 
+const theme = localStorage.getItem('themeColor');
+
+const verifyTheme = theme ? theme : "#45156B";
+
 
 export const ProfileCover: React.FC = () => {
 
     return (
         <div className="w-full lg:w-4/5 mx-auto text-gray-900 rounded-lg">
             {/* cover  */}
-            <div className="relative overflow-hidden rounded-xl h-36 bg-primary">
+            <div
+                style={{ backgroundColor: verifyTheme }}
+                className={`relative overflow-hidden rounded-xl h-36`}>
                 {/* settings icon */}
                 <SettingsPageButton />
             </div>

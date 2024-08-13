@@ -7,7 +7,7 @@ export const MessageInput: React.FC = () => {
     return (
         <div className="w-[95%] flex flex-row items-center justify-between p-3 mx-auto my-3 rounded-xl bg-overlay_2 gap-3">
 
-            <div className="mx-auto w-1/3 sm:w-fit flex lg:justify-start justify-center items-center flex-row gap-3">
+            <div className="mx-auto w-1/3 sm:w-fit flex lg:justify-start justify-center items-center flex-row gap-5">
                 <FileIcon size={30} color="#fff" />
                 <MicrophoneIcon size={30} color="#fff" />
                 <CameraIcon size={30} color="#fff" />

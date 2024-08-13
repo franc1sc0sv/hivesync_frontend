@@ -6,6 +6,8 @@ import { TextArea } from "../../../forms/Inputs/TextArea";
 import { SubmitButton } from "../../../forms/Inputs/Button";
 import { useCustomForm } from "../../../../hooks/useForm";
 
+const savedStatus = localStorage.getItem("userStatus");
+
 
 export const AddStatusModal: React.FC = () => {
     return (
@@ -19,13 +21,21 @@ export const AddStatusModal: React.FC = () => {
 
 const StatusForm: React.FC = () => {
 
-    const api_login = () => console.log("hola, *llama a la api épicamente*");
 
-    const success = () => console.log("success");
+    const api_function = async (data: any) => {
+        const status = data.status;
+
+        localStorage.setItem("userStatus", status);
+    }
+
+    const post_success_function = () => {
+        location.reload();
+        console.log("la api se llamó exitosa y épicamente");
+    }
 
     const { onSubmit, register, isLoading } = useCustomForm(
-        api_login,
-        success,
+        api_function,
+        post_success_function,
         ``
     );
 
@@ -39,14 +49,16 @@ const StatusForm: React.FC = () => {
 
             <div className="mx-auto">
 
-                <form 
-                onSubmit={onSubmit} 
-                className="flex flex-col gap-10 items-center">
-                    <TextArea 
-                    placeholder="¡Añade un estado genial!" 
-                    name="status" 
-                    register={register} />
-
+                <form
+                    onSubmit={onSubmit}
+                    className="flex flex-col gap-10 items-center">
+                    <TextArea
+                        placeholder="¡Añade un estado genial!"
+                        name="status"
+                        register={register}
+                        inputValue={savedStatus}
+                        />
+    
                     <SubmitButton text="Guardar" isLoading={isLoading} />
                 </form>
             </div>

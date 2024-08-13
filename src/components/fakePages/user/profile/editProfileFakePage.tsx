@@ -4,6 +4,8 @@ import { EditPictureOrCoverModal } from "../../../modals/userModals/profile/Edit
 
 import { useState } from "react";
 
+import { useForm } from "react-hook-form";
+
 //form utils
 import { useCustomForm } from "../../../../hooks/useForm";
 import { SubmitButton } from "../../../forms/Inputs/Button";
@@ -17,6 +19,9 @@ import { PencilIcon } from "../../../Icons/pencil";
 const temporaryRoute =
     "https://static.fundacion-affinity.org/cdn/farfuture/PVbbIC-0M9y4fPbbCsdvAD8bcjjtbFc0NSP3lRwlWcE/mtime:1643275542/sites/default/files/los-10-sonidos-principales-del-perro.jpg";
 
+const theme = localStorage.getItem('themeColor');
+const verifyTheme = theme ? theme : "#45156B";
+
 interface User {
     username: string;
     about: string;
@@ -26,10 +31,13 @@ interface User {
     github: boolean;
 }
 
+const displayName = localStorage.getItem("name");
+const aboutUser = localStorage.getItem("aboutUser")
+
 const user: User = {
-    name: "FJ",
+    name: displayName ? displayName : "FJ",
     username: "franc1sc0_sv",
-    about: "En efecto, es una prueba",
+    about: aboutUser ? aboutUser : "En efecto, es una prueba",
     memberSince: "21 de septiembre de 2005",
     spotify: true,
     github: true,
@@ -55,21 +63,23 @@ export const EditProfileFakePage: React.FC = () => {
 
 const ProfileCover: React.FC = () => {
 
-    const {setModalId} = useModal();
+    const { setModalId } = useModal();
 
     return (
 
         <div className="w-full text-gray-900 rounded-lg">
             {/* cover  */}
-            <div className="relative overflow-hidden rounded-xl h-36 bg-primary">
+            <div
+                style={{ backgroundColor: verifyTheme }}
+                className={`relative overflow-hidden rounded-xl h-36`}>
                 {/* edit cover theme */}
                 <EditCoverThemeButton />
             </div>
 
             {/* edit profile picture modal */}
-            <div 
-            className="relative w-24 h-24 ml-5 -mt-20 overflow-hidden rounded-2xl" 
-            onClick={() => setModalId("editProfilePicture")}
+            <div
+                className="relative w-24 h-24 ml-5 -mt-20 overflow-hidden rounded-2xl"
+                onClick={() => setModalId("editProfilePicture")}
             >
                 <img
                     className="object-cover object-center w-full h-full"
@@ -89,7 +99,7 @@ const ProfileCover: React.FC = () => {
 }
 
 const EditCoverThemeButton: React.FC = () => {
-    const {setModalId} = useModal();
+    const { setModalId } = useModal();
     return (
         <div className="absolute top-0 right-0 p-3" onClick={() => setModalId("editCoverTheme")}>
             <PencilIcon size={30} color="white" />
@@ -136,18 +146,42 @@ const EditProfilePicture: React.FC = () => {
 
 const EditProfileForm: React.FC = () => {
 
-    const api_function = () => console.log("*llama a api épicamente*")
 
-    const post_success_function = () => console.log("la api se llamó exitosamente")
+    const api_function = async (data: any) => {
+        const displayName = data.name;
+        const aboutUser = data.aboutMe;
 
-    const {onSubmit, register, isLoading } = useCustomForm(api_function, post_success_function, "")
+        localStorage.setItem("name", displayName);
+        localStorage.setItem("aboutUser", aboutUser);
+    }
+
+    const post_success_function = () => {
+        location.reload();
+        console.log("la api se llamó exitosa y épicamente");
+    }
+
+    const { onSubmit, register, isLoading } = useCustomForm(api_function, post_success_function, "")
+
     return (
 
-        <form 
-        onSubmit={onSubmit}
-        className="w-full flex flex-col gap-5 overflow-y-auto px-1 text-start ">
-            <InputsForms title="Nombre" register={register} name="name" placeholder="Nombre a mostrar" />
-            <TextArea title="Sobre mí" name="aboutMe" placeholder="Agrega una genial descripción" register={register} />
+        <form
+            onSubmit={onSubmit}
+            className="w-full flex flex-col gap-5 overflow-y-auto px-1 text-start ">
+            <InputsForms
+                title="Nombre"
+                register={register}
+                name="name"
+                placeholder="Nombre a mostrar"
+                inputValue={user.name}
+            />
+
+            <TextArea
+                title="Sobre mí"
+                name="aboutMe"
+                placeholder="Agrega una genial descripción"
+                register={register}
+                inputValue={user.about}
+            />
             <SubmitButton text="Guardar cambios" isLoading={isLoading} />
         </form>
     )
