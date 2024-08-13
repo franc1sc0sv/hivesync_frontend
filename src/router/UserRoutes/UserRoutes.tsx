@@ -10,6 +10,9 @@ import { ProfilePage } from "../../pages/User/Profile/Profile";
 import { SettingsPage } from "../../pages/User/UserSettings/Settings";
 import { NotificationsPage } from "../../pages/User/Notifications/NotificationsPage";
 
+//no le hagan caso xd ay lo borro
+import { TestingPage } from "../../pages/testing/TestingPage";
+
 export const UserRoutes: RouteObject = {
   caseSensitive: true,
   path: "/app",
@@ -17,6 +20,7 @@ export const UserRoutes: RouteObject = {
   children: [
     { path: "@me", element: <DirectMessagesPage /> }, // Bandeja entrada DM
     { path: ":id", element: <ChatPage /> }, //Chats individuales
+    {path: "test", element: <TestingPage/> },
 
     { path: "@notifications", element: <NotificationsPage /> }, //Notificaciones
 

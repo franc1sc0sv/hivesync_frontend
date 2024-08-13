@@ -49,8 +49,8 @@ const Form = () => {
         register={register}
         // name="user"
         // title="Usuario"
-        name="email"
-        title="Email"
+        name="user"
+        title="Email o Usuario"
         placeholder="Digite su email o nombre de usuario"
         type="text"
       />
