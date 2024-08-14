@@ -5,6 +5,9 @@ import { HiChatBubbleLeftRight, HiMiniBell } from "react-icons/hi2";
 
 import { ArrayLinks, PropsProfilePicture } from "./types/GeneralLayout";
 
+//mock
+import { userData } from "../../../pages/User/mocks/userData";
+
 const links: ArrayLinks = [
   {
     Icon: HiUserGroup,
@@ -21,8 +24,7 @@ const links: ArrayLinks = [
 ];
 
 const profilePicture: PropsProfilePicture = {
-  pictureRoute:
-    "https://static.fundacion-affinity.org/cdn/farfuture/PVbbIC-0M9y4fPbbCsdvAD8bcjjtbFc0NSP3lRwlWcE/mtime:1643275542/sites/default/files/los-10-sonidos-principales-del-perro.jpg",
+  pictureRoute: userData.picture,
   url: "/app/profile/agaw1-qffq3135-af3451",
 };
 

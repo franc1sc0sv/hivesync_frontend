@@ -1,9 +1,9 @@
-import { BsFillCameraFill } from "react-icons/bs";
+import { HiMiniVideoCamera } from "react-icons/hi2";
 
 import { IconProps } from "./types/iconProps";
 
 export const CameraIcon: React.FC<IconProps> = ({size, color}) => {
     return (
-        <BsFillCameraFill size={size} fill={color} />
+        <HiMiniVideoCamera size={size} fill={color} />
     );
 };

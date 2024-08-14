@@ -7,33 +7,14 @@ import { ShowFakePages } from "../../../../components/fakePages/ShowFakePages";
 import { EditProfileFakePage } from "../../../../components/fakePages/user/profile/editProfileFakePage";
 import { UserFriendsFakePage } from "../../../../components/fakePages/user/friends/FriendsFakePage";
 
-const temporaryRoute =
-  "https://static.fundacion-affinity.org/cdn/farfuture/PVbbIC-0M9y4fPbbCsdvAD8bcjjtbFc0NSP3lRwlWcE/mtime:1643275542/sites/default/files/los-10-sonidos-principales-del-perro.jpg";
-
-
-interface User {
-  username: string;
-  about: string;
-  name: string;
-  memberSince: string;
-  spotify: boolean;
-  github: boolean;
-}
-
-const user: User = {
-  name: "FJ",
-  username: "franc1sc0_sv",
-  about: "En efecto, es una prueba",
-  memberSince: "21 de septiembre de 2005",
-  spotify: true,
-  github: true,
-};
+//mock
+import { userData } from "../../mocks/userData";
 
 const friendsMiniPictures = [
-  { picture: temporaryRoute },
-  { picture: temporaryRoute },
-  { picture: temporaryRoute },
-  { picture: temporaryRoute },
+  { picture: userData.picture },
+  { picture: userData.picture },
+  { picture: userData.picture },
+  { picture: userData.picture },
 ]
 
 export const UserInformation = () => {
@@ -68,8 +49,8 @@ const MainInformation: React.FC = () => {
   return (
     <div className="flex flex-col gap-2 p-3 rounded-lg bg-overlay_2 ">
       <div className="flex flex-col gap-1">
-        <p className="text-2xl text-custom_white ">{user.name}</p>
-        <p className="text-sm text-gray ">{user.username}</p>
+        <p className="text-2xl text-custom_white ">{userData.name}</p>
+        <p className="text-sm text-gray ">{userData.username}</p>
       </div>
 
       <div className="w-full flex items-center justify-center lg:justify-start gap-5">
@@ -93,16 +74,22 @@ const MainInformation: React.FC = () => {
 }
 
 const AboutUser = () => {
+
   return (
     <div className="flex flex-col gap-3 p-3 rounded-lg bg-overlay_2">
       <div className="flex flex-col text-custom_white">
         <h3 className="text-lg">Sobre mí</h3>
-        <p className="text-gray">{user.about}</p>
+        <p className="text-gray">{userData.about}</p>
+      </div>
+
+      <div className="flex flex-col text-custom_white">
+        <h3 className="text-lg">Mi estado</h3>
+        <p className="text-gray">{userData.status}</p>
       </div>
 
       <div className="flex flex-col text-custom_white">
         <h3 className="text-lg">Miembro de HiveSync desde</h3>
-        <p className="text-gray">{user.memberSince}</p>
+        <p className="text-gray">{userData.memberSince}</p>
       </div>
     </div>
   )
