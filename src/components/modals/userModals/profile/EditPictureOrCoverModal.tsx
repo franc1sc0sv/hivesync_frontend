@@ -45,13 +45,21 @@ const EditCoverTheme = () => {
         console.log("la api se llamó exitosa y épicamente");
     }
 
+    const resetColor = () => {
+        localStorage.setItem("themeColor", "#45156B");
+        location.reload();
+    }
+
     const { onSubmit, register, isLoading } = useCustomForm(api_function, post_success_function, "")
-    
+
     return (
-        <form 
-        onSubmit={onSubmit}
-        className="h-full w-full lg:w-1/2 mx-auto text-white flex flex-col items-center justify-center p-4 gap-5">
+        <form
+            onSubmit={onSubmit}
+            className="h-full w-full lg:w-1/2 mx-auto text-white flex flex-col items-center justify-center p-4 gap-5">
+
             <ColorPickerInput register={register} name="themeColor" inputValue={verifyTheme} />
+
+            <p onClick={() => resetColor()} className="text-xl hover:text-primary transition-all duration-300">Restablecer color de tema</p>
             <SubmitButton text="Guardar cambios" isLoading={isLoading} />
         </form>
     )
