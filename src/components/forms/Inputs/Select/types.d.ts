@@ -13,4 +13,5 @@ type PropsSelect = {
   Icon: IconType;
   StrokeIcon: boolean;
   options: Options;
+  setValue: UseFormSetValue<FieldValues>
 };

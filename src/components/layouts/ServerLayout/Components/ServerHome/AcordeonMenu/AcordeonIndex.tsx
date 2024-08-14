@@ -62,6 +62,7 @@ export const AcordeonItems = ({
     <div className="flex flex-col">
       {CategoryChannel.map((channel) => (
         <ItemAcordeonChannel
+        
           isCategoryOpen={isCategoryOpen}
           channel={channel}
           key={channel.id}

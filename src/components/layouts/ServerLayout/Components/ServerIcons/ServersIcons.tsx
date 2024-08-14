@@ -25,6 +25,7 @@ const Icons: React.FC<PropsServerIcons> = ({ server_data_icons }) => {
   return server_data_icons.map((server, i) => {
     return !Array.isArray(server) ? (
       <ServerIcon
+      
         id={server.id}
         IconServerURL={server.IconServerURL}
         active={server.active}

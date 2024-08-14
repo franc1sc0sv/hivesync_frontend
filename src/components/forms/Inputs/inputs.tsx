@@ -19,7 +19,7 @@ export const InputsForms: React.FC<InputInformation> = ({
 }) => {
   return (
     <div className="flex flex-col w-full max-w-[320px] gap-2">
-      <p className="text-lg font-bold text-custom_white font-almarai ">
+      <p className="text-xl font-bold text-custom_white font-almarai ">
         {title}
       </p>
       

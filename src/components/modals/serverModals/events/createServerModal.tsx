@@ -1,6 +1,5 @@
-import { useCustomForm } from "../../../../hooks/useForm";
+import { FieldValues, UseFormRegister } from "react-hook-form";
 import { useCustomFormCreateServer } from "../../../../hooks/useFormCreateServer";
-import { useCustomFormModal } from "../../../../hooks/useFormModal";
 import { SubmitButton } from "../../../forms/Inputs/Button";
 import { ImgInput } from "../../../forms/Inputs/ImgInput";
 import { InputsForms } from "../../../forms/Inputs/inputs";
@@ -126,10 +125,10 @@ const ModalForm = () => {
       onSubmit={onSubmit}
       className="flex flex-col items-center justify-center w-full gap-5 px-1 overflow-y-auto"
     >
-      <EditProfilePicture />
+      <EditProfilePicture register={register} />
 
       <InputsForms
-        title="Nombre del servidor"
+        title="Nombre l servidor"
         register={register}
         name="name"
         placeholder="Nombre del servidor"
@@ -140,10 +139,10 @@ const ModalForm = () => {
   );
 };
 
-const EditProfilePicture = () => {
+const EditProfilePicture = ({ register }: { register: UseFormRegister<FieldValues> }) => {
   return (
     <div className="flex items-center justify-center w-full h-full p-5 text-white">
-      <ImgInput text="Subir" />
+      <ImgInput status={() => { }} register={register} name="avatar" text="Subir" />
     </div>
   );
 };

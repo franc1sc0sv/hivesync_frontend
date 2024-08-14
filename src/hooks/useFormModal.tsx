@@ -5,7 +5,7 @@ import { useNotifications } from "../store/useNotifications";
 import { useModal } from "../store/useModal";
 
 export const useCustomFormModal = (api_function: (data?: any) => any) => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
   const [isLoading, setIsloading] = useState(false);
   const { setNotifications } = useNotifications();
   const { setModalId } = useModal();
@@ -47,5 +47,5 @@ export const useCustomFormModal = (api_function: (data?: any) => any) => {
     }
   };
 
-  return { onSubmit: handleSubmit(onSubmit), register, isLoading };
+  return { onSubmit: handleSubmit(onSubmit), register, isLoading, setValue };
 };

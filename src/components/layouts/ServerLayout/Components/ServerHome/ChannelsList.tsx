@@ -30,13 +30,12 @@ export const ChannelList = ({ channels }: { channels: Channels[] }) => {
     setChannelList(formatedChannels);
   }, []);
 
-  console.log(channels);
-
   return (
     <article className="flex flex-col gap-5 overflow-y-auto">
       {channelList.map((channel) => {
         return channel.category === ChannelCategory.NO_CATEGORY ? (
           <AcordeonItems
+
             CategoryChannel={channel.channels}
             key={channel.category}
           />
