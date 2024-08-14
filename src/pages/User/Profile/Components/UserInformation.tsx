@@ -7,7 +7,7 @@ import { ShowFakePages } from "../../../../components/fakePages/ShowFakePages";
 import { EditProfileFakePage } from "../../../../components/fakePages/user/profile/editProfileFakePage";
 import { UserFriendsFakePage } from "../../../../components/fakePages/user/friends/FriendsFakePage";
 
-//testing data
+//mock
 import { userData } from "../../mocks/userData";
 
 const friendsMiniPictures = [
