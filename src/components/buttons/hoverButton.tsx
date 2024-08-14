@@ -6,7 +6,7 @@ interface ButtonHoverProp {
 }
 
 export const ButtonHover: React.FC<ButtonHoverProp> = ({ children, direction }) => {
-  // Construir la clase dinámica
+
   const dynamicClass = `rounded-${direction}-lg bg-overlay_2 hover:bg-overlay_4`;
 
   return (
