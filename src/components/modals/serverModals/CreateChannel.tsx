@@ -1,15 +1,24 @@
 import { ModalTemplate } from "../ModalTemplate";
+
 import { InputsForms } from "../../forms/Inputs/inputs";
 import { SubmitButton } from "../../forms/Inputs/Button";
-import { useCustomForm } from "../../../hooks/useForm";
-
 import { SelectInput } from "../../forms/Inputs/Select/Select";
 
 import { BiSolidCategory } from "react-icons/bi";
-import { getCategories } from "../../layouts/ServerLayout/Context/ServerContext";
+import { getCategories, getChannels } from "../../layouts/ServerLayout/Context/ServerContext";
 import { useServer } from "../../layouts/ServerLayout/hooks/useServer";
 import { RadioInput } from "../../forms/Inputs/Radio/InputRadio";
 import { useState } from "react";
+import { ChannelType } from "../../layouts/ServerLayout/Enums/SpecificServer";
+
+import { v4 as uuidv4 } from 'uuid';
+import { useCustomFormCreateServer } from "../../../hooks/useFormCreateServer";
+
+const options = [
+  { label: "Texto", value: ChannelType.TEXT, description: "Chatea y envia imagenes" },
+  { label: "Voz", value: ChannelType.VIDEO, description: "Comunicate por voz y video" },
+]
+
 
 export const CreateChannel: React.FC = () => {
   return (
@@ -39,30 +48,63 @@ const ModalForm = () => {
     (server: any) => server.serverID === selected_server.id
   );
 
-  const api_function = (data: any) => {};
+  const api_function = (data: any) => {
 
-  const post_success_function = () => {};
+    const category = data.category?.trim() || "";
+    const name = data.name?.trim() || "";
+    const type = data.type?.trim() || "";
 
-  const { register, isLoading, onSubmit } = useCustomForm(
-    api_function,
-    post_success_function
-  );
+    if (!name || !category || !type) {
+      throw {
+        message: "Todos los campos deben ser completados.",
+        severity: "warning",
+      };
+    }
+
+    if (name.length < 3) {
+      throw {
+        message: "El nombre debe tener al menos 3 caracteres.",
+        severity: "warning",
+      };
+    }
+
+    const newChannel = {
+      id: uuidv4(),
+      name: data.name,
+      categoryID: data.category,
+      serverID: selected_server.id,
+      type: data.type
+    }
+
+    const updatedChannels = [...getChannels(), newChannel];
+    localStorage.setItem("serverChannels", JSON.stringify(updatedChannels));
+
+    const url = `/app/${selected_server.id}/${newChannel.id}`;
+
+    return { url: url };
+
+  };
+
+
+  const { register, isLoading, onSubmit, setValue } = useCustomFormCreateServer(
+    api_function);
 
   const [selectedOption, setSelectedOption] = useState<string>("option1");
 
   const handleOptionChange = (value: string) => {
+    setValue("type", value)
     setSelectedOption(value);
   };
 
   return (
     <form
       onSubmit={onSubmit}
-      className="flex flex-col items-center justify-center w-full gap-5 px-1 overflow-y-auto"
+      className="flex flex-col items-center justify-center w-full gap-9 px-1 overflow-y-auto"
     >
       <InputsForms
         title="Nombre del canal"
         register={register}
-        name="category"
+        name="name"
         placeholder="Nombre del canal"
       />
 
@@ -72,15 +114,14 @@ const ModalForm = () => {
         Icon={BiSolidCategory}
         text={"Categoria"}
         required
+        setValue={setValue}
         options={categorias_por_server}
         placeholder={"Categorias"}
       />
 
       <RadioInput
-        options={[
-          { label: "Opción 1", value: "option1" },
-          { label: "Opción 2", value: "option2" },
-        ]}
+        title="Tipo de canal"
+        options={options}
         name="exampleOptions"
         selectedValue={selectedOption}
         onChange={handleOptionChange}
@@ -90,8 +131,3 @@ const ModalForm = () => {
     </form>
   );
 };
-
-const options = [
-  { text: "Consultoría de Mejora Continúa", value: "1" },
-  { text: "Reclutamiento y Selección de Personal", value: "2" },
-];

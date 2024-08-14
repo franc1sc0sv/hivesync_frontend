@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 export const useCustomFormCreateServer = (
   api_function: (data?: any) => any
 ) => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
   const [isLoading, setIsloading] = useState(false);
   const { setNotifications } = useNotifications();
   const { setModalId } = useModal();
@@ -47,5 +47,5 @@ export const useCustomFormCreateServer = (
     }
   };
 
-  return { onSubmit: handleSubmit(onSubmit), register, isLoading };
+  return { onSubmit: handleSubmit(onSubmit), register, isLoading, setValue };
 };

@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { API_RESPONSE_ERROR_CLASS } from "../class/api_responses_instances";
@@ -6,15 +7,13 @@ import { useNavigate } from "react-router-dom";
 
 export const useCustomForm = (
   api_function: (data?: any) => any,
-  post_success_function: (data: any) => void,
-  route?: string
+  post_success_function: (data: Usuario) => void,
+  route: string
 ) => {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const [isLoading, setIsloading] = useState(false);
   const { setNotifications } = useNotifications();
-
-  const [url, setUrl] = useState(route ? route : "");
 
   const onSubmit = async (data: any) => {
     try {
@@ -22,28 +21,15 @@ export const useCustomForm = (
       const res = await api_function(data);
 
       post_success_function(res);
-
-      if (res.url) {
-        setUrl(res.url);
-      }
-
-      if (route != "") {
-        navigate(url);
-      }
+      navigate(route);
 
       setIsloading(false);
       return res;
-    } catch (e: any) {
-      if (e.message) {
-        setNotifications(e);
-        setIsloading(false);
-        return;
-      }
-
+    } catch (e) {
       if (e instanceof API_RESPONSE_ERROR_CLASS) {
         setNotifications({
           message: e.DATA.message,
-          severity: "warning",
+          severity: "warningsaegcbjhts",
         });
         setIsloading(false);
         return;
@@ -57,5 +43,5 @@ export const useCustomForm = (
     }
   };
 
-  return { onSubmit: handleSubmit(onSubmit), register, isLoading, setUrl };
+  return { onSubmit: handleSubmit(onSubmit), register, isLoading };
 };

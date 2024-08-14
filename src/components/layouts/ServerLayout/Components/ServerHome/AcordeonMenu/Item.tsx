@@ -35,10 +35,10 @@ export const ItemAcordeonChannel = ({
   );
 };
 
-const IconChannel = ({ type }: { type: ChannelType }) => {
+export const IconChannel = ({ type, size = 28 }: { type: ChannelType, size?: number }) => {
   return type === ChannelType.TEXT ? (
-    <HiHashtag size={28} />
+    <HiHashtag size={size} />
   ) : (
-    <HiSpeakerWave size={28} />
+    <HiSpeakerWave size={size} />
   );
 };

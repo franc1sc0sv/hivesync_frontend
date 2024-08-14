@@ -14,6 +14,7 @@ export const SelectionInput: React.FC<PropsSelect> = ({
   Icon,
   StrokeIcon = false,
   options = [],
+  setValue
 }) => {
   const { value, setShowOptions, showOptions } = useSelect();
 
@@ -28,15 +29,15 @@ export const SelectionInput: React.FC<PropsSelect> = ({
 
   useEffect(() => {
     if (!value.id) return;
-    // setValue(name, value.value);
+    setValue(name, value.id);
   }, [value]);
 
   return (
     <div className="flex flex-col w-full max-w-[320px] gap-3 font-almarai  ">
-      <p className="text-lg font-bold text-custom_white ">{text}</p>
+      <p className="text-xl font-bold text-custom_white ">{text}</p>
       <div
         className="relative w-full p-2 rounded-lg cursor-default bg-overlay_2 "
-        onClick={handleClick}
+
       >
         <p className="w-full max-w-lg truncate ... py-2 rounded-lg text-body px-14 text-gray">
           {value.name === "" ? placeholder : value.name}
@@ -45,6 +46,7 @@ export const SelectionInput: React.FC<PropsSelect> = ({
 
         <IoIosArrowForward
           size={28}
+          onClick={handleClick}
           className={`absolute right-5 top-1/2 translate-y-[-50%] cursor-pointer fill-white rounded-full p-1 fill-dark transition-all duration-200 ${openStylesArrow}`}
         />
         <Icon
@@ -62,7 +64,7 @@ const Options = ({ options, show }: { options: Options; show: boolean }) => {
       {show && (
         <motion.div
           key={Number(show)}
-          className="absolute flex flex-col w-full gap-5 p-4 text-white rounded-lg shadow-xl bg-overlay_2 "
+          className="absolute flex flex-col w-full gap-5 p-4 text-white rounded-lg shadow-xl bg-overlay_2 z-50 "
           initial={initialAnimation}
           animate={animateAnimation}
           exit={exitAnimation}
@@ -82,8 +84,8 @@ const Option = ({ option }: { option: Option }) => {
   const { name } = option;
 
   const handleClick = () => {
-    setValue(option);
     setShowOptions(false);
+    setValue(option);
   };
 
   return (

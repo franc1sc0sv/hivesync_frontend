@@ -2,6 +2,8 @@ import { GeneralLayout } from "../../../components/layouts/GeneralLayout/General
 import { ServerProvider } from "../../../components/layouts/ServerLayout/Context/ServerContext.js";
 import { ServerLayout } from "../../../components/layouts/ServerLayout/ServerLayout.jsx";
 
+
+
 export const ServerPage = () => {
   return (
     <GeneralLayout showHeader={false}>

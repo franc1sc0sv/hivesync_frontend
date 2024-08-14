@@ -93,7 +93,7 @@ const getServers = () => {
   return servers;
 };
 
-const getChannels = () => {
+export const getChannels = () => {
   const channels = JSON.parse(localStorage.getItem("serverChannels") || "[]");
   return channels;
 };
