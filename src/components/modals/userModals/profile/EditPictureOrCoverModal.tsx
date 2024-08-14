@@ -4,34 +4,46 @@ import { ColorPickerInput } from "../../../forms/Inputs/ColorPicker";
 import { SubmitButton } from "../../../forms/Inputs/Button";
 
 export const EditPictureOrCoverModal = () => {
-    return (
-        <div>
-            <ModalTemplate identificator="editProfilePicture">
-                <EditProfilePicture />
-            </ModalTemplate>
+  return (
+    <div>
+      <ModalTemplate identificator="editProfilePicture">
+        <EditProfilePicture />
+      </ModalTemplate>
 
-            <ModalTemplate identificator="editCoverTheme">
-                <EditCoverTheme />
-            </ModalTemplate>
-        </div>
-    )
-}
+      <ModalTemplate identificator="editCoverTheme">
+        <EditCoverTheme />
+      </ModalTemplate>
+    </div>
+  );
+};
+
+const ModalHeader = () => {
+  return (
+    <div className="flex flex-col items-center justify-center gap-2">
+      <p className="text-2xl font-bold text-center font-amiko text-custom_white">
+        Sube tu foto de perfil
+      </p>
+      <p className="text-sm text-center font-almarai text-custom_white">
+        Dale identidad a tu perfil con una foto
+      </p>
+    </div>
+  );
+};
 
 const EditProfilePicture = () => {
-    return (
-        <div className="h-full w-full text-white flex items-center justify-center p-5">
-            <ImgInput
-                text="Haz click para subir una nueva foto de perfil o puedes arrastar la foto y soltarla aquí"
-            />
-        </div>
-    )
-}
+  return (
+    <div className="flex flex-col items-center w-full h-full gap-10 text-white">
+      <ModalHeader />
+      <ImgInput text="Subir" />
+    </div>
+  );
+};
 
 const EditCoverTheme = () => {
-    return (
-        <div className="h-full w-full lg:w-1/2 mx-auto text-white flex flex-col items-center justify-center p-4 gap-5">
-            <ColorPickerInput />
-            <SubmitButton text="Guardar cambios" isLoading={false} />
-        </div>
-    )
-}
+  return (
+    <div className="flex flex-col items-center justify-center w-full h-full gap-5 p-4 mx-auto text-white lg:w-1/2">
+      <ColorPickerInput />
+      <SubmitButton text="Guardar cambios" isLoading={false} />
+    </div>
+  );
+};

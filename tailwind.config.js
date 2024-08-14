@@ -6,6 +6,7 @@ export default {
       anaheim: ["Anaheim", "sans-serif"],
       amiko: ["Amiko", "sans-serif"],
       almarai: ["Almarai", "sans-serif"],
+      exo: ["Exo 2", "sans-serif"],
     },
     extend: {
       colors: {

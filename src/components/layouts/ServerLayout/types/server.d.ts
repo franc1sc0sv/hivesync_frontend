@@ -5,4 +5,5 @@ interface ServerInfoIcons {
   url: string;
   active: boolean;
   name: string;
+  id: string;
 }

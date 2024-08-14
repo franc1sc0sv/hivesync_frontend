@@ -1,11 +1,28 @@
+// type Channels = {
+//   id: string;
+//   name: string;
+//   categoryID: string;
+//   category: Category | any;
+//   type: ChannelType;
+//   isSelected: boolean;
+// };
+
 type Channels = {
-  name: string;
-  category: Category | any;
-  isSelected: boolean;
-  type: ChannelType;
   id: string;
+  name: string;
+  categoryID: string;
+  category: Category | any;
+  type: ChannelType;
+  isSelected: boolean;
 };
+
+type ServerDataIcons = (ServerInfoIcons[] | ServerInfoIcons)[];
+
 type SpecificServer = {
+  IconServerURL: string;
+  url: string;
+  active: boolean;
+  id: string;
   name: string;
   channels: Channels[];
 };

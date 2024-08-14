@@ -6,6 +6,7 @@ import {
   useMotionValue,
   useAnimate,
   motion,
+  AnimatePresence,
 } from "framer-motion";
 
 interface ModalTemplateProps {
@@ -39,9 +40,10 @@ export const ModalTemplate: React.FC<ModalTemplateProps> = ({
   };
 
   return (
-    <>
+    <AnimatePresence mode="wait">
       {modalId === identificator && (
         <motion.div
+          key={identificator}
           ref={scope}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -91,6 +93,6 @@ export const ModalTemplate: React.FC<ModalTemplateProps> = ({
           </motion.div>
         </motion.div>
       )}
-    </>
+    </AnimatePresence>
   );
 };
