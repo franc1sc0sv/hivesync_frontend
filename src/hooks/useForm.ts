@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { API_RESPONSE_ERROR_CLASS } from "../class/api_responses_instances";
@@ -10,7 +9,7 @@ export const useCustomForm = (
   post_success_function: (data: Usuario) => void,
   route: string
 ) => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const navigate = useNavigate();
   const [isLoading, setIsloading] = useState(false);
   const { setNotifications } = useNotifications();
@@ -24,12 +23,13 @@ export const useCustomForm = (
       navigate(route);
 
       setIsloading(false);
+      reset();
       return res;
     } catch (e) {
       if (e instanceof API_RESPONSE_ERROR_CLASS) {
         setNotifications({
           message: e.DATA.message,
-          severity: "warningsaegcbjhts",
+          severity: "warning",
         });
         setIsloading(false);
         return;
@@ -43,5 +43,5 @@ export const useCustomForm = (
     }
   };
 
-  return { onSubmit: handleSubmit(onSubmit), register, isLoading };
+  return { onSubmit: handleSubmit(onSubmit), register, isLoading, reset };
 };

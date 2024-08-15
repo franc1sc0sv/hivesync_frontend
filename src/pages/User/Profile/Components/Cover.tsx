@@ -1,37 +1,34 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import { HiCog } from "react-icons/hi";
 
 // testing data
 import { userData } from "../../mocks/userData";
+import { UserAvatar } from "../../../../components/Avatars/UserAvatar";
 
 export const ProfileCover: React.FC = () => {
+  return (
+    <div className="w-full mx-auto text-gray-900 rounded-lg lg:w-4/5">
+      {/* cover  */}
+      <div
+        style={{ backgroundColor: userData.themeColor }}
+        className={`relative overflow-hidden rounded-xl h-36`}
+      >
+        {/* settings icon */}
+        <SettingsPageButton />
+      </div>
 
-    return (
-        <div className="w-full lg:w-4/5 mx-auto text-gray-900 rounded-lg">
-            {/* cover  */}
-            <div
-                style={{ backgroundColor: userData.themeColor }}
-                className={`relative overflow-hidden rounded-xl h-36`}>
-                {/* settings icon */}
-                <SettingsPageButton />
-            </div>
-
-            {/* icon */}
-            <div className="relative w-28 h-28 ml-5 -mt-20 overflow-hidden rounded-2xl">
-                <img
-                    className="object-cover object-center w-full h-full rounded-2xl"
-                    src={userData.picture}
-                    alt="Profile picture"
-                />
-            </div>
-        </div>
-    )
-}
+      {/* icon */}
+      <div className="relative ml-5 -mt-20 overflow-hidden w-28 h-28 rounded-2xl">
+        <UserAvatar />
+      </div>
+    </div>
+  );
+};
 
 const SettingsPageButton: React.FC = () => {
-    return (
-        <Link to={`settings`} className="absolute top-0 right-0 p-3">
-            <HiCog className="text-4xl text-custom_white" />
-        </Link>
-    )
-}
+  return (
+    <Link to={`settings`} className="absolute top-0 right-0 p-3">
+      <HiCog className="text-4xl text-custom_white" />
+    </Link>
+  );
+};

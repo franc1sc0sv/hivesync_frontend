@@ -4,13 +4,12 @@ import { MessageProps } from "../types/Messages";
 export const Inbox = ({ friends = [] }: { friends: MessageProps[] }) => {
   return (
     <div className="h-[80%]">
-      <div className="h-full w-full grid grid-flow-row overflow-y-auto gap-3">
+      <div className="grid items-start w-full h-full grid-flow-row gap-3 overflow-y-auto">
         <FriendsChats friends={friends} />
       </div>
-    </div >
+    </div>
   );
 };
-
 
 const FriendsChats = ({ friends = [] }: { friends: MessageProps[] }) => {
   return friends?.map((friend, index) => (
@@ -22,5 +21,5 @@ const FriendsChats = ({ friends = [] }: { friends: MessageProps[] }) => {
       messagePreview={friend.messagePreview}
       timeAgo={friend.timeAgo}
     />
-  ))
-}
+  ));
+};

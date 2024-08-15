@@ -72,11 +72,24 @@ export const ServerProvider = ({ children }: { children: ReactNode }) => {
     };
   };
 
+  const set_ultimo_servidor = (specific_server: SpecificServer) => {
+    if (!specific_server.id) return;
+
+    const firtsChannelID = specific_server.channels[0].id;
+    const serverID = specific_server.id;
+
+    const serverURL = `/app/${serverID}/${firtsChannelID}`;
+
+    localStorage.setItem("lastserver", serverURL);
+  };
+
   useEffect(() => {
     const servers = obtener_servidores();
+    const specific_server = obtener_servidor_activo(servers);
 
     setServerData(servers);
-    setSelectedServer(obtener_servidor_activo(servers));
+    setSelectedServer(specific_server);
+    set_ultimo_servidor(specific_server);
   }, []);
 
   return (

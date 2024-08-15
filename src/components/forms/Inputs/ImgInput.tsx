@@ -21,7 +21,7 @@ export const ImgInput: React.FC<InputProps> = ({
         htmlFor="dropzone-file"
         className="flex flex-col items-center justify-center w-40 border-4 border-dashed rounded-lg cursor-pointer border-custom_white bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
       >
-        <div className="flex flex-col items-center justify-center gap-10 p-5">
+        <div className="flex flex-col items-center justify-center gap-2 p-5">
           <AiFillPicture size={80} />
           <p className="text-lg text-gray-500 font-almarai dark:text-gray-400">
             {text}

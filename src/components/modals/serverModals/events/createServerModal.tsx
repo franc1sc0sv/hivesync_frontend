@@ -128,7 +128,7 @@ const ModalForm = () => {
       <EditProfilePicture register={register} />
 
       <InputsForms
-        title="Nombre l servidor"
+        title="Nombre del servidor"
         register={register}
         name="name"
         placeholder="Nombre del servidor"
@@ -139,10 +139,19 @@ const ModalForm = () => {
   );
 };
 
-const EditProfilePicture = ({ register }: { register: UseFormRegister<FieldValues> }) => {
+const EditProfilePicture = ({
+  register,
+}: {
+  register: UseFormRegister<FieldValues>;
+}) => {
   return (
     <div className="flex items-center justify-center w-full h-full p-5 text-white">
-      <ImgInput status={() => { }} register={register} name="avatar" text="Subir" />
+      <ImgInput
+        status={() => {}}
+        register={register}
+        name="avatar"
+        text="Subir"
+      />
     </div>
   );
 };

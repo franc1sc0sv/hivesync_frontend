@@ -8,10 +8,11 @@ import {
   PropsProfilePicture,
 } from "../types/GeneralLayout";
 import { Link } from "react-router-dom";
+import { UserAvatar } from "../../../Avatars/UserAvatar";
 
 export const NavBar: React.FC<PropsLinksNav> = ({ links, profilePicture }) => {
   return (
-    <nav className="flex flex-row items-center mx-auto justify-around w-full max-w-sm py-3 rounded-overlay  bg-overlay_2">
+    <nav className="flex flex-row items-center justify-around w-full max-w-sm py-3 mx-auto rounded-overlay bg-overlay_2">
       <LinksNav links={links} />
       <UserProfile
         pictureRoute={profilePicture.pictureRoute}
@@ -38,10 +39,10 @@ const LinkNavBar: React.FC<Links> = ({ Icon, url }) => {
   );
 };
 
-const UserProfile: React.FC<PropsProfilePicture> = ({ pictureRoute, url }) => {
+const UserProfile: React.FC<PropsProfilePicture> = ({ url }) => {
   return (
     <Link to={url} className="flex flex-shrink-0">
-      <UserStatusIcon pictureRoute={pictureRoute} isActive={true} />
+      <UserAvatar w={3} h={3} fontSize={2} />
     </Link>
   );
 };
