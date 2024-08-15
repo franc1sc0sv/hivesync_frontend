@@ -1,4 +1,4 @@
-import { PurpleButton } from "../../../../../buttons/PurpleButton"
+import { PurpleButton } from "../../../../../../buttons/PurpleButton"
 
 export const NoFriendsinCall=()=>{
     const awa = () =>{

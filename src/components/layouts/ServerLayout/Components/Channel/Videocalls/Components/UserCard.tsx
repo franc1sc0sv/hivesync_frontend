@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { userData } from "../../../../../../pages/User/mocks/userData";
+
  interface userCardProps {
   user: string
   userId: string | any
