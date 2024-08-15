@@ -13,7 +13,7 @@ export const NotificationsPanel = ({ notifications = [] }: { notifications: Noti
     }, [notifications])
 
     return (
-        <div className="flex flex-col w-full gap-3">
+        <div className="flex flex-col w-full h-full gap-3">
             {notifications.length === 0 ? <NoNotifications /> : <NotificationsList notifications={notifications_data as NotificationProps[]} />}
         </div >
     );
@@ -32,9 +32,9 @@ const NotificationsList = ({ notifications = [] }: { notifications: Notification
 
 const NoNotifications = () => {
     return (
-        <div className="w-full h-full flex items-center justify-center gap-5">
+        <div className="w-full h-full flex flex-col sm:flex-row items-center justify-center gap-5">
             <BellIcon size={60} color="white" />
-            <h2 className="text-custom_white">
+            <h2 className="text-custom_white text-2xl text-center">
                 No tienes notificaciones por el momento.
             </h2>
         </div>
