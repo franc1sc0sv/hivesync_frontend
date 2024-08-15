@@ -12,6 +12,7 @@ import { NotificationsPage } from "../../pages/User/Notifications/NotificationsP
 
 //no le hagan caso xd ay lo borro
 import { TestingPage } from "../../pages/testing/TestingPage";
+import { NoServerPage } from "../../pages/User/Servers/NoServerPage";
 
 export const UserRoutes: RouteObject = {
   caseSensitive: true,
@@ -20,7 +21,7 @@ export const UserRoutes: RouteObject = {
   children: [
     { path: "@me", element: <DirectMessagesPage /> }, // Bandeja entrada DM
     { path: ":id", element: <ChatPage /> }, //Chats individuales
-    {path: "test", element: <TestingPage/> },
+    { path: "test", element: <TestingPage /> },
 
     { path: "@notifications", element: <NotificationsPage /> }, //Notificaciones
 
@@ -30,5 +31,7 @@ export const UserRoutes: RouteObject = {
     { path: "testin", element: <ComunityPage /> },
     { path: "comunity/:id", element: <ComunityIndividualPage /> },
     { path: ":id/:id", element: <ServerPage /> }, // Servers - /server_id/channel_id
+    { index: true, element: <NoServerPage /> }, // Servers - /server_id/channel_id
+
   ],
 };

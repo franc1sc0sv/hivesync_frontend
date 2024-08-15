@@ -21,7 +21,7 @@ type PropsGeneralLayout = {
 };
 
 export const get_last_server = () => {
-  const categories = localStorage.getItem("lastserver") || "";
+  const categories = localStorage.getItem("lastserver") || "/app/";
   return categories;
 };
 
