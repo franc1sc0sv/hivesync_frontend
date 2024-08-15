@@ -22,18 +22,15 @@ export const ChatHeader: React.FC<ChatHeaderProps> = ({ username }) => {
       </div>
 
       <div className="flex flex-row items-end ">
-        <ButtonHover direction="l">
-        <PhoneIcon size={30} color="#fff" />
-        </ButtonHover>
-        
-        
-        
         <ButtonHover direction="r">
-        <WebCameraIcon size={35} color="#fff" />
+          <PhoneIcon size={30} color="#fff" />
         </ButtonHover>
-        
-        
-        
+
+
+
+        <ButtonHover direction="l">
+          <WebCameraIcon size={35} color="#fff" />
+        </ButtonHover>
       </div>
     </div>
   );
