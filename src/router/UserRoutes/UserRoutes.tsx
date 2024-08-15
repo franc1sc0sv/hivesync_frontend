@@ -27,7 +27,7 @@ export const UserRoutes: RouteObject = {
     { path: "profile/:id", element: <ProfilePage /> },
     { path: "profile/:id/settings", element: <SettingsPage /> }, //ajustes del usuario
 
-    { path: "comunity", element: <ComunityPage /> },
+    { path: "testin", element: <ComunityPage /> },
     { path: "comunity/:id", element: <ComunityIndividualPage /> },
     { path: ":id/:id", element: <ServerPage /> }, // Servers - /server_id/channel_id
   ],
