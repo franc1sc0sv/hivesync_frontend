@@ -7,6 +7,7 @@ import { NoServers } from "./Components/NoServers";
 import { useServer } from "./hooks/useServer";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { CommunityButton } from "../GeneralLayout/buttons/Comunitybutton";
 
 export const ServerLayout = () => {
   const { server_data, selected_server } = useServer();
@@ -20,6 +21,10 @@ export const ServerLayout = () => {
       navigate("/app/")
     }
   }, [])
+
+
+
+
 
   return (
     <article className={`flex h-full gap-3 ${stylesServers}`}>
@@ -38,6 +43,8 @@ export const NoServersLayout = () => {
       <ServerIcons server_data_icons={[]} />
       <NoServers />
       <Notifications />
+      <CommunityButton/>
+
     </article>)
 
 }
