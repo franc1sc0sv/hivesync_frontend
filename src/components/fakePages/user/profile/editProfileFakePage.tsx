@@ -15,6 +15,7 @@ import { PencilIcon } from "../../../Icons/pencil";
 
 //mock
 import { userData } from "../../../../pages/User/mocks/userData";
+import { UserAvatar } from "../../../Avatars/UserAvatar";
 
 // componente activado en UserInformation 
 
@@ -50,14 +51,15 @@ const ProfileCover: React.FC = () => {
 
             {/* edit profile picture modal */}
             <div
-                className="relative w-24 h-24 ml-5 -mt-20 overflow-hidden rounded-2xl"
+                className="relative w-24 h-24 ml-5 -mt-20 overflow-hidden flex justify-center items-center rounded-2xl"
                 onClick={() => setModalId("editProfilePicture")}
             >
-                <img
+                {/* <img
                     className="object-cover object-center w-full h-full"
                     src={userData.picture}
                     alt="Profile picture"
-                />
+                /> */}
+                <UserAvatar />
                 <span className="absolute bottom-0 right-0 left-15 w-10 h-10 transition duration-300 bg-overlay_2 hover:bg-primary border border-white dark:border-gray-800 rounded-full z-10">
                     <div className="absolute bottom-1 right-1 cursor-pointer">
                         <PencilIcon size={30} color="white" />
