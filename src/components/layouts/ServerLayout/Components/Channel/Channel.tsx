@@ -2,11 +2,13 @@ import useFakePages from "../../../../../store/useFakePage";
 import { ShowFakePages } from "../../../../fakePages/ShowFakePages";
 import { useSwipeHandler } from "../../hooks/useFakePageSwipeHandler";
 
+import { MegaphoneIcon } from "../../../../Icons/megaphone";
+
 export const Channel: React.FC = () => {
   const { addFakePage } = useFakePages();
 
   const handler = useSwipeHandler({
-    onSwipedLeft: () => addFakePage({ title: "su", children: <ElChildren /> }),
+    onSwipedLeft: () => addFakePage({ title: "", children: <NoChannelSelected /> }),
   });
 
   return (
@@ -15,7 +17,7 @@ export const Channel: React.FC = () => {
         {...handler}
         className="w-full h-full ml-auto rounded-tl-lg rounded-bl-lg bg-overlay_2 screen_overlay"
         onClick={() =>
-          addFakePage({ title: "Primer children", children: <ElChildren /> })
+          addFakePage({ title: "", children: <NoChannelSelected /> })
         }
       ></div>
       <ShowFakePages />
@@ -23,63 +25,21 @@ export const Channel: React.FC = () => {
   );
 };
 
-const ElChildren: React.FC = () => {
-  const { addFakePage } = useFakePages();
-
+const NoChannelSelected: React.FC = () => {
   return (
-    <div className="flex flex-col items-center justify-center gap-10">
-      <p className="text-2xl text-custom_white">este es el primer children </p>
+    <section className="flex flex-col justify-center items-center w-full h-full gap-6 p-4 rounded-overlay ">
+      <div className="flex flex-col gap-10 justify-center items-center">
 
-      <button
-        onClick={() =>
-          addFakePage({ title: "Segundo children", children: <Children2 /> })
-        }
-        className="text-2xl text-white bg-primary"
-      >
-        Llamemos a una segunda fake page
-      </button>
-    </div>
-  );
-};
-
-const Children2: React.FC = () => {
-  const { addFakePage } = useFakePages();
-
-  return (
-    <div className="flex flex-col items-center justify-center gap-10">
-      <p className="text-2xl text-custom_white">
-        este es el segundo children su{" "}
-      </p>
-
-      <button
-        onClick={() =>
-          addFakePage({ title: "Tercer children", children: <Children3 /> })
-        }
-        className="text-2xl text-white bg-primary"
-      >
-        Llamemos a una tercera fake page
-      </button>
-    </div>
-  );
-};
-
-const Children3: React.FC = () => {
-  const { addFakePage } = useFakePages();
-
-  return (
-    <div className="flex flex-col items-center justify-center gap-10">
-      <p className="text-2xl text-custom_white">
-        este es el tercer children wowowowo{" "}
-      </p>
-
-      <button
-        onClick={() =>
-          addFakePage({ title: "tercer children", children: <Children3 /> })
-        }
-        className="text-2xl text-white bg-primary"
-      >
-        Llamemos a una cuarta fake page
-      </button>
-    </div>
-  );
-};
+        <div className="flex flex-col items-center rounded-lg justify-evenly gap-5 p-4">
+          <MegaphoneIcon size={60} color="#fff" />
+          <h1 className="text-3xl text-custom_white font-almarai text-center">
+            No te quedes en silencio
+          </h1>
+          <p className="text-xl text-center text-custom_white">
+          Selecciona un canal de texto o voz y únete a la charla
+          </p>
+        </div>
+      </div>
+    </section>
+  )
+}

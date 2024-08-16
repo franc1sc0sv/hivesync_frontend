@@ -47,12 +47,11 @@ const Form = () => {
     >
       <InputsForms
         register={register}
-        // name="user"
-        // title="Usuario"
-        name="user"
+        //se necesita enviar si o si email, aún no acepta usuario por el momento la api
+        name="email"
         title="Email o Usuario"
         placeholder="Digite su email o nombre de usuario"
-        type="text"
+        type="mail"
       />
       <PasswordInput register={register} />
       <SubmitButton isLoading={isLoading} text="Entra a Hivesync" />
