@@ -1,9 +1,6 @@
-import { BiSolidGroup } from "react-icons/bi";
-
+import { VscGroupByRefType } from "react-icons/vsc";
 import { IconProps } from "./types/iconProps";
 
-export const Community: React.FC<IconProps> = ({size, color}) => {
-    return (
-        <BiSolidGroup size={size} fill={color} />
-    );
+export const Community: React.FC<IconProps> = ({ size, color }) => {
+  return <VscGroupByRefType size={size} fill={color} />;
 };

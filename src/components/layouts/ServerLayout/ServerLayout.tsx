@@ -7,22 +7,18 @@ import { NoServers } from "./Components/NoServers";
 import { useServer } from "./hooks/useServer";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { CommunityButton } from "../GeneralLayout/buttons/Comunitybutton";
-
-const getServers = localStorage.getItem("servers");
 
 export const ServerLayout = () => {
   const { server_data, selected_server } = useServer();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const stylesServers = server_data.length ? "w-[200%]" : "w-full";
-
 
   useEffect(() => {
     const areServers = server_data.length;
     if (!areServers) {
-      navigate("/app/")
+      navigate("/app/");
     }
-  }, [])
+  }, []);
 
   return (
     <article className={`flex h-full gap-3 ${stylesServers}`}>
@@ -34,18 +30,15 @@ export const ServerLayout = () => {
   );
 };
 
-
 export const NoServersLayout = () => {
   return (
     <article className={`flex h-full gap-3 w-full`}>
       <ServerIcons server_data_icons={[]} />
       <NoServers />
       <Notifications />
-      {!getServers && (<CommunityButton />)}
-    </article>)
-
-}
-
+    </article>
+  );
+};
 
 //limpiar servers
 // localStorage.removeItem("lastserver")
