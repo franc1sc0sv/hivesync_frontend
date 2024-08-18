@@ -5,20 +5,35 @@ import { SubmitButton } from "../../forms/Inputs/Button";
 import { SelectInput } from "../../forms/Inputs/Select/Select";
 
 import { BiSolidCategory } from "react-icons/bi";
-import { getCategories, getChannels } from "../../layouts/ServerLayout/Context/ServerContext";
+import {
+  getCategories,
+  getChannels,
+} from "../../layouts/ServerLayout/Context/ServerContext";
 import { useServer } from "../../layouts/ServerLayout/hooks/useServer";
 import { RadioInput } from "../../forms/Inputs/Radio/InputRadio";
 import { useState } from "react";
 import { ChannelType } from "../../layouts/ServerLayout/Enums/SpecificServer";
 
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import { useCustomFormCreateServer } from "../../../hooks/useFormCreateServer";
 
-const options = [
-  { label: "Texto", value: ChannelType.TEXT, description: "Chatea y envia imagenes" },
-  { label: "Voz", value: ChannelType.VIDEO, description: "Comunicate por voz y video" },
-]
+import { HiSpeakerWave } from "react-icons/hi2";
+import { HiHashtag } from "react-icons/hi";
 
+const options = [
+  {
+    label: "Texto",
+    value: ChannelType.TEXT,
+    description: "Chatea y envia imagenes",
+    Icon: HiHashtag,
+  },
+  {
+    label: "Voz",
+    value: ChannelType.VIDEO,
+    description: "Comunicate por voz y video",
+    Icon: HiSpeakerWave,
+  },
+];
 
 export const CreateChannel: React.FC = () => {
   return (
@@ -49,7 +64,6 @@ const ModalForm = () => {
   );
 
   const api_function = (data: any) => {
-
     const category = data.category?.trim() || "";
     const name = data.name?.trim() || "";
     const type = data.type?.trim() || "";
@@ -73,8 +87,8 @@ const ModalForm = () => {
       name: data.name,
       categoryID: data.category,
       serverID: selected_server.id,
-      type: data.type
-    }
+      type: data.type,
+    };
 
     const updatedChannels = [...getChannels(), newChannel];
     localStorage.setItem("serverChannels", JSON.stringify(updatedChannels));
@@ -82,24 +96,22 @@ const ModalForm = () => {
     const url = `/app/${selected_server.id}/${newChannel.id}`;
 
     return { url: url };
-
   };
 
-
-  const { register, isLoading, onSubmit, setValue } = useCustomFormCreateServer(
-    api_function);
+  const { register, isLoading, onSubmit, setValue } =
+    useCustomFormCreateServer(api_function);
 
   const [selectedOption, setSelectedOption] = useState<string>("option1");
 
   const handleOptionChange = (value: string) => {
-    setValue("type", value)
+    setValue("type", value);
     setSelectedOption(value);
   };
 
   return (
     <form
       onSubmit={onSubmit}
-      className="flex flex-col items-center justify-center w-full gap-9 px-1 overflow-y-auto"
+      className="flex flex-col items-center justify-center w-full px-1 overflow-y-auto gap-9"
     >
       <InputsForms
         title="Nombre del canal"

@@ -5,7 +5,31 @@ import { ImgInput } from "../../../forms/Inputs/ImgInput";
 import { InputsForms } from "../../../forms/Inputs/inputs";
 import { ModalTemplate } from "../../ModalTemplate";
 
-import { v4 as uuidv4 } from "uuid";
+import { create_server } from "../../../../api/server";
+import { useState } from "react";
+import { RadioInput } from "../../../forms/Inputs/Radio/InputRadio";
+
+import { FaLock } from "react-icons/fa";
+import { TbWorld } from "react-icons/tb";
+
+enum ServerPrivacity {
+  PUBLIC = "PUBLIC",
+  PRIVATE = "PRIVATE",
+}
+const options = [
+  {
+    label: "Publico",
+    value: ServerPrivacity.PUBLIC,
+    description: "Chatea y envia imagenes",
+    Icon: FaLock,
+  },
+  {
+    label: "Privado",
+    value: ServerPrivacity.PRIVATE,
+    description: "Comunicate por voz y video",
+    Icon: TbWorld,
+  },
+];
 
 export const CreateServerModal: React.FC = () => {
   return (
@@ -29,96 +53,15 @@ const ModalHeader = () => {
 };
 
 const ModalForm = () => {
-  const api_function = (data: any) => {
-    const name = data.name.trim();
-    if (name.length < 3) {
-      throw {
-        message: "nombre muy corto",
-        severity: "warning",
-      };
-    }
+  const [selectedOption, setSelectedOption] = useState<string>("");
 
-    const servers = JSON.parse(localStorage.getItem("servers") || "[]");
-    if (servers.some((server: any) => server.name === name)) {
-      throw {
-        message: "nombre ya en uso",
-        severity: "warning",
-      };
-    }
+  const { register, isLoading, onSubmit, setValue } =
+    useCustomFormCreateServer(create_server);
 
-    const newId = uuidv4();
-
-    const serverURL = `/app/${newId}/85b70973-9e7c-436d-9249-f6e5d1abc575`;
-
-    const newServer = {
-      IconServerURL: ``,
-      url: serverURL,
-      active: false,
-      id: newId,
-      name: name,
-    };
-
-    // Recuperar categorías existentes
-    const existingCategories = JSON.parse(
-      localStorage.getItem("serverCategories") || "[]"
-    );
-
-    const textCategoryId = uuidv4();
-    const voiceCategoryId = uuidv4();
-
-    const defaultCategories = [
-      {
-        id: textCategoryId,
-        name: "Canales de texto",
-        serverID: newId,
-      },
-      {
-        id: voiceCategoryId,
-        name: "Canales de voz",
-        serverID: newId,
-      },
-    ];
-
-    // Agregar las nuevas categorías a las existentes
-    const updatedCategories = [...existingCategories, ...defaultCategories];
-
-    // Crear canales predeterminados para cada categoría
-    const defaultChannels = [
-      {
-        id: uuidv4(),
-        name: "general-texto",
-        categoryID: textCategoryId,
-        serverID: newId,
-        type: "text",
-      },
-      {
-        id: uuidv4(),
-        name: "general-video",
-        categoryID: voiceCategoryId,
-        serverID: newId,
-        type: "video",
-      },
-    ];
-
-    // Recuperar canales existentes
-    const existingChannels = JSON.parse(
-      localStorage.getItem("serverChannels") || "[]"
-    );
-
-    // Agregar los nuevos canales a los existentes
-    const updatedChannels = [...existingChannels, ...defaultChannels];
-
-    // Guardar los servidores, categorías y canales en localStorage
-    servers.push(newServer);
-    localStorage.setItem("servers", JSON.stringify(servers));
-    localStorage.setItem("serverCategories", JSON.stringify(updatedCategories));
-    localStorage.setItem("serverChannels", JSON.stringify(updatedChannels));
-
-    return newServer;
+  const handleOptionChange = (value: string) => {
+    setValue("privacity", value);
+    setSelectedOption(value);
   };
-
-  const { register, isLoading, onSubmit } =
-    useCustomFormCreateServer(api_function);
 
   return (
     <form
@@ -132,6 +75,14 @@ const ModalForm = () => {
         register={register}
         name="name"
         placeholder="Nombre del servidor"
+      />
+
+      <RadioInput
+        title="Tipo de canal"
+        options={options}
+        name="exampleOptions"
+        selectedValue={selectedOption}
+        onChange={handleOptionChange}
       />
 
       <SubmitButton text="Crear servidor " isLoading={isLoading} />
