@@ -2,7 +2,13 @@ import { useEffect, useState } from "react";
 import { NotificationIcon } from "./NotificationIcon";
 import { NotificationProps } from "./Notification";
 
+import { ComponentsAnimator } from "../../../../components/animation/componentsAnimator";
+
 import { BellIcon } from "../../../../components/Icons/bell";
+
+interface NotificationsListProps {
+    notifications: NotificationProps[];
+}
 
 export const NotificationsPanel = ({ notifications = [] }: { notifications: NotificationProps[] }) => {
     const [notifications_data, setNotifications] = useState<NotificationProps[]>()
@@ -19,16 +25,55 @@ export const NotificationsPanel = ({ notifications = [] }: { notifications: Noti
     );
 };
 
-const NotificationsList = ({ notifications = [] }: { notifications: NotificationProps[] }) => {
-    return notifications.map((notification, index) => (
-        <NotificationIcon
-            key={index}
-            pictureRoute={notification.pictureRoute}
-            message={notification.message}
-            timeAgo={notification.timeAgo}
-        />
-    ))
-}
+const NotificationsList: React.FC<NotificationsListProps> = ({ notifications }) => {
+
+    const [selectedCategory, setSelectedCategory] = useState('Todo');
+
+    const categories = ["Todo", "Solicitudes", "Invitaciones", "Mensajes"]
+
+    const handleCategoryClick = (category: string) => {
+        setSelectedCategory(category);
+    };
+
+    return (
+        <section className="w-full flex flex-col gap-5">
+            <div className="mt-8 flex gap-4 overflow-x-auto">
+                {categories.map(category => (
+                    <button
+                        key={category}
+                        onClick={() => handleCategoryClick(category)}
+                        className={`py-2 px-4 rounded-full ${selectedCategory === category ? 'bg-purple-600 text-white' : 'bg-transparent text-white transition-all duration-300'}`}
+                    >
+                        {category}
+                    </button>
+                ))}
+            </div>
+
+            {notifications?.map((notification, index) => (
+                selectedCategory == "Todo" ? (
+                    <ComponentsAnimator>
+                        <NotificationIcon
+                            key={index}
+                            pictureRoute={notification.pictureRoute}
+                            message={notification.message}
+                            timeAgo={notification.timeAgo}
+                        />
+                    </ComponentsAnimator>
+                    
+                ) : selectedCategory == notification.category && (
+                    <ComponentsAnimator>
+                        <NotificationIcon
+                            key={index}
+                            pictureRoute={notification.pictureRoute}
+                            message={notification.message}
+                            timeAgo={notification.timeAgo}
+                        />
+                    </ComponentsAnimator>
+                )
+            ))}
+        </section>
+    );
+};
 
 const NoNotifications = () => {
     return (

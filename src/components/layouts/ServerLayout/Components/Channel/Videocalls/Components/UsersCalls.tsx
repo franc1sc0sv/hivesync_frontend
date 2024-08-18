@@ -42,7 +42,7 @@ export const UsersCalls = ({}) => {
   const { user } = useSession();
 
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full md:flex-row">
+    <div className="flex flex-col items-center justify-center w-full h-full md:flex-row md:gap-3">
       <UserCardFriend user="Lu_krieg" userColor="" />
 
       <UserCard user={user?.username as string} userColor="" />

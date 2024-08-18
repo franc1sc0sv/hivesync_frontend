@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { HiDotsVertical } from "react-icons/hi";
 
+import { ComponentsAnimator } from "../../../../components/animation/componentsAnimator";
+
 export const RightButton = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -37,16 +39,18 @@ export const RightButton = () => {
         />
       </button>
       {isMenuOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-overlay_2 shadow-lg rounded-lg">
-          <ul>
-            <li
-              onClick={handleClearNotifications}
-              className="cursor-pointer px-4 py-2 hover:bg-gray-200"
-            >
-              <p className="text-custom_white">Limpiar notificaciones</p>
-            </li>
-          </ul>
-        </div>
+        <ComponentsAnimator>
+          <div className="absolute right-0 mt-2 w-48 bg-overlay_2 shadow-lg rounded-lg">
+            <ul>
+              <li
+                onClick={handleClearNotifications}
+                className="cursor-pointer px-4 py-2 hover:bg-gray-200"
+              >
+                <p className="text-custom_white">Limpiar notificaciones</p>
+              </li>
+            </ul>
+          </div>
+        </ComponentsAnimator>
       )}
     </div>
   );
