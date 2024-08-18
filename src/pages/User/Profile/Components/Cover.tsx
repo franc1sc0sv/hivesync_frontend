@@ -5,6 +5,7 @@ import { HiCog } from "react-icons/hi";
 import { userData } from "../../mocks/userData";
 import { UserAvatar } from "../../../../components/Avatars/UserAvatar";
 
+
 export const ProfileCover: React.FC = () => {
   return (
     <div className="w-full mx-auto text-gray-900 rounded-lg lg:w-4/5">

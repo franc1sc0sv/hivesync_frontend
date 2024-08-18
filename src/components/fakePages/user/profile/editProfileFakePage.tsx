@@ -2,7 +2,7 @@
 import { useModal } from "../../../../store/useModal";
 import { EditPictureOrCoverModal } from "../../../modals/userModals/profile/EditPictureOrCoverModal";
 
-import { useState } from "react";
+import { useNotifications } from "../../../../store/useNotifications";
 
 //form utils
 import { useCustomForm } from "../../../../hooks/useForm";
@@ -92,34 +92,9 @@ const UserInformation: React.FC = () => {
     )
 }
 
-const EditProfilePicture: React.FC = () => {
-
-
-    const [file, setFile] = useState<File | undefined>(undefined)
-
-    return (
-        <div className="relative w-28 h-28 mx-auto">
-            <img className=" w-full h-full rounded-full object-cover object-center" src={userData.picture} alt="Profile picture" />
-
-            <span className={`bottom-0 right-1 absolute w-10 h-10 transition duration-300
-                bg-overlay_2 hover:bg-primary border border-white dark:border-gray-800 rounded-full`}>
-                <label className="absolute bottom-1 right-1 cursor-pointer">
-                    <input
-                        type="file"
-                        accept="image/*"
-                        className="hidden"
-                        onChange={(e) => { setFile(e.target.files?.[0]); }}
-                    />
-                    <PencilIcon size={30} color="white" />
-                </label>
-            </span>
-        </div>
-    )
-}
-
-
 const EditProfileForm: React.FC = () => {
 
+    const {setNotifications} = useNotifications();
 
     const api_function = async (data: any) => {
         const displayName = data.name;
@@ -129,9 +104,14 @@ const EditProfileForm: React.FC = () => {
         localStorage.setItem("aboutUser", aboutUser);
     }
 
-    const post_success_function = () => {
-        location.reload();
+    const post_success_function = async () => {
+        await location.reload();
+        setNotifications({
+            message: "ayuda",
+            severity: "info"
+        })
         console.log("la api se llamó exitosa y épicamente");
+
     }
 
     const { onSubmit, register, isLoading } = useCustomForm(api_function, post_success_function, "")

@@ -6,30 +6,44 @@ import { MdCoPresent } from "react-icons/md";
 import { ButtonCallsProps } from "../types";
 import { ButtonCalls } from "./Button";
 import { BUTTON_TYPE } from "../enums";
+
+import { useNotifications } from "../../../../../../../store/useNotifications";
 import useFakePages from "../../../../../../../store/useFakePage";
 
 export const VideoCallControlls = () => {
-  const { removeFakePage } = useFakePages();
+
+  const { setNotifications } = useNotifications();
+  const { removeFakePage, fakePages } = useFakePages();
+
+  const lastPageId = fakePages.length > 0 ? fakePages[fakePages.length - 1].id : null;
+
+
   const controlls: ButtonCallsProps[] = [
     {
       Icon: FaMicrophone,
-      onClick: () => {},
+      onClick: () => { },
       type: BUTTON_TYPE.MICROPHONE,
     },
     {
       Icon: FiCamera,
-      onClick: () => {},
+      onClick: () => { },
       type: BUTTON_TYPE.CAMERA,
     },
     {
       Icon: MdCoPresent,
-      onClick: () => {},
+      onClick: () => { },
       type: BUTTON_TYPE.PRESENTATION,
     },
     {
       Icon: MdCallEnd,
-      onClick: () => {
-        removeFakePage(0);
+      onClick: async () => {
+        if (lastPageId !== null) {
+          removeFakePage(lastPageId);
+        }
+        setNotifications({
+          severity: "info",
+          message: "Llamada finalizada"
+        });
       },
       type: BUTTON_TYPE.HANG_UP,
     },

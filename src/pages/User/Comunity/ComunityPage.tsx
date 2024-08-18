@@ -8,7 +8,7 @@ export const ComunityPage = () => {
   const { register } = useForm();
   const [selectedCategory, setSelectedCategory] = useState('Todo');
 
-  const handleCategoryClick = (category) => {
+  const handleCategoryClick = (category: string) => {
     setSelectedCategory(category);
   };
 
@@ -40,7 +40,7 @@ export const ComunityPage = () => {
             <button
               key={category}
               onClick={() => handleCategoryClick(category)}
-              className={`py-2 px-4 rounded-full ${selectedCategory === category ? 'bg-purple-600 text-white' : 'bg-transparent text-white'}`}
+              className={`py-2 px-4 rounded-full ${selectedCategory === category ? 'bg-purple-600 text-white' : 'bg-transparent text-white transition-all duration-500'}`}
             >
               {category}
             </button>

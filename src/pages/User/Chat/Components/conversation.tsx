@@ -1,6 +1,7 @@
 import useChat from "../../../../store/chat/useChat";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRef, useEffect } from "react";
+import { Notifications } from "../../../../components/Alerts/Notification";
 
 interface MessagesProps {
   text?: string;
@@ -15,15 +16,19 @@ export const Conversation: React.FC<MessagesProps> = () => {
 
   const conversation = getMessages();
 
+
   useEffect(() => {
+    endOfMessagesRef.current?.scrollIntoView({ behavior: "smooth" });
     if (shouldScrollToBottom) {
-      endOfMessagesRef.current?.scrollIntoView({ behavior: "smooth" });
       setShouldScrollToBottom(false);
     }
   }, [conversation, shouldScrollToBottom, setShouldScrollToBottom]);
 
   return (
     <div className="w-full h-[70%] overflow-y-auto">
+      <div className="w-full flex justify-center">
+        <Notifications />
+      </div>
       {conversation.map((message, index) => (
         <div key={index}>
           {message.isUserSender ? (
@@ -64,7 +69,7 @@ const SentMessage: React.FC<MessagesProps> = ({ text }) => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
           className="bg-overlay_2 mx-3 flex flex-col w-full max-w-[320px] leading-1.5 p-4 rounded-e-xl rounded-es-xl"
         >
           <p className="text-sm font-almarai py-2.5 text-gray-900 dark:text-white">
