@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import { get_profile } from "../../api/auth";
 import { useSession } from "../../store/user";
-import { LoadingPage } from "./LoadingPage";
+import { LoadingPage } from "../routes/loadingPage";
 
 export const SessionDetector = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(true);

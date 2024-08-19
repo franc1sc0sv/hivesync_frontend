@@ -1,6 +1,8 @@
 import { useSession } from "../../../../../../../store/user";
+import useVideoStream from "../../../../../../../store/videoCall/useCameraStream";
 
-import { UserAvatar } from "../../../../../../Avatars/UserAvatar";
+import { UserAvatar } from "./userAvatar";
+import { UserCameraStream } from "./userCameraStream";
 import { UserAvatarTemplate } from "../../../../../../Avatars/UserAvatarTemplate";
 
 
@@ -9,11 +11,14 @@ interface userCardProps {
   userColor: string;
 }
 export const UserCard: React.FC<userCardProps> = ({ user, userColor }) => {
+
+  const {stream} = useVideoStream();
+
   return (
     <div
       className={` bg-primary w-full h-[50%] sm:h-[13.5rem] sm:w-[21rem] rounded-2xl flex items-center justify-center mb-4 md:mb-0 relative `}
     >
-      <UserAvatar />
+      {stream ? <UserCameraStream /> : <UserAvatar />}
 
       <p className="absolute pl-2 pr-2 mb-2 ml-2 text-white rounded-md left-2 2t-1 bottom-1 pb- bg-overlay_2 opacity-90">
         {user}

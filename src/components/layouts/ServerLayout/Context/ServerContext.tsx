@@ -3,6 +3,8 @@ import { useFetch } from "../../../../hooks/useFetch";
 import { get_all_servers_by_user, get_server } from "../../../../api/server";
 import { useFetchID } from "../../../../hooks/useFecthID";
 import { CategoryType, ChannelType, SpecificServerType } from "../types/server";
+import { LoadingPage } from "../../../routes/loadingPage";
+
 
 interface ServerContextProps {
   server_data: ServerDataIcons;
@@ -119,7 +121,7 @@ export const ServerProvider = ({ children }: { children: ReactNode }) => {
     loader();
   }, []);
 
-  if (isLoading || isLoadingID) return <p>Cargando ...</p>;
+  if (isLoading || isLoadingID) return <LoadingPage />;
 
   return (
     <ServerContext.Provider
