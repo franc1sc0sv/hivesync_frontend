@@ -2,22 +2,22 @@ import React, { useRef, useEffect } from 'react';
 import { useScreenShare } from '../../../../../../../store/videoCall/useScreenShare';
 
 export const SharedScreen: React.FC = () => {
-    const { screenSretam, stopScreenShare, error } = useScreenShare();
+    const { screenStream, stopScreenShare, error } = useScreenShare();
     const videoRef = useRef<HTMLVideoElement | null>(null);
 
     useEffect(() => {
-        if (screenSretam && videoRef.current) {
-            videoRef.current.srcObject = screenSretam;
+        if (screenStream && videoRef.current) {
+            videoRef.current.srcObject = screenStream;
             videoRef.current.play().catch(err => {
                 console.error("Error al intentar reproducir el video:", err);
             });
         }
-    }, [screenSretam]);
+    }, [screenStream]);
 
     return (
         <div className='w-full h-full'>
             {error && <p style={{ color: 'red' }}>{error}</p>}
-            {screenSretam ? (
+            {screenStream ? (
                 <div className='w-full h-full'>
                     <button onClick={stopScreenShare}>Dejar de compartir</button>
                     <video

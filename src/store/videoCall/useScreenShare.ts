@@ -1,14 +1,14 @@
 import create from 'zustand';
 
 interface ScreenShareState {
-    screenSretam: MediaStream | null;
+    screenStream: MediaStream | null;
     error: string | null;
     startScreenShare: () => Promise<void>;
     stopScreenShare: () => void;
 }
 
 export const useScreenShare = create<ScreenShareState>((set) => ({
-    screenSretam: null,
+    screenStream: null,
     error: null,
 
     startScreenShare: async () => {
@@ -19,20 +19,20 @@ export const useScreenShare = create<ScreenShareState>((set) => ({
             });
 
             set({
-                screenSretam: displayStream,
+                screenStream: displayStream,
                 error: null,
             });
 
             // Handle screen sharing end
             displayStream.getTracks().forEach(track => {
                 track.onended = () => {
-                    set({ screenSretam: null });
+                    set({ screenStream: null });
                 };
             });
         } catch (err) {
             console.error('Error al intentar compartir la pantalla:', err);
             set({
-                screenSretam: null,
+                screenStream: null,
                 error: 'No se pudo compartir la pantalla. Asegúrate de que has concedido los permisos necesarios.'
             });
         }
@@ -40,8 +40,8 @@ export const useScreenShare = create<ScreenShareState>((set) => ({
 
     stopScreenShare: () => {
         set(state => {
-            state.screenSretam?.getTracks().forEach(track => track.stop());
-            return { screenSretam: null };
+            state.screenStream?.getTracks().forEach(track => track.stop());
+            return { screenStream: null };
         });
     },
 }));

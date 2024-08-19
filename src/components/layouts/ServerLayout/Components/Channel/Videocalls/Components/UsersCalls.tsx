@@ -16,7 +16,7 @@ export const UserCard: React.FC<userCardProps> = ({ user, userColor }) => {
 
   return (
     <div
-      className={` bg-primary w-2/5 sm:w-full h-full sm:h-[13.5rem] rounded-2xl flex items-center justify-center mb-4 md:mb-0 relative `}
+      className={` bg-primary w-2/5 sm:w-[240px] h-1/2 sm:h-[13.5rem] rounded-2xl flex items-center justify-center mb-4 md:mb-0 relative `}
     >
       {stream ? <UserCameraStream /> : <UserAvatar />}
 
@@ -33,7 +33,7 @@ export const UserCardFriend: React.FC<userCardProps> = ({
 }) => {
   return (
     <div
-      className={`bg-primary opacity-50  w-2/5 h-full sm:h-[13.5rem] sm:w-full rounded-2xl flex items-center justify-center mb-4 md:mb-0 relative `}
+      className={`bg-primary opacity-50  w-2/5 h-1/2 sm:h-[13.5rem] sm:w-[240px] rounded-2xl flex items-center justify-center mb-4 md:mb-0 relative `}
     >
       <UserAvatarTemplate username={user} />
 
@@ -48,13 +48,17 @@ export const UsersCalls = ({ }) => {
   const { user } = useSession();
 
   return (
-    <div className="flex flex-wrap items-start justify-center w-full h-full gap-3 overflow-y-auto p-2">
+    <div className="flex flex-wrap sm:items-center justify-center w-full h-full gap-3 overflow-y-auto p-2">
       <UserCard user={user?.username as string} userColor="" />
       <UserCardFriend user="Lu_krieg" userColor="" /> 
       <UserCardFriend user="Lu_krieg" userColor="" /> 
       <UserCardFriend user="Lu_krieg" userColor="" /> 
       <UserCardFriend user="Lu_krieg" userColor="" /> 
       <UserCardFriend user="Lu_krieg" userColor="" /> 
+      <UserCardFriend user="Lu_krieg" userColor="" /> 
+      <UserCardFriend user="Lu_krieg" userColor="" /> 
+
+
     </div>
   );
 };

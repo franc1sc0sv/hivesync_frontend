@@ -15,21 +15,23 @@ interface ChatHeaderProps {
 
 export const ChatHeader: React.FC<ChatHeaderProps> = ({ username }) => {
   const { addFakePage } = useFakePages();
-  const {setIsVoiceCall} = useVerifyCallType();
+  const {isVoiceCall ,setIsVoiceCall} = useVerifyCallType();
+
+  const callType = isVoiceCall == true ? "Llamada de voz" : "Videollamada"
 
   const handleVoiceCall = () => {
     setIsVoiceCall(true);
     addFakePage({
-      title: "Llamada activa",
-      children: <VideoCallComponent isVoiceCall />,
+      title: "Llamada de voz",
+      children: <VideoCallComponent />,
     });
   };
 
   const handleVideoCall = () => {
     setIsVoiceCall(false);
     addFakePage({
-      title: "Llamada activa",
-      children: <VideoCallComponent isVoiceCall={false} />,
+      title: "Videollamada",
+      children: <VideoCallComponent />,
     });
   };
 
