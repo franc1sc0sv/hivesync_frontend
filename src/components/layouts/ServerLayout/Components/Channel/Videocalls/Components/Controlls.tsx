@@ -1,3 +1,4 @@
+//icons
 import { FiCamera } from "react-icons/fi";
 import { MdCallEnd } from "react-icons/md";
 import { PiMicrophoneFill, PiMicrophoneSlashFill } from "react-icons/pi";
@@ -10,14 +11,18 @@ import { BUTTON_TYPE } from "../enums";
 
 import { useState } from "react";
 
+//custom hooks
 import { useNotifications } from "../../../../../../../store/useNotifications";
 import useFakePages from "../../../../../../../store/useFakePage";
 import useVideoStream from "../../../../../../../store/videoCall/useCameraStream";
+import { useScreenShare } from "../../../../../../../store/videoCall/useScreenShare";
 
 export const VideoCallControlls: React.FC = () => {
   const { setStream, clearStream, stream } = useVideoStream();
   const { setNotifications } = useNotifications();
   const { removeFakePage, fakePages } = useFakePages();
+  const {screenSretam, startScreenShare, stopScreenShare} = useScreenShare();
+
   const [hasCamera, setHasCamera] = useState<boolean>(false);
   const [isCameraActive, setIsCameraActive] = useState<boolean>(false);
   const [isMicrophoneActive, setIsMicrophoneActive] = useState(false)
@@ -43,6 +48,14 @@ export const VideoCallControlls: React.FC = () => {
     }
   };
 
+  const toggleScreenShare = () => {
+    if (screenSretam) {
+      stopScreenShare()
+    } else {
+      startScreenShare()
+    }
+  }
+
   const toggleMicrophone = async () => {
     if (!isMicrophoneActive) {
       setIsMicrophoneActive(true)
@@ -66,7 +79,7 @@ export const VideoCallControlls: React.FC = () => {
     },
     {
       Icon: MdCoPresent,
-      onClick: () => { },
+      onClick: toggleScreenShare,
       type: BUTTON_TYPE.PRESENTATION,
     },
     {
@@ -79,6 +92,7 @@ export const VideoCallControlls: React.FC = () => {
           severity: "info",
           message: "Llamada finalizada"
         });
+        stopScreenShare();
         clearStream();
       },
       type: BUTTON_TYPE.HANG_UP,
