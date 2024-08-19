@@ -7,3 +7,14 @@ type Usuario = {
   token: string;
   createdAt: string;
 };
+
+type UserProfile = {
+  id: string;
+  name: string;
+  username: string;
+  about: string;
+  profileUrl: string;
+  backgroundUrl: string;
+  id_user: string;
+  createdAt: string;
+};

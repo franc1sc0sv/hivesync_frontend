@@ -6,17 +6,18 @@ import { Inbox } from "./Components/Inbox";
 
 import { ShowFakePages } from "../../../components/fakePages/ShowFakePages";
 
-import { friends } from "./data";
-import { MessageProps } from "./types/Messages";
+import { DmProvider } from "./Context/ContextDM";
 
 export const DirectMessagesPage = () => {
   return (
     <GeneralLayout title="Mensajes" RightComponent={AddFriendsButton}>
-      <article className="flex flex-col w-full h-full gap-5">
-        <FriendsPanel friends={friends as MessageProps[]} />
-        <Inbox friends={friends as MessageProps[]} />
-      </article>
-      <ShowFakePages />
+      <DmProvider>
+        <article className="flex flex-col w-full h-full gap-5">
+          <FriendsPanel friends={[]} />
+          <Inbox friends={[]} />
+        </article>
+        <ShowFakePages />
+      </DmProvider>
     </GeneralLayout>
   );
 };

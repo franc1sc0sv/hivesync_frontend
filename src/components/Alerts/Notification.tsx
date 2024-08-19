@@ -5,7 +5,7 @@ import { useNotifications } from "../../store/useNotifications";
 export const Notifications = () => {
   const { notifications, removeNotification } = useNotifications();
   return (
-    <section className="z-50 flex flex-col gap-2 top-10 mx-auto absolute">
+    <section className="absolute z-50 flex flex-col gap-2 mx-auto transform -translate-x-1/2 top-10 left-1/2 w-max ">
       <AnimatePresence initial={false}>
         {notifications.map((noti, i) => {
           return (

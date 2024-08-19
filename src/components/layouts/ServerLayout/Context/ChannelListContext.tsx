@@ -5,8 +5,6 @@ import {
   ServerChannelsAray,
 } from "../types/server";
 
-import { useNavigate, useLocation } from "react-router-dom";
-
 interface ChannelContextType {
   channelList: ServerChannelsAray;
   setChannelList: React.Dispatch<React.SetStateAction<ServerChannelsAray>>;

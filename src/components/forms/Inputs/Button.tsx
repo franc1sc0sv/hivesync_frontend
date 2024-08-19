@@ -15,7 +15,7 @@ export const SubmitButton: React.FC<PurpleInputProps> = ({
     <button
       disabled={isLoading}
       type="submit"
-      className={`flex items-center ${stylesIsloading} h-14 w-full max-w-[320px] p-3 font-bold bg-primary rounded-xl text-custom_white font-almarai mx-auto`}
+      className={`flex items-center ${stylesIsloading} h-14 w-full p-3 font-bold bg-primary rounded-xl text-custom_white font-almarai mx-auto`}
     >
       {isLoading ? (
         <BeatLoader color="white" />

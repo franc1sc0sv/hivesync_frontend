@@ -13,17 +13,16 @@ const useFetchID = ({
   const fecthData = async (id: string) => {
     try {
       setIsloading(true);
-      const res = await api_function(id);
-      let datos = { ...res };
+      let res = await api_function(id);
 
       if (transformData) {
-        datos = transformData(res);
+        res = transformData(res);
       }
 
-      setData(datos);
+      setData(res);
       setIsloading(false);
 
-      return datos;
+      return res;
     } catch (e) {
       setIsloading(false);
     }
