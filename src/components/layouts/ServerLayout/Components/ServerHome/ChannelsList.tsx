@@ -1,41 +1,9 @@
-import { useEffect } from "react";
 import { useChannelList } from "../../hooks/useChannelList";
 import { AcordeonItems, AcordeonMenu } from "./AcordeonMenu/AcordeonIndex";
 import { ChannelCategory } from "../../Enums/SpecificServer";
-import {
-  ChannelsFormated,
-  ChannelType,
-  ServerChannelsAray,
-} from "../../types/server";
 
-export const ChannelList = ({ channels }: { channels: ChannelType[] }) => {
-  const { channelList, setChannelList } = useChannelList();
-
-  useEffect(() => {
-    const groupedData = channels.reduce((acc: any, curr: any) => {
-      const category = curr.category;
-      if (!acc[category]) {
-        acc[category] = [];
-      }
-      acc[category].push(curr);
-      return acc;
-    }, {});
-
-    const channels_by_categories: ChannelsFormated[][] =
-      Object.values(groupedData);
-
-    const formatedChannels: ServerChannelsAray = channels_by_categories.map(
-      (channelArray) => {
-        return {
-          channels: [...channelArray],
-          isCategoryActive: false,
-          category: channelArray[0].category,
-        };
-      }
-    );
-
-    setChannelList(formatedChannels);
-  }, []);
+export const ChannelList = () => {
+  const { channelList } = useChannelList();
 
   return (
     <article className="flex flex-col gap-5 overflow-y-auto">

@@ -8,6 +8,7 @@ import { useServer } from "./hooks/useServer";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { get_last_server } from "../GeneralLayout/GeneralLayout";
+import { ChannelListProvider } from "./Context/ChannelListContext";
 
 const obtener_server_id_activo = () => {
   const currentURL = window.location.pathname;
@@ -31,10 +32,12 @@ const AreServersLayout = () => {
     }
   }, []);
   return (
-    <article className={`flex w-full justify-center h-full gap-3 ${stylesServers}`}>
+    <article className={`flex justify-center h-full gap-3 ${stylesServers}`}>
       <ServerIcons server_data_icons={server_data} />
-      <ServerHome specific_server_data={selected_server} />
-      <Channel />
+      <ChannelListProvider channels={selected_server.channels}>
+        <ServerHome specific_server_data={selected_server} />
+        <Channel />
+      </ChannelListProvider>
       <Notifications />
     </article>
   );
@@ -49,9 +52,3 @@ export const NoServersLayout = () => {
     </article>
   );
 };
-
-//limpiar servers
-// localStorage.removeItem("lastserver")
-// localStorage.removeItem("serverCategories")
-// localStorage.removeItem("serverChannels")
-// localStorage.removeItem("servers")
