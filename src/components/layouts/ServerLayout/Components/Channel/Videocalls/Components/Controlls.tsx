@@ -16,18 +16,29 @@ import { useNotifications } from "../../../../../../../store/useNotifications";
 import useFakePages from "../../../../../../../store/useFakePage";
 import useVideoStream from "../../../../../../../store/videoCall/useCameraStream";
 import { useScreenShare } from "../../../../../../../store/videoCall/useScreenShare";
+import useVerifyCallType from "../../../../../../../store/chat/useVerifyCall";
+import { Notifications } from "../../../../../../Alerts/Notification";
 
 export const VideoCallControlls: React.FC = () => {
   const { setStream, clearStream, stream } = useVideoStream();
   const { setNotifications } = useNotifications();
   const { removeFakePage, fakePages } = useFakePages();
   const {screenSretam, startScreenShare, stopScreenShare} = useScreenShare();
+  const {isVoiceCall} = useVerifyCallType();
 
   const [hasCamera, setHasCamera] = useState<boolean>(false);
   const [isCameraActive, setIsCameraActive] = useState<boolean>(false);
   const [isMicrophoneActive, setIsMicrophoneActive] = useState(false)
 
   const handleToggleCamera = async () => {
+    if (isVoiceCall) {
+      setNotifications({
+        message: "No puedes acceder a la cámara en una llamada de voz",
+        severity: "info"
+      })
+      return 
+    }
+
     if (!isCameraActive) {
       try {
         const videoStream = await navigator.mediaDevices.getUserMedia({ video: true });
@@ -37,6 +48,10 @@ export const VideoCallControlls: React.FC = () => {
       } catch (err) {
         console.error('Error al acceder a la cámara: ', err);
         setHasCamera(false);
+        setNotifications({
+          message: "Hubo un error al acceder a la cámara, revisa los permisos",
+          severity: "error"
+        })
       }
     } else {
       if (stream) {
@@ -49,6 +64,15 @@ export const VideoCallControlls: React.FC = () => {
   };
 
   const toggleScreenShare = () => {
+
+    if (isVoiceCall) {
+      setNotifications({
+        message: "No puedes compartir pantalla en  una llamada de voz",
+        severity: "info"
+      })
+      return
+    }
+
     if (screenSretam) {
       stopScreenShare()
     } else {
@@ -109,6 +133,7 @@ export const VideoCallControlls: React.FC = () => {
           type={controll.type}
         />
       ))}
+      <Notifications />
     </div>
   );
 };

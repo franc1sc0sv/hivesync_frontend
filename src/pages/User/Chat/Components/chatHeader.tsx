@@ -4,8 +4,10 @@ import { GoBackTriangle } from "../../../../components/Icons/goBackTriangle";
 import { PhoneIcon } from "../../../../components/Icons/phone";
 import { WebCameraIcon } from "../../../../components/Icons/webCamera";
 import { ButtonHover } from "../../../../components/buttons/hoverButton";
-import useFakePages from "../../../../store/useFakePage";
 import { VideoCallComponent } from "../../VideoCalls/VideoCallsIndex";
+
+import useFakePages from "../../../../store/useFakePage";
+import useVerifyCallType from "../../../../store/chat/useVerifyCall";
 
 interface ChatHeaderProps {
   username: string;
@@ -13,8 +15,10 @@ interface ChatHeaderProps {
 
 export const ChatHeader: React.FC<ChatHeaderProps> = ({ username }) => {
   const { addFakePage } = useFakePages();
+  const {setIsVoiceCall} = useVerifyCallType();
 
   const handleVoiceCall = () => {
+    setIsVoiceCall(true);
     addFakePage({
       title: "Llamada activa",
       children: <VideoCallComponent isVoiceCall />,
@@ -22,6 +26,7 @@ export const ChatHeader: React.FC<ChatHeaderProps> = ({ username }) => {
   };
 
   const handleVideoCall = () => {
+    setIsVoiceCall(false);
     addFakePage({
       title: "Llamada activa",
       children: <VideoCallComponent isVoiceCall={false} />,
