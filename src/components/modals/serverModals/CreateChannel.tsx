@@ -12,7 +12,7 @@ import {
 import { useServer } from "../../layouts/ServerLayout/hooks/useServer";
 import { RadioInput } from "../../forms/Inputs/Radio/InputRadio";
 import { useState } from "react";
-import { ChannelType } from "../../layouts/ServerLayout/Enums/SpecificServer";
+import { ChannelTypeEnum } from "../../layouts/ServerLayout/Enums/SpecificServer";
 
 import { v4 as uuidv4 } from "uuid";
 import { useCustomFormCreateServer } from "../../../hooks/useFormCreateServer";
@@ -23,13 +23,13 @@ import { HiHashtag } from "react-icons/hi";
 const options = [
   {
     label: "Texto",
-    value: ChannelType.TEXT,
+    value: ChannelTypeEnum.TEXT,
     description: "Chatea y envia imagenes",
     Icon: HiHashtag,
   },
   {
     label: "Voz",
-    value: ChannelType.VIDEO,
+    value: ChannelTypeEnum.VIDEO,
     description: "Comunicate por voz y video",
     Icon: HiSpeakerWave,
   },

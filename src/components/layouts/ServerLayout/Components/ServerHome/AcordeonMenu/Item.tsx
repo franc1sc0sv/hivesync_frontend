@@ -1,13 +1,17 @@
 import { HiHashtag } from "react-icons/hi";
 import { HiSpeakerWave } from "react-icons/hi2";
-import { ChannelCategory, ChannelType } from "../../../Enums/SpecificServer";
+import {
+  ChannelCategory,
+  ChannelTypeEnum,
+} from "../../../Enums/SpecificServer";
 import { useChannelList } from "../../../hooks/useChannelList";
+import { ChannelsFormated } from "../../../types/server";
 
 export const ItemAcordeonChannel = ({
   channel,
   isCategoryOpen,
 }: {
-  channel: Channels;
+  channel: ChannelsFormated;
   isCategoryOpen?: boolean;
 }) => {
   const { setCurrentChannel } = useChannelList();
@@ -35,8 +39,14 @@ export const ItemAcordeonChannel = ({
   );
 };
 
-export const IconChannel = ({ type, size = 28 }: { type: ChannelType, size?: number }) => {
-  return type === ChannelType.TEXT ? (
+export const IconChannel = ({
+  type,
+  size = 28,
+}: {
+  type: ChannelTypeEnum;
+  size?: number;
+}) => {
+  return type === ChannelTypeEnum.TEXT ? (
     <HiHashtag size={size} />
   ) : (
     <HiSpeakerWave size={size} />

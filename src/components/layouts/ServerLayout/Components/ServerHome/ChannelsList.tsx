@@ -2,8 +2,13 @@ import { useEffect } from "react";
 import { useChannelList } from "../../hooks/useChannelList";
 import { AcordeonItems, AcordeonMenu } from "./AcordeonMenu/AcordeonIndex";
 import { ChannelCategory } from "../../Enums/SpecificServer";
+import {
+  ChannelsFormated,
+  ChannelType,
+  ServerChannelsAray,
+} from "../../types/server";
 
-export const ChannelList = ({ channels }: { channels: Channels[] }) => {
+export const ChannelList = ({ channels }: { channels: ChannelType[] }) => {
   const { channelList, setChannelList } = useChannelList();
 
   useEffect(() => {
@@ -16,7 +21,9 @@ export const ChannelList = ({ channels }: { channels: Channels[] }) => {
       return acc;
     }, {});
 
-    const channels_by_categories: Channels[][] = Object.values(groupedData);
+    const channels_by_categories: ChannelsFormated[][] =
+      Object.values(groupedData);
+
     const formatedChannels: ServerChannelsAray = channels_by_categories.map(
       (channelArray) => {
         return {
@@ -35,7 +42,6 @@ export const ChannelList = ({ channels }: { channels: Channels[] }) => {
       {channelList.map((channel) => {
         return channel.category === ChannelCategory.NO_CATEGORY ? (
           <AcordeonItems
-
             CategoryChannel={channel.channels}
             key={channel.category}
           />

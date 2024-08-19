@@ -7,19 +7,29 @@ import { NoServers } from "./Components/NoServers";
 import { useServer } from "./hooks/useServer";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { get_last_server } from "../GeneralLayout/GeneralLayout";
+
+const obtener_server_id_activo = () => {
+  const currentURL = window.location.pathname;
+  return currentURL.split("/")[2];
+};
 
 export const ServerLayout = () => {
+  const { server_data } = useServer();
+
+  return server_data?.length ? <AreServersLayout /> : <NoServersLayout />;
+};
+
+const AreServersLayout = () => {
   const { server_data, selected_server } = useServer();
+  const stylesServers = server_data?.length ? "w-[200%]" : "w-full";
   const navigate = useNavigate();
-  const stylesServers = server_data.length ? "w-[200%]" : "w-full";
 
   useEffect(() => {
-    const areServers = server_data.length;
-    if (!areServers) {
-      navigate("/app/");
+    if (!obtener_server_id_activo()) {
+      navigate(get_last_server());
     }
   }, []);
-
   return (
     <article className={`flex h-full gap-3 ${stylesServers}`}>
       <ServerIcons server_data_icons={server_data} />

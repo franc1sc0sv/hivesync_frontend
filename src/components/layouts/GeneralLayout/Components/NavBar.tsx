@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 
-import { UserStatusIcon } from "../../../Icons/userStatusIcon";
 import {
   Links,
   PropsLinks,

@@ -1,21 +1,3 @@
-// type Channels = {
-//   id: string;
-//   name: string;
-//   categoryID: string;
-//   category: Category | any;
-//   type: ChannelType;
-//   isSelected: boolean;
-// };
-
-type Channels = {
-  id: string;
-  name: string;
-  categoryID: string;
-  category: Category | any;
-  type: ChannelType;
-  isSelected: boolean;
-};
-
 type ServerDataIcons = (ServerInfoIcons[] | ServerInfoIcons)[];
 
 type SpecificServer = {
@@ -32,9 +14,3 @@ type ServerChannels = {
   isCategoryActive: boolean;
   category: Category | any;
 };
-
-type ServerChannelsAray = {
-  channels: Channels[];
-  isCategoryActive: boolean;
-  category: Category | any;
-}[];

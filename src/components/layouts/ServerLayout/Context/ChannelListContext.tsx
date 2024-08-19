@@ -1,4 +1,5 @@
 import { ReactNode, createContext, useState } from "react";
+import { ServerChannelsAray } from "../types/server";
 
 interface ChannelContextType {
   channelList: ServerChannelsAray;

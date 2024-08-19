@@ -6,15 +6,15 @@ interface PropsServerIcons extends ServerInfoIcons {
 
 export const ServerIcon: React.FC<PropsServerIcons> = ({
   active,
-  IconServerURL,
+  avatarURL,
   url,
   name,
   isFolder = false,
 }) => {
-  const isIconUrlEmpty = IconServerURL.length === 0;
+  const isIconUrlEmpty = avatarURL.length === 0;
   const firstLetterName = name[0].toUpperCase();
 
-  const imgBG = !isIconUrlEmpty ? `url(${IconServerURL})` : "";
+  const imgBG = !isIconUrlEmpty ? `url(${avatarURL})` : "";
   const borderStyleActive = active ? "rounded-xl" : "rounded-full";
   const letterIconStyles = isIconUrlEmpty
     ? "text-white bg-secondary font-medium"

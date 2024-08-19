@@ -1,6 +1,4 @@
 import React from "react";
-import { IconChannel } from "../../../layouts/ServerLayout/Components/ServerHome/AcordeonMenu/Item";
-import { ChannelType } from "../../../layouts/ServerLayout/Enums/SpecificServer";
 import { IconType } from "react-icons";
 
 type Option = {

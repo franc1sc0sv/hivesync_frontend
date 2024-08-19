@@ -71,7 +71,7 @@ const ServerCover: React.FC = () => {
         <div className="absolute ml-5 -mt-16 overflow-hidden w-28 h-28 md:mx-auto rounded-2xl">
           <ServerIcon
             name={selected_server.name}
-            IconServerURL={selected_server.IconServerURL}
+            IconServerURL={selected_server.avatarURL}
           />
         </div>
       </div>

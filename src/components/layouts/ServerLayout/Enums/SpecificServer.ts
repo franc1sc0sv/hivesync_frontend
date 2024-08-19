@@ -1,6 +1,6 @@
-export enum ChannelType {
-  VIDEO = "video",
-  TEXT = "text",
+export enum ChannelTypeEnum {
+  VIDEO = "VIDEO",
+  TEXT = "TEXT",
 }
 
 export enum ChannelCategory {

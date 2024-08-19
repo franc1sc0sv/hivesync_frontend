@@ -1,4 +1,5 @@
 import { ChannelListProvider } from "../../Context/ChannelListContext";
+import { SpecificServerType } from "../../types/server";
 import { ChannelList } from "./ChannelsList";
 import { HeaderServer } from "./HeaderServer";
 
@@ -7,7 +8,7 @@ import { HeaderServer } from "./HeaderServer";
 export const ServerHome = ({
   specific_server_data,
 }: {
-  specific_server_data: SpecificServer;
+  specific_server_data: SpecificServerType;
 }) => {
   if (!specific_server_data.channels.length) return <p>Loading . . </p>;
 

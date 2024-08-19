@@ -1,6 +1,7 @@
 import { IoIosArrowForward } from "react-icons/io";
 import { ItemAcordeonChannel } from "./Item";
 import { useChannelList } from "../../../hooks/useChannelList";
+import { ChannelsFormated } from "../../../types/server";
 
 export const AcordeonMenu = ({
   CategoryChannel,
@@ -55,14 +56,13 @@ export const AcordeonItems = ({
   CategoryChannel,
   isCategoryOpen,
 }: {
-  CategoryChannel: Channels[];
+  CategoryChannel: ChannelsFormated[];
   isCategoryOpen?: boolean;
 }) => {
   return (
     <div className="flex flex-col">
       {CategoryChannel.map((channel) => (
         <ItemAcordeonChannel
-        
           isCategoryOpen={isCategoryOpen}
           channel={channel}
           key={channel.id}

@@ -18,8 +18,7 @@ export const useCustomFormCreateServer = (
     try {
       setIsloading(true);
       const res = await api_function(data);
-
-      // navigate(res.url);
+      navigate(res.url);
       setIsloading(false);
       setModalId("");
       return res;
