@@ -1,32 +1,67 @@
 import { FiCamera } from "react-icons/fi";
 import { MdCallEnd } from "react-icons/md";
-import { FaMicrophone } from "react-icons/fa6";
+import { PiMicrophoneFill, PiMicrophoneSlashFill } from "react-icons/pi";
 import { MdCoPresent } from "react-icons/md";
+import { FiCameraOff } from "react-icons/fi";
 
 import { ButtonCallsProps } from "../types";
 import { ButtonCalls } from "./Button";
 import { BUTTON_TYPE } from "../enums";
 
+import { useState } from "react";
+
 import { useNotifications } from "../../../../../../../store/useNotifications";
 import useFakePages from "../../../../../../../store/useFakePage";
+import useVideoStream from "../../../../../../../store/videoCall/useCameraStream";
 
-export const VideoCallControlls = () => {
-
+export const VideoCallControlls: React.FC = () => {
+  const { setStream, clearStream, stream } = useVideoStream();
   const { setNotifications } = useNotifications();
   const { removeFakePage, fakePages } = useFakePages();
+  const [hasCamera, setHasCamera] = useState<boolean>(false);
+  const [isCameraActive, setIsCameraActive] = useState<boolean>(false);
+  const [isMicrophoneActive, setIsMicrophoneActive] = useState(false)
+
+  const handleToggleCamera = async () => {
+    if (!isCameraActive) {
+      try {
+        const videoStream = await navigator.mediaDevices.getUserMedia({ video: true });
+        setStream(videoStream);
+        setIsCameraActive(true);
+        setHasCamera(true);
+      } catch (err) {
+        console.error('Error al acceder a la cámara: ', err);
+        setHasCamera(false);
+      }
+    } else {
+      if (stream) {
+        const tracks = stream.getTracks();
+        tracks.forEach(track => track.stop()); // Detener todas las pistas de video
+        clearStream(); 
+      }
+      setIsCameraActive(false);
+    }
+  };
+
+  const toggleMicrophone = async () => {
+    if (!isMicrophoneActive) {
+      setIsMicrophoneActive(true)
+    } else {
+      setIsMicrophoneActive(false)
+    }
+  }
 
   const lastPageId = fakePages.length > 0 ? fakePages[fakePages.length - 1].id : null;
 
-
   const controlls: ButtonCallsProps[] = [
     {
-      Icon: FaMicrophone,
-      onClick: () => { },
+      Icon: isMicrophoneActive ? PiMicrophoneFill : PiMicrophoneSlashFill,
+      onClick: toggleMicrophone,
       type: BUTTON_TYPE.MICROPHONE,
     },
     {
-      Icon: FiCamera,
-      onClick: () => { },
+      Icon: isCameraActive ? FiCamera : FiCameraOff,
+      onClick: handleToggleCamera,
       type: BUTTON_TYPE.CAMERA,
     },
     {
@@ -44,6 +79,7 @@ export const VideoCallControlls = () => {
           severity: "info",
           message: "Llamada finalizada"
         });
+        clearStream();
       },
       type: BUTTON_TYPE.HANG_UP,
     },
@@ -51,16 +87,14 @@ export const VideoCallControlls = () => {
 
   return (
     <div className="flex items-center justify-center w-full h-20 gap-3 bg-opacity-50 rounded-2xl bg-overlay_2">
-      {controlls.map((controll, i) => {
-        return (
-          <ButtonCalls
-            key={i}
-            Icon={controll.Icon}
-            onClick={controll.onClick}
-            type={controll.type}
-          />
-        );
-      })}
+      {controlls.map((controll, i) => (
+        <ButtonCalls
+          key={i}
+          Icon={controll.Icon}
+          onClick={controll.onClick}
+          type={controll.type}
+        />
+      ))}
     </div>
   );
 };

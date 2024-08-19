@@ -66,14 +66,14 @@ const EditProfilePicture = () => {
 
   return (
     <div className="flex items-center justify-center w-full h-full p-5 mx-auto text-white lg:w-1/2">
-      <form className="flex flex-col gap-5" onSubmit={onSubmit}>
+      <form className="w-full lg:w-4/5 flex flex-col gap-5" onSubmit={onSubmit}>
         <ImgInput
           name="pictureRoute"
           register={register}
           text={
             picRoute
               ? "Archivo seleccionado: " + picRoute
-              : "Haz click para subir una nueva foto de perfil o puedes arrastar la foto y soltarla aquí"
+              : "Haz click para subir una foto"
           }
           status={handleFileChange}
         />

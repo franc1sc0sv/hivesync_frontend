@@ -31,7 +31,7 @@ const AreServersLayout = () => {
     }
   }, []);
   return (
-    <article className={`flex h-full gap-3 ${stylesServers}`}>
+    <article className={`flex w-full justify-center h-full gap-3 ${stylesServers}`}>
       <ServerIcons server_data_icons={server_data} />
       <ServerHome specific_server_data={selected_server} />
       <Channel />

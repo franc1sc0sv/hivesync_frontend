@@ -10,19 +10,19 @@ export const ButtonCalls: React.FC<ButtonCallsProps> = ({
 
   switch (type) {
     case BUTTON_TYPE.MICROPHONE:
-      buttonClass = "bg-overlay_2 hover:bg-overlay_4"; // Ejemplo de clase para micrófono
+      buttonClass = "bg-overlay_2 hover:bg-primary"; // Ejemplo de clase para micrófono
       break;
     case BUTTON_TYPE.PRESENTATION:
-      buttonClass = "bg-overlay_2 hover:bg-overlay_4"; // Ejemplo de clase para presentación
+      buttonClass = "bg-overlay_2 hover:bg-primary"; // Ejemplo de clase para presentación
       break;
     case BUTTON_TYPE.CAMERA:
-      buttonClass = "bg-overlay_2 hover:bg-overlay_4"; // Ejemplo de clase para cámara
+      buttonClass = "bg-overlay_2 hover:bg-primary"; // Ejemplo de clase para cámara
       break;
     case BUTTON_TYPE.HANG_UP:
       buttonClass = "bg-red-500  hover:bg-red-600"; // Ejemplo de clase para colgar
       break;
     default:
-      buttonClass = "bg-overlay_2 hover:bg-overlay_4";
+      buttonClass = "bg-overlay_2 hover:bg-primary";
   }
 
   return (
