@@ -69,9 +69,8 @@ const NotificationsList: React.FC<NotificationsListProps> = ({
 
       {notifications?.map((notification, index) =>
         selectedCategory == "Todo" ? (
-          <ComponentsAnimator>
+          <ComponentsAnimator key={index}>
             <NotificationIcon
-              key={index}
               pictureRoute={notification.pictureRoute}
               message={notification.message}
               timeAgo={notification.timeAgo}
@@ -79,9 +78,8 @@ const NotificationsList: React.FC<NotificationsListProps> = ({
           </ComponentsAnimator>
         ) : (
           selectedCategory == notification.category && (
-            <ComponentsAnimator>
+            <ComponentsAnimator key={index}>
               <NotificationIcon
-                key={index}
                 pictureRoute={notification.pictureRoute}
                 message={notification.message}
                 timeAgo={notification.timeAgo}
