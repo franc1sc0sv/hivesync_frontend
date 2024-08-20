@@ -1,6 +1,7 @@
 import { InboxMessage } from "./InboxMessage";
 import { MessageProps } from "../types/Messages";
 
+//ignorar esto, sé que al poner los datos truena el frontend pero supongo que es porque el backend no encuentra amigos y si chats
 const awa = [
   {
     pictureRoute: '/images/user1.jpg',

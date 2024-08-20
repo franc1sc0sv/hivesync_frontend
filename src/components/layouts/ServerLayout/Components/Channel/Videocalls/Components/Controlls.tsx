@@ -34,7 +34,7 @@ export const VideoCallControlls: React.FC = () => {
     if (isVoiceCall) {
       setNotifications({
         message: "No puedes acceder a la cámara en una llamada de voz",
-        severity: "info"
+        severity: "warning"
       })
       return 
     }
@@ -68,7 +68,7 @@ export const VideoCallControlls: React.FC = () => {
     if (isVoiceCall) {
       setNotifications({
         message: "No puedes compartir pantalla en  una llamada de voz",
-        severity: "info"
+        severity: "warning"
       })
       return
     }

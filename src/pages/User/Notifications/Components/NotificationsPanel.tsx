@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { NotificationIcon } from "./NotificationIcon";
+import { NotificationIcon } from "./NotificationIcon"; //es la plantilla de notificatión normal
+import { FriendRequestNotification } from "./friendRequest";
 import { NotificationProps } from "./Notification";
 
 import { ComponentsAnimator } from "../../../../components/animation/componentsAnimator";
@@ -56,18 +57,17 @@ const NotificationsList: React.FC<NotificationsListProps> = ({
           <button
             key={category}
             onClick={() => handleCategoryClick(category)}
-            className={`py-2 px-4 rounded-full ${
-              selectedCategory === category
-                ? "bg-purple-600 text-white"
-                : "bg-transparent text-white transition-all duration-300"
-            }`}
+            className={`py-2 px-4 rounded-full ${selectedCategory === category
+              ? "bg-purple-600 text-white"
+              : "bg-transparent text-white transition-all duration-300"
+              }`}
           >
             {category}
           </button>
         ))}
       </div>
 
-      {notifications?.map((notification, index) =>
+      {/* {notifications?.map((notification, index) =>
         selectedCategory == "Todo" ? (
           <ComponentsAnimator key={index}>
             <NotificationIcon
@@ -87,7 +87,45 @@ const NotificationsList: React.FC<NotificationsListProps> = ({
             </ComponentsAnimator>
           )
         )
+      )} */}
+
+      {notifications?.map((notification, index) =>
+        selectedCategory === "Todo" ? (
+
+          <ComponentsAnimator key={index}>
+            {notification.category === "Solicitudes" ? (
+              <FriendRequestNotification
+                pictureRoute={notification.pictureRoute}
+                message={notification.message}
+              />
+            ) : (
+              <NotificationIcon
+                pictureRoute={notification.pictureRoute}
+                message={notification.message}
+                timeAgo={notification.timeAgo}
+              />
+            )}
+          </ComponentsAnimator>
+
+        ) : selectedCategory === notification.category && (
+
+          <ComponentsAnimator key={index}>
+            {notification.category === "Solicitudes" ? (
+              <FriendRequestNotification
+                pictureRoute={notification.pictureRoute}
+                message={notification.message}
+              />
+            ) : (
+              <NotificationIcon
+                pictureRoute={notification.pictureRoute}
+                message={notification.message}
+                timeAgo={notification.timeAgo}
+              />
+            )}
+          </ComponentsAnimator>
+        )
       )}
+
     </section>
   );
 };
