@@ -18,11 +18,12 @@ const obtener_server_id_activo = () => {
 export const ServerLayout = () => {
   const { server_data } = useServer();
 
-  useEffect(() => {
-    if (!server_data?.length) {
-      localStorage.setItem("lastserver", "");
-    }
-  }, []);
+  // useEffect(() => {
+  //   console.log(!server_data?.length);
+  //   if (!server_data?.length) {
+  //     localStorage.setItem("lastserver", "");
+  //   }
+  // }, []);
 
   return server_data?.length ? <AreServersLayout /> : <NoServersLayout />;
 };
