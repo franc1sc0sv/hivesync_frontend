@@ -19,7 +19,6 @@ export const SharedScreen: React.FC = () => {
             {error && <p style={{ color: 'red' }}>{error}</p>}
             {screenStream ? (
                 <div className='w-full h-full'>
-                    <button onClick={stopScreenShare}>Dejar de compartir</button>
                     <video
                         ref={videoRef}
                         autoPlay

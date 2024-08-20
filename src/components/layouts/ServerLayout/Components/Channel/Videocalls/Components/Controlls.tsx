@@ -23,7 +23,7 @@ export const VideoCallControlls: React.FC = () => {
   const { setStream, clearStream, stream } = useVideoStream();
   const { setNotifications } = useNotifications();
   const { removeFakePage, fakePages } = useFakePages();
-  const {screenSretam, startScreenShare, stopScreenShare} = useScreenShare();
+  const {screenStream, startScreenShare, stopScreenShare} = useScreenShare();
   const {isVoiceCall} = useVerifyCallType();
 
   const [hasCamera, setHasCamera] = useState<boolean>(false);
@@ -73,7 +73,7 @@ export const VideoCallControlls: React.FC = () => {
       return
     }
 
-    if (screenSretam) {
+    if (screenStream) {
       stopScreenShare()
     } else {
       startScreenShare()
@@ -124,7 +124,7 @@ export const VideoCallControlls: React.FC = () => {
   ];
 
   return (
-    <div className="flex items-center justify-center w-full h-20 gap-3 bg-opacity-50 rounded-2xl bg-overlay_2">
+    <div className="z-10 flex items-center justify-center w-full h-20 gap-3 rounded-2xl bg-overlay_2">
       {controlls.map((controll, i) => (
         <ButtonCalls
           key={i}

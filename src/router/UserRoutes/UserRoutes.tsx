@@ -3,6 +3,7 @@ import { AuthDetector } from "../../components/auth/AuthDetector";
 
 import { DirectMessagesPage } from "../../pages/User/DirectMessages/DM";
 import { ChatPage } from "../../pages/User/Chat/ChatPage";
+import { VideoCallComponent } from "../../pages/User/VideoCalls/VideoCallsIndex";
 import { ComunityPage } from "../../pages/User/Comunity/ComunityPage";
 import { ComunityIndividualPage } from "../../pages/User/ComunityIndividual/ComunityIndividualPage";
 import { ServerPage } from "../../pages/User/Servers/ServerPage";
@@ -16,7 +17,7 @@ import { TestingPage } from "../../pages/testing/TestingPage";
 export const UserRoutes: RouteObject = {
   caseSensitive: true,
   path: "/app",
-  element: <AuthDetector />,
+  // element: <AuthDetector />,
   children: [
     { path: "@me", element: <DirectMessagesPage /> }, // Bandeja entrada DM
     { path: ":id", element: <ChatPage /> }, //Chats individuales
@@ -28,6 +29,7 @@ export const UserRoutes: RouteObject = {
     { path: "profile/:id/settings", element: <SettingsPage /> }, //ajustes del usuario
 
     { path: "testin", element: <ComunityPage /> },
+    { path: "test2", element: <VideoCallComponent /> },
     { path: "comunity/:id", element: <ComunityIndividualPage /> },
     { path: ":id/:id", element: <ServerPage /> }, // Servers - /server_id/channel_id
     { index: true, element: <ServerPage /> }, // Servers - /server_id/channel_id

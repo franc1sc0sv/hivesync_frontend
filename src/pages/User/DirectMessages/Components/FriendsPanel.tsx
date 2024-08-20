@@ -12,9 +12,7 @@ export const FriendsPanel = ({ friends = [] }: { friends: MessageProps[] }) => {
   }, [])
 
   return (
-    // <div className="grid grid-flow-col overflow-x-auto rounded-lg w-full gap-3 items-center">
     <div className="grid grid-flow-col overflow-x-auto rounded-lg h-screen w-full gap-3 items-center justify-center">
-
       {friends.length === 0 ? <NoFriends /> : <FriendsList friends={friends_data as MessageProps[]} />}
     </div >
   );
