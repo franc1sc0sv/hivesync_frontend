@@ -16,7 +16,10 @@ export const ToggleMicrophone: React.FC = () => {
 
 const Form = () => {
   const { isMicrophoneActive, toggleMicrophone } = useMicrophoneStore();
-  const { register } = useCustomForm();
+  const api = () => console.log("hola, *llama a la api épicamente*");
+  const success = () => console.log("success");
+
+  const {register } = useCustomForm(api, success, "");
 
   const handleToggle = async () => {
     await toggleMicrophone();

@@ -31,7 +31,11 @@ const Form = () => {
         location.reload();
     }
 
-    const { register } = useCustomForm();
+    const api = () => console.log("hola, *llama a la api épicamente*");
+    const success = () => console.log("success");
+  
+    const {register } = useCustomForm(api, success, "");
+  
 
     return (
         <div className="w-full flex flex-col justify-center items-center gap-5">
