@@ -2,7 +2,22 @@ import { useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { CurrentPage } from "./CurrentPage";
 
+const storedValue = localStorage.getItem("transitionState");
+const verifyState = storedValue ? JSON.parse(storedValue) : false;
+
 export const Animator = () => {
+  const location = useLocation();
+
+  return (
+    <>
+      {verifyState ? <Animation /> : <NoAnimation />}
+    </>
+  );
+};
+
+
+const Animation = () => {
+
   const location = useLocation();
 
   return (
@@ -18,5 +33,20 @@ export const Animator = () => {
         <CurrentPage />
       </motion.div>
     </AnimatePresence>
-  );
-};
+  )
+}
+
+const NoAnimation = () => {
+
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={location.pathname}
+      >
+        <CurrentPage />
+      </motion.div>
+    </AnimatePresence>
+  )
+}

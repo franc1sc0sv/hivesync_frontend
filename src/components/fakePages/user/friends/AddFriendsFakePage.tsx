@@ -76,7 +76,7 @@ const SendFriendsRequest = ({
       onSubmit={onSubmit}
       className="flex flex-col justify-between w-full gap-10 p-5 h-4/5"
     >
-      <div className="flex flex-col items-center w-full gap-5">
+      <div className="mx-auto flex flex-col items-center w-[320px] gap-5">
         <SearchBar
           name="username"
           register={register}

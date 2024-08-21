@@ -33,12 +33,11 @@ const accountOptions: MenuProps[] = [
     name: "Privacidad",
     page: <PrivacySettingsFakePage />
   },
-  // { icon: <HiUsers />, optionName: "Solicitudes de amistad", optionLink: "" },
-  {
-    icon: <ClipIcon size={30} color="white" />,
-    name: "Conexiones",
-    page: <ConnectionsSettingsFakePage />
-  },
+  // {
+  //   icon: <ClipIcon size={30} color="white" />,
+  //   name: "Conexiones",
+  //   page: <ConnectionsSettingsFakePage />
+  // },
 ];
 
 const appOptions: MenuProps[] = [
@@ -69,10 +68,11 @@ export const MenuOptions: React.FC = () => {
       <form
         className="p-1"
         onSubmit={onSubmit}>
-        <SearchBar
+          
+        {/* <SearchBar
           name="setting"
           register={register}
-          placeholder="Buscar una opción de ajuste" />
+          placeholder="Buscar una opción de ajuste" /> */}
       </form>
 
       {/* account options */}
