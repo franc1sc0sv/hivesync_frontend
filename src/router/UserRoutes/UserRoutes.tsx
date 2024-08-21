@@ -17,7 +17,7 @@ import { TestingPage } from "../../pages/testing/TestingPage";
 export const UserRoutes: RouteObject = {
   caseSensitive: true,
   path: "/app",
-  // element: <AuthDetector />,
+  element: <AuthDetector />,
   children: [
     { path: "@me", element: <DirectMessagesPage /> }, // Bandeja entrada DM
     { path: ":id", element: <ChatPage /> }, //Chats individuales

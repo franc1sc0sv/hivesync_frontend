@@ -21,7 +21,7 @@ const FormFooter = () => {
       <Link to="/signup" className="text-custom_white">
         No tienes cuenta? Crear cuenta
       </Link>
-      <Link to={"/"} className="text-custom_white">
+      <Link to={"/recover"} className="text-custom_white">
         Olvidé mi contraseña
       </Link>
     </div>

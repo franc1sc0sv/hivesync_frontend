@@ -59,7 +59,7 @@ const FormFooter = () => {
       <Link to="/login" className="text-custom_white">
         ¿Ya tienes cuenta? Inicia en HiveSync
       </Link>
-      <Link to={"/"} className="text-custom_white">
+      <Link to={"/recover"} className="text-custom_white">
         Olvidé mi contraseña
       </Link>
     </div>
