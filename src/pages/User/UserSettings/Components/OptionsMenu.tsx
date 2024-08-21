@@ -7,6 +7,8 @@ import { ClipIcon } from "../../../../components/Icons/clip";
 import { MicrophoneIcon } from "../../../../components/Icons/microphone";
 import { ColorPaletteIcon } from "../../../../components/Icons/colorPalette";
 
+import { Notifications } from "../../../../components/Alerts/Notification";
+
 import useFakePages from "../../../../store/useFakePage";
 import { AccountSettingsFakePage } from "../../../../components/fakePages/user/settingsFakePages/userAccountFakePage";
 import { PrivacySettingsFakePage } from "../../../../components/fakePages/user/settingsFakePages/privacyFakePage";
@@ -62,6 +64,7 @@ export const MenuOptions: React.FC = () => {
 
   return (
     <div className="w-full lg:w-4/5 mx-auto flex flex-col gap-5 h-[80vh] overflow-y-auto">
+      <Notifications />
 
       <form
         className="p-1"

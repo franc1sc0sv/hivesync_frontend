@@ -13,6 +13,7 @@ export default {
         primary: "#45156B",
         secondary: "#382C6C",
         light_blue: "#486CFF",
+        light_purple: "#9333EA",
         custom_white: "#FFFFFE",
         gray: "#8C8C8C",
         green: "#25DE21",

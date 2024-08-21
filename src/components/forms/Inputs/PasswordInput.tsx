@@ -6,9 +6,10 @@ import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
 
 type Props = {
   register: UseFormRegister<FieldValues>;
+  name?: string
 };
 
-export const PasswordInput: React.FC<Props> = ({ register }) => {
+export const PasswordInput: React.FC<Props> = ({ register, name }) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const handlePassworwd = () => {
@@ -22,7 +23,7 @@ export const PasswordInput: React.FC<Props> = ({ register }) => {
     <div className="relative w-full max-w-[320px]">
       <InputsForms
         register={register}
-        name="password"
+        name= {name ? name : "password"}
         title="Contraseña"
         placeholder="Digite su contraseña"
         type={showPassword ? "text" : "password"}

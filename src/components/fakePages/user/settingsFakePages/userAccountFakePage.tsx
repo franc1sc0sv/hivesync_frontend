@@ -1,41 +1,38 @@
-import useFakePages from "../../../../store/useFakePage";
+import { Notifications } from "../../../Alerts/Notification";
 import { RightTriangleIcon } from "../../../Icons/rightTriangle";
+
+import { useModal } from "../../../../store/useModal";
+import { AccountSettingsModals } from "../../../modals/userModals/settings/accountSettings/modals";
 
 interface MenuProps {
     name: string;
-    // page: React.ReactNode;
+    modal: string;
 }
 
 const options: MenuProps[] = [
     {
         name: "Nombre de usuario",
-        // page: <AccountSettingsFakePage />
+        modal: "editUsername"
     },
     {
-        name: "Nombre a mostrar",
-        // page: <PrivacySettingsFakePage />
+        name: "Tu nombre",
+        modal: "editName"
     },
-    // { icon: <HiUsers />, optionName: "Solicitudes de amistad", optionLink: "" },
     {
         name: "Correo electrónico",
-        // page: <ConnectionsSettingsFakePage />
-    },
-    {
-        name: "Teléfono",
-        // page: <ConnectionsSettingsFakePage />
+        modal: "editMail"
     },
     {
         name: "Contraseña",
-        // page: <ConnectionsSettingsFakePage />
+        modal: "editPassword"
     },
 ];
 
 export const AccountSettingsFakePage: React.FC = () => {
     return (
-        <div className="w-full h-full flex flex-col gap-5 p-3 overflow-y-auto">
+        <div className="w-full sm:w-4/5 lg:w-3/5 h-full flex flex-col justify-between gap-5 p-3 overflow-y-auto">
             {/* account options */}
             <Options />
-
             <div className="h-3/5 w-full flex items-end">
                 <button
                     className="flex items-center justify-center w-full gap-2 p-3 mb-14 text-lg bg-red-600 rounded-xl font-amiko text-custom_white place-items-center"
@@ -43,23 +40,24 @@ export const AccountSettingsFakePage: React.FC = () => {
                     <p>Eliminar cuenta</p>
                 </button>
             </div>
-
+            <AccountSettingsModals />
         </div>
     )
 }
 
 const Options: React.FC = () => {
 
-    const { addFakePage } = useFakePages();
+    const { setModalId } = useModal();
 
     return (
         <div className="flex flex-col gap-5 p-3 bg-overlay_2 rounded-xl">
             {options.map((option, index) => (
                 <button
-                    className="flex flex-row justify-between items-center gap-3"
+                    onClick={() => setModalId(option.modal)}
+                    className="flex flex-row justify-between items-center gap-3 text-lg text-custom_white hover:text-light_purple transition-all duration-200"
                     key={index}
                 >
-                    <p className="text-lg text-custom_white">{option.name}</p>
+                    {option.name}
                     <RightTriangleIcon size={20} color="white" />
                 </button>
             ))}

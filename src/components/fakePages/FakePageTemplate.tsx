@@ -60,7 +60,7 @@ const FakePageTemplate: React.FC<FakePageProps> = ({
           <div className="w-full h-screen text-center">
             <div className="flex flex-row h-[10%] items-center justify-between p-3 text-custom_white">
               <div onClick={handleClose}>
-                <GoBackTriangle size={30} color="white" />{" "}
+                <GoBackTriangle size={30} color="white" />
               </div>
               <span className="text-2xl font-bold">{title}</span>
               <span></span>

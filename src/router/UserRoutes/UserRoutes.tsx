@@ -28,8 +28,8 @@ export const UserRoutes: RouteObject = {
     { path: "profile/:id", element: <ProfilePage /> },
     { path: "profile/:id/settings", element: <SettingsPage /> }, //ajustes del usuario
 
-    { path: "testin", element: <ComunityPage /> },
-    { path: "test2", element: <VideoCallComponent /> },
+    // { path: "testin", element: <ComunityPage /> },
+    {path: "communities/", element: <ComunityPage />},
     { path: "comunity/:id", element: <ComunityIndividualPage /> },
     { path: ":id/:id", element: <ServerPage /> }, // Servers - /server_id/channel_id
     { index: true, element: <ServerPage /> }, // Servers - /server_id/channel_id

@@ -1,8 +1,10 @@
-import React, { useState } from 'react'; 
+import React, { useState } from 'react';
 import { InputsForms } from "../../../components/forms/Inputs/inputs";
 import { useForm } from 'react-hook-form';
 import { FiSearch, FiFilter } from "react-icons/fi";
 import { FiBookmark, FiMapPin } from "react-icons/fi";
+import { GoBackTriangle } from '../../../components/Icons/goBackTriangle';
+import { Link } from 'react-router-dom';
 
 export const ComunityPage = () => {
   const { register } = useForm();
@@ -14,6 +16,12 @@ export const ComunityPage = () => {
 
   return (
     <div className="flex flex-col items-center p-6 bg-overlay_1 min-h-screen" style={{ overflowX: 'hidden' }}>
+      <Link 
+      to={`/app/25c618ef-553b-4064-bb27-294a01aa15ff/c8480359-ae51-4e98-8875-9f3d1d3009cf`}
+      className='w-full flex justify-start items-center'>
+        <GoBackTriangle size={30} color='white' />
+      </Link>
+
       <div className="w-full max-w-5xl">
         <h2 className="text-3xl font-bold text-white">Descubre Nuestro Entorno</h2>
         <h3 className="text-4xl font-bold text-white mt-2">Comunidades</h3>

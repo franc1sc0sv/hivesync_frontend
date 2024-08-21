@@ -4,7 +4,7 @@ import { Community } from "../../../Icons/community";
 export const CommunityButton: React.FC = () => {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/app/testin");
+    navigate("/app/communities");
   };
   return (
     <div

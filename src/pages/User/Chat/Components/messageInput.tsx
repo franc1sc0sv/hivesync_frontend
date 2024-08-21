@@ -2,7 +2,6 @@ import { SendIcon } from "../../../../components/Icons/send";
 
 import { useCustomForm } from "../../../../hooks/useForm";
 import useChat from "../../../../store/chat/useChat";
-import { useState } from "react";
 
 export const MessageInput: React.FC = () => {
   const { sendMessage, setShouldScrollToBottom } = useChat();
@@ -15,6 +14,8 @@ export const MessageInput: React.FC = () => {
         isUserSender: true,
         content: textMessage,
       };
+
+      if (message.content.trim().length === 0) return;
 
       sendMessage(message);
       setShouldScrollToBottom(true);

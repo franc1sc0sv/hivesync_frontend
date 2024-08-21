@@ -20,7 +20,10 @@ export const ProfileCover: React.FC = () => {
 
       {/* icon */}
       <div className="relative ml-5 -mt-20 overflow-hidden w-28 h-28 rounded-2xl">
-        <UserAvatar />
+        <UserAvatar 
+        username={userData.username} 
+        profileURl=""
+        />
       </div>
     </div>
   );
