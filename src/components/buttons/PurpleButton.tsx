@@ -12,7 +12,7 @@ export const PurpleButton: React.FC<PurpleInputProp> = ({
     return (
         <div
             onClick={onAction}
-            className={"flex items-center h-14 w-full max-w-[100%] p-3 font-bold bg-primary rounded-xl text-custom_white font-almarai  "}
+            className={"flex items-center h-14 w-full p-3 font-bold bg-primary rounded-xl text-custom_white font-almarai "}
         >
             <div className="flex justify-between w-full flex-row">
                 <p>{text}</p>   

@@ -1,10 +1,9 @@
-import { Notifications } from "../../../Alerts/Notification";
 import { RightTriangleIcon } from "../../../Icons/rightTriangle";
 
 import { useModal } from "../../../../store/useModal";
 import { AccountSettingsModals } from "../../../modals/userModals/settings/accountSettings/modals";
 
-interface MenuProps {
+export interface MenuProps {
     name: string;
     modal: string;
 }
@@ -57,7 +56,7 @@ const Options: React.FC = () => {
                     className="flex flex-row justify-between items-center gap-3 text-lg text-custom_white hover:text-light_purple transition-all duration-200"
                     key={index}
                 >
-                    {option.name}
+                    {option.name}   
                     <RightTriangleIcon size={20} color="white" />
                 </button>
             ))}

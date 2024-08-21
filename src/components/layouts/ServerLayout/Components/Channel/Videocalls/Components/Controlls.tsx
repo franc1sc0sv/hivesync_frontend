@@ -11,32 +11,33 @@ import { BUTTON_TYPE } from "../enums";
 
 import { useState } from "react";
 
-//custom hooks
+// custom hooks
 import { useNotifications } from "../../../../../../../store/useNotifications";
 import useFakePages from "../../../../../../../store/useFakePage";
 import useVideoStream from "../../../../../../../store/videoCall/useCameraStream";
 import { useScreenShare } from "../../../../../../../store/videoCall/useScreenShare";
 import useVerifyCallType from "../../../../../../../store/chat/useVerifyCall";
 import { Notifications } from "../../../../../../Alerts/Notification";
+import useVideoCallStore from "../../../../../../../store/videoCall/useMicrophoneVideocalls";
 
 export const VideoCallControlls: React.FC = () => {
   const { setStream, clearStream, stream } = useVideoStream();
   const { setNotifications } = useNotifications();
   const { removeFakePage, fakePages } = useFakePages();
-  const {screenStream, startScreenShare, stopScreenShare} = useScreenShare();
-  const {isVoiceCall} = useVerifyCallType();
+  const { screenStream, startScreenShare, stopScreenShare } = useScreenShare();
+  const { isVoiceCall } = useVerifyCallType();
+  const { isMicrophoneActive, toggleMicrophone } = useVideoCallStore();
 
   const [hasCamera, setHasCamera] = useState<boolean>(false);
   const [isCameraActive, setIsCameraActive] = useState<boolean>(false);
-  const [isMicrophoneActive, setIsMicrophoneActive] = useState(false)
 
   const handleToggleCamera = async () => {
     if (isVoiceCall) {
       setNotifications({
         message: "No puedes acceder a la cámara en una llamada de voz",
-        severity: "warning"
-      })
-      return 
+        severity: "warning",
+      });
+      return;
     }
 
     if (!isCameraActive) {
@@ -50,50 +51,46 @@ export const VideoCallControlls: React.FC = () => {
         setHasCamera(false);
         setNotifications({
           message: "Hubo un error al acceder a la cámara, revisa los permisos",
-          severity: "error"
-        })
+          severity: "error",
+        });
       }
     } else {
       if (stream) {
         const tracks = stream.getTracks();
-        tracks.forEach(track => track.stop()); // Detener todas las pistas de video
-        clearStream(); 
+        tracks.forEach((track) => track.stop()); // Detener todas las pistas de video
+        clearStream();
       }
       setIsCameraActive(false);
     }
   };
 
   const toggleScreenShare = () => {
-
     if (isVoiceCall) {
       setNotifications({
-        message: "No puedes compartir pantalla en  una llamada de voz",
-        severity: "warning"
-      })
-      return
+        message: "No puedes compartir pantalla en una llamada de voz",
+        severity: "warning",
+      });
+      return;
     }
 
     if (screenStream) {
-      stopScreenShare()
+      stopScreenShare();
     } else {
-      startScreenShare()
+      startScreenShare();
     }
-  }
+  };
 
-  const toggleMicrophone = async () => {
-    if (!isMicrophoneActive) {
-      setIsMicrophoneActive(true)
-    } else {
-      setIsMicrophoneActive(false)
-    }
-  }
+  const handleToggleMicrophone = async () => {
+    // Alterna el estado del micrófono utilizando el estado global de Zustand
+    await toggleMicrophone();
+  };
 
   const lastPageId = fakePages.length > 0 ? fakePages[fakePages.length - 1].id : null;
 
   const controlls: ButtonCallsProps[] = [
     {
       Icon: isMicrophoneActive ? PiMicrophoneFill : PiMicrophoneSlashFill,
-      onClick: toggleMicrophone,
+      onClick: handleToggleMicrophone,
       type: BUTTON_TYPE.MICROPHONE,
     },
     {
@@ -114,7 +111,7 @@ export const VideoCallControlls: React.FC = () => {
         }
         setNotifications({
           severity: "info",
-          message: "Llamada finalizada"
+          message: "Llamada finalizada",
         });
         stopScreenShare();
         clearStream();
