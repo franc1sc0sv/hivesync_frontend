@@ -20,8 +20,8 @@ export const PrivacySettingsFakePage: React.FC = () => {
     return (
         <div className="w-full sm:w-4/5 lg:w-3/5 h-full flex flex-col justify-between gap-5 p-3 overflow-y-auto">
             {/* Privacity Options*/}
-            <Options/>
-            <PrivacityModals/>
+            <Options />
+            <PrivacityModals />
         </div>
     )
 }
@@ -42,7 +42,6 @@ const Options: React.FC = () => {
                 </button>
             ))}
         </div>
-    
-)
 
+    )
 }
