@@ -5,6 +5,7 @@ const aboutUser = localStorage.getItem("aboutUser");
 const userStatus = localStorage.getItem("userStatus");
 const theme = localStorage.getItem('themeColor');
 const verifyTheme = theme ? theme : "#45156B";
+const appearAs = localStorage.getItem("localAppearAs")
 
 interface User {
   picture: string
@@ -16,6 +17,8 @@ interface User {
   spotify: boolean;
   github: boolean;
   themeColor: string
+  appearAs: string
+  
 }
 
 export const userData: User = {
@@ -25,6 +28,7 @@ export const userData: User = {
     about: aboutUser ? aboutUser : "En efecto, es una prueba",
     status: userStatus ? userStatus : "estoy sentado",
     memberSince: "21 de septiembre de 2005",
+    appearAs: appearAs ? appearAs: "Conectado",
     spotify: true,
     github: true,
     themeColor: verifyTheme

@@ -1,5 +1,5 @@
+//este ya no se ocupa xd
 import { ModalTemplate } from "../ModalTemplate";
-
 const temporaryRoute =
   "https://static.fundacion-affinity.org/cdn/farfuture/PVbbIC-0M9y4fPbbCsdvAD8bcjjtbFc0NSP3lRwlWcE/mtime:1643275542/sites/default/files/los-10-sonidos-principales-del-perro.jpg";
 
@@ -62,12 +62,12 @@ const About = ({ user }: { user: UserProfile }) => {
 
       <div className="flex flex-col gap-3 p-3 rounded-lg bg-overlay_2">
         <div className="flex flex-col text-custom_white">
-          <h3 className="text-lg text-left">Sobre {user.name}</h3>
+          <h3 className="text-lg text-left">Sobre {user.name} </h3>
           <p className="text-left text-gray">{user.about}</p>
         </div>
 
         <div className="flex flex-col text-custom_white">
-          <h3 className="text-lg text-left">Miembro de HiveSync desde</h3>
+          <h3 className="text-lg text-left">Miembro de HiveSync desde </h3>
           <p className="text-left text-gray">{formated_date}</p>
         </div>
       </div>

@@ -88,10 +88,17 @@ const AboutUser = () => {
       </div>
 
       <div className="flex flex-col text-custom_white">
-        <h3 className="text-lg">Miembro de HiveSync desde</h3>
+        <h3 className="text-lg">Miembro de HiveSync desde </h3>
         <p className="text-gray">{userData.memberSince}</p>
       </div>
+      <div className="flex flex-col text-custom_white">
+        <h3 className="text-lg">Aparecer como</h3>
+        <p className="text-gray">{userData.appearAs}</p>
+      </div>
+      
     </div>
+
+    
   )
 }
 
