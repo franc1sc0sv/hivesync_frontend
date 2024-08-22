@@ -1,14 +1,15 @@
 import { v4 as uuidv4 } from "uuid";
-import { ModalTemplate } from "../ModalTemplate";
-import { InputsForms } from "../../forms/Inputs/inputs";
-import { SubmitButton } from "../../forms/Inputs/Button";
-import { useServer } from "../../layouts/ServerLayout/hooks/useServer";
-import { useCustomFormModal } from "../../../hooks/useFormModal";
+
+import { ModalTemplate } from "../../ModalTemplate";
+import { InputsForms } from "../../../forms/Inputs/inputs";
+import { SubmitButton } from "../../../forms/Inputs/Button";
+import { useServer } from "../../../layouts/ServerLayout/hooks/useServer";
+import { useCustomFormModal } from "../../../../hooks/useFormModal";
 
 export const CreateCategory: React.FC = () => {
   return (
     <ModalTemplate identificator="CreateCategory">
-      <div className="flex flex-col gap-5">
+      <div className="h-full flex flex-col  justify-center items-center gap-5">
         <ModalHeader />
         <ModalForm />
       </div>

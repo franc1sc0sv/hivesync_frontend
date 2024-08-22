@@ -5,14 +5,9 @@ import { UsersGroupIcon } from "../../../../Icons/usersGroup";
 import { useCustomForm } from "../../../../../hooks/useForm";
 
 import { useModal } from "../../../../../store/useModal";
-import { ServerInfoModal } from "../../../../modals/serverModals/serverInfoModal";
-import { MembersListModal } from "../../../../modals/serverModals/members/membersListModal";
-import { AddServerMembersModal } from "../../../../modals/serverModals/members/addServerMemberModal";
-import { EventsModal } from "../../../../modals/serverModals/events/eventsModal";
+import { ServerModals } from "../../../../modals/serverModals";
 
 import { SearchBar } from "../../../../forms/Inputs/SearchBar";
-import { CreateChannel } from "../../../../modals/serverModals/CreateChannel";
-import { CreateCategory } from "../../../../modals/serverModals/CreateCategory";
 
 export const HeaderServer = ({ name }: { name: string }) => {
   const api = () => console.log("hola, *llama a la api épicamente*");
@@ -59,12 +54,7 @@ export const HeaderServer = ({ name }: { name: string }) => {
         </button>
       </div>
 
-      <ServerInfoModal />
-      <MembersListModal />
-      <AddServerMembersModal />
-      <EventsModal />
-      <CreateCategory />
-      <CreateChannel />
+      <ServerModals />
     </article>
   );
 };

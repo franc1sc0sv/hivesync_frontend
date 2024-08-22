@@ -6,7 +6,6 @@ import { ShieldIcon } from "../../../../components/Icons/shield";
 import { ClipIcon } from "../../../../components/Icons/clip";
 import { MicrophoneIcon } from "../../../../components/Icons/microphone";
 import { ColorPaletteIcon } from "../../../../components/Icons/colorPalette";
-import { DeleteIcon } from "../../../../components/Icons/delete";
 
 import { Notifications } from "../../../../components/Alerts/Notification";
 

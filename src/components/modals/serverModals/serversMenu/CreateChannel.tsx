@@ -1,21 +1,21 @@
-import { ModalTemplate } from "../ModalTemplate";
+import { ModalTemplate } from "../../ModalTemplate";
 
-import { InputsForms } from "../../forms/Inputs/inputs";
-import { SubmitButton } from "../../forms/Inputs/Button";
-import { SelectInput } from "../../forms/Inputs/Select/Select";
+import { InputsForms } from "../../../forms/Inputs/inputs";
+import { SubmitButton } from "../../../forms/Inputs/Button";
+import { SelectInput } from "../../../forms/Inputs/Select/Select";
 
 import { BiSolidCategory } from "react-icons/bi";
 import {
   getCategories,
   getChannels,
-} from "../../layouts/ServerLayout/Context/ServerContext";
-import { useServer } from "../../layouts/ServerLayout/hooks/useServer";
-import { RadioInput } from "../../forms/Inputs/Radio/InputRadio";
+} from "../../../layouts/ServerLayout/Context/ServerContext";
+import { useServer } from "../../../layouts/ServerLayout/hooks/useServer";
+import { RadioInput } from "../../../forms/Inputs/Radio/InputRadio";
 import { useState } from "react";
-import { ChannelTypeEnum } from "../../layouts/ServerLayout/Enums/SpecificServer";
+import { ChannelTypeEnum } from "../../../layouts/ServerLayout/Enums/SpecificServer";
 
 import { v4 as uuidv4 } from "uuid";
-import { useCustomFormCreateServer } from "../../../hooks/useFormCreateServer";
+import { useCustomFormCreateServer } from "../../../../hooks/useFormCreateServer";
 
 import { HiSpeakerWave } from "react-icons/hi2";
 import { HiHashtag } from "react-icons/hi";

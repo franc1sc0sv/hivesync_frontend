@@ -1,4 +1,4 @@
-import { HiOutlineLogin } from "react-icons/hi";
+import { ExitIcon } from "../../../components/Icons/exit";
 import { GeneralLayout } from "../../../components/layouts/GeneralLayout/GeneralLayout";
 import { useSession } from "../../../store/user";
 import { MenuOptions } from "./Components/OptionsMenu";
@@ -14,7 +14,7 @@ export const SettingsPage: React.FC = () => {
         onClick={logout}
         className="w-full lg:w-4/5 mx-auto flex items-center justify-center gap-2 py-3 text-lg bg-red-600 rounded-xl font-amiko text-custom_white place-items-center"
       >
-        <HiOutlineLogin size={36} />
+        <ExitIcon size={36} color="#fff" />
         <p>Cerrar Sesión</p>
       </button>
       <ShowFakePages />

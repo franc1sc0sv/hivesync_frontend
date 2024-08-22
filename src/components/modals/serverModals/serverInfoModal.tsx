@@ -3,17 +3,14 @@ import { SettingsIcon } from "../../Icons/settings";
 import { CalendarIcon } from "../../Icons/calendar";
 import { FolderIcon } from "../../Icons/folder";
 import { CategoryIcon } from "../../Icons/category";
+import { ExitIcon } from "../../Icons/exit";
 
 import { ModalTemplate } from "../ModalTemplate";
 
 import { useServer } from "../../layouts/ServerLayout/hooks/useServer";
 import { useModal } from "../../../store/useModal";
 
-interface MenuProps {
-  icon: React.ReactNode;
-  name: string;
-  modal: string;
-}
+import { MenuProps, OptionsTemplateProps } from "../types/menuProps";
 
 const quickOptions: MenuProps[] = [
   {
@@ -24,7 +21,7 @@ const quickOptions: MenuProps[] = [
   {
     icon: <SettingsIcon size={30} color="white" />,
     name: "Ajustes",
-    modal: "",
+    modal: "serverSettings",
   },
 ];
 
@@ -46,6 +43,14 @@ const serverOptions: MenuProps[] = [
   },
 ];
 
+const leaveServer = [
+  {
+    icon: <ExitIcon size={30} color="white" />,
+    name: "Abandonar servidor",
+    modal: "events",
+  }
+]
+
 export const ServerInfoModal: React.FC = () => {
   return (
     <ModalTemplate identificator="serverInfo">
@@ -55,6 +60,31 @@ export const ServerInfoModal: React.FC = () => {
         <ServerOptions />
       </div>
     </ModalTemplate>
+  );
+};
+
+const OptionsTemplate: React.FC<OptionsTemplateProps> = ({ options }) => {
+  const { setModalId } = useModal();
+
+  return (
+    <div className="flex flex-col gap-3 p-3 bg-overlay_2 rounded-xl">
+      {options.map((option: any, index: number) => (
+        <div
+          className="flex flex-row items-center gap-3"
+          key={index}
+          onClick={() => {
+            setModalId(option.modal);
+          }}
+        >
+          <div>
+            <div className="p-2 text-3xl text-custom_white rounded-xl">
+              {option.icon}
+            </div>
+          </div>
+          <p className="text-custom_white">{option.name}</p>
+        </div>
+      ))}
+    </div>
   );
 };
 
@@ -78,6 +108,8 @@ const ServerCover: React.FC = () => {
     </div>
   );
 };
+
+
 
 const ServerDetails: React.FC = () => {
   const { selected_server } = useServer();
@@ -104,48 +136,13 @@ const ServerDetails: React.FC = () => {
 };
 
 const ServerOptions = () => {
-  const { setModalId } = useModal();
-
   return (
-    <div className="flex flex-col gap-5">
-      <div className="flex flex-col gap-3 p-3 bg-overlay_2 rounded-xl">
-        {quickOptions.map((option, index) => (
-          <div
-            className="flex flex-row items-center gap-3"
-            key={index}
-            onClick={() => {
-              setModalId(option.modal);
-            }}
-          >
-            <div>
-              <div className="p-2 text-3xl text-custom_white rounded-xl">
-                {option.icon}
-              </div>
-            </div>
-            <p className="text-custom_white">{option.name}</p>
-          </div>
-        ))}
-      </div>
+    <>
+      <OptionsTemplate options={quickOptions} />
+      <OptionsTemplate options={serverOptions} />
+      <OptionsTemplate options={leaveServer} />
+    </>
 
-      <div className="flex flex-col gap-3 p-3 bg-overlay_2 rounded-xl">
-        {serverOptions.map((option, index) => (
-          <div
-            className="flex flex-row items-center gap-3"
-            key={index}
-            onClick={() => {
-              setModalId(option.modal);
-            }}
-          >
-            <div>
-              <div className="p-2 text-3xl text-custom_white rounded-xl">
-                {option.icon}
-              </div>
-            </div>
-            <p className="text-custom_white">{option.name}</p>
-          </div>
-        ))}
-      </div>
-    </div>
   );
 };
 
