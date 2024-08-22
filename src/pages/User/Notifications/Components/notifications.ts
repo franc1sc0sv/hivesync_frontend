@@ -88,7 +88,7 @@ const notifications = [
 ];
 
 
-localStorage.setItem("notifications", JSON.stringify(notifications));
+//localStorage.setItem("notifications", JSON.stringify(notifications));
 
 
 

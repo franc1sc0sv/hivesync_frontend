@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { HiDotsVertical } from "react-icons/hi";
+import { NotificationProps } from "./Notification";
 
 import { ComponentsAnimator } from "../../../../components/animation/componentsAnimator";
 
@@ -10,9 +11,26 @@ export const RightButton = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
+  
+  const storedNotifications: NotificationProps[] = JSON.parse(localStorage.getItem("notifications") || "[]");
   const handleClearNotifications = () => {
-    localStorage.removeItem("notifications");
+    
+    const filteredNotifications = storedNotifications.filter(notification =>
+      notification.category === "Solicitudes"
+    );
+    localStorage.setItem("notifications", JSON.stringify(filteredNotifications));
+    console.log(filteredNotifications);
+
+    setIsMenuOpen(false);
+    location.reload();
+  };
+
+  const handleClearFriendsRequest = () => {
+    const filteredNotifications = storedNotifications.filter(notification =>
+      notification.category !== "Solicitudes"
+    );
+    localStorage.setItem("notifications", JSON.stringify(filteredNotifications));
+    console.log(filteredNotifications);
     setIsMenuOpen(false);
     location.reload();
   };
@@ -46,7 +64,13 @@ export const RightButton = () => {
                 onClick={handleClearNotifications}
                 className="cursor-pointer px-4 py-2 hover:bg-gray-200"
               >
-                <p className="text-custom_white">Limpiar notificaciones</p>
+                <p className="text-custom_white text-md">Limpiar notificaciones</p>
+              </li>
+              <li
+                onClick={handleClearFriendsRequest}
+                className="cursor-pointer px-4 py-2 hover:bg-gray-200"
+              >
+                <p className="text-custom_white text-md">Limpiar solicitudes</p>
               </li>
             </ul>
           </div>
