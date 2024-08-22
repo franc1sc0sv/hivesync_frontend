@@ -7,14 +7,14 @@ export const NoEvents: React.FC = () => {
     const { setModalId } = useModal();
 
     return (
-        <div className="flex flex-col gap-10 justify-center items-center">
+        <div className="h-full flex flex-col gap-10 justify-center items-center">
 
-            <div className="flex flex-col items-center rounded-lg bg-overlay_2 h-1/3 justify-evenly gap-5 p-4">
+            <div className="flex flex-col items-center rounded-lg  justify-evenly gap-5 p-4">
                 <CalendarIcon size={60} color="white" />
-                <h1 className="text-3xl text-custom_white font-almarai text-center">
-                    No hay eventos próximamente
+                <h1 className="text-4xl text-custom_white font-almarai text-center">
+                    Sin planes por ahora.
                 </h1>
-                <p className="text-xl text-center text-custom_white">
+                <p className="sm:w-3/5 text-xl text-center text-custom_white">
                     Programa un evento para cualquier actividad planeada en tu servidor.
                 </p>
             </div>

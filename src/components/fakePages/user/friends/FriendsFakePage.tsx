@@ -29,7 +29,7 @@ const friends = [
 
 export const UserFriendsFakePage: React.FC = () => {
   return (
-    <div className="flex flex-col h-full gap-5 p-1">
+    <div className="w-4/5 h-full gap-5 p-1">
       <Header />
       <FriendsList />
     </div>
@@ -43,7 +43,7 @@ const Header = () => {
   const { onSubmit, register } = useCustomForm(api, success, "");
 
   return (
-    <div className="flex flex-row items-center justify-between gap-5">
+    <div className="flex flex-row items-center justify-between gap-5 my-2">
       <form onSubmit={onSubmit}>
         <SearchBar register={register} name="friend" placeholder="Buscar" />
       </form>

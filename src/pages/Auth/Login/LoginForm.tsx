@@ -18,10 +18,10 @@ export const LoginForm = () => {
 const FormFooter = () => {
   return (
     <div className="flex flex-col items-center w-full gap-2 text-custom_white font-almarai hover:text-primary">
-      <Link to="/signup" className="text-custom_white">
-        No tienes cuenta? Crear cuenta
+      <Link to="/signup" className="text-custom_white hover:text-light_purple transition-all duration-200">
+        ¿No tienes cuenta? Crear cuenta
       </Link>
-      <Link to={"/recover"} className="text-custom_white">
+      <Link to={"/recover"} className="text-custom_white hover:text-light_purple transition-all duration-200">
         Olvidé mi contraseña
       </Link>
     </div>

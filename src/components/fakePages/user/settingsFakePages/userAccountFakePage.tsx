@@ -2,6 +2,8 @@ import { RightTriangleIcon } from "../../../Icons/rightTriangle";
 
 import { useModal } from "../../../../store/useModal";
 import { AccountSettingsModals } from "../../../modals/userModals/settings/accountSettings/modals";
+import { DeleteIcon } from "../../../../components/Icons/delete";
+
 
 export interface MenuProps {
     name: string;
@@ -29,13 +31,14 @@ const options: MenuProps[] = [
 
 export const AccountSettingsFakePage: React.FC = () => {
     return (
-        <div className="w-full sm:w-4/5 lg:w-3/5 h-full flex flex-col justify-between gap-5 p-3 overflow-y-auto">
+        <div className="w-full sm:w-4/5 lg:w-4/5 h-full flex flex-col justify-between gap-5 p-3 overflow-y-auto">
             {/* account options */}
             <Options />
-            <div className="h-3/5 w-full flex items-end">
+            <div className="h-3/5 w-full flex flex-row items-end">
                 <button
                     className="flex items-center justify-center w-full gap-2 p-3 mb-14 text-lg bg-red-600 rounded-xl font-amiko text-custom_white place-items-center"
                 >
+                    <DeleteIcon size={40} color="#fff" />
                     <p>Eliminar cuenta</p>
                 </button>
             </div>

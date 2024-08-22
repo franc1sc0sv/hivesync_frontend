@@ -8,7 +8,7 @@ import { UserAvatar } from "../../../../components/Avatars/UserAvatar";
 
 export const ProfileCover: React.FC = () => {
   return (
-    <div className="w-full mx-auto text-gray-900 rounded-lg lg:w-4/5">
+    <div className="w-full mx-auto text-gray-900 rounded-lg lg:w-[90%]">
       {/* cover  */}
       <div
         style={{ backgroundColor: userData.themeColor }}

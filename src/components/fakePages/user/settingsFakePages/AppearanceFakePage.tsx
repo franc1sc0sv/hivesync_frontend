@@ -21,7 +21,7 @@ const options: MenuProps[] = [
 
 export const AppearanceSettingsFakePage: React.FC = () => {
     return (
-        <div className="w-full h-full flex flex-col gap-5 p-3 overflow-y-auto">
+        <div className="w-full lg:w-3/5 h-full flex flex-col gap-5 p-3 overflow-y-auto">
             {/* account options */}
             <Options />
             <EditAppearanceModals />

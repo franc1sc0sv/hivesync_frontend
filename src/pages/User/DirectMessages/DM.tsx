@@ -12,8 +12,8 @@ export const DirectMessagesPage = () => {
   return (
     <GeneralLayout title="Mensajes" RightComponent={AddFriendsButton}>
       <DmProvider>
-        <article className="flex flex-col w-full h-full gap-5">
-          <FriendsPanel friends={[]} />
+        <article className="flex flex-col w-full h-full">
+          {/* <FriendsPanel friends={[]} /> */}
           <Inbox friends={[]} />
         </article>
         <ShowFakePages />

@@ -1,13 +1,17 @@
 import { CustomizedButton } from "../../../../components/buttons/customizedButton";
 import { useNotifications } from "../../../../store/useNotifications";
+import { useModal } from "../../../../store/useModal";
 
 interface NotificationIconProps {
+    username: string,
     pictureRoute: string;
     message: string;
 }
 
-export const FriendRequestNotification: React.FC<NotificationIconProps> = ({ pictureRoute, message })=> {
+export const FriendRequestNotification: React.FC<NotificationIconProps> = ({ username, pictureRoute, message })=> {
 
+
+    const {setModalId} = useModal();
     const {setNotifications} = useNotifications();
 
     const acceptRequest = () => {
@@ -31,7 +35,9 @@ export const FriendRequestNotification: React.FC<NotificationIconProps> = ({ pic
     return (
         <div className="w-full flex justify-between items-center p-2">
 
-            <div className="flex flex-row items-center w-3/5">
+            <div 
+            onClick={() => setModalId("")}
+            className="flex flex-row items-center w-3/5">
                 <img src={pictureRoute} alt="User" className="w-12 h-12 rounded-full object-cover mr-3" />
                 <p className="text-white">{message}</p>
             </div>

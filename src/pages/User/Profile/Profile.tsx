@@ -6,7 +6,7 @@ import { GeneralLayout } from "../../../components/layouts/GeneralLayout/General
 export const ProfilePage: React.FC = () => {
   return (
     <GeneralLayout showHeader={false}>
-      <section className="flex flex-col justify-around h-full">
+      <section className="flex flex-col justify-around w-full h-full">
         <ProfileCover />
         <UserInformation />
       </section>

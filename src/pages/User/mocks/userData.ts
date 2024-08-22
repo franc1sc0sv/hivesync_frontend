@@ -16,7 +16,8 @@ interface User {
   memberSince: string;
   spotify: boolean;
   github: boolean;
-  themeColor: string
+  themeColor: string;
+  isOnline: boolean
   appearAs: string
   
 }
@@ -31,5 +32,6 @@ export const userData: User = {
     appearAs: appearAs ? appearAs: "Conectado",
     spotify: true,
     github: true,
-    themeColor: verifyTheme
+    themeColor: verifyTheme,
+    isOnline: true
 };

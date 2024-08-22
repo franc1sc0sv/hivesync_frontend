@@ -6,7 +6,7 @@ import { RiEyeCloseLine, RiEyeLine, RiArrowRightSLine } from "react-icons/ri";
 
 export const RecoverPage: React.FC = () => {
   return (
-    <div className="h-screen bg-[#0E091B] flex items-center justify-center px-4">
+    <div className="h-screen bg-overlay_1 flex items-center justify-center px-4">
       <Form />
     </div>
   );

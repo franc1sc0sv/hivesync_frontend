@@ -21,7 +21,7 @@ export const UserInformation = () => {
 
 
   return (
-    <div className="h-3/5 w-full lg:w-4/5 mx-auto flex flex-col gap-5 overflow-y-auto">
+    <div className="h-3/5 w-full lg:w-[90%] mx-auto flex flex-col gap-5 overflow-y-auto">
       {/* Main profile options */}
 
       <MainInformation />

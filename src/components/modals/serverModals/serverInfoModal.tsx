@@ -49,7 +49,7 @@ const serverOptions: MenuProps[] = [
 export const ServerInfoModal: React.FC = () => {
   return (
     <ModalTemplate identificator="serverInfo">
-      <div className="flex flex-col gap-10">
+      <div className="flex flex-col gap-10 w-full sm:w-4/5 mx-auto">
         <ServerCover />
         <ServerDetails />
         <ServerOptions />
@@ -63,12 +63,12 @@ const ServerCover: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="max-w-2xl text-gray-900 rounded-lg sm:max-w-sm md:max-w-sm lg:max-w-sm xl:max-w-sm sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto">
+      <div className="w-full mx-auto text-gray-900 rounded-lg ">
         {/* cover  */}
-        <div className="relative overflow-hidden rounded-xl h-36 bg-secondary"></div>
+        <div className="w-full relative overflow-hidden rounded-xl h-36 bg-secondary"></div>
 
         {/* icon */}
-        <div className="absolute ml-5 -mt-16 overflow-hidden w-28 h-28 md:mx-auto rounded-2xl">
+        <div className="absolute ml-5 -mt-16 overflow-hidden w-28 h-28 rounded-2xl">
           <ServerIcon
             name={selected_server.name}
             IconServerURL={selected_server.avatarURL}

@@ -6,6 +6,7 @@ import { ShieldIcon } from "../../../../components/Icons/shield";
 import { ClipIcon } from "../../../../components/Icons/clip";
 import { MicrophoneIcon } from "../../../../components/Icons/microphone";
 import { ColorPaletteIcon } from "../../../../components/Icons/colorPalette";
+import { DeleteIcon } from "../../../../components/Icons/delete";
 
 import { Notifications } from "../../../../components/Alerts/Notification";
 
@@ -63,17 +64,15 @@ export const MenuOptions: React.FC = () => {
 
   return (
     <div className="w-full lg:w-4/5 mx-auto flex flex-col gap-5 h-[80vh] overflow-y-auto">
-      <Notifications />
-
-      <form
+      {/* <form
         className="p-1"
         onSubmit={onSubmit}>
-          
-        {/* <SearchBar
+
+        <SearchBar
           name="setting"
           register={register}
-          placeholder="Buscar una opción de ajuste" /> */}
-      </form>
+          placeholder="Buscar una opción de ajuste" />
+      </form> */}
 
       {/* account options */}
       <div>

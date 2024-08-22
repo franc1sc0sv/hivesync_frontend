@@ -45,14 +45,14 @@ export const HeaderServer = ({ name }: { name: string }) => {
         </form>
 
         <button
-          className="p-2 rounded-full w-max bg-overlay_1"
+          className="flex justify-center items-center p-2 rounded-full w-12 bg-overlay_1"
           onClick={() => setModalId("membersList")}
         >
           <UsersGroupIcon size={24} color="white" />
         </button>
 
         <button
-          className="p-2 rounded-full w-max bg-overlay_1"
+          className="flex justify-center items-center p-2 rounded-full w-12 bg-overlay_1"
           onClick={() => setModalId("events")}
         >
           <CalendarIcon size={24} color="white" />
