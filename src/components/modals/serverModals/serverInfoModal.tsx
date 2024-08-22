@@ -10,7 +10,7 @@ import { ModalTemplate } from "../ModalTemplate";
 import { useServer } from "../../layouts/ServerLayout/hooks/useServer";
 import { useModal } from "../../../store/useModal";
 
-import { MenuProps, OptionsTemplateProps } from "../types/menuProps";
+import { MenuProps, OptionsTemplateProps } from "./types/menuProps";
 
 const quickOptions: MenuProps[] = [
   {
@@ -47,7 +47,7 @@ const leaveServer = [
   {
     icon: <ExitIcon size={30} color="white" />,
     name: "Abandonar servidor",
-    modal: "events",
+    modal: "leaveServer",
   }
 ]
 

@@ -8,7 +8,7 @@ import { ColorPaletteIcon } from "../../../Icons/colorPalette";
 import { PadlockIcon } from "../../../Icons/padlock";
 import { DeleteIcon } from "../../../Icons/delete";
 
-import { MenuProps, OptionsTemplateProps } from "../../types/menuProps";
+import { MenuProps, OptionsTemplateProps } from "../types/menuProps";
 
 
 const generalOptions: MenuProps[] = [

@@ -5,7 +5,7 @@ import { UsersGroupIcon } from "../../../../Icons/usersGroup";
 import { useCustomForm } from "../../../../../hooks/useForm";
 
 import { useModal } from "../../../../../store/useModal";
-import { ServerModals } from "../../../../modals/serverModals";
+import { ServerModals } from "../../../../modals/serverModals/serverModals";
 
 import { SearchBar } from "../../../../forms/Inputs/SearchBar";
 
