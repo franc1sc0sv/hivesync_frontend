@@ -9,8 +9,8 @@ import { PrivacityModals } from "../../../modals/userModals/settings/accountSett
 
 const PrivacityOptions: MenuProps[] = [
     {
-        name: "Micrófono",
-        modal: "toggleMicro"
+        name: "Estado en Linea",
+        modal: "toggleOnline"
     }
 ];
 
