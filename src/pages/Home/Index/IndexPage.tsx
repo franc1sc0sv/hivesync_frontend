@@ -13,7 +13,7 @@ export const IndexPage = () => {
               className="text-white rounded-sm text-xl p-2 font-almarai bg-primary"
               to={"signup"}
             >
-              Registro
+              Empezar
             </Link>
             <Link
               className="text-white text-xl p-2 font-almarai hover:bg-overlay_2 rounded-sm"
@@ -42,14 +42,14 @@ export const IndexPage = () => {
             </p>
 
             {/* Barra y Botón */}
-            <div className="bg-primary w-16 h-4 rounded-md mb-4"></div>
+            <div className="bg-primary w-14 h-3 rounded-md mb-4"></div>
             <div className="text-white bg-primary rounded-sm p-2 w-40 flex justify-between items-center">
               <p className="font-anami text-sm">Usar HiveSync</p>
               <img className="h-4" src="/flecha.png" alt="Flecha" />
             </div>
 
             {/* Subtítulo y Texto */}
-            <p className="font-amiko text-white text-lg mt-8">
+            <p className="font-amiko text-white text-xl mt-8 font-extrabold">
               Conéctate, Comunica, Colabora.
             </p>
             <p className="font-almarai text-white text-base mt-2">
@@ -59,26 +59,32 @@ export const IndexPage = () => {
             </p>
 
             {/* Tres cuadros alineados bajo el texto */}
-            <div className="flex justify-between mt-6">
+            <div className="flex justify-between mt-4 relative">
   {/* Lado Izquierdo: Tres cuadros */}
-  <div className="flex flex-col space-y-2">
-    <div className="bg-[#2E2934] w-36 h-12"></div>
-    <div className="bg-[#2E2934] w-48 h-12 flex">
-      <div className="bg-[#2E2934] w-36 h-12"></div>
+  <div className="flex flex-col">
+    {/* Primer cuadro ocupa la izquierda */}
+    <div className="flex">
+      <div className="bg-[#2E2934] h-[150px] w-[200px] mr-1 rounded-md"></div>
+      {/* Columna de dos cuadros pequeños a la derecha */}
+      <div className="flex flex-col space-y-1">
+        <div className="bg-[#2E2934] h-[75px] w-[118px] rounded-md"></div>
+        <div className="bg-[#2E2934] h-[72px] w-[118px] rounded-md"></div>
+      </div>
     </div>
-    <div className="bg-[#2E2934] w-28 h-12"></div>
   </div>
 
-  {/* Lado Derecho: Imagen */}
-  <div className="flex items-center">
+  {/* Imagen nudo.png posicionada entre el tercer cuadro y el espacio derecho */}
+  <div className="absolute left-[50%] top-[100%] transform translate-x-[-25%] translate-y-[-50%] z-10">
     <img className="w-32 h-auto" src="/nudo.png" alt="Nudo" />
   </div>
 </div>
-
           </div>
 
           {/* Imágenes organizadas con posición absoluta */}
-          <div className="absolute right-0 top-0 grid grid-cols-2 gap-4 opacity-90" style={{ transform: 'translateX(20px)' }}>
+          <div
+            className="absolute right-0 top-0 grid grid-cols-2 gap-4 opacity-90"
+            style={{ transform: "translateX(20px)" }}
+          >
             <img className="w-32 h-auto" src="/moneda.png" alt="Moneda" />
             <img className="w-32 h-auto" src="/esferaN.png" alt="EsferaN" />
             <img className="w-32 h-auto" src="/esfera.png" alt="Esfera" />
@@ -88,18 +94,14 @@ export const IndexPage = () => {
 
         {/* Texto y Cuadro "Tu aprendizaje al Lado de Todos" */}
         <div className="relative mt-12">
-  <div className="bg-[#45156B] w-36 h-36 flex items-center justify-center relative z-10">
-    <div className="font-amiko text-white text-xl absolute left-[100px]">
-    <p>
-      Tu aprendizaje al
-    </p>
-    <p>
-    Lado de Todos
-    </p>
-    </div>
-  </div>
-</div>
-
+          <div className="bg-[#45156B] w-64 h-36 flex items-center justify-center">
+            {/* Texto centrado dentro del cuadro morado pero desplazado hacia la derecha */}
+            <div className="font-amiko text-white text-xl relative transform translate-x-[50%]">
+              <p>Tu aprendizaje al</p>
+              <p>Lado de Todos</p>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   );
