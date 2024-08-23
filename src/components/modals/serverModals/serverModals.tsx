@@ -5,6 +5,7 @@ import { EventsModal } from "./events/eventsModal"
 import { CreateCategory } from "./serversMenu/CreateCategory"
 import { CreateChannel } from "./serversMenu/CreateChannel"
 import { ServerSettingsModal } from "./serverSettings/serverSettingsModal"
+import { LeaveServerDialogue } from "../../Alerts/dialog/serverDialogues/leaveServerDialogue"
 import { LeaveServerModal } from "./serversMenu/leaveServer"
 
 export const ServerModals: React.FC = () => {
@@ -17,7 +18,7 @@ export const ServerModals: React.FC = () => {
             <CreateCategory />
             <CreateChannel />
             <ServerSettingsModal />
-            <LeaveServerModal />
+            <LeaveServerDialogue />
         </>
     )
 }

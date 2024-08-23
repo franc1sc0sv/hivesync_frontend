@@ -12,6 +12,8 @@ export const CallInterface = () => {
   return (
     <div className="w-screen h-full p-2 flex flex-col justify-between items-center text-white bg-overlay_1 overflow-y-auto">
       {/* Componente ultra importante, NO MOVER POR FAVOR */}
+      <div></div>
+      
       {screenStream ? <Streaming /> : <NoStreaming />}
 
       <VideoCallControlls />
