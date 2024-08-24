@@ -23,7 +23,7 @@ const AddEventForm: React.FC = () => {
 
     const post_success_function = () => console.log("la api se llamó exitosamente")
 
-    const { register, isLoading } = useCustomForm(api_function, post_success_function, "")
+    const { onSubmit, register, isLoading } = useCustomForm(api_function, post_success_function, "")
 
     return (
         <div className="h-full flex flex-col gap-10 justify-center items-center">
@@ -33,7 +33,9 @@ const AddEventForm: React.FC = () => {
                 <p className="text-2xl text-custom_white text-center">Detalles sobre tu evento</p>
             </div>
 
-            <form className="w-full flex flex-col justify-center items-center gap-5 overflow-y-auto px-1">
+            <form 
+            onSubmit={onSubmit}
+            className="w-full flex flex-col justify-center items-center gap-5 overflow-y-auto px-1">
 
                 <InputsForms title="Tema del evento" register={register} name="name" placeholder="¿De qué trata tu evento?" />
 

@@ -1,4 +1,5 @@
 import { ModalTemplate } from "../../ModalTemplate"
+import { useModal } from "../../../../store/useModal"
 
 import { UserAddIcon } from "../../../Icons/userAdd"
 import { ChatIcon } from "../../../Icons/chat"
@@ -13,16 +14,6 @@ const temporaryRoute =
 
 const members = [
     { username: "arsene_lupin", picture: temporaryRoute },
-    { username: "arsene_lupin", picture: temporaryRoute },
-    { username: "arsene_lupin", picture: temporaryRoute },
-    { username: "arsene_lupin", picture: temporaryRoute },
-    { username: "arsene_lupin", picture: temporaryRoute },
-    { username: "arsene_lupin", picture: temporaryRoute },
-    { username: "arsene_lupin", picture: temporaryRoute },
-    { username: "arsene_lupin", picture: temporaryRoute },
-    { username: "arsene_lupin", picture: temporaryRoute },
-    { username: "arsene_lupin", picture: temporaryRoute },
-    { username: "arsene_lupin", picture: temporaryRoute }
 ]
 
 export const MembersListModal: React.FC = () => {
@@ -35,7 +26,8 @@ export const MembersListModal: React.FC = () => {
 
 const MembersList: React.FC = () => {
     return (
-        <div className="h-full p-1 flex flex-col gap-5">
+        <div className="h-full w-full lg:w-3/5 mx-auto p-1 flex flex-col gap-5">
+            <p className="text-2xl text-custom_white text-center">Miembros del servidor</p>
             <Header />
             <List />
         </div>
@@ -44,6 +36,8 @@ const MembersList: React.FC = () => {
 
 const Header: React.FC = () => {
 
+    const {setModalId} = useModal();
+
     const api = () => console.log("hola, *llama a la api épicamente*");
     const success = () => console.log("success");
 
@@ -51,17 +45,18 @@ const Header: React.FC = () => {
 
     return (
         <div className="w-full flex flex-row justify-between items-center gap-5">
-            <form 
-            className="w-1/2"
-            onSubmit={onSubmit}>
-                <SearchBar
-                    register={register}
-                    name="member"
-                    placeholder="Buscar" />
+            <form
+                className="w-full lg:w-1/3"
+                onSubmit={onSubmit}>
+                    <SearchBar
+                        register={register}
+                        name="member"
+                        placeholder="Buscar" />
             </form>
 
-            <div className="w-1/2">
+            <div className="w-full lg:w-1/3">
                 <button
+                    onClick={() => setModalId("addServerMembers")}
                     className="flex flex-row flex-wrap items-center justify-center mx-auto gap-2 sm:h-1/4 bg-overlay_1"
                 >
                     <UserAddIcon size={30} color="white" />
