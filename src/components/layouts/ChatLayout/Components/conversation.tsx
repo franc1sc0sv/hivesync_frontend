@@ -1,7 +1,7 @@
 import useChat from "../../../../store/chat/useChat";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRef, useEffect } from "react";
-import { Notifications } from "../../../../components/Alerts/Notification";
+import { Notifications } from "../../../Alerts/Notification";
 
 interface MessagesProps {
   text?: string;
@@ -9,12 +9,21 @@ interface MessagesProps {
   voiceNote?: string;
 }
 
-export const Conversation: React.FC<MessagesProps> = () => {
+interface MessagesList {
+  content: string;
+  isUserSender: boolean;
+}
+
+interface ConversationProps {
+  conversation: MessagesList[]
+}
+
+export const Conversation: React.FC<ConversationProps> = ({conversation}) => {
   const endOfMessagesRef = useRef<HTMLDivElement | null>(null);
   const { getMessages, shouldScrollToBottom, setShouldScrollToBottom } =
     useChat();
 
-  const conversation = getMessages();
+  // const conversation = getMessages();
 
 
   useEffect(() => {
@@ -29,7 +38,7 @@ export const Conversation: React.FC<MessagesProps> = () => {
       <div className="w-full flex justify-center">
         <Notifications />
       </div>
-      {conversation.map((message, index) => (
+      {conversation?.map((message, index) => (
         <div key={index}>
           {message.isUserSender ? (
             <SentMessage text={message.content} />

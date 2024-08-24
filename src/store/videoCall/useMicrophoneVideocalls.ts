@@ -1,6 +1,8 @@
 // useMicrophoneStore.ts
 import { create } from 'zustand';
-import { INITIAL_MICROPHONE_STATE, LOCAL_STORAGE_KEY } from '../../components/layouts/ServerLayout/Components/Channel/Videocalls/config';
+import { INITIAL_MICROPHONE_STATE, LOCAL_STORAGE_KEY } from '../../components/layouts/VideocallLayout/config';
+
+
 
 interface MicrophoneState {
   isMicrophoneActive: boolean;

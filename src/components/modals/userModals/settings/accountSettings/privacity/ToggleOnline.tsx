@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ModalTemplate } from "../../../../ModalTemplate";
 import { useCustomForm } from "../../../../../../hooks/useForm";
 import { ToggleSwitch } from "../../../../../forms/switch";
-import { USER_STATUS_PROFILE } from "../../../../../layouts/ServerLayout/Components/Channel/Videocalls/config";
+import { USER_STATUS_PROFILE } from "../../../../../layouts/VideocallLayout/config";
 
 export const ToggleOnline: React.FC = () => {
   return (

@@ -1,16 +1,15 @@
-import { Notifications } from "../../../../../Alerts/Notification";
-import { VideoCallControlls } from "./Components/Controlls";
-import { SharedScreen } from "./Components/shareScreen";
-import { UsersCalls } from "./Components/UsersCalls";
-import { useScreenShare } from "../../../../../../store/videoCall/useScreenShare";
+import { VideoCallControlls } from "./components/videocallControls";
+import { SharedScreen } from "./components/shareScreen";
+import { useScreenShare } from "../../../store/videoCall/useScreenShare";
+import { UsersCalls } from "./components/usersCards";
 
-
-export const CallInterface = () => {
+export const VideoCallLayout = () => {
 
   const { screenStream } = useScreenShare();
 
   return (
     <div className="w-screen h-full p-2 flex flex-col justify-between items-center text-white bg-overlay_1 overflow-y-auto">
+
       {/* Componente ultra importante, NO MOVER POR FAVOR */}
       <div></div>
       

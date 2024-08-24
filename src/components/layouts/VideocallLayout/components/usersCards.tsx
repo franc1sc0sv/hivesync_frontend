@@ -1,14 +1,15 @@
-import { useSession } from "../../../../../../../store/user";
-import useVideoStream from "../../../../../../../store/videoCall/useCameraStream";
-import { UserAvatar } from "../../../../../../Avatars/UserAvatar";
+import { useSession } from "../../../../store/user";
+import useVideoStream from "../../../../store/videoCall/useCameraStream";
 
+import { UserAvatar } from "../../../Avatars/UserAvatar";
 import { UserCameraStream } from "./userCameraStream";
+
 
 interface UserCardProps {
   username: string;
   userColor: string;
 }
-export const UserCard: React.FC<UserCardProps> = ({ username, userColor }) => {
+const UserCard: React.FC<UserCardProps> = ({ username, userColor }) => {
   const { stream } = useVideoStream();
 
   return (
@@ -28,7 +29,7 @@ export const UserCard: React.FC<UserCardProps> = ({ username, userColor }) => {
   );
 };
 
-export const UserCardFriend: React.FC<UserCardProps> = ({
+const UserCardFriend: React.FC<UserCardProps> = ({
   username,
   userColor,
 }) => {
