@@ -1,132 +1,95 @@
-import { useEffect, useState } from "react";
-import { NotificationIcon } from "./NotificationIcon"; //es la plantilla de notificatión normal
-import { FriendRequestNotification } from "./friendRequest";
-import { NotificationProps } from "./Notification";
-
 import { ComponentsAnimator } from "../../../../components/animation/componentsAnimator";
 
 import { BellIcon } from "../../../../components/Icons/bell";
+import { formatTimeDifference } from "../../../../helpers/date";
+import { useNotificationsContext } from "../context/useNotifications";
+import { NotificationProps } from "../types/NotificationProps";
 
-interface NotificationsListProps {
-  notifications: NotificationProps[];
-}
-
-export const NotificationsPanel = ({
-  notifications = [],
-}: {
-  notifications: NotificationProps[];
-}) => {
-  const [notifications_data, setNotifications] =
-    useState<NotificationProps[]>();
-
-  useEffect(() => {
-    const formatted_notifications = notifications.sort((a, b) =>
-      b.timeAgo.localeCompare(a.timeAgo)
-    );
-    setNotifications(formatted_notifications);
-  }, [notifications]);
-
+export const NotificationsPanel = () => {
   return (
-    <div className="flex flex-col w-full h-full gap-3">
-      {notifications.length === 0 ? (
-        <NoNotifications />
-      ) : (
-        <NotificationsList
-          notifications={notifications_data as NotificationProps[]}
-        />
-      )}
-    </div>
+    <section className="flex flex-col w-full h-full gap-5 overflow-y-auto bg-gray-800 rounded-lg shadow-lg">
+      <CategoriesHeader />
+      <NotificationsBox />
+    </section>
   );
 };
 
-const NotificationsList: React.FC<NotificationsListProps> = ({
-  notifications,
+const NotificationsBox = () => {
+  const { category, notifications } = useNotificationsContext();
+
+  const filteres_notifications =
+    category === "all"
+      ? [...notifications]
+      : notifications.filter((noti) => noti.category === category);
+  return filteres_notifications.length === 0 ? (
+    <NoNotifications />
+  ) : (
+    <NotificationsContainer filtered_notifications={filteres_notifications} />
+  );
+};
+
+const NotificationsContainer = ({
+  filtered_notifications,
+}: {
+  filtered_notifications: NotificationProps[];
 }) => {
-  const [selectedCategory, setSelectedCategory] = useState("Todo");
-
-  const categories = ["Todo", "Solicitudes", "Invitaciones", "Mensajes"];
-
-  const handleCategoryClick = (category: string) => {
-    setSelectedCategory(category);
-  };
-
   return (
-    <section className="flex flex-col w-full gap-5">
-      <div className="flex gap-4 mt-8 overflow-x-auto">
-        {categories.map((category) => (
-          <button
-            key={category}
-            onClick={() => handleCategoryClick(category)}
-            className={`py-2 px-4 rounded-full ${selectedCategory === category
+    <article className="flex flex-col w-full h-full gap-5 overflow-y-auto">
+      {filtered_notifications.map((noti, i) => (
+        <NotificationItem key={i} notification={noti} i={i} />
+      ))}
+    </article>
+  );
+};
+
+const NotificationItem = ({
+  notification,
+  i,
+}: {
+  notification: NotificationProps;
+  i: number;
+}) => {
+  return (
+    <ComponentsAnimator key={i}>
+      <div className="flex items-center w-full p-4 border-b-0">
+        <img
+          src={notification.data.profile_url}
+          alt="User"
+          className="object-cover w-12 h-12 mr-3 rounded-full"
+        />
+        <div className="flex flex-col w-full">
+          <p className="text-white">{notification.message}</p>
+          <span className="self-end text-sm text-white">
+            {formatTimeDifference(notification.createdAt)}
+          </span>
+        </div>
+      </div>
+    </ComponentsAnimator>
+  );
+};
+
+const CategoriesHeader = () => {
+  const {
+    category: selectedCategory,
+    handleCategoryClick,
+    categories,
+  } = useNotificationsContext();
+  return (
+    <div className="flex gap-4 overflow-x-auto">
+      {categories.map((category, i) => (
+        <button
+          key={i}
+          onClick={() => handleCategoryClick(category.id)}
+          className={`py-2 px-4 rounded-full capitalize ${
+            selectedCategory === category.id
               ? "bg-purple-600 text-white"
               : "bg-transparent text-white transition-all duration-300"
-              }`}
-          >
-            {category}
-          </button>
-        ))}
-      </div>
-
-      {/* {notifications?.map((notification, index) =>
-        selectedCategory == "Todo" ? (
-          <ComponentsAnimator key={index}>
-            <NotificationIcon
-              pictureRoute={notification.pictureRoute}
-              message={notification.message}
-              timeAgo={notification.timeAgo}
-            />
-          </ComponentsAnimator>
-        ) : (
-          selectedCategory == notification.category && (
-            <ComponentsAnimator key={index}>
-              <NotificationIcon
-                pictureRoute={notification.pictureRoute}
-                message={notification.message}
-                timeAgo={notification.timeAgo}
-              />
-            </ComponentsAnimator>
-          )
-        )
-      )} */}
-
-      {notifications?.map((notification, index) =>
-        selectedCategory === "Todo" ? (
-
-          <ComponentsAnimator key={index}>
-            {notification.category === "Solicitudes" ? (
-              <FriendRequestNotification
-                pictureRoute={notification.pictureRoute}
-                message={notification.message}
-              />
-            ) : (
-              <NotificationIcon
-                pictureRoute={notification.pictureRoute}
-                message={notification.message}
-                timeAgo={notification.timeAgo}
-              />
-            )}
-          </ComponentsAnimator>
-
-        ) : selectedCategory === notification.category && (
-
-          <ComponentsAnimator key={index}>
-            {notification.category === "Solicitudes" ? (
-              <FriendRequestNotification
-                pictureRoute={notification.pictureRoute}
-                message={notification.message}
-              />
-            ) : (
-              <NotificationIcon
-                pictureRoute={notification.pictureRoute}
-                message={notification.message}
-                timeAgo={notification.timeAgo}
-              />
-            )}
-          </ComponentsAnimator>
-        )
-      )}
-
-    </section>
+          }`}
+        >
+          {category.name}
+        </button>
+      ))}
+    </div>
   );
 };
 

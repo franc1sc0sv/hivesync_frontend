@@ -1,5 +1,15 @@
 export interface NotificationProps {
-    pictureRoute: string;
-    message: string;
-    timeAgo: string;
-  }
+  id: string;
+  message: string;
+  category: string;
+  data: any;
+  createdAt: string;
+  to_user_id: string;
+}
+
+type Category = "all" | "request" | "invitation" | "message";
+
+type Categories = {
+  name: string;
+  id: Category;
+}[];
