@@ -1,66 +1,55 @@
-import { useModal } from "../../../../store/useModal";
-
-import { CalendarIcon } from "../../../Icons/calendar";
-import { AddIcon } from "../../../Icons/add";
-import { TaskIcon } from "../../../Icons/task";
-import { ClockIcon } from "../../../Icons/clock";
-
 import { SubmitButton } from "../../../forms/Inputs/Button";
+
 
 interface EventInfoProps {
     name: string,
     eventDate: string
+    description: string
 }
 
 interface EventProps {
     eventsList: EventInfoProps[]
 }
 
-export const EventsList: React.FC<EventProps> = ({eventsList}) => {
-
-    const { setModalId } = useModal();
-
+export const EventsList: React.FC<EventProps> = ({ eventsList }) => {
     return (
-        <div className="flex flex-col gap-10">
-            <div className="flex gap-5 justify-around items-center">
+        <List eventsList={eventsList} />
+    )
+}
 
-                <div className="flex flex-row justify-center items-center gap-5">
-                    <CalendarIcon size={40} color="white" />
-                    <p className="text-2xl text-custom_white">Tus eventos</p>
-                </div>
+const List: React.FC<EventProps> = ({ eventsList }) => {
+    return (
+        <div className="w-full lg:w-4/5 mx-auto">
+            <p className="text-center text-custom_white text-2xl">Próximos eventos</p>
+            <ol
+                className="relative border-s-2 border-custom_white">
+                {eventsList.map((event, index) => (
+                    <li
+                        key={index}
+                        className="mb-10 ms-4">
 
-                {/* add event button */}
-                <div onClick={() => setModalId("addEvent")} >
-                    <AddIcon size={40} color="white" />
-                </div>
-            </div>
-            {
-                eventsList && eventsList.map((event, index) => (
-                    <div className="w-full flex flex-col bg-overlay_2 p-3 rounded-xl  mx-auto gap-5" key={index}>
+                        <div className="bg-light_purple absolute w-5 h-5 bg-gray-200 rounded-full mt-1.5 -start-3"></div>
 
-                        <div className="flex flex-row items-center justify-between gap-5">
-
-                            <div className="flex flex-row justify-center items-center gap-5">
-                                <TaskIcon size={20} color="white" />
-                                <p className="text-xl text-custom_white font-almarai">{event.name}</p>
+                        <div className="w-full flex flex-row flex-wrap justify-between">
+                            <div className="w-3/5">
+                                <time className="mb-1 text-lg text-gray">
+                                    {event.eventDate}
+                                </time>
+                                <h3 className="text-2xl font-semibold text-custom_white ">
+                                    {event.name}
+                                </h3>
+                                <p className="mb-4 text-base font-normal text-gray">
+                                    {event.description}
+                                </p>
                             </div>
 
-                            <div className="flex justify-center items-center ">
+                            <div className="w- flex justify-center items-center">
                                 <SubmitButton text="Finalizar" isLoading={false} />
-
                             </div>
                         </div>
-
-                        <div className="w-full flex flex-row items-center">
-
-                            <div className="w-full flex flex-row gap-5 items-center">
-                                <ClockIcon size={20} color="white" />
-                                <p className="text-xl text-custom_white font-almarai">{event.eventDate}</p>
-                            </div>
-                        </div>
-                    </div>
-                ))
-            }
-        </div >
-    );
-};
+                    </li>
+                ))}
+            </ol>
+        </div>
+    )
+}

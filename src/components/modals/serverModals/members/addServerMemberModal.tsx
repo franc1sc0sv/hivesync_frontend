@@ -1,9 +1,13 @@
 import { ModalTemplate } from "../../ModalTemplate"
 
-import { UserAddIcon } from "../../../Icons/userAdd"
+import { FieldValues, UseFormRegister } from "react-hook-form"
+
 
 import { SearchBar } from "../../../forms/Inputs/SearchBar"
 import { useCustomForm } from "../../../../hooks/useForm"
+import { SubmitButton } from "../../../forms/Inputs/Button"
+
+import { UserBox } from "../../../fakePages/user/friends/Components/UserBox"
 
 export const AddServerMembersModal: React.FC = () => {
     return (
@@ -14,36 +18,62 @@ export const AddServerMembersModal: React.FC = () => {
 }
 
 const AddMembers: React.FC = () => {
-
-    const api = () => console.log("hola, *llama a la api épicamente*");
-    const success = () => console.log("success");
-
-    const { onSubmit, register } = useCustomForm(api, success, "");
-
     return (
-        <section className="flex flex-col gap-10 my-10 w-full h-full">
-            <AddMembersCard />
-            <form onSubmit={onSubmit}>
-                <SearchBar
-                    name="user"
-                    register={register}
-                    placeholder="Busca por nombre de usuario" />
-            </form>
-
+        <section className="flex flex-col gap-10 my-10 w-full h-full">  
+            <Form />
         </section>
     )
 }
 
-const AddMembersCard = () => {
+const Form = () => {
+
+    const api = () => console.log("hola, *llama a la api épicamente*");
+    const success = () => console.log("success");
+  
+    const { onSubmit, register, isLoading } = useCustomForm(api, success, "");7
+
     return (
-        <div className="flex flex-col items-center rounded-lg bg-overlay_2 h-1/3 justify-evenly">
-            <UserAddIcon size={60} color="white" />
-
-            <h1 className="text-3xl text-custom_white">Agregar miembros al servidor</h1>
-
-            <p className="text-xl text-center text-custom_white">
-                ¡Construye conexiones significativas!.
-            </p>
+      <form
+        onSubmit={onSubmit}
+        className="flex flex-col justify-between w-full gap-10 h-4/5"
+      >
+        <p className="text-custom_white text-center text-2xl">Agregar miembros al servidor</p>
+        <div className="mx-auto flex flex-col items-center w-[320px] gap-5">
+          <SearchBar
+            name="username"
+            register={register}
+            placeholder="Busca un nombre de usuario"
+          />
+  
+          {/* <User data={data} /> */}
         </div>
-    )
-}
+  
+        <div className="flex flex-col items-end justify-end w-full h-full py-10 md:p-0 ">
+          <SubmitButton text="Buscar" isLoading={isLoading} />
+        </div>
+      </form>
+    );
+  };
+
+const User = ({ data }: { data: UserProfile }) => {
+    if (!data) return;
+    if (!data.id) return <NoResults />;
+    return (
+      <UserBox
+        id={data.id_user}
+        isFromFriends
+        avatarURL={data.profileUrl}
+        username={data.username}
+      />
+    );
+  };
+  
+  const NoResults = () => {
+    return (
+      <div className="flex items-start w-full">
+        <p className="text-sm text-red-500 font-amiko">
+          Ups al parecer hubo un error al encontrar este usuario
+        </p>
+      </div>
+    );
+  };

@@ -16,7 +16,7 @@ const quickOptions: MenuProps[] = [
   {
     icon: <UserAddIcon size={30} color="white" />,
     name: "Invitar miembros",
-    modal: "membersList",
+    modal: "addServerMembers",
   },
   {
     icon: <SettingsIcon size={30} color="white" />,
