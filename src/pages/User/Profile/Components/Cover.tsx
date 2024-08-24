@@ -1,28 +1,28 @@
 import { Link } from "react-router-dom";
 import { HiCog } from "react-icons/hi";
 
-// testing data
-import { userData } from "../../mocks/userData";
 import { UserAvatar } from "../../../../components/Avatars/UserAvatar";
+import { useSession } from "../../../../store/user";
 
-
-export const ProfileCover: React.FC = () => {
+export const ProfileCover: React.FC = ({
+  show_config = true,
+}: {
+  show_config?: boolean;
+}) => {
+  const { user } = useSession();
   return (
     <div className="w-full mx-auto text-gray-900 rounded-lg lg:w-[90%]">
-      {/* cover  */}
       <div
-        style={{ backgroundColor: userData.themeColor }}
+        style={{ backgroundColor: user?.backgroundUrl }}
         className={`relative overflow-hidden rounded-xl h-36`}
       >
-        {/* settings icon */}
-        <SettingsPageButton />
+        {show_config && <SettingsPageButton />}
       </div>
 
-      {/* icon */}
       <div className="relative ml-5 -mt-20 overflow-hidden w-28 h-28 rounded-2xl">
-        <UserAvatar 
-        username={userData.username} 
-        profileURl=""
+        <UserAvatar
+          username={user?.username as string}
+          profileURl={user?.profileUrl as string}
         />
       </div>
     </div>

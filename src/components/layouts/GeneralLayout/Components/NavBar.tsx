@@ -8,6 +8,7 @@ import {
 } from "../types/GeneralLayout";
 import { Link } from "react-router-dom";
 import { UserAvatar } from "../../../Avatars/UserAvatar";
+import { useSession } from "../../../../store/user";
 
 export const NavBar: React.FC<PropsLinksNav> = ({ links, profilePicture }) => {
   return (
@@ -39,9 +40,16 @@ const LinkNavBar: React.FC<Links> = ({ Icon, url }) => {
 };
 
 const UserProfile: React.FC<PropsProfilePicture> = ({ url }) => {
+  const { user } = useSession();
   return (
     <Link to={url} className="flex flex-shrink-0">
-      <UserAvatar w={3} h={3} fontSize={2} />
+      <UserAvatar
+        profileURl={user?.profileUrl as string}
+        username={user?.username as string}
+        w={3}
+        h={3}
+        fontSize={2}
+      />
     </Link>
   );
 };

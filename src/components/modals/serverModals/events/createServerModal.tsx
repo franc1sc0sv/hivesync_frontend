@@ -10,7 +10,7 @@ import { useState } from "react";
 import { RadioInput } from "../../../forms/Inputs/Radio/InputRadio";
 import { CheckboxInput } from "../../../forms/Inputs/checkbox/checkBox";
 
-//icons  
+//icons
 import { HiUserGroup } from "react-icons/hi";
 import { IoIosColorPalette } from "react-icons/io";
 import { FaBook } from "react-icons/fa";
@@ -27,7 +27,7 @@ enum ServerTags {
   ENTERTAINMENT = "Entretinimiento",
   STUDY = "Estudio y productividad",
   SOCIAL = "Comunidad y social",
-  CREATIVITY = "Arte y creatividad"
+  CREATIVITY = "Arte y creatividad",
 }
 
 const options = [
@@ -36,7 +36,6 @@ const options = [
     value: ServerPrivacity.PUBLIC,
     description: "Chatea y envia imagenes",
     Icon: TbWorld,
-
   },
   {
     label: "Privado",
@@ -46,12 +45,12 @@ const options = [
   },
 ];
 
-
 const serverTags = [
   {
     label: "Entretenimiento",
     value: ServerTags.ENTERTAINMENT,
-    description: "Desde juegos en línea hasta salas de chat para ver contenido multimedia",
+    description:
+      "Desde juegos en línea hasta salas de chat para ver contenido multimedia",
     Icon: IoGameController,
   },
   {
@@ -71,9 +70,8 @@ const serverTags = [
     value: ServerTags.CREATIVITY,
     description: "Comparte tus creaciones y explora nuevas ideas",
     Icon: IoIosColorPalette,
-  }
+  },
 ];
-
 
 export const CreateServerModal: React.FC = () => {
   return (
@@ -130,12 +128,11 @@ const ModalForm = () => {
         placeholder="Nombre del servidor"
       />
 
-      <div className="flex justify-center max-w-4/5 sm:w-full">
+      {/* <div className="flex justify-center max-w-4/5 sm:w-full">
         <EditProfilePicture register={register} />
-      </div>
+      </div> */}
 
-      <div className="w-full flex flex-col  items-center justify-center gap-10">
-
+      <div className="flex flex-col items-center justify-center w-full gap-10">
         <RadioInput
           title="Tipo de canal"
           options={options}
@@ -158,28 +155,32 @@ const ModalForm = () => {
   );
 };
 
-const EditProfilePicture = ({register,}: {register: UseFormRegister<FieldValues>}) => {
+// const EditProfilePicture = ({
+//   register,
+// }: {
+//   register: UseFormRegister<FieldValues>;
+// }) => {
+//   const [picRoute, setPicRoute] = useState("");
 
-  const [picRoute, setPicRoute] = useState("");
+//   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+//     const file = event.target.files[0].name;
+//     if (file) {
+//       setPicRoute(file);
+//     }
+//   };
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files[0].name;
-    if (file) {
-      setPicRoute(file);
-    }
-  };
-
-  return (
-    <div className="flex items-center justify-center w-full lg:w-1/3 h-full p-5 text-white">
-      <ImgInput
-        status={handleFileChange}
-        register={register}
-        name="avatar"
-        text={
-          picRoute
-            ? "Archivo seleccionado: " + picRoute
-            : "Haz click para subir una foto"
-        }      />
-    </div>
-  );
-};
+//   return (
+//     <div className="flex items-center justify-center w-full h-full p-5 text-white lg:w-1/3">
+//       <ImgInput
+//         status={handleFileChange}
+//         register={register}
+//         name="avatar"
+//         text={
+//           picRoute
+//             ? "Archivo seleccionado: " + picRoute
+//             : "Haz click para subir una foto"
+//         }
+//       />
+//     </div>
+//   );
+// };

@@ -3,9 +3,12 @@ type Usuario = {
   email: string;
   username: string;
   password: string;
-  name: string;
   token: string;
+  profileUrl: string;
+  backgroundUrl: string;
+  name: string;
   createdAt: string;
+  about: string;
 };
 
 type UserProfile = {

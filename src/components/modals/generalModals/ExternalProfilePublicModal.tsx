@@ -1,7 +1,5 @@
-//este ya no se ocupa xd
+import { formatDate } from "../../../helpers/date";
 import { ModalTemplate } from "../ModalTemplate";
-const temporaryRoute =
-  "https://static.fundacion-affinity.org/cdn/farfuture/PVbbIC-0M9y4fPbbCsdvAD8bcjjtbFc0NSP3lRwlWcE/mtime:1643275542/sites/default/files/los-10-sonidos-principales-del-perro.jpg";
 
 export const ExternalProfilePublicModal = ({ user }: { user: UserProfile }) => {
   return (
@@ -38,15 +36,6 @@ const Cover = ({ user }: { user: UserProfile }) => {
       </div>
     </div>
   );
-};
-
-const formatDate = (dateString: string): string => {
-  const date = new Date(dateString);
-  return date.toLocaleDateString("es-ES", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
 };
 
 const About = ({ user }: { user: UserProfile }) => {

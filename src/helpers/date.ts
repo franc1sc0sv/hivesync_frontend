@@ -26,3 +26,12 @@ export function formatTimeDifference(dateString: string): string {
   const diffInYears = Math.floor(diffInMonths / 12);
   return `${diffInYears}y`;
 }
+
+export const formatDate = (dateString: string): string => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("es-ES", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+};
