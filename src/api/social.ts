@@ -18,3 +18,38 @@ export const create_friend_request = async (data: any) => {
     throwError(e);
   }
 };
+
+export const reject_friend_request = async (data: any) => {
+  try {
+    const res = await AxiosClient.post(
+      "/social/request/reject",
+      data,
+      headers()
+    );
+    return format_api_response(res);
+  } catch (e) {
+    throwError(e);
+  }
+};
+
+export const accept_friend_request = async (data: any) => {
+  try {
+    const res = await AxiosClient.post(
+      "/social/request/accept",
+      data,
+      headers()
+    );
+    return format_api_response(res);
+  } catch (e) {
+    throwError(e);
+  }
+};
+
+export const delete_friend_request = async () => {
+  try {
+    const res = await AxiosClient.delete("/social/request/", headers());
+    return format_api_response(res);
+  } catch (e) {
+    throwError(e);
+  }
+};

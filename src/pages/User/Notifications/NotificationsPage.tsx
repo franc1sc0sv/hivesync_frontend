@@ -5,11 +5,13 @@ import { Notifications } from "../../../components/Alerts/Notification";
 
 import { NotificationsPanel } from "./Components/NotificationsPanel";
 import { NotificationProvider } from "./context/NotificationsContext";
+import { AddFriendModal } from "../../../components/modals/userModals/friends/AddFriendModal";
 
 export const NotificationsPage = () => {
   return (
     <GeneralLayout title="Notificaciones" RightComponent={RightButton}>
       <Notifications />
+      <AddFriendModal />
       <NotificationProvider>
         <NotificationsPanel />
       </NotificationProvider>

@@ -1,7 +1,11 @@
+import { useEffect } from "react";
 import { ComponentsAnimator } from "../../../../components/animation/componentsAnimator";
+import { UserAvatar } from "../../../../components/Avatars/UserAvatar";
 
 import { BellIcon } from "../../../../components/Icons/bell";
 import { formatTimeDifference } from "../../../../helpers/date";
+import { useAddFriendsData } from "../../../../store/useAddFriendsData";
+import { useModal } from "../../../../store/useModal";
 import { useNotificationsContext } from "../context/useNotifications";
 import { NotificationProps } from "../types/NotificationProps";
 
@@ -21,6 +25,8 @@ const NotificationsBox = () => {
     category === "all"
       ? [...notifications]
       : notifications.filter((noti) => noti.category === category);
+  console.log();
+
   return filteres_notifications.length === 0 ? (
     <NoNotifications />
   ) : (
@@ -34,8 +40,8 @@ const NotificationsContainer = ({
   filtered_notifications: NotificationProps[];
 }) => {
   return (
-    <article className="flex flex-col w-full h-full gap-5 overflow-y-auto">
-      {filtered_notifications.map((noti, i) => (
+    <article className="flex flex-col w-full h-full gap-2 overflow-y-auto">
+      {filtered_notifications?.map((noti, i) => (
         <NotificationItem key={i} notification={noti} i={i} />
       ))}
     </article>
@@ -49,17 +55,44 @@ const NotificationItem = ({
   notification: NotificationProps;
   i: number;
 }) => {
+  const { setModalId } = useModal();
+  const { setFriendsData } = useAddFriendsData();
+
+  const handleClick = () => {
+    if (!notification.data?.id_request) return;
+    if (notification.category === "request") {
+      setModalId("AddFriendModal");
+    }
+  };
+
+  useEffect(() => {
+    if (notification.category === "request") {
+      const data = { id_notification: notification.id, ...notification.data };
+      setFriendsData(data);
+    }
+  }, []);
+
   return (
     <ComponentsAnimator key={i}>
-      <div className="flex items-center w-full p-4 border-b-0">
-        <img
-          src={notification.data.profile_url}
-          alt="User"
-          className="object-cover w-12 h-12 mr-3 rounded-full"
-        />
+      <div
+        onClick={handleClick}
+        className="flex items-center w-full gap-4 p-4 border-b-0"
+      >
+        <div className="w-max">
+          <UserAvatar
+            fontSize={2}
+            h={4}
+            w={4}
+            profileURl={notification.data.profile_url}
+            username={notification.data.username_who_sent}
+          />
+        </div>
+
         <div className="flex flex-col w-full">
-          <p className="text-white">{notification.message}</p>
-          <span className="self-end text-sm text-white">
+          <p className="text-sm font-light text-white font-amiko">
+            {notification.message}
+          </p>
+          <span className="self-end text-sm text-gray">
             {formatTimeDifference(notification.createdAt)}
           </span>
         </div>
