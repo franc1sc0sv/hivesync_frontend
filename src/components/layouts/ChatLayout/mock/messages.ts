@@ -4,7 +4,7 @@ export interface MessageProps {
 }
 
 const storedConversation = localStorage.getItem("conversation");
-export const conversation: MessageProps[] = storedConversation ? JSON.parse(storedConversation) : [];
+export const conversation = storedConversation ? JSON.parse(storedConversation).state.messages : [];
 
 export const messagesData: MessageProps[] = [
     {
@@ -50,7 +50,7 @@ export const messagesData: MessageProps[] = [
 ];
 
 
-
+localStorage.setItem("conversation", JSON.stringify(messagesData));
 
 
 

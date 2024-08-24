@@ -38,7 +38,7 @@ export const Conversation: React.FC<ConversationProps> = ({conversation}) => {
       <div className="w-full flex justify-center">
         <Notifications />
       </div>
-      {conversation?.map((message, index) => (
+      {conversation.map((message, index) => (
         <div key={index}>
           {message.isUserSender ? (
             <SentMessage text={message.content} />
