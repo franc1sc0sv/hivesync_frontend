@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 
-import { GoBackTriangle } from "../../../../components/Icons/goBackTriangle";
-import { PhoneIcon } from "../../../../components/Icons/phone";
-import { WebCameraIcon } from "../../../../components/Icons/webCamera";
-import { ButtonHover } from "../../../../components/buttons/hoverButton";
-import { VideoCallComponent } from "../../VideoCalls/VideoCallsIndex";
+import { GoBackTriangle } from "../../../Icons/goBackTriangle";
+import { PhoneIcon } from "../../../Icons/phone";
+import { WebCameraIcon } from "../../../Icons/webCamera";
+import { ButtonHover } from "../../../buttons/hoverButton";
 
 import useFakePages from "../../../../store/useFakePage";
 import useVerifyCallType from "../../../../store/chat/useVerifyCall";
+import { VideoCallLayout } from "../../VideocallLayout/VideocallLayout";
 
 interface ChatHeaderProps {
   username: string;
@@ -15,15 +15,13 @@ interface ChatHeaderProps {
 
 export const ChatHeader: React.FC<ChatHeaderProps> = ({ username }) => {
   const { addFakePage } = useFakePages();
-  const {isVoiceCall ,setIsVoiceCall} = useVerifyCallType();
-
-  const callType = isVoiceCall == true ? "Llamada de voz" : "Videollamada"
+  const {setIsVoiceCall} = useVerifyCallType();
 
   const handleVoiceCall = () => {
     setIsVoiceCall(true);
     addFakePage({
       title: "Llamada de voz",
-      children: <VideoCallComponent />,
+      children: <VideoCallLayout />,
     });
   };
 
@@ -31,7 +29,7 @@ export const ChatHeader: React.FC<ChatHeaderProps> = ({ username }) => {
     setIsVoiceCall(false);
     addFakePage({
       title: "Videollamada",
-      children: <VideoCallComponent />,
+      children: <VideoCallLayout />,
     });
   };
 

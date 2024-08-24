@@ -1,5 +1,5 @@
-import { BUTTON_TYPE } from "../enums";
-import { ButtonCallsProps } from "../types";
+import { BUTTON_TYPE } from "../enum";
+import { ButtonCallsProps } from "../ButtonCallProps";
 
 export const ButtonCalls: React.FC<ButtonCallsProps> = ({
   type,

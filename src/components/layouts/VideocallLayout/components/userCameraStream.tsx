@@ -1,4 +1,4 @@
-import useVideoStream from "../../../../../../../store/videoCall/useCameraStream";
+import useVideoStream from "../../../../store/videoCall/useCameraStream";
 import { useRef, useEffect } from "react";
 
 type Props = {

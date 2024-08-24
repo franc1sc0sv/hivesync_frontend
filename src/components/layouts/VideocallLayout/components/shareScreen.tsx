@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { useScreenShare } from '../../../../../../../store/videoCall/useScreenShare';
+import { useScreenShare } from '../../../../store/videoCall/useScreenShare';
 
 export const SharedScreen: React.FC = () => {
     const { screenStream, stopScreenShare, error } = useScreenShare();

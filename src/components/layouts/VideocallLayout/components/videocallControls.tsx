@@ -5,20 +5,22 @@ import { PiMicrophoneFill, PiMicrophoneSlashFill } from "react-icons/pi";
 import { MdCoPresent } from "react-icons/md";
 import { FiCameraOff } from "react-icons/fi";
 
-import { ButtonCallsProps } from "../types";
-import { ButtonCalls } from "./Button";
-import { BUTTON_TYPE } from "../enums";
+import { Notifications } from "../../../Alerts/Notification";
+
+
+import { ButtonCallsProps } from "../ButtonCallProps";
+import { ButtonCalls } from "./button";
+import { BUTTON_TYPE } from "../enum";
 
 import { useState } from "react";
 
-// custom hooks
-import { useNotifications } from "../../../../../../../store/useNotifications";
-import useFakePages from "../../../../../../../store/useFakePage";
-import useVideoStream from "../../../../../../../store/videoCall/useCameraStream";
-import { useScreenShare } from "../../../../../../../store/videoCall/useScreenShare";
-import useVerifyCallType from "../../../../../../../store/chat/useVerifyCall";
-import { Notifications } from "../../../../../../Alerts/Notification";
-import useVideoCallStore from "../../../../../../../store/videoCall/useMicrophoneVideocalls";
+//custom hooks
+import { useNotifications } from "../../../../store/useNotifications";
+import useFakePages from "../../../../store/useFakePage";
+import useVideoStream from "../../../../store/videoCall/useCameraStream";
+import useVerifyCallType from "../../../../store/chat/useVerifyCall";
+import useMicrophoneStore from "../../../../store/videoCall/useMicrophoneVideocalls";
+import { useScreenShare } from "../../../../store/videoCall/useScreenShare";
 
 export const VideoCallControlls: React.FC = () => {
   const { setStream, clearStream, stream } = useVideoStream();
@@ -26,7 +28,7 @@ export const VideoCallControlls: React.FC = () => {
   const { removeFakePage, fakePages } = useFakePages();
   const { screenStream, startScreenShare, stopScreenShare } = useScreenShare();
   const { isVoiceCall } = useVerifyCallType();
-  const { isMicrophoneActive, toggleMicrophone } = useVideoCallStore();
+  const { isMicrophoneActive, toggleMicrophone } = useMicrophoneStore();
 
   const [hasCamera, setHasCamera] = useState<boolean>(false);
   const [isCameraActive, setIsCameraActive] = useState<boolean>(false);
