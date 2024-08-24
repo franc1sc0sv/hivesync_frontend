@@ -1,23 +1,15 @@
 import { NavLink } from "react-router-dom";
 
-import {
-  Links,
-  PropsLinks,
-  PropsLinksNav,
-  PropsProfilePicture,
-} from "../types/GeneralLayout";
+import { Links, PropsLinks, PropsProfilePicture } from "../types/GeneralLayout";
 import { Link } from "react-router-dom";
 import { UserAvatar } from "../../../Avatars/UserAvatar";
 import { useSession } from "../../../../store/user";
 
-export const NavBar: React.FC<PropsLinksNav> = ({ links, profilePicture }) => {
+export const NavBar: React.FC<PropsLinks> = ({ links }) => {
   return (
     <nav className="flex flex-row items-center justify-around w-full max-w-sm py-3 mx-auto rounded-overlay bg-overlay_2">
       <LinksNav links={links} />
-      <UserProfile
-        pictureRoute={profilePicture.pictureRoute}
-        url={profilePicture.url}
-      />
+      <UserProfile url="/app/profile" />
     </nav>
   );
 };

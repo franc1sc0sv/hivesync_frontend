@@ -6,12 +6,6 @@ import { HiChatBubbleLeftRight, HiMiniBell } from "react-icons/hi2";
 import { ArrayLinks, PropsProfilePicture } from "./types/GeneralLayout";
 
 //mock
-import { userData } from "../../../pages/User/mocks/userData";
-
-const profilePicture: PropsProfilePicture = {
-  pictureRoute: userData.picture,
-  url: "/app/profile/agaw1-qffq3135-af3451",
-};
 
 type PropsGeneralLayout = {
   title?: string;
@@ -52,7 +46,7 @@ export const GeneralLayout: React.FC<PropsGeneralLayout> = ({
         {showHeader && <Header title={title} RightComponent={RightComponent} />}
         {children}
       </section>
-      <NavBar links={links} profilePicture={profilePicture} />
+      <NavBar links={links} />
     </main>
   );
 };

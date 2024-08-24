@@ -14,129 +14,128 @@ import { TextArea } from "../../../forms/Inputs/TextArea";
 import { PencilIcon } from "../../../Icons/pencil";
 
 //mock
-import { userData } from "../../../../pages/User/mocks/userData";
 import { UserAvatar } from "../../../Avatars/UserAvatar";
+import { useSession } from "../../../../store/user";
 
-// componente activado en UserInformation 
+// componente activado en UserInformation
 
 export const EditProfileFakePage: React.FC = () => {
-    return (
-        <div className="w-full h-full flex justify-center items-center rounded-xl">
-            <div className="w-full max-w-[320px] flex flex-col gap-5 m-5 h-auto">
-                <ProfileCover />
-                <UserInformation />
-                <EditProfileForm />
-                <EditPictureOrCoverModal />
-            </div>
-        </div>
-    )
-}
-
-
+  return (
+    <div className="flex items-center justify-center w-full h-full rounded-xl">
+      <div className="w-full max-w-[320px] flex flex-col gap-5 m-5 h-auto">
+        <ProfileCover />
+        <UserInformation />
+        <EditProfileForm />
+        <EditPictureOrCoverModal />
+      </div>
+    </div>
+  );
+};
 
 const ProfileCover: React.FC = () => {
+  const { user } = useSession();
 
-    const { setModalId } = useModal();
+  const { setModalId } = useModal();
 
-    return (
-
-        <div className="w-full text-gray-900 rounded-lg">
-            {/* cover  */}
-            <div
-                style={{ backgroundColor: userData.themeColor }}
-                className={`relative overflow-hidden rounded-xl h-36`}>
-                {/* edit cover theme */}
-                <EditCoverThemeButton />
-            </div>
-
-            {/* edit profile picture modal */}
-            <div
-                className="relative w-24 h-24 ml-5 -mt-20 overflow-hidden flex justify-center items-center rounded-2xl"
-                onClick={() => setModalId("editProfilePicture")}
-            >
-                {/* <img
-                    className="object-cover object-center w-full h-full"
-                    src={userData.picture}
-                    alt="Profile picture"
-                /> */}
-                <UserAvatar />
-                <span className="absolute bottom-0 right-0 left-15 w-10 h-10 transition duration-300 bg-overlay_2 hover:bg-primary border border-white dark:border-gray-800 rounded-full z-10">
-                    <div className="absolute bottom-1 right-1 cursor-pointer">
-                        <PencilIcon size={30} color="white" />
-                    </div>
-                </span>
-            </div>
-
-        </div>
-
-    )
-}
+  return (
+    <div className="w-full text-gray-900 rounded-lg">
+      <div
+        style={{ backgroundColor: user?.backgroundUrl }}
+        className={`relative overflow-hidden rounded-xl h-36`}
+      >
+        <EditCoverThemeButton />
+      </div>
+      <div
+        className="relative flex items-center justify-center w-24 h-24 ml-5 -mt-20 overflow-hidden rounded-2xl"
+        onClick={() => setModalId("editProfilePicture")}
+      >
+        <UserAvatar
+          profileURl={user?.profileUrl as string}
+          username={user?.username as string}
+        />
+        <span className="absolute bottom-0 right-0 z-10 w-10 h-10 transition duration-300 border border-white rounded-full left-15 bg-overlay_2 hover:bg-primary dark:border-gray-800">
+          <div className="absolute cursor-pointer bottom-1 right-1">
+            <PencilIcon size={30} color="white" />
+          </div>
+        </span>
+      </div>
+    </div>
+  );
+};
 
 const EditCoverThemeButton: React.FC = () => {
-    const { setModalId } = useModal();
-    return (
-        <div className="absolute top-0 right-0 p-3" onClick={() => setModalId("editCoverTheme")}>
-            <PencilIcon size={30} color="white" />
-        </div>
-    )
-}
+  const { setModalId } = useModal();
+  return (
+    <div
+      className="absolute top-0 right-0 p-3"
+      onClick={() => setModalId("editCoverTheme")}
+    >
+      <PencilIcon size={30} color="white" />
+    </div>
+  );
+};
 
 const UserInformation: React.FC = () => {
-    return (
-        <div className="w-full">
-            <div className="flex flex-col gap-2 p-3 rounded-lg bg-overlay_2 ">
-                <p className="text-3xl text-custom_white text-start">{userData.name}</p>
-                <p className="text-md text-gray text-start">{userData.username}</p>
-            </div>
-        </div>
-    )
-}
+  const { user } = useSession();
+
+  return (
+    <div className="w-full">
+      <div className="flex flex-col gap-2 p-3 rounded-lg bg-overlay_2 ">
+        <p className="text-3xl text-custom_white text-start">{user?.name}</p>
+        <p className="text-md text-gray text-start">{user?.username}</p>
+      </div>
+    </div>
+  );
+};
 
 const EditProfileForm: React.FC = () => {
+  const { setNotifications } = useNotifications();
 
-    const {setNotifications} = useNotifications();
+  const api_function = async (data: any) => {
+    const displayName = data.name;
+    const aboutUser = data.aboutMe;
 
-    const api_function = async (data: any) => {
-        const displayName = data.name;
-        const aboutUser = data.aboutMe;
+    localStorage.setItem("name", displayName);
+    localStorage.setItem("aboutUser", aboutUser);
+  };
 
-        localStorage.setItem("name", displayName);
-        localStorage.setItem("aboutUser", aboutUser);
-    }
+  const post_success_function = async () => {
+    await location.reload();
+    setNotifications({
+      message: "ayuda",
+      severity: "info",
+    });
+    console.log("la api se llamó exitosa y épicamente");
+  };
+  const { user } = useSession();
 
-    const post_success_function = async () => {
-        await location.reload();
-        setNotifications({
-            message: "ayuda",
-            severity: "info"
-        })
-        console.log("la api se llamó exitosa y épicamente");
+  const { onSubmit, register, isLoading } = useCustomForm(
+    api_function,
+    post_success_function,
+    ""
+  );
 
-    }
+  return (
+    <form
+      onSubmit={onSubmit}
+      className="flex flex-col w-full gap-5 px-1 overflow-y-auto text-start "
+    >
+      <InputsForms
+        title="Nombre"
+        register={register}
+        name="name"
+        placeholder="Nombre a mostrar"
+        inputValue={user?.name}
+      />
 
-    const { onSubmit, register, isLoading } = useCustomForm(api_function, post_success_function, "")
-
-    return (
-
-        <form
-            onSubmit={onSubmit}
-            className="w-full flex flex-col gap-5 overflow-y-auto px-1 text-start ">
-            <InputsForms
-                title="Nombre"
-                register={register}
-                name="name"
-                placeholder="Nombre a mostrar"
-                inputValue={userData.name}
-            />
-
-            <TextArea
-                title="Sobre mí"
-                name="aboutMe"
-                placeholder="Agrega una genial descripción"
-                register={register}
-                inputValue={userData.about}
-            />
-            <SubmitButton text="Guardar cambios" isLoading={isLoading} />
-        </form>
-    )
-}
+      <TextArea
+        title="Sobre mí"
+        name="aboutMe"
+        placeholder="Agrega una genial descripción"
+        register={register}
+        inputValue={user?.about}
+      />
+      <SubmitButton text="Guardar cambios" isLoading={isLoading} />
+    </form>
+  );
+};

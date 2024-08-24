@@ -7,16 +7,15 @@ import { EditProfileFakePage } from "../../../../components/fakePages/user/profi
 import { UserFriendsFakePage } from "../../../../components/fakePages/user/friends/FriendsFakePage";
 
 //mock
-import { userData } from "../../mocks/userData";
 import { useSession } from "../../../../store/user";
 import { formatDate } from "../../../../helpers/date";
 
-const friendsMiniPictures = [
-  { picture: userData.picture },
-  { picture: userData.picture },
-  { picture: userData.picture },
-  { picture: userData.picture },
-];
+// const friendsMiniPictures = [
+//   { picture: userData.picture },
+//   { picture: userData.picture },
+//   { picture: userData.picture },
+//   { picture: userData.picture },
+// ];
 
 export const UserInformation = () => {
   return (
@@ -24,7 +23,7 @@ export const UserInformation = () => {
       <MainInformation />
 
       <AboutUser />
-      <UserFriends />
+      {/* <UserFriends /> */}
 
       <ShowFakePages />
       <AddStatusModal />
@@ -82,28 +81,28 @@ const AboutUser = () => {
   );
 };
 
-const UserFriends = () => {
-  const { addFakePage } = useFakePages();
+// const UserFriends = () => {
+//   const { addFakePage } = useFakePages();
 
-  return (
-    <div
-      onClick={() =>
-        addFakePage({ title: "Mis amigos", children: <UserFriendsFakePage /> })
-      }
-      className="flex flex-row items-center justify-between p-3 rounded-lg bg-overlay_2"
-    >
-      <h1 className="text-custom_white">Mis amigos</h1>
+//   return (
+//     <div
+//       onClick={() =>
+//         addFakePage({ title: "Mis amigos", children: <UserFriendsFakePage /> })
+//       }
+//       className="flex flex-row items-center justify-between p-3 rounded-lg bg-overlay_2"
+//     >
+//       <h1 className="text-custom_white">Mis amigos</h1>
 
-      <div className="flex -space-x-4 rtl:space-x-reverse">
-        {friendsMiniPictures.map((friend, index) => (
-          <img
-            key={index}
-            className="object-cover object-center w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
-            src={friend.picture}
-            alt="Friend Profile picture"
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
+//       <div className="flex -space-x-4 rtl:space-x-reverse">
+//         {friendsMiniPictures.map((friend, index) => (
+//           <img
+//             key={index}
+//             className="object-cover object-center w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
+//             src={friend.picture}
+//             alt="Friend Profile picture"
+//           />
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };

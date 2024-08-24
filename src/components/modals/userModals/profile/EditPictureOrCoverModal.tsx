@@ -8,9 +8,9 @@ import { useCustomForm } from "../../../../hooks/useForm";
 import { ImgInput } from "../../../forms/Inputs/ImgInput";
 import { ColorPickerInput } from "../../../forms/Inputs/ColorPicker";
 import { SubmitButton } from "../../../forms/Inputs/Button";
+import { useSession } from "../../../../store/user";
 
 //mock
-import { userData } from "../../../../pages/User/mocks/userData";
 
 export const EditPictureOrCoverModal = () => {
   return (
@@ -66,7 +66,7 @@ const EditProfilePicture = () => {
 
   return (
     <div className="flex items-center justify-center w-full h-full p-5 mx-auto text-white lg:w-1/2">
-      <form className="w-full lg:w-4/5 flex flex-col gap-5" onSubmit={onSubmit}>
+      <form className="flex flex-col w-full gap-5 lg:w-4/5" onSubmit={onSubmit}>
         <ImgInput
           name="pictureRoute"
           register={register}
@@ -98,6 +98,8 @@ const EditProfilePicture = () => {
 };
 
 const EditCoverTheme = () => {
+  const { user } = useSession();
+
   const api_function = async (data: any) => {
     const theme = data.themeColor;
 
@@ -128,7 +130,7 @@ const EditCoverTheme = () => {
       <ColorPickerInput
         register={register}
         name="themeColor"
-        inputValue={userData.themeColor}
+        inputValue={user?.backgroundUrl}
       />
 
       <p

@@ -8,14 +8,9 @@ type Links = {
 type ArrayLinks = Links[];
 
 type PropsProfilePicture = {
-  pictureRoute: string;
   url: string;
 };
 
 interface PropsLinks {
   links: ArrayLinks;
-}
-
-interface PropsLinksNav extends PropsLinks {
-  profilePicture: PropsProfilePicture;
 }

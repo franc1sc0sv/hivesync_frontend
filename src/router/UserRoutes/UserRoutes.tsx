@@ -3,7 +3,6 @@ import { AuthDetector } from "../../components/auth/AuthDetector";
 
 import { DirectMessagesPage } from "../../pages/User/DirectMessages/DM";
 import { ChatPage } from "../../pages/User/Chat/ChatPage";
-import { VideoCallComponent } from "../../pages/User/VideoCalls/VideoCallsIndex";
 import { ComunityPage } from "../../pages/User/Comunity/ComunityPage";
 import { ComunityIndividualPage } from "../../pages/User/ComunityIndividual/ComunityIndividualPage";
 import { ServerPage } from "../../pages/User/Servers/ServerPage";
@@ -25,11 +24,11 @@ export const UserRoutes: RouteObject = {
 
     { path: "@notifications", element: <NotificationsPage /> }, //Notificaciones
 
-    { path: "profile/:id", element: <ProfilePage /> },
-    { path: "profile/:id/settings", element: <SettingsPage /> }, //ajustes del usuario
+    { path: "profile", element: <ProfilePage /> },
+    { path: "profile/settings", element: <SettingsPage /> }, //ajustes del usuario
 
     // { path: "testin", element: <ComunityPage /> },
-    {path: "communities/", element: <ComunityPage />},
+    { path: "communities/", element: <ComunityPage /> },
     { path: "comunity/:id", element: <ComunityIndividualPage /> },
     { path: ":id/:id", element: <ServerPage /> }, // Servers - /server_id/channel_id
     { index: true, element: <ServerPage /> }, // Servers - /server_id/channel_id

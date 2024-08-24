@@ -7,7 +7,7 @@ export interface NotificationProps {
   to_user_id: string;
 }
 
-type Category = "all" | "request" | "invitation" | "message";
+type Category = "all" | "request" | "invitation" | "messages";
 
 type Categories = {
   name: string;

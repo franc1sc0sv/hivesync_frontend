@@ -52,7 +52,7 @@ export const NotificationProvider = ({ children }: { children: ReactNode }) => {
     { name: "todo", id: "all" },
     { name: "solicitudes", id: "request" },
     { name: "invitaciones", id: "invitation" },
-    { name: "mensajes", id: "message" },
+    { name: "mensajes", id: "messages" },
   ];
 
   const handleCategoryClick = (category: Category) => {
