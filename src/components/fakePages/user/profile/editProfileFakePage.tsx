@@ -22,7 +22,7 @@ import { useSession } from "../../../../store/user";
 export const EditProfileFakePage: React.FC = () => {
   return (
     <div className="flex items-center justify-center w-full h-full rounded-xl">
-      <div className="w-full max-w-[320px] flex flex-col gap-5 m-5 h-auto">
+      <div className="w-full max-w-[320px] flex flex-col gap-5 m-5 h-full py-5">
         <ProfileCover />
         <UserInformation />
         <EditProfileForm />
@@ -118,7 +118,7 @@ const EditProfileForm: React.FC = () => {
   return (
     <form
       onSubmit={onSubmit}
-      className="flex flex-col w-full gap-5 px-1 overflow-y-auto text-start "
+      className="flex flex-col w-full h-full gap-5 p-5 px-1 text-start"
     >
       <InputsForms
         title="Nombre"

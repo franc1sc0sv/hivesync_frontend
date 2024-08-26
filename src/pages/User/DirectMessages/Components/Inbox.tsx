@@ -1,26 +1,19 @@
+import { useDM } from "../Context/useDM";
 import { InboxMessage } from "./InboxMessage";
-import { MessageProps } from "../types/Messages";
-import { chatsList } from "../mocks/messages";
 
-export const Inbox = ({ friends = [] }: { friends: MessageProps[] }) => {
+export const Inbox = () => {
   return (
     <div className="h-full overflow-y-auto">
-      <div className="grid items- w-full h-[90%] grid-flow-row gap-6 overflow-y-auto">
-        <FriendsChats friends={chatsList} />
+      <div className="flex flex-col w-full h-full gap-3 overflow-y-auto">
+        <FriendsChats />
       </div>
     </div>
   );
 };
 
-const FriendsChats = ({ friends = [] }: { friends: MessageProps[] }) => {
+const FriendsChats = () => {
+  const { friends } = useDM();
   return friends?.map((friend, index) => (
-    <InboxMessage
-      key={index}
-      pictureRoute={friend.pictureRoute}
-      isActive={friend.isActive}
-      username={friend.username}
-      messagePreview={friend.messagePreview}
-      timeAgo={friend.timeAgo}
-    />
+    <InboxMessage friend={friend} key={index} />
   ));
 };

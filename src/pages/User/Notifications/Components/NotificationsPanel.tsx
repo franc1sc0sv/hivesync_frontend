@@ -40,7 +40,7 @@ const NotificationsContainer = ({
   filtered_notifications: NotificationProps[];
 }) => {
   return (
-    <article className="flex flex-col w-full h-full gap-2 overflow-y-auto">
+    <article className="flex flex-col w-full h-full overflow-y-auto">
       {filtered_notifications?.map((noti, i) => (
         <NotificationItem key={i} notification={noti} i={i} />
       ))}
@@ -61,22 +61,17 @@ const NotificationItem = ({
   const handleClick = () => {
     if (!notification.data?.id_request) return;
     if (notification.category === "request") {
+      const data = { id_notification: notification.id, ...notification.data };
+      setFriendsData(data);
       setModalId("AddFriendModal");
     }
   };
-
-  useEffect(() => {
-    if (notification.category === "request") {
-      const data = { id_notification: notification.id, ...notification.data };
-      setFriendsData(data);
-    }
-  }, []);
 
   return (
     <ComponentsAnimator key={i}>
       <div
         onClick={handleClick}
-        className="flex items-center w-full gap-4 p-4 border-b-0"
+        className="flex items-center w-full gap-4 p-3 border-b-0"
       >
         <div className="w-max">
           <UserAvatar

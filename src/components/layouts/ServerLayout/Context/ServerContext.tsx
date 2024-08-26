@@ -4,7 +4,7 @@ import { get_all_servers_by_user, get_server } from "../../../../api/server";
 import { useFetchID } from "../../../../hooks/useFecthID";
 import { CategoryType, ChannelType, SpecificServerType } from "../types/server";
 import { LoadingPage } from "../../../routes/loadingPage";
-
+import { useNavigate } from "react-router-dom";
 
 interface ServerContextProps {
   server_data: ServerDataIcons;
@@ -105,6 +105,8 @@ export const ServerProvider = ({ children }: { children: ReactNode }) => {
   const [selected_server, setSelectedServer] =
     useState<SpecificServerType>(defaultData);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const loader = async () => {
       const servers = await fecthData();
@@ -113,7 +115,12 @@ export const ServerProvider = ({ children }: { children: ReactNode }) => {
       if (!servers?.length) return;
       const active_server = obtener_servidor_activo(servers);
 
+      if (!active_server) {
+        navigate(servers[0].url);
+      }
+
       const specific_server = await fechtDataID(active_server.id);
+
       setSelectedServer(specific_server);
 
       set_ultimo_servidor(specific_server);

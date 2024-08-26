@@ -1,26 +1,47 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
 import { useFetch } from "../../../../hooks/useFetch";
-import { get_friends_by_user } from "../../../../api/social";
 import { LoadingPage } from "../../../../components/routes/loadingPage";
+import { get_friends_data } from "../../../../api/user_info";
 
-export const DmContext = createContext({});
+interface DmContextProps {
+  friends: FriendsWithUserInfoArray;
+  setFriends: React.Dispatch<React.SetStateAction<FriendsWithUserInfoArray>>;
+  selectedChat: string;
+  setSelectedChat: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export const DmContext = createContext<DmContextProps>({
+  friends: [],
+  setFriends: () => {},
+  selectedChat: "",
+  setSelectedChat: () => {},
+});
 
 export const DmProvider = ({ children }: { children: ReactNode }) => {
-  const [friends, serFriends] = useState();
-  const [selectedChat, setSelectedChat] = useState();
+  const [friends, setFriends] = useState<FriendsWithUserInfoArray>([]);
+  const [selectedChat, setSelectedChat] = useState<string>("");
 
   const { fecthData, isLoading } = useFetch({
-    api_function: get_friends_by_user,
+    api_function: get_friends_data,
   });
 
   useEffect(() => {
     const fetching = async () => {
-      console.log(await fecthData());
+      const friends = await fecthData();
+      setFriends(friends);
     };
     fetching();
   }, []);
 
+  console.log(friends);
+
   if (isLoading) return <LoadingPage />;
 
-  return <DmContext.Provider value={{}}>{children}</DmContext.Provider>;
+  return (
+    <DmContext.Provider
+      value={{ friends, setFriends, selectedChat, setSelectedChat }}
+    >
+      {children}
+    </DmContext.Provider>
+  );
 };

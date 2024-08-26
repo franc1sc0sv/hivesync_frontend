@@ -1,7 +1,7 @@
 import { GeneralLayout } from "../../../components/layouts/GeneralLayout/GeneralLayout";
 
 import { AddFriendsButton } from "../../../components/buttons/AddFriendsButton";
-import { FriendsPanel } from "./Components/FriendsPanel";
+
 import { Inbox } from "./Components/Inbox";
 
 import { ShowFakePages } from "../../../components/fakePages/ShowFakePages";
@@ -13,8 +13,7 @@ export const DirectMessagesPage = () => {
     <GeneralLayout title="Mensajes" RightComponent={AddFriendsButton}>
       <DmProvider>
         <article className="flex flex-col w-full h-full">
-          {/* <FriendsPanel friends={[]} /> */}
-          <Inbox friends={[]} />
+          <Inbox />
         </article>
         <ShowFakePages />
       </DmProvider>

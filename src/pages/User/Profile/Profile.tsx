@@ -5,6 +5,7 @@ import { useSession } from "../../../store/user";
 
 export const ProfilePage: React.FC = () => {
   const { user } = useSession();
+  console.log(user);
   return (
     <GeneralLayout showHeader={false}>
       <section className="flex flex-col justify-around w-full h-full">

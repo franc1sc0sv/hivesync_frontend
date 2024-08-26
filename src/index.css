@@ -5,3 +5,7 @@
 .screen_overlay {
   height: calc(100vh - 8rem);
 }
+
+* {
+  font-family: Amiko, sans-serif;
+}

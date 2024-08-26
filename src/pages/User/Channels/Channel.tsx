@@ -1,5 +1,5 @@
 import { ChatLayout } from "../../../components/layouts/ChatLayout/ChatLayout";
 
-export const ChatPage = () => {
+export const ChannelPage = () => {
   return <ChatLayout />;
 };

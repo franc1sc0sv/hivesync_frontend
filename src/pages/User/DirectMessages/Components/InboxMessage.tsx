@@ -1,42 +1,39 @@
-import { UserStatusIcon } from "../../../../components/Icons/userStatusIcon";
+import { UserAvatar } from "../../../../components/Avatars/UserAvatar";
 import { Link } from "react-router-dom";
-import { IconProps } from "../../../../components/Icons/userStatusIcon";
 
-interface UserProps extends IconProps {
-  username: string;
-  messagePreview: string;
-  timeAgo: string;
+interface UserProps {
+  friend: FriendWithUserInfo;
 }
 
-export const InboxMessage: React.FC<UserProps> = ({
-  pictureRoute,
-  isActive,
-  username,
-  messagePreview,
-  timeAgo,
-}) => {
+export const InboxMessage: React.FC<UserProps> = ({ friend }) => {
+  const { messagePreview, timeAgo, userInfo } = friend;
 
-  const id = "d853c1ef-e3b6-4f04-942d-62226325536a";
+  const { username, id_user, profileUrl } = userInfo;
 
+  const message =
+    messagePreview === ""
+      ? `Has clcik aqui y comienza a hablar con ${username}`
+      : messagePreview;
   return (
     <Link
-      to={`/app/${id}`}
-      className="flex flex-row items-center justify-around"
+      to={`/app/${id_user}`}
+      className="flex justify-around w-full gap-4 h-18"
     >
-
-      <div className="flex w-full gap-3">
-        <div className="">
-          <UserStatusIcon pictureRoute={pictureRoute} isActive={isActive} />
-        </div>
-        <div className="">
-          <h1 className="text-lg text-custom_white">{username}</h1>
-          <p className="text-sm text-zinc-500">{messagePreview}</p>
-        </div>
+      <div>
+        <UserAvatar
+          w={4}
+          h={4}
+          fontSize={2}
+          profileURl={profileUrl}
+          username={username}
+        />
+      </div>
+      <div className="flex flex-col w-full font-amiko">
+        <h1 className="text-lg text-custom_white">{username}</h1>
+        <p className="text-sm text-gray">{message}</p>
       </div>
 
-      <div className="w-[20%]">
-        <h2 className="text-sm text-right text-gray">{timeAgo}</h2>
-      </div>
+      <h2 className="self-end text-sm text-right text-gray">{timeAgo}</h2>
     </Link>
   );
 };

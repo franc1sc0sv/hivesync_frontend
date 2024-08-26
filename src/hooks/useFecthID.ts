@@ -25,6 +25,7 @@ const useFetchID = ({
       return res;
     } catch (e) {
       setIsloading(false);
+      throw e;
     }
   };
 

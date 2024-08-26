@@ -6,7 +6,7 @@ import { ChatHeader } from "./Components/Header/chatHeader";
 import { MessageInput } from "./Components/messageInput";
 import { ChatProvider } from "./Context/ChatContext";
 
-export const ChatLayout = () => {
+export const ChannelLaout = () => {
   return (
     <main className="flex flex-col justify-between w-full h-screen bg-overlay_1">
       <ChatProvider>

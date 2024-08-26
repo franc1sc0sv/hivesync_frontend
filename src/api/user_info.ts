@@ -13,3 +13,24 @@ export const get_user_username = async (data: any) => {
     throwError(e);
   }
 };
+
+export const get_friends_data = async () => {
+  try {
+    const res = await AxiosClient.get("/user_info/user/friends", headers());
+    return format_api_response(res);
+  } catch (e) {
+    throwError(e);
+  }
+};
+
+export const get_friend_data = async (id: string) => {
+  try {
+    const res = await AxiosClient.get(
+      `/user_info/user/friends/${id}`,
+      headers()
+    );
+    return format_api_response(res);
+  } catch (e) {
+    throwError(e);
+  }
+};
