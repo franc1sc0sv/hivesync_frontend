@@ -20,7 +20,7 @@ export const PasswordInput: React.FC<Props> = ({ register, name }) => {
     "absolute right-0 flex items-center pr-3 text-xl cursor-pointer top-1/2 text-custom_white ";
 
   return (
-    <div className="relative w-full max-w-[320px]">
+    <div className="relative w-full">
       <InputsForms
         register={register}
         name= {name ? name : "password"}

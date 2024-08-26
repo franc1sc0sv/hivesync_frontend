@@ -53,7 +53,7 @@ const ProfileCover: React.FC = () => {
           profileURl={user?.profileUrl as string}
           username={user?.username as string}
         />
-        <span className="absolute bottom-0 right-0 z-10 w-10 h-10 transition duration-300 border border-white rounded-full left-15 bg-overlay_2 hover:bg-primary dark:border-gray-800">
+        <span className="absolute bottom-0 right-0 z-10 w-10 h-10 transition duration-300 border border-white rounded-full left-15 bg-overlay_2 hover:bg-light_purple dark:border-gray-800">
           <div className="absolute cursor-pointer bottom-1 right-1">
             <PencilIcon size={30} color="white" />
           </div>
