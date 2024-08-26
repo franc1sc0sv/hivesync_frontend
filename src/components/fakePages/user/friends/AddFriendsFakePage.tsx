@@ -86,7 +86,7 @@ const SendFriendsRequest = ({
         <User data={data} />
       </div>
 
-      <div className="flex flex-col items-end justify-end w-full h-full py-10 md:p-0 ">
+      <div className="w-[320px] mx-auto flex flex-col items-end justify-end py-10 md:p-0 ">
         <SubmitButton text="Buscar" isLoading={isLoading} />
       </div>
     </form>

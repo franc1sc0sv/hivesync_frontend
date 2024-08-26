@@ -121,12 +121,15 @@ const ModalForm = () => {
       onSubmit={onSubmit}
       className="flex flex-col items-center justify-center w-full gap-5 px-1 overflow-y-auto"
     >
-      <InputsForms
-        title="Nombre del servidor"
-        register={register}
-        name="name"
-        placeholder="Nombre del servidor"
-      />
+      <div className="w-[320px]">
+        <InputsForms
+          title="Nombre del servidor"
+          register={register}
+          name="name"
+          placeholder="Nombre del servidor"
+        />
+
+      </div>
 
       {/* <div className="flex justify-center max-w-4/5 sm:w-full">
         <EditProfilePicture register={register} />
@@ -150,7 +153,9 @@ const ModalForm = () => {
         />
       </div>
 
-      <SubmitButton text="Crear servidor" isLoading={isLoading} />
+      <div className="w-[320px]">
+        <SubmitButton text="Crear servidor" isLoading={isLoading} />
+      </div>
     </form>
   );
 };

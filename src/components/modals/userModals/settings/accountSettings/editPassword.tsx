@@ -72,7 +72,7 @@ const Form = () => {
 
     return (
         <form
-            className="w-full flex flex-col justify-center items-center gap-10"
+            className="w-4/5 sm:w-3/5 lg:w-1/3 flex flex-col justify-center items-center gap-10"
             onSubmit={onSubmit}
         >
             <PasswordInput name="password" register={register} />
@@ -82,6 +82,7 @@ const Form = () => {
                     {message}
                 </p>
             )}
+            
             <SubmitButton text="Guardar cambios" isLoading={isLoading} />
         </form>
     );

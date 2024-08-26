@@ -12,7 +12,6 @@ import { NotificationProps } from "../types/NotificationProps";
 export const NotificationsPanel = () => {
   return (
     <section className="flex flex-col w-full h-full gap-5 overflow-y-auto bg-gray-800 rounded-lg shadow-lg">
-      <CategoriesHeader />
       <NotificationsBox />
     </section>
   );
@@ -30,7 +29,11 @@ const NotificationsBox = () => {
   return filteres_notifications.length === 0 ? (
     <NoNotifications />
   ) : (
-    <NotificationsContainer filtered_notifications={filteres_notifications} />
+    <>
+      <CategoriesHeader />
+      <NotificationsContainer filtered_notifications={filteres_notifications} />
+    </>
+
   );
 };
 
@@ -113,11 +116,10 @@ const CategoriesHeader = () => {
         <button
           key={i}
           onClick={() => handleCategoryClick(category.id)}
-          className={`py-2 px-4 rounded-full capitalize ${
-            selectedCategory === category.id
-              ? "bg-purple-600 text-white"
-              : "bg-transparent text-white transition-all duration-300"
-          }`}
+          className={`py-2 px-4 rounded-full capitalize ${selectedCategory === category.id
+            ? "bg-purple-600 text-white"
+            : "bg-transparent text-white transition-all duration-300"
+            }`}
         >
           {category.name}
         </button>

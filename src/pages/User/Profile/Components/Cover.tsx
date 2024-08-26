@@ -3,6 +3,8 @@ import { HiCog } from "react-icons/hi";
 
 import { UserAvatar } from "../../../../components/Avatars/UserAvatar";
 
+import { useEffect } from "react";
+
 export const ProfileCover = ({
   show_config = true,
   profileUrl,
@@ -14,6 +16,12 @@ export const ProfileCover = ({
   backgroundUrl: string;
   show_config?: boolean;
 }) => {
+
+  // solución ultra sofisticada para arreglar bug del color de la portada xd
+  useEffect(() => {
+    if (!backgroundUrl) return window.location.reload();
+  },[])
+
   return (
     <div className="w-full mx-auto text-gray-900 rounded-lg lg:w-[90%]">
       <div

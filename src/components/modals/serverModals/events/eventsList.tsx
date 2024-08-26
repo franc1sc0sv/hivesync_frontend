@@ -23,7 +23,7 @@ const List: React.FC<EventProps> = ({ eventsList }) => {
     const {setModalId} = useModal();
 
     return (
-        <div className="w-full lg:w-4/5 mx-auto">
+        <div className="w-full sm:w-4/5 lg:w-3/5 mx-auto">
 
             <div className="w-full flex flex-row justify-between lg:justify-around items-center my-5">
                 <p className="text-center text-custom_white text-2xl lg:text-3xl">Próximos eventos</p>

@@ -4,6 +4,7 @@ import { CalendarIcon } from "../../Icons/calendar";
 import { FolderIcon } from "../../Icons/folder";
 import { CategoryIcon } from "../../Icons/category";
 import { ExitIcon } from "../../Icons/exit";
+import { PencilIcon } from "../../Icons/pencil";
 
 import { ModalTemplate } from "../ModalTemplate";
 
@@ -13,6 +14,12 @@ import { useModal } from "../../../store/useModal";
 import { MenuProps, OptionsTemplateProps } from "./types/menuProps";
 
 const quickOptions: MenuProps[] = [
+
+  {
+    icon: <PencilIcon size={30} color="white" />,
+    name: "Editar servidor",
+    modal: "editServer",
+  },
   {
     icon: <UserAddIcon size={30} color="white" />,
     name: "Invitar miembros",
@@ -164,7 +171,7 @@ export const ServerIcon = ({
   return (
     <div
       style={{ backgroundImage: imgBG }}
-      className={` w-24 h-24 rounded-full text-4xl z-50 font-exo lowercase  grid place-items-center ${letterIconStyles} `}
+      className={` w-24 h-24 rounded-full text-4xl z-10 font-exo lowercase  grid place-items-center ${letterIconStyles} `}
     >
       {isIconUrlEmpty && firstLetterName}
     </div>

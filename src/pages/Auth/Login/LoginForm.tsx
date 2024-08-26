@@ -47,9 +47,8 @@ const Form = () => {
     >
       <InputsForms
         register={register}
-        //se necesita enviar si o si email, aún no acepta usuario por el momento la api
         name="user"
-        title="Usuario"
+        title="Email o usuario"
         placeholder="Digite su email o nombre de usuario"
         type="mail"
       />
