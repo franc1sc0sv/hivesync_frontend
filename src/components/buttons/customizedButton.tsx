@@ -15,7 +15,7 @@ export const CustomizedButton: React.FC<ButtonProps> = ({ text, color, onAction,
     const handleMouseLeave = () => setIsHovered(false);
 
     return (
-        <div
+        <button
             style={{
                 background: isHovered ? 'white' : color,
                 color: isHovered ? '#overlay_1' : '#custom_white',
@@ -30,6 +30,6 @@ export const CustomizedButton: React.FC<ButtonProps> = ({ text, color, onAction,
                 <p>{text}</p>
                 {displayIcon && <RiArrowRightSLine size={28} />}
             </div>
-        </div>
+        </button>
     );
 };

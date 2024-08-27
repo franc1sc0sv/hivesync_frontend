@@ -43,7 +43,7 @@ const Form: React.FC = () => {
     return (
         <form
             onSubmit={onSubmit}
-            className="w-full sm:w-4/5 lg:w-1/2 h-full flex flex-col items-center justify-center gap-5 p-4 mx-auto text-white "
+            className="w-full sm:w-4/5 lg:w-1/2 h-full   flex flex-col items-center justify-center gap-5 p-4 mx-auto text-white "
         >
             <ColorPickerInput
                 register={register}
