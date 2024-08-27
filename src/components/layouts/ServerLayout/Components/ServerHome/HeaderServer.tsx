@@ -2,19 +2,22 @@ import { CalendarIcon } from "../../../../Icons/calendar";
 import { RightTriangleIcon } from "../../../../Icons/rightTriangle";
 import { UsersGroupIcon } from "../../../../Icons/usersGroup";
 
-import { useCustomForm } from "../../../../../hooks/useForm";
+// import { useCustomForm } from "../../../../../hooks/useForm";
 
 import { useModal } from "../../../../../store/useModal";
 import { ServerModals } from "../../../../modals/serverModals/serverModals";
 
-import { SearchBar } from "../../../../forms/Inputs/SearchBar";
+// import { SearchBar } from "../../../../forms/Inputs/SearchBar";
 
 export const HeaderServer = ({ name }: { name: string }) => {
-  const api = () => console.log("hola, *llama a la api épicamente*");
-  const success = () => console.log("success");
+  // const api = () => console.log("hola, *llama a la api épicamente*");
+  // const success = () => console.log("success");
 
-  const { onSubmit, register } = useCustomForm(api, success, "");
-
+  // const { onSubmit, register } = useCustomForm(api, success, "");
+  
+  
+  
+  //ESTO ES RE IMPORTANTE, pq asi selecciona el nombre del server
   const { setModalId } = useModal();
 
   return (
@@ -30,14 +33,14 @@ export const HeaderServer = ({ name }: { name: string }) => {
       </div>
 
       <div className="flex gap-2">
-        <form onSubmit={onSubmit}>
+        {/* <form onSubmit={onSubmit}>
           <SearchBar
             register={register}
             name="searchInServer"
             bg_color="bg-overlay_1"
             placeholder="Buscar"
           />
-        </form>
+        </form> */}
 
         <button
           className="flex justify-center items-center p-2 rounded-full w-12 bg-overlay_1"

@@ -14,6 +14,7 @@ const obtener_server_id_activo = () => {
   const currentURL = window.location.pathname;
   return currentURL.split("/")[2];
 };
+//en esta wea tengo que mandar el modal para que el provider le llegue el coso
 
 export const ServerLayout = () => {
   const { server_data } = useServer();
@@ -35,6 +36,7 @@ const AreServersLayout = () => {
     <article className={`flex justify-center h-full gap-3 ${stylesServers}`}>
       <ServerIcons server_data_icons={server_data} />
       <ChannelListProvider channels={selected_server.channels}>
+        {/* especificamente acá tengo que mandar mis modales */}
         <ServerHome specific_server_data={selected_server} />
         <Channel />
       </ChannelListProvider>

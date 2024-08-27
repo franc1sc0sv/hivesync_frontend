@@ -3,7 +3,7 @@ import { ShowFakePages } from "../../../../fakePages/ShowFakePages";
 import { useSwipeHandler } from "../../hooks/useFakePageSwipeHandler";
 
 import { MegaphoneIcon } from "../../../../Icons/megaphone";
-
+// esta es donde sale la fakepage
 export const Channel: React.FC = () => {
   const { addFakePage } = useFakePages();
 
@@ -15,6 +15,7 @@ export const Channel: React.FC = () => {
     <div className="flex flex-row items-center justify-center w-[100%] rounded-tl-lg rounded-bl-lg max-h-fit bg-overlay_2 screen_overlay">
       <div
         {...handler}
+        // aca esta wea
         className="w-full h-full ml-auto rounded-tl-lg rounded-bl-lg bg-overlay_2 screen_overlay"
         onClick={() =>
           addFakePage({ title: "", children: <NoChannelSelected /> })

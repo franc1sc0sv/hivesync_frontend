@@ -3,6 +3,7 @@ import { ItemAcordeonChannel } from "./Item";
 import { useChannelList } from "../../../hooks/useChannelList";
 import { ChannelsFormated } from "../../../types/server";
 
+//estas weas son las secciones de los grupos de canales
 export const AcordeonMenu = ({
   CategoryChannel,
 }: {
@@ -40,7 +41,7 @@ const CategoryChannels = ({
 
   return (
     <div
-      className="flex items-center gap-2 font-medium text-custom_white font-almarai"
+      className="flex items-center gap-2 font-medium text-custom_white font-almarai "
       onClick={handleClick}
     >
       <IoIosArrowForward
@@ -60,7 +61,7 @@ export const AcordeonItems = ({
   isCategoryOpen?: boolean;
 }) => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col ">
       {CategoryChannel.map((channel) => (
         <ItemAcordeonChannel
           isCategoryOpen={isCategoryOpen}

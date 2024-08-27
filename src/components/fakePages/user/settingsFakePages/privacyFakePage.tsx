@@ -26,6 +26,7 @@ export const PrivacySettingsFakePage: React.FC = () => {
     )
 }
 
+
 const Options: React.FC = () => {
     const { setModalId } = useModal();
 

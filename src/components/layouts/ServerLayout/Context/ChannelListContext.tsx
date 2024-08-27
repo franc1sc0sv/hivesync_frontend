@@ -109,7 +109,8 @@ export const ChannelListProvider = ({
 
     setChannelList(formatedChannels);
   }, []);
-
+  
+  
   return (
     <ChannelListContext.Provider
       value={{
