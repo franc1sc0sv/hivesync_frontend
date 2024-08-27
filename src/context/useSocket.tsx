@@ -31,12 +31,9 @@ export const SocketContextProvider: React.FC<SocketContextProviderProps> = ({
   children,
 }) => {
   const [socket, setSocket] = useState<Socket | null>(null);
-  const API_URL = import.meta.env.VITE_API_URL + "/zelda";
 
   useEffect(() => {
-    const socketInstance = io(API_URL, {
-      transports: ["websocket"],
-    });
+    const socketInstance = io(import.meta.env.VITE_SOCKET);
     setSocket(socketInstance);
 
     socketInstance.on("connect_error", (err) => {
