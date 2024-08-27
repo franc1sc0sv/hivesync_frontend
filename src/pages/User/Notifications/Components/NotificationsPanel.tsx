@@ -12,6 +12,7 @@ import { NotificationProps } from "../types/NotificationProps";
 export const NotificationsPanel = () => {
   return (
     <section className="flex flex-col w-full h-full gap-5 overflow-y-auto bg-gray-800 rounded-lg shadow-lg">
+      <CategoriesHeader />
       <NotificationsBox />
     </section>
   );
@@ -30,7 +31,6 @@ const NotificationsBox = () => {
     <NoNotifications />
   ) : (
     <>
-      <CategoriesHeader />
       <NotificationsContainer filtered_notifications={filteres_notifications} />
     </>
 
