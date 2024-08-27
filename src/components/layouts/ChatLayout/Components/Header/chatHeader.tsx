@@ -33,30 +33,32 @@ export const ChatHeader = () => {
     setIsVoiceCall(false);
     StartCall();
   };
-  console.log(friend);
 
   return (
-    <div className="flex items-center justify-between w-full px-5 py-3">
-      <div className="flex items-center gap-5">
+    <div className="flex items-center justify-between w-full gap-2 px-5 py-3">
+      <div className="flex items-center gap-5 w-[70%]">
         <Link to="/app/@me">
           <GoBackTriangle size={24} color="#fff" />
         </Link>
-        <div className="flex items-center gap-2">
-          <UserAvatar
-            w={2.5}
-            h={2.5}
-            fontSize={1.5}
-            profileURl={friend?.profileUrl}
-            username={friend?.username}
-          />
-
-          <p className="text-xl font-amiko text-custom_white">
-            {friend.username}
-          </p>
+        <div className="flex items-center w-full gap-2 !truncate">
+          <div className="w-max">
+            <UserAvatar
+              w={3}
+              h={3}
+              fontSize={1.5}
+              profileURl={friend?.profileUrl}
+              username={friend?.username}
+            />
+          </div>
+          <div className="w-full ">
+            <p className="w-full text-xl font-amiko text-custom_white">
+              {friend.username}
+            </p>
+          </div>
         </div>
       </div>
 
-      <div className="flex gap-5">
+      <div className="flex gap-5 w-[30%]">
         <ButtonHover handleClick={handleVoiceCall}>
           <PhoneIcon size={24} color="#fff" />
         </ButtonHover>

@@ -2,29 +2,31 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { API_RESPONSE_ERROR_CLASS } from "../class/api_responses_instances";
 import { useNotifications } from "../store/useNotifications";
-import { useNavigate } from "react-router-dom";
+import { useSocketContext } from "../context/useSocket";
 
-export const useCustomForm = (
-  api_function: (data?: any) => any,
-  post_success_function: (data: Usuario) => void,
-  route: string
-) => {
+export const useSendMessage = () => {
   const { register, handleSubmit, reset, setValue } = useForm();
-  const navigate = useNavigate();
   const [isLoading, setIsloading] = useState(false);
+
   const { setNotifications } = useNotifications();
+  const { socket } = useSocketContext();
 
   const onSubmit = async (data: any) => {
     try {
       setIsloading(true);
-      const res = await api_function(data);
+      const datos: { message: string; room: string; token: string } = {
+        ...data,
+      };
 
-      post_success_function(res);
-      navigate(route);
+      if (!datos.message || !datos.room || !datos.token) throw "error";
+      if (!socket) throw "error";
+      datos.message = datos.message.trim();
+
+      console.log(datos);
+      socket?.emit("send_message", datos);
 
       setIsloading(false);
       reset();
-      return res;
     } catch (e) {
       if (e instanceof API_RESPONSE_ERROR_CLASS) {
         setNotifications({

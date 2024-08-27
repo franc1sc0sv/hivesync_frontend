@@ -5,3 +5,18 @@ type Message = {
   id_user: string;
   id_inbox: string;
 };
+
+type GroupedMessagesType = {
+  id_user: string;
+  sendAt: string;
+  messages: MessageFormatedArray;
+};
+
+type MessageFormated = {
+  id: string;
+  message: string;
+};
+
+type GroupedMessagesTypeArray = GroupedMessagesType[];
+
+type MessageFormatedArray = MessageFormated[];

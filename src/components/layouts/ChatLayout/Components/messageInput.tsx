@@ -1,34 +1,20 @@
+import { useEffect } from "react";
 import { SendIcon } from "../../../../components/Icons/send";
 
-import { useCustomForm } from "../../../../hooks/useForm";
-import useChat from "../../../../store/chat/useChat";
+import { useChat } from "../Context/useChat";
+import { useSendMessage } from "../../../../hooks/useSendMessage";
 
 export const MessageInput: React.FC = () => {
-  const { sendMessage, setShouldScrollToBottom } = useChat();
+  const { onSubmit, register, setValue } = useSendMessage();
 
-  const api_function = async (data: any) => {
-    const textMessage = data.text;
+  const { friend } = useChat();
 
-    if (textMessage) {
-      const message = {
-        isUserSender: true,
-        content: textMessage,
-      };
+  useEffect(() => {
+    const token = localStorage.getItem("token");
 
-      if (message.content.trim().length === 0) return;
-
-      sendMessage(message);
-      setShouldScrollToBottom(true);
-    }
-  };
-
-  const post_success_function = () => {};
-
-  const { onSubmit, register } = useCustomForm(
-    api_function,
-    post_success_function,
-    ""
-  );
+    setValue("room", friend.id);
+    setValue("token", token);
+  }, [onSubmit]);
 
   return (
     <form
@@ -37,7 +23,7 @@ export const MessageInput: React.FC = () => {
     >
       <div className="relative w-full">
         <input
-          {...register("text")}
+          {...register("message")}
           placeholder="Escribe un mensaje"
           type="text"
           className="w-full px-4 py-3 pr-10 text-sm transition duration-300 border-none font-amiko bg-overlay_2 rounded-overlay text-custom_white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"

@@ -33,8 +33,6 @@ export const DmProvider = ({ children }: { children: ReactNode }) => {
     fetching();
   }, []);
 
-  console.log(friends);
-
   if (isLoading) return <LoadingPage />;
 
   return (

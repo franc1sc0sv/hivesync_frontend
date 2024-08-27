@@ -35,3 +35,27 @@ export const formatDate = (dateString: string): string => {
     year: "numeric",
   });
 };
+
+export function formatDateMessage(dateString: string): string {
+  const now = new Date();
+  const date = new Date(dateString);
+  const diff = Math.floor(
+    (now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24)
+  );
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  const time = `${hours}:${minutes}`;
+
+  if (diff === 0) {
+    return `hoy ${time}`;
+  } else if (diff === 1) {
+    return `ayer ${time}`;
+  } else if (diff >= 2 && diff <= 7) {
+    return `hace ${diff} días ${time}`;
+  } else {
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}/${month}/${year} ${time}`;
+  }
+}

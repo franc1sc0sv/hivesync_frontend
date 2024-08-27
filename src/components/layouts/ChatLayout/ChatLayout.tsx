@@ -1,7 +1,7 @@
 import { Notifications } from "../../Alerts/Notification";
 import { ShowFakePages } from "../../fakePages/ShowFakePages";
 
-import { Conversation } from "./Components/conversation";
+import { Conversation } from "./Components/Conversation/conversation";
 import { ChatHeader } from "./Components/Header/chatHeader";
 import { MessageInput } from "./Components/messageInput";
 import { ChatProvider } from "./Context/ChatContext";
