@@ -31,22 +31,11 @@ export const SocketContextProvider: React.FC<SocketContextProviderProps> = ({
   children,
 }) => {
   const [socket, setSocket] = useState<Socket | null>(null);
-  const API_URL = import.meta.env.VITE_API_URL + "/zelda";
+  const API_URL = import.meta.env.VITE_SOCKET;
 
   useEffect(() => {
-    const socketInstance = io(API_URL, {
-      transports: ["websocket"],
-    });
+    const socketInstance = io(API_URL);
     setSocket(socketInstance);
-
-    socketInstance.on("connect_error", (err) => {
-      // the reason of the error, for example "xhr poll error"
-      console.log(err);
-    });
-
-    socketInstance.on("connnection", () => {
-      console.log("connected to server");
-    });
   }, []);
   return (
     <SocketContext.Provider value={{ socket }}>

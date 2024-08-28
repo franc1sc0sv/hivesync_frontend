@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { Ref, useEffect, useRef } from "react";
 import { Notifications } from "../../../../Alerts/Notification";
 import { useChat } from "../../Context/useChat";
 import { UserAvatar } from "../../../../Avatars/UserAvatar";
@@ -10,21 +10,18 @@ import { formatDateMessage } from "../../../../../helpers/date";
 export const Conversation = () => {
   const { messages } = useChat();
 
-  const a = messages.length ? "gap-10" : "";
+  const a = messages.length ? "gap-5" : "";
   const endOfMessagesRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     endOfMessagesRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, []);
+  }, [messages]);
 
   return (
-    <div
-      className={`flex flex-col justify-end w-full h-full  px-5 overflow-y-auto ${a}`}
-    >
+    <div className={`flex flex-col w-full h-full px-5 overflow-y-auto ${a}`}>
       <Notifications />
       <StartConvsersation />
-      <ContainerMessages />
-      <div ref={endOfMessagesRef} />
+      <ContainerMessages endOfMessagesRef={endOfMessagesRef} />
     </div>
   );
 };
@@ -33,7 +30,7 @@ const StartConvsersation = () => {
   const { friend } = useChat();
 
   return (
-    <div className="flex flex-col w-full gap-3 self">
+    <div className="flex flex-col w-full gap-3 mt-6">
       <UserAvatar profileURl={friend.profileUrl} username={friend.username} />
       <div className="flex flex-col gap-1">
         <p className="text-4xl text-white font-amiko">{friend.name}</p>
@@ -46,7 +43,11 @@ const StartConvsersation = () => {
   );
 };
 
-const ContainerMessages = () => {
+const ContainerMessages = ({
+  endOfMessagesRef,
+}: {
+  endOfMessagesRef: React.MutableRefObject<HTMLDivElement | null>;
+}) => {
   const { messages } = useChat();
 
   const a = messages.length ? "h-full" : "";
@@ -55,6 +56,7 @@ const ContainerMessages = () => {
       {messages.map((group, i) => (
         <GroupOfMessages key={i} group={group} />
       ))}
+      <div ref={endOfMessagesRef}></div>
     </div>
   );
 };
@@ -70,7 +72,7 @@ const GroupOfMessages = ({ group }: { group: GroupedMessagesType }) => {
   const profile_url_friend = friend.profileUrl;
   const username_friend = friend.username;
 
-  const isFromCurrentUserTheMessage = id_user !== user?.id;
+  const isFromCurrentUserTheMessage = id_user === user?.id;
 
   return (
     <AnimatePresence>
