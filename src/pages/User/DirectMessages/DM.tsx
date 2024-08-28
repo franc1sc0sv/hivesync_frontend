@@ -9,6 +9,8 @@ import { ShowFakePages } from "../../../components/fakePages/ShowFakePages";
 import { DmProvider } from "./Context/ContextDM";
 
 export const DirectMessagesPage = () => {
+
+
   return (
     <GeneralLayout title="Mensajes" RightComponent={AddFriendsButton}>
       <DmProvider>

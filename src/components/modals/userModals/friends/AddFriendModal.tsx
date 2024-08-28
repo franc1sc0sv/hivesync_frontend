@@ -14,8 +14,8 @@ export const AddFriendModal = () => {
 
   return (
     <ModalTemplate identificator="AddFriendModal">
-      <div className="flex flex-col justify-between h-full">
-        <div className="flex flex-col gap-4">
+      <div className="w-full h-full flex flex-col justify-between items-center p-3">
+        <div className="w-4/5 sm:w-4/5 lg:w-3/5 flex flex-col justify-center items-center gap-4">
           <ProfileCover
             backgroundUrl={friendsData.background_url}
             profileUrl={friendsData.profile_url}
@@ -24,6 +24,7 @@ export const AddFriendModal = () => {
           />
           <MainInformation />
         </div>
+
         <ButtonsActions />
       </div>
     </ModalTemplate>
@@ -34,14 +35,14 @@ const MainInformation: React.FC = () => {
   const { friendsData } = useAddFriendsData();
 
   return (
-    <div className="flex flex-col w-full gap-2 p-3 rounded-lg bg-overlay_2 ">
-      <p className="text-sm text-white font-extralight font-amiko ">
+    <div className="w-full lg:w-[90%]">
+      <p className="text-left text-xl text-white font-extralight font-amiko">
         <span
-          style={{ color: friendsData.background_url }}
-          className="font-extrabold"
+          // style={{ color: friendsData.background_url }}
+          className="font-extrabold text-light_purple"
         >
-          {friendsData.username_who_sent}
-        </span>{" "}
+          {friendsData.username_who_sent + " "}
+        </span>
         te ha enviado una solicitud de amistad
       </p>
     </div>
@@ -90,13 +91,14 @@ const ButtonsContainer = ({
   declineRequest: () => Promise<void>;
 }) => {
   return (
-    <div className="flex w-full gap-5 lg:flex-row sm:w-1/3 md:w-1/3 lg:w-1/5">
+    <div className="flex w-4/5 lg:w-1/2 mx-auto gap-5">
       <CustomizedButton
         text="Aceptar"
         color="#382C6C"
         displayIcon={false}
         onAction={acceptRequest}
       />
+
       <CustomizedButton
         text="Rechazar"
         color="#EF4444"

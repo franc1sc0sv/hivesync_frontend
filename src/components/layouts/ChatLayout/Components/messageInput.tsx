@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { SendIcon } from "../../../../components/Icons/send";
 
-import { useChat } from "../Context/useChat";
 import { useSendMessage } from "../../../../hooks/useSendMessage";
+import { useChat } from "../Context/useChat";
 
 export const MessageInput: React.FC = () => {
   const { onSubmit, register, setValue } = useSendMessage();

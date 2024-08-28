@@ -3,7 +3,6 @@ import { AuthDetector } from "../../components/auth/AuthDetector";
 
 import { DirectMessagesPage } from "../../pages/User/DirectMessages/DM";
 import { ChatPage } from "../../pages/User/Chat/ChatPage";
-import { ComunityPage } from "../../pages/User/Comunity/ComunityPage";
 import { ComunityIndividualPage } from "../../pages/User/ComunityIndividual/ComunityIndividualPage";
 import { ServerPage } from "../../pages/User/Servers/ServerPage";
 import { ProfilePage } from "../../pages/User/Profile/Profile";
@@ -12,6 +11,7 @@ import { NotificationsPage } from "../../pages/User/Notifications/NotificationsP
 
 //no le hagan caso xd ay lo borro
 import { TestingPage } from "../../pages/testing/TestingPage";
+import { ComunityPage } from "../../pages/Home/Comunity/ComunityPage";
 
 export const UserRoutes: RouteObject = {
   caseSensitive: true,
@@ -27,7 +27,6 @@ export const UserRoutes: RouteObject = {
     { path: "profile", element: <ProfilePage /> },
     { path: "profile/settings", element: <SettingsPage /> }, //ajustes del usuario
 
-    // { path: "testin", element: <ComunityPage /> },
     { path: "communities/", element: <ComunityPage /> },
     { path: "comunity/:id", element: <ComunityIndividualPage /> },
     { path: ":id/:id", element: <ServerPage /> }, // Servers - /server_id/channel_id
