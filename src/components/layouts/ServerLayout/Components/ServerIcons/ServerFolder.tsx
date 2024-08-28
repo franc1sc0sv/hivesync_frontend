@@ -1,3 +1,4 @@
+import { ServerInfoIcons } from "../../types/server";
 import { ServerIcon } from "./ServerIcon";
 
 type PropsServerIcons = {
@@ -15,7 +16,10 @@ export const ServerFolder: React.FC<PropsServerIcons> = ({ serversFolder }) => {
       {firts_elements.map((server, i) => (
         <ServerIcon
           isFolder
-          IconServerURL={server.IconServerURL}
+          avatarURL={server.avatarURL}
+          createdAt={server.createdAt}
+          id={server.id}
+          privacity={server.privacity}
           active={server.active}
           name={server.name}
           url={server.url}

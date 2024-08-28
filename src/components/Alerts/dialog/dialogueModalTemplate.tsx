@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useModal } from "../../../store/useModal";
 import { AnimatePresence, motion } from "framer-motion";
 import { CloseIcon } from "../../Icons/close";
@@ -24,10 +23,10 @@ export const DialogueTemplate: React.FC<DialogueProps> = ({
         <motion.div
           key={identificator}
           aria-hidden="true"
-          className="fixed inset-0 z-50 flex justify-center items-center w-full h-screen overflow-y-auto bg-overlay_3 bg-opacity-50"
+          className="fixed inset-0 z-50 flex items-center justify-center w-full h-screen overflow-y-auto bg-opacity-50 bg-overlay_3"
         >
           <motion.div
-            className="relative p-4 w-full max-w-md max-h-full"
+            className="relative w-full max-w-md max-h-full p-4"
             initial="hidden"
             animate="visible"
             exit="hidden"
@@ -42,7 +41,7 @@ export const DialogueTemplate: React.FC<DialogueProps> = ({
           >
             {/* Modal content */}
             <motion.div
-              className="relative bg-overlay_2 rounded-xl shadow"
+              className="relative shadow bg-overlay_2 rounded-xl"
               initial={{
                 opacity: 0,
                 scale: 0.3,
@@ -68,7 +67,7 @@ export const DialogueTemplate: React.FC<DialogueProps> = ({
                 <button
                   type="button"
                   onClick={onClose}
-                  className="ms-auto inline-flex justify-center items-center "
+                  className="inline-flex items-center justify-center ms-auto "
                 >
                   <CloseIcon size={30} color="white" />
                 </button>

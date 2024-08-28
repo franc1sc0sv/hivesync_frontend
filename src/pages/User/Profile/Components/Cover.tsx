@@ -3,8 +3,6 @@ import { HiCog } from "react-icons/hi";
 
 import { UserAvatar } from "../../../../components/Avatars/UserAvatar";
 
-import { useEffect } from "react";
-
 export const ProfileCover = ({
   show_config = true,
   profileUrl,
@@ -16,7 +14,6 @@ export const ProfileCover = ({
   backgroundUrl: string;
   show_config?: boolean;
 }) => {
-
   // // solución ultra sofisticada para arreglar bug del color de la portada xd
   // useEffect(() => {
   //   if (!backgroundUrl) return window.location.reload();
@@ -31,7 +28,7 @@ export const ProfileCover = ({
         {show_config && <SettingsPageButton />}
       </div>
 
-      <div className="relative ml-5 -mt-20 overflow-hidden w-28 h-28 rounded-2xl">  
+      <div className="relative ml-5 -mt-20 overflow-hidden w-28 h-28 rounded-2xl">
         <UserAvatar username={username} profileURl={profileUrl} />
       </div>
     </div>

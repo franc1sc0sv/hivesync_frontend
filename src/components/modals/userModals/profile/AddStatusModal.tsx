@@ -8,61 +8,53 @@ import { useCustomForm } from "../../../../hooks/useForm";
 
 const savedStatus = localStorage.getItem("userStatus");
 
-
 export const AddStatusModal: React.FC = () => {
-    return (
-        <ModalTemplate identificator="añadirEstado">
-            <div className="flex items-center justify-center h-full">
-                <StatusForm />
-            </div>
-        </ModalTemplate>
-    )
-}
+  return (
+    <ModalTemplate identificator="añadirEstado">
+      <div className="flex items-center justify-center h-full">
+        <StatusForm />
+      </div>
+    </ModalTemplate>
+  );
+};
 
 const StatusForm: React.FC = () => {
+  const api_function = async (data: any) => {
+    const status = data.status;
 
+    localStorage.setItem("userStatus", status);
+  };
 
-    const api_function = async (data: any) => {
-        const status = data.status;
+  const post_success_function = () => {
+    location.reload();
+    console.log("la api se llamó exitosa y épicamente");
+  };
 
-        localStorage.setItem("userStatus", status);
-    }
+  const { onSubmit, register, isLoading } = useCustomForm(
+    api_function,
+    post_success_function,
+    ``
+  );
 
-    const post_success_function = () => {
-        location.reload();
-        console.log("la api se llamó exitosa y épicamente");
-    }
+  return (
+    <div className="flex flex-col items-center justify-center w-full h-full gap-10">
+      <div className="flex flex-row items-center justify-center gap-5 p-4">
+        <FaFaceSmileWink className="text-4xl text-custom_white" />
+        <p className="text-2xl text-custom_white">¿Cómo te encuentras hoy?</p>
+      </div>
 
-    const { onSubmit, register, isLoading } = useCustomForm(
-        api_function,
-        post_success_function,
-        ``
-    );
+      <div className="mx-auto">
+        <form onSubmit={onSubmit} className="flex flex-col items-center gap-10">
+          <TextArea
+            placeholder="¡Añade un estado genial!"
+            name="status"
+            register={register}
+            inputValue={savedStatus as string}
+          />
 
-    return (
-        <div className="h-full w-full flex flex-col justify-center items-center gap-10">
-
-            <div className="flex flex-row p-4 gap-5 justify-center items-center">
-                <FaFaceSmileWink className="text-custom_white text-4xl" />
-                <p className="text-2xl text-custom_white">¿Cómo te encuentras hoy?</p>
-            </div>
-
-            <div className="mx-auto">
-
-                <form
-                    onSubmit={onSubmit}
-                    className="flex flex-col gap-10 items-center">
-                    <TextArea
-                        placeholder="¡Añade un estado genial!"
-                        name="status"
-                        register={register}
-                        inputValue={savedStatus}
-                        />
-    
-                    <SubmitButton text="Guardar" isLoading={isLoading} />
-                </form>
-            </div>
-        </div>
-    )
-}
-
+          <SubmitButton text="Guardar" isLoading={isLoading} />
+        </form>
+      </div>
+    </div>
+  );
+};

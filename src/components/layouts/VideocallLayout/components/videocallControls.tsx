@@ -7,7 +7,6 @@ import { FiCameraOff } from "react-icons/fi";
 
 import { Notifications } from "../../../Alerts/Notification";
 
-
 import { ButtonCallsProps } from "../ButtonCallProps";
 import { ButtonCalls } from "./button";
 import { BUTTON_TYPE } from "../enum";
@@ -30,7 +29,7 @@ export const VideoCallControlls: React.FC = () => {
   const { isVoiceCall } = useVerifyCallType();
   const { isMicrophoneActive, toggleMicrophone } = useMicrophoneStore();
 
-  const [hasCamera, setHasCamera] = useState<boolean>(false);
+  const [_, setHasCamera] = useState<boolean>(false);
   const [isCameraActive, setIsCameraActive] = useState<boolean>(false);
 
   const handleToggleCamera = async () => {
@@ -44,12 +43,14 @@ export const VideoCallControlls: React.FC = () => {
 
     if (!isCameraActive) {
       try {
-        const videoStream = await navigator.mediaDevices.getUserMedia({ video: true });
+        const videoStream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+        });
         setStream(videoStream);
         setIsCameraActive(true);
         setHasCamera(true);
       } catch (err) {
-        console.error('Error al acceder a la cámara: ', err);
+        console.error("Error al acceder a la cámara: ", err);
         setHasCamera(false);
         setNotifications({
           message: "Hubo un error al acceder a la cámara, revisa los permisos",
@@ -83,11 +84,11 @@ export const VideoCallControlls: React.FC = () => {
   };
 
   const handleToggleMicrophone = async () => {
-    // Alterna el estado del micrófono utilizando el estado global de Zustand
     await toggleMicrophone();
   };
 
-  const lastPageId = fakePages.length > 0 ? fakePages[fakePages.length - 1].id : null;
+  const lastPageId =
+    fakePages.length > 0 ? fakePages[fakePages.length - 1].id : null;
 
   const controlls: ButtonCallsProps[] = [
     {

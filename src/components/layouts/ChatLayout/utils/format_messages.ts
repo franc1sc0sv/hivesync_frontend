@@ -6,8 +6,8 @@ export function groupMessages({
   if (messages.length === 0) return [];
 
   const groupedMessages = [];
-  let currentGroup = {
-    id_user: messages[0].id_user,
+  let currentGroup: GroupedMessagesType = {
+    id_user: messages[0].id_sender,
     sendAt: messages[0].sendAt,
     messages: [{ id: messages[0].id, message: messages[0].message }],
   };
@@ -20,7 +20,7 @@ export function groupMessages({
       (currentDate.getTime() - previousDate.getTime()) / 60000;
 
     if (
-      currentMessage.id_user === currentGroup.id_user &&
+      currentMessage.id_sender === currentGroup.id_user &&
       timeDifference <= 1
     ) {
       currentGroup.messages.push({
@@ -30,7 +30,7 @@ export function groupMessages({
     } else {
       groupedMessages.push(currentGroup);
       currentGroup = {
-        id_user: currentMessage.id_user,
+        id_user: currentMessage.id_sender,
         sendAt: currentMessage.sendAt,
         messages: [{ id: currentMessage.id, message: currentMessage.message }],
       };

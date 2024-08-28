@@ -3,11 +3,8 @@ import { SearchBar } from "../../../forms/Inputs/SearchBar";
 
 import { AddFriendsButton } from "../../../buttons/AddFriendsButton";
 
-import { useModal } from "../../../../store/useModal";
 import { ExternalProfileModal } from "../../../modals/generalModals/externalProfileModal";
 
-import { ChatIcon } from "../../../Icons/chat";
-import { PhoneIcon } from "../../../Icons/phone";
 import { UserBox } from "./Components/UserBox";
 
 const temporaryRoute =

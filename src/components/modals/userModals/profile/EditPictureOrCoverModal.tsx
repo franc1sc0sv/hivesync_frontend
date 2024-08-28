@@ -26,28 +26,28 @@ export const EditPictureOrCoverModal = () => {
   );
 };
 
-const ModalHeader = () => {
-  return (
-    <div className="flex flex-col items-center justify-center gap-2">
-      <p className="text-2xl font-bold text-center font-amiko text-custom_white">
-        Sube tu foto de perfil
-      </p>
-      <p className="text-sm text-center font-almarai text-custom_white">
-        Dale identidad a tu perfil con una foto
-      </p>
-    </div>
-  );
-};
+// const ModalHeader = () => {
+//   return (
+//     <div className="flex flex-col items-center justify-center gap-2">
+//       <p className="text-2xl font-bold text-center font-amiko text-custom_white">
+//         Sube tu foto de perfil
+//       </p>
+//       <p className="text-sm text-center font-almarai text-custom_white">
+//         Dale identidad a tu perfil con una foto
+//       </p>
+//     </div>
+//   );
+// };
 
 const EditProfilePicture = () => {
-  const [picRoute, setPicRoute] = useState("");
+  const [picRoute] = useState("");
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files[0].name;
-    if (file) {
-      setPicRoute(file);
-    }
-  };
+  // const handleFileChange = (_: React.ChangeEvent<HTMLInputElement>) => {
+  //   // const file = event.currentTargetS
+  //   // if (file) {
+  //   //   setPicRoute(file);
+  //   // }
+  // };
 
   const api_function = async () => {
     localStorage.setItem("userPictureRoute", picRoute);
@@ -75,7 +75,7 @@ const EditProfilePicture = () => {
               ? "Archivo seleccionado: " + picRoute
               : "Haz click para subir una foto"
           }
-          status={handleFileChange}
+          status={() => {}}
         />
 
         {picRoute && (

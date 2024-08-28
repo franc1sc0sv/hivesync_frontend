@@ -33,17 +33,12 @@ export const SocketContextProvider: React.FC<SocketContextProviderProps> = ({
   const [socket, setSocket] = useState<Socket | null>(null);
 
   useEffect(() => {
-    const socketInstance = io(import.meta.env.VITE_SOCKET);
+    const socketInstance = io(import.meta.env.VITE_SOCKET,{
+      extraHeaders:{
+        "ngrok-skip-browser-warning":"1011"
+      }
+    });
     setSocket(socketInstance);
-
-    socketInstance.on("connect_error", (err) => {
-      // the reason of the error, for example "xhr poll error"
-      console.log(err);
-    });
-
-    socketInstance.on("connnection", () => {
-      console.log("connected to server");
-    });
   }, []);
   return (
     <SocketContext.Provider value={{ socket }}>
