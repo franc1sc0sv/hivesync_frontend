@@ -12,7 +12,7 @@ export const MessageInput: React.FC = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    setValue("room", friend.id);
+    setValue("room", friend.id_friendship);
     setValue("token", token);
   }, [onSubmit]);
 

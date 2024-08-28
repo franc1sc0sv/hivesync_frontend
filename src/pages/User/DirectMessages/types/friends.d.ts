@@ -9,6 +9,17 @@ type UserInfo = {
   createdAt: string;
 };
 
+type UserInfoChat = {
+  id_friendship: string;
+  name: string;
+  username: string;
+  about: string;
+  profileUrl: string;
+  backgroundUrl: string;
+  id_user: string;
+  createdAt: string;
+};
+
 type FriendWithUserInfo = {
   id_friendship: string;
   createdAt_friendship: string;
