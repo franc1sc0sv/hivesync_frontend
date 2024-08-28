@@ -10,6 +10,8 @@ import { useSocketContext } from "../../../../context/useSocket";
 import notificationSound from "/public/sounds/sound.mp3";
 import { useSession } from "../../../../store/user";
 
+//esto no es un comentario, es un grito de ayuda
+
 interface ChatContextProps {
   friend: UserInfoChat;
   setFriend: React.Dispatch<React.SetStateAction<UserInfoChat>>;
