@@ -5,7 +5,7 @@ import { useModal } from "../../store/useModal";
 export const CurrentPage = () => {
   const o = useOutlet();
   const [outlet] = useState(o);
-  const { modalId, setModalId } = useModal();
+  const { setModalId } = useModal();
 
   useEffect(() => {
     setModalId("");

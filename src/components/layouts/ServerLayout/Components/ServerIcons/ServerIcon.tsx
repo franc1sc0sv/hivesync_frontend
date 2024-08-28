@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { ServerInfoIcons } from "../../types/server";
 
 interface PropsServerIcons extends ServerInfoIcons {
   isFolder?: boolean;

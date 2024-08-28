@@ -3,7 +3,7 @@ import { Header } from "./Components/UserHeader";
 import { HiUserGroup } from "react-icons/hi";
 import { HiChatBubbleLeftRight, HiMiniBell } from "react-icons/hi2";
 
-import { ArrayLinks, PropsProfilePicture } from "./types/GeneralLayout";
+import { ArrayLinks } from "./types/GeneralLayout";
 
 //mock
 

@@ -6,7 +6,7 @@ export function groupMessages({
   if (messages.length === 0) return [];
 
   const groupedMessages = [];
-  let currentGroup = {
+  let currentGroup: GroupedMessagesType = {
     id_user: messages[0].id_sender,
     sendAt: messages[0].sendAt,
     messages: [{ id: messages[0].id, message: messages[0].message }],

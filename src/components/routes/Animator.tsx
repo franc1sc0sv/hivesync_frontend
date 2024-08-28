@@ -5,23 +5,12 @@ import { CurrentPage } from "./CurrentPage";
 const storedValue = localStorage.getItem("transitionState");
 const verifyState = storedValue ? JSON.parse(storedValue) : false;
 
-interface AnimatorProps {
-  location: any
-}
-
 export const Animator = () => {
-  const location = useLocation();
-
-  return (
-    <>
-      {verifyState ? <Animation location={location} /> : <NoAnimation location={location} />}
-    </>
-  );
+  return <>{verifyState ? <Animation /> : <NoAnimation />}</>;
 };
 
-
-const Animation = ({location: AnimatorProps}) => {
-
+const Animation = () => {
+  const location = useLocation();
   return (
     <AnimatePresence mode="wait">
       <motion.div
@@ -35,20 +24,17 @@ const Animation = ({location: AnimatorProps}) => {
         <CurrentPage />
       </motion.div>
     </AnimatePresence>
-  )
-}
+  );
+};
 
-const NoAnimation = ({location: AnimatorProps}) => {
-
+const NoAnimation = () => {
   const location = useLocation();
 
   return (
     <AnimatePresence mode="wait">
-      <motion.div
-        key={location.pathname}
-      >
+      <motion.div key={location.pathname}>
         <CurrentPage />
       </motion.div>
     </AnimatePresence>
-  )
-}
+  );
+};

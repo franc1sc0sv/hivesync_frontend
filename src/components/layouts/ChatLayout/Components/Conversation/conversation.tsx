@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { Ref, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Notifications } from "../../../../Alerts/Notification";
 import { useChat } from "../../Context/useChat";
 import { UserAvatar } from "../../../../Avatars/UserAvatar";

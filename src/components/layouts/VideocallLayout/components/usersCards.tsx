@@ -4,7 +4,6 @@ import useVideoStream from "../../../../store/videoCall/useCameraStream";
 import { UserAvatar } from "../../../Avatars/UserAvatar";
 import { UserCameraStream } from "./userCameraStream";
 
-
 interface UserCardProps {
   username: string;
   userColor: string;
@@ -14,7 +13,8 @@ const UserCard: React.FC<UserCardProps> = ({ username, userColor }) => {
 
   return (
     <div
-      className={` bg-primary w-2/5 sm:w-[240px] h-1/2 sm:h-[13.5rem] rounded-2xl flex items-center justify-center mb-4 md:mb-0 relative `}
+      style={{ backgroundColor: userColor }}
+      className={`w-2/5 sm:w-[240px] h-1/2 sm:h-[13.5rem] rounded-2xl flex items-center justify-center mb-4 md:mb-0 relative `}
     >
       {stream ? (
         <UserCameraStream />
@@ -29,13 +29,11 @@ const UserCard: React.FC<UserCardProps> = ({ username, userColor }) => {
   );
 };
 
-const UserCardFriend: React.FC<UserCardProps> = ({
-  username,
-  userColor,
-}) => {
+const UserCardFriend: React.FC<UserCardProps> = ({ username, userColor }) => {
   return (
     <div
-      className={`bg-primary opacity-50  w-2/5 h-1/2 sm:h-[13.5rem] sm:w-[240px] rounded-2xl flex items-center justify-center mb-4 md:mb-0 relative `}
+      style={{ backgroundColor: userColor }}
+      className={`opacity-50  w-2/5 h-1/2 sm:h-[13.5rem] sm:w-[240px] rounded-2xl flex items-center justify-center mb-4 md:mb-0 relative `}
     >
       <UserAvatar profileURl="" username={username} />
 

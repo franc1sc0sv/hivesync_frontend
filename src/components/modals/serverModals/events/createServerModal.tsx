@@ -1,7 +1,6 @@
-import { FieldValues, UseFormRegister } from "react-hook-form";
 import { useCustomFormCreateServer } from "../../../../hooks/useFormCreateServer";
 import { SubmitButton } from "../../../forms/Inputs/Button";
-import { ImgInput } from "../../../forms/Inputs/ImgInput";
+
 import { InputsForms } from "../../../forms/Inputs/inputs";
 import { ModalTemplate } from "../../ModalTemplate";
 
@@ -128,7 +127,6 @@ const ModalForm = () => {
           name="name"
           placeholder="Nombre del servidor"
         />
-
       </div>
 
       {/* <div className="flex justify-center max-w-4/5 sm:w-full">

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { ComponentsAnimator } from "../../../../components/animation/componentsAnimator";
 import { UserAvatar } from "../../../../components/Avatars/UserAvatar";
 
@@ -33,7 +32,6 @@ const NotificationsBox = () => {
       <CategoriesHeader />
       <NotificationsContainer filtered_notifications={filteres_notifications} />
     </>
-
   );
 };
 
@@ -111,10 +109,11 @@ const CategoriesHeader = () => {
         <button
           key={i}
           onClick={() => handleCategoryClick(category.id)}
-          className={`py-2 px-4 rounded-full capitalize ${selectedCategory === category.id
-            ? "bg-purple-600 text-white"
-            : "bg-transparent text-white transition-all duration-300"
-            }`}
+          className={`py-2 px-4 rounded-full capitalize ${
+            selectedCategory === category.id
+              ? "bg-purple-600 text-white"
+              : "bg-transparent text-white transition-all duration-300"
+          }`}
         >
           {category.name}
         </button>

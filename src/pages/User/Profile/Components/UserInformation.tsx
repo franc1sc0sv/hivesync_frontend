@@ -4,7 +4,6 @@ import { AddStatusModal } from "../../../../components/modals/userModals/profile
 import useFakePages from "../../../../store/useFakePage";
 import { ShowFakePages } from "../../../../components/fakePages/ShowFakePages";
 import { EditProfileFakePage } from "../../../../components/fakePages/user/profile/editProfileFakePage";
-import { UserFriendsFakePage } from "../../../../components/fakePages/user/friends/FriendsFakePage";
 
 //mock
 import { useSession } from "../../../../store/user";
