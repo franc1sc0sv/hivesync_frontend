@@ -1,6 +1,7 @@
 export const ReadyToJoin =()=>{
     return (
-        <section className="flex flex-col items-center justify-center h-full w-fit bg-gray-900 text-white">
+      
+        <section className="flex flex-col items-center justify-center h-screen w-screen bg-gray-900 text-white bg-overlay_3 ">
         <article className="flex flex-col items-center justify-center space-y-4">
           <div className="flex items-center justify-center w-24 h-24 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full">
           </div>
