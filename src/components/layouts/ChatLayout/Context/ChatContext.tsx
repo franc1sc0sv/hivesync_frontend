@@ -104,15 +104,15 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
       if (user?.id !== newMessage.id_sender) {
         const sound = new Audio(notificationSound);
         sound.play();
+
+        const newUnFormatedMessages = [...unFormatedMessages, newMessage];
+
+        setMessages(groupMessages({ messages: newUnFormatedMessages }));
+        setUnFormatedMessages(newUnFormatedMessages);
       }
-
-      const newUnFormatedMessages = [...unFormatedMessages, newMessage];
-
-      setUnFormatedMessages(newUnFormatedMessages);
-      setMessages(groupMessages({ messages: newUnFormatedMessages }));
     };
 
-    socket.once("receive_message", handleNewMessage);
+    socket.on("receive_message", handleNewMessage);
   }, [socket, setMessages, messages]);
 
   if (isLoading || friend.id_friendship === "" || isLoadingMessages)
