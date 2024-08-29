@@ -9,8 +9,7 @@ export const SessionDetector = ({ children }: { children: ReactNode }) => {
   const perfil = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem("token");
-      const res = await get_profile(token ?? "");
+      const res = await get_profile();
       setUser(res);
       setLoading(false);
     } catch (error) {
