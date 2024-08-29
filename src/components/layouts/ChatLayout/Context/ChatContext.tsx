@@ -90,7 +90,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
 
     if (socket && roomId) {
       socket.emit("join_room", roomId);
-
+      console.log(roomId);
       return () => {
         socket.emit("leave_room", roomId);
       };
@@ -105,6 +105,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
         const sound = new Audio(notificationSound);
         sound.play();
       }
+      console.log("aaa");
 
       const newUnFormatedMessages = [...unFormatedMessages, newMessage];
 
@@ -112,7 +113,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
       setMessages(groupMessages({ messages: newUnFormatedMessages }));
     };
 
-    socket.once("receive_message", handleNewMessage);
+    socket.on("receive_message", handleNewMessage);
   }, [socket, setMessages, messages]);
 
   if (isLoading || friend.id_friendship === "" || isLoadingMessages)
