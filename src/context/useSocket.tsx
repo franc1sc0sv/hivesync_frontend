@@ -33,11 +33,7 @@ export const SocketContextProvider: React.FC<SocketContextProviderProps> = ({
   const [socket, setSocket] = useState<Socket | null>(null);
 
   useEffect(() => {
-    const socketInstance = io(import.meta.env.VITE_SOCKET,{
-      extraHeaders:{
-        "ngrok-skip-browser-warning":"1011"
-      }
-    });
+    const socketInstance = io(import.meta.env.VITE_SOCKET);
     setSocket(socketInstance);
   }, []);
   return (
