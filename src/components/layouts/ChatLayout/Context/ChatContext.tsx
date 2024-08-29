@@ -90,10 +90,6 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
 
     if (socket && roomId) {
       socket.emit("join_room", roomId);
-
-      return () => {
-        socket.emit("leave_room", roomId);
-      };
     }
   }, [socket]);
 
@@ -104,16 +100,16 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
       if (user?.id !== newMessage.id_sender) {
         const sound = new Audio(notificationSound);
         sound.play();
-
-        const newUnFormatedMessages = [...unFormatedMessages, newMessage];
-
-        setMessages(groupMessages({ messages: newUnFormatedMessages }));
-        setUnFormatedMessages(newUnFormatedMessages);
       }
+
+      const newUnFormatedMessages = [...unFormatedMessages, newMessage];
+
+      setMessages(groupMessages({ messages: newUnFormatedMessages }));
+      setUnFormatedMessages(newUnFormatedMessages);
     };
 
     socket.on("receive_message", handleNewMessage);
-  }, [socket, setMessages, messages]);
+  }, [socket, messages]);
 
   if (isLoading || friend.id_friendship === "" || isLoadingMessages)
     return <LoadingPage />;
