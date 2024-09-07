@@ -36,7 +36,7 @@ const StartConvsersation = () => {
         <p className="text-4xl text-white font-amiko">{friend.name}</p>
         <p className="text-lg text-gray font-amiko">{friend.username}</p>
         <p className="text-sm text-gray font-amiko">
-          Este es el principio de tu epica conversacion con {friend.username}
+          Este es el principio de tu épica conversación con {friend.username}
         </p>
       </div>
     </div>
@@ -74,31 +74,39 @@ const GroupOfMessages = ({ group }: { group: GroupedMessagesType }) => {
 
   const isFromCurrentUserTheMessage = id_user === user?.id;
 
+  // Clase para alinear todo el mensaje a la derecha o izquierda
+  const alignmentClass = isFromCurrentUserTheMessage
+    ? "flex-row-reverse items-end text-right" // Mensajes del usuario a la derecha
+    : "flex-row items-start text-left"; // Mensajes del amigo a la izquierda
+
+  // Estilo de la burbuja de mensaje dependiendo del remitente
+  const bubbleStyle = {
+    backgroundColor: isFromCurrentUserTheMessage ? "#45156B" : "#28242C", // Morado para mensajes del usuario, gris oscuro para recibidos
+  };
+
   return (
     <AnimatePresence>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeInOut" }}
-        className="flex w-full gap-2 "
+        className={`flex w-full gap-2 ${alignmentClass}`} // Aplicar la clase de alineación
       >
-        <div>
-          <UserAvatar
-            fontSize={2}
-            w={3}
-            h={3}
-            username={
-              isFromCurrentUserTheMessage
-                ? (username_user as string)
-                : (username_friend as string)
-            }
-            profileURl={
-              isFromCurrentUserTheMessage
-                ? (profile_url_user as string)
-                : (profile_url_friend as string)
-            }
-          />
-        </div>
+        <UserAvatar
+          fontSize={2}
+          w={3}
+          h={3}
+          username={
+            isFromCurrentUserTheMessage
+              ? (username_user as string)
+              : (username_friend as string)
+          }
+          profileURl={
+            isFromCurrentUserTheMessage
+              ? (profile_url_user as string)
+              : (profile_url_friend as string)
+          }
+        />
         <div className="flex flex-col">
           <div className="flex items-end gap-2">
             <p className="font-bold text-white">
@@ -110,7 +118,7 @@ const GroupOfMessages = ({ group }: { group: GroupedMessagesType }) => {
               {formatDateMessage(sendAt)}
             </p>
           </div>
-          <div>
+          <div className="p-2 rounded-lg" style={bubbleStyle}>
             {messages.map((message, i) => (
               <Message message={message} key={i} />
             ))}
