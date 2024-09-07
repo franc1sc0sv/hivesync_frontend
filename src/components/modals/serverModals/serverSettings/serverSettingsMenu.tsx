@@ -2,11 +2,11 @@ import { ModalTemplate } from "../../ModalTemplate"
 import { useModal } from "../../../../store/useModal"
 
 import { PencilIcon } from "../../../Icons/pencil";
-import { FaUsersCog } from "react-icons/fa";
-import { ShieldIcon } from "../../../Icons/shield";
 import { ColorPaletteIcon } from "../../../Icons/colorPalette";
 import { PadlockIcon } from "../../../Icons/padlock";
 import { DeleteIcon } from "../../../Icons/delete";
+import { FolderIcon } from "../../../Icons/folder";
+import { CategoryIcon } from "../../../Icons/category";
 
 import { MenuProps, OptionsTemplateProps } from "../types/menuProps";
 
@@ -18,23 +18,26 @@ const generalOptions: MenuProps[] = [
         modal: "generalSettings",
     },
     {
-        icon: <FaUsersCog size={30} color="white" />,
-        name: "Roles",
-        modal: "rolesSettings",
-    },
-    {
         icon: <ColorPaletteIcon size={30} color="white" />,
         name: "Apariencia",
-        modal: "appearanceSettings",
+        modal: "serverAppearanceSettings",
     },
 ];
 
+const serverOptions: MenuProps[] = [
+        {
+            icon: <CategoryIcon size={30} color="white" />,
+            name: "Categorías",
+            modal: "manageCategories",
+        }, 
+        {
+            icon: <FolderIcon size={30} color="white" />,
+            name: "Canales",
+            modal: "manageChannels",
+        }
+]
+
 const advancedOptions: MenuProps[] = [
-    {
-        icon: <ShieldIcon size={30} color="white" />,
-        name: "Seguridad",
-        modal: "securitySettings",
-    },
     {
         icon: <PadlockIcon size={30} color="white" />,
         name: "Privacidad",
@@ -47,12 +50,14 @@ const advancedOptions: MenuProps[] = [
     },
 ];
 
-export const ServerSettingsModal = () => {
+export const SettingsMenuModal = () => {
     return (
         <ModalTemplate identificator="serverSettings">
-            <div className="lg:w-4/5 mx-auto flex flex-col h-full gap-5">
+            <div className="w-full sm:w-3/5 mx-auto flex flex-col gap-3">
                 <p className="text-2xl text-custom_white">Ajustes generales</p>
                 <Settings options={generalOptions} />
+                <p className="text-2xl text-custom_white">Ajustes de servidor</p>
+                <Settings options={serverOptions} />
                 <p className="text-2xl text-custom_white">Ajustes avanzados</p>
                 <Settings options={advancedOptions} />
             </div>
@@ -87,4 +92,4 @@ const Settings: React.FC<OptionsTemplateProps> = ({ options }) => {
         </div>
 
     )
-}
+}   

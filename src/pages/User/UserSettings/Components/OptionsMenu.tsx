@@ -17,6 +17,10 @@ interface MenuProps {
   page: React.ReactNode;
 }
 
+interface SettingsProps {
+  settings: MenuProps[]
+}
+
 const accountOptions: MenuProps[] = [
   {
     icon: <UserIcon size={30} color="white" />,
@@ -27,12 +31,7 @@ const accountOptions: MenuProps[] = [
     icon: <ShieldIcon size={30} color="white" />,
     name: "Privacidad",
     page: <PrivacySettingsFakePage />,
-  },
-  // {
-  //   icon: <ClipIcon size={30} color="white" />,
-  //   name: "Conexiones",
-  //   page: <ConnectionsSettingsFakePage />
-  // },
+  }
 ];
 
 const appOptions: MenuProps[] = [
@@ -65,7 +64,7 @@ export const MenuOptions: React.FC = () => {
       {/* account options */}
       <div>
         <h1 className="my-2 text-2xl text-custom_white">Mi cuenta</h1>
-        <AccountSettings />
+        <SettingsTemplate settings={accountOptions} />
       </div>
 
       {/* style and connections */}
@@ -73,18 +72,21 @@ export const MenuOptions: React.FC = () => {
         <h1 className="my-2 text-2xl text-custom_white rounded-xl">
           Ajustes avanzados
         </h1>
-        <AppSettings />
+        <SettingsTemplate settings={appOptions} />
       </div>
     </div>
   );
 };
 
-const AccountSettings: React.FC = () => {
+
+
+const SettingsTemplate: React.FC<SettingsProps> = ({ settings }) => {
+
   const { addFakePage } = useFakePages();
 
   return (
     <div className="flex flex-col gap-3 p-3 bg-overlay_2 rounded-xl">
-      {accountOptions.map((option, index) => (
+      {settings.map((option, index) => (
         <button
           onClick={() =>
             addFakePage({ title: option.name, children: option.page })
@@ -99,28 +101,5 @@ const AccountSettings: React.FC = () => {
         </button>
       ))}
     </div>
-  );
-};
-
-const AppSettings: React.FC = () => {
-  const { addFakePage } = useFakePages();
-
-  return (
-    <div className="flex flex-col gap-3 p-3 bg-overlay_2 rounded-xl">
-      {appOptions.map((option, index) => (
-        <button
-          onClick={() =>
-            addFakePage({ title: option.name, children: option.page })
-          }
-          className="flex flex-row items-center gap-3"
-          key={index}
-        >
-          <div>
-            <div className="p-2 rounded-xl">{option.icon}</div>
-          </div>
-          <p className="text-custom_white">{option.name}</p>
-        </button>
-      ))}
-    </div>
-  );
-};
+  )
+}
