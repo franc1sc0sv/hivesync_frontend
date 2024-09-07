@@ -16,7 +16,7 @@ import { ComunityPage } from "../../pages/Home/Comunity/ComunityPage";
 export const UserRoutes: RouteObject = {
   caseSensitive: true,
   path: "/app",
-  // element: <AuthDetector />,
+  element: <AuthDetector />,
   children: [
     { path: "@me", element: <DirectMessagesPage /> }, // Bandeja entrada DM
     { path: ":id", element: <ChatPage /> }, //Chats individuales
