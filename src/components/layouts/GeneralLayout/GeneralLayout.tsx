@@ -41,8 +41,8 @@ export const GeneralLayout: React.FC<PropsGeneralLayout> = ({
   ];
 
   return (
-    <main className="flex flex-col w-full max-h-screen gap-4 p-5 overflow-hidden bg-overlay_1">
-      <section className="flex flex-col w-full gap-5 screen_overlay">
+    <main className="flex flex-col md:flex-row-reverse w-full max-h-screen gap-5 p-5 overflow-hidden bg-overlay_1">
+      <section className="flex flex-col w-full gap-5 h-screen">
         {showHeader && <Header title={title} RightComponent={RightComponent} />}
         {children}
       </section>
