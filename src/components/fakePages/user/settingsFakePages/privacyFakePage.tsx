@@ -3,7 +3,7 @@ import { RightTriangleIcon } from "../../../Icons/rightTriangle";
 import { useModal } from "../../../../store/useModal";
 
 import { MenuProps } from "./userAccountFakePage";
-import { PrivacityModals } from "../../../modals/userModals/settings/accountSettings/privacity/PrivacityModals";
+import { PrivacityModals } from "../../../modals/userModals/settings/privacity/PrivacityModals";
 
 const PrivacityOptions: MenuProps[] = [
   {

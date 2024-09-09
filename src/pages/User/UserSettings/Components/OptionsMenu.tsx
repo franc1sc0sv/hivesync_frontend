@@ -1,68 +1,40 @@
 import { useState } from "react";
 
-import { UserIcon } from "../../../../components/Icons/user";
-import { ShieldIcon } from "../../../../components/Icons/shield";
+import { options } from "../options";
+import { SettingsProps } from "../options";
+
+import { useModal } from "../../../../store/useModal";
+import { UserSettingsModals } from "../../../../components/modals/userModals/settings/UserSettingsModals";
+
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
 
-import { MicrophoneIcon } from "../../../../components/Icons/microphone";
-import { ColorPaletteIcon } from "../../../../components/Icons/colorPalette";
+import { NoOptionSelected } from "../context/noOptionSelected";
 
-import useFakePages from "../../../../store/useFakePage";
-import { AccountSettingsFakePage } from "../../../../components/fakePages/user/settingsFakePages/userAccountFakePage";
-import { PrivacySettingsFakePage } from "../../../../components/fakePages/user/settingsFakePages/privacyFakePage";
 
-import { VoiceSettingsFakePage } from "../../../../components/fakePages/user/settingsFakePages/voiceFakePage";
-import { AppearanceSettingsFakePage } from "../../../../components/fakePages/user/settingsFakePages/AppearanceFakePage";
-
-interface MenuProps {
-  icon: React.ReactNode;
-  name: string;
-  page: React.ReactNode;
-  toggleOptions: boolean;
+interface OptionSelectedProps {
+  optionSelected: React.ReactNode;
 }
-
-interface SettingsProps {
-  settings: MenuProps[]
-}
-
-const options: MenuProps[] = [
-  {
-    icon: <UserIcon size={30} color="white" />,
-    name: "Cuenta",
-    page: <AccountSettingsFakePage />,
-    toggleOptions: false
-  },
-  {
-    icon: <ShieldIcon size={30} color="white" />,
-    name: "Privacidad",
-    page: <PrivacySettingsFakePage />,
-    toggleOptions: false
-  },
-  {
-    icon: <MicrophoneIcon size={30} color="white" />,
-    name: "Voz",
-    page: <VoiceSettingsFakePage />,
-    toggleOptions: false
-  },
-  {
-    icon: <ColorPaletteIcon size={30} color="white" />,
-    name: "Apariencia",
-    page: <AppearanceSettingsFakePage />,
-    toggleOptions: false
-  },
-]
-
 
 export const MenuOptions: React.FC = () => {
   return (
-    <div className="w-full mx-auto flex flex-col gap-3 overflow-y-auto">
-      <SettingsTemplate settings={options} />
+    <div className="w-full flex flex-row justify-between">
+      <div className="w-full lg:w-1/3 overflow-y-auto">
+        <SettingsTemplate settings={options} />
+      </div>
+
+      <div className="max-h-fit hidden lg:block w-3/5 ">
+        <OptionSelected optionSelected={<></>} />
+      </div>
+      <UserSettingsModals />
     </div>
   );
 };
 
+
 const SettingsTemplate: React.FC<SettingsProps> = ({ settings }) => {
+
+  const {setModalId} = useModal();
 
   const [settingsState, setSettingsState] = useState(settings);
 
@@ -79,14 +51,15 @@ const SettingsTemplate: React.FC<SettingsProps> = ({ settings }) => {
   };
 
   return (
-    <div className="h-full overflow-y-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-6 p-3 rounded-xl">
+    <div className="w-full flex flex-col gap-3 md:gap-8">
       {settingsState.map((option, index) => (
         <div
-          onClick={() => handleToggle(index)}
           key={index}
-          className={`relative flex flex-col items-center gap-3 p-5 bg-overlay_2 hover:bg-gray-700 rounded-lg shadow-lg transition-all duration-300 ease-in-out transform border-4 border-overlay_2 hover:border-primary w-full flex-shrink-0`}
+          className={`w-full relative flex flex-col gap-3 p-5 bg-overlay_2 hover:bg-gray-700 rounded-lg shadow-lg transition-all duration-300 ease-in-out transform border-4 border-overlay_2 hover:border-primary flex-shrink-0`}
         >
+          {/* card header */}
           <div
+            onClick={() => handleToggle(index)}
             className="flex flex-row items-center justify-between w-full"
           >
             <div className="flex flex-row items-center justify-center gap-3">
@@ -102,24 +75,37 @@ const SettingsTemplate: React.FC<SettingsProps> = ({ settings }) => {
             )}
           </div>
 
-          {/* El contenido expandible */}
+          {/* Cntenido expandible */}
           <div
             className={`w-full transition-all ease-in-out overflow-hidden`}
             style={{
-              transition: "0.3s ease-in-out",
-              overflow: "hidden",
+              maxHeight: option.toggleOptions ? "500px" : "0",
+              transition: "max-height 0.3s ease-in-out",
             }}
           >
-            {option.toggleOptions && (
-              <div className="w-full bg-gray-800 p-3 rounded-lg text-custom_white">
-                <p>El contenido</p>
-              </div>
-            )}
+            <div className="w-full flex flex-col justify-start bg-gray-800 rounded-lg text-custom_white gap-5 p-3">
+              {option.options.map((opt, index) => (
+                <button
+                onClick={() => setModalId(opt.modal)}
+                  key={index}
+                  className="w-full text-start hover:bg-primary p-3 transition-all duration-200 rounded-xl">
+                  {opt.name}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       ))}
     </div>
-
   );
 };
+
+const OptionSelected: React.FC<OptionSelectedProps> = ({ optionSelected }) => {
+
+  return (
+    <NoOptionSelected />
+  )
+}
+
+
 
