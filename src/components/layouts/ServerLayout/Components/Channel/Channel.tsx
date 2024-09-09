@@ -12,10 +12,10 @@ export const Channel: React.FC = () => {
   });
 
   return (
-    <div className="flex flex-row items-center justify-center w-[100%] rounded-tl-lg rounded-bl-lg max-h-fit bg-overlay_2 screen_overlay">
+    <div className="flex flex-row items-center justify-center w-[100%] rounded-tl-lg rounded-bl-lg bg-overlay_2 ">
       <div
         {...handler}
-        className="w-full h-full ml-auto rounded-tl-lg rounded-bl-lg bg-overlay_2 screen_overlay"
+        className="w-full ml-auto rounded-tl-lg rounded-bl-lg bg-overlay_2 screen_overlay"
         onClick={() =>
           addFakePage({ title: "", children: <NoChannelSelected /> })
         }

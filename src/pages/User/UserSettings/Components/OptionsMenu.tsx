@@ -1,105 +1,111 @@
-import { UserIcon } from "../../../../components/Icons/user";
-import { ShieldIcon } from "../../../../components/Icons/shield";
+import { useState } from "react";
 
-import { MicrophoneIcon } from "../../../../components/Icons/microphone";
-import { ColorPaletteIcon } from "../../../../components/Icons/colorPalette";
+import { options } from "../options";
+import { SettingsProps } from "../options";
 
-import useFakePages from "../../../../store/useFakePage";
-import { AccountSettingsFakePage } from "../../../../components/fakePages/user/settingsFakePages/userAccountFakePage";
-import { PrivacySettingsFakePage } from "../../../../components/fakePages/user/settingsFakePages/privacyFakePage";
+import { useModal } from "../../../../store/useModal";
+import { UserSettingsModals } from "../../../../components/modals/userModals/settings/UserSettingsModals";
 
-import { VoiceSettingsFakePage } from "../../../../components/fakePages/user/settingsFakePages/voiceFakePage";
-import { AppearanceSettingsFakePage } from "../../../../components/fakePages/user/settingsFakePages/AppearanceFakePage";
+import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowUp } from "react-icons/io";
 
-interface MenuProps {
-  icon: React.ReactNode;
-  name: string;
-  page: React.ReactNode;
+import { NoOptionSelected } from "../context/noOptionSelected";
+
+
+interface OptionSelectedProps {
+  optionSelected: React.ReactNode;
 }
-
-interface SettingsProps {
-  settings: MenuProps[]
-}
-
-const accountOptions: MenuProps[] = [
-  {
-    icon: <UserIcon size={30} color="white" />,
-    name: "Cuenta",
-    page: <AccountSettingsFakePage />,
-  },
-  {
-    icon: <ShieldIcon size={30} color="white" />,
-    name: "Privacidad",
-    page: <PrivacySettingsFakePage />,
-  }
-];
-
-const appOptions: MenuProps[] = [
-  {
-    icon: <MicrophoneIcon size={30} color="white" />,
-    name: "Voz",
-    page: <VoiceSettingsFakePage />,
-  },
-  {
-    icon: <ColorPaletteIcon size={30} color="white" />,
-    name: "Apariencia",
-    page: <AppearanceSettingsFakePage />,
-  },
-  // { icon: <HiOutlineLightBulb />, optionName: "Voz", optionLink: "" },
-];
 
 export const MenuOptions: React.FC = () => {
   return (
-    <div className="w-full lg:w-4/5 mx-auto flex flex-col gap-5 h-[80vh] overflow-y-auto">
-      {/* <form
-        className="p-1"
-        onSubmit={onSubmit}>
-
-        <SearchBar
-          name="setting"
-          register={register}
-          placeholder="Buscar una opción de ajuste" />
-      </form> */}
-
-      {/* account options */}
-      <div>
-        <h1 className="my-2 text-2xl text-custom_white">Mi cuenta</h1>
-        <SettingsTemplate settings={accountOptions} />
+    <div className="w-full flex flex-row justify-between">
+      <div className="w-full lg:w-1/3 overflow-y-auto">
+        <SettingsTemplate settings={options} />
       </div>
 
-      {/* style and connections */}
-      <div>
-        <h1 className="my-2 text-2xl text-custom_white rounded-xl">
-          Ajustes avanzados
-        </h1>
-        <SettingsTemplate settings={appOptions} />
+      <div className="max-h-fit hidden lg:block w-3/5 ">
+        <OptionSelected optionSelected={<></>} />
       </div>
+      <UserSettingsModals />
     </div>
   );
 };
 
 
-
 const SettingsTemplate: React.FC<SettingsProps> = ({ settings }) => {
 
-  const { addFakePage } = useFakePages();
+  const {setModalId} = useModal();
+
+  const [settingsState, setSettingsState] = useState(settings);
+
+  const handleToggle = (index: number) => {
+    setSettingsState((prevState) => {
+      const newSettings = prevState.map((setting, i) => {
+        if (i === index) {
+          return { ...setting, toggleOptions: !setting.toggleOptions };
+        }
+        return setting;
+      });
+      return newSettings;
+    });
+  };
 
   return (
-    <div className="flex flex-col gap-3 p-3 bg-overlay_2 rounded-xl">
-      {settings.map((option, index) => (
-        <button
-          onClick={() =>
-            addFakePage({ title: option.name, children: option.page })
-          }
-          className="flex flex-row items-center gap-3"
+    <div className="w-full flex flex-col gap-3 md:gap-8">
+      {settingsState.map((option, index) => (
+        <div
           key={index}
+          className={`w-full relative flex flex-col gap-3 p-5 bg-overlay_2 hover:bg-gray-700 rounded-lg shadow-lg transition-all duration-300 ease-in-out transform border-4 border-overlay_2 hover:border-primary flex-shrink-0`}
         >
-          <div>
-            <div className="p-2 rounded-xl">{option.icon}</div>
+          {/* card header */}
+          <div
+            onClick={() => handleToggle(index)}
+            className="flex flex-row items-center justify-between w-full"
+          >
+            <div className="flex flex-row items-center justify-center gap-3">
+              {option.icon}
+              <p className="text-custom_white text-lg font-medium">
+                {option.name}
+              </p>
+            </div>
+            {option.toggleOptions ? (
+              <IoIosArrowUp size={40} color="#fff" />
+            ) : (
+              <IoIosArrowDown size={40} color="#fff" />
+            )}
           </div>
-          <p className="text-custom_white">{option.name}</p>
-        </button>
+
+          {/* Cntenido expandible */}
+          <div
+            className={`w-full transition-all ease-in-out overflow-hidden`}
+            style={{
+              maxHeight: option.toggleOptions ? "500px" : "0",
+              transition: "max-height 0.3s ease-in-out",
+            }}
+          >
+            <div className="w-full flex flex-col justify-start bg-gray-800 rounded-lg text-custom_white gap-5 p-3">
+              {option.options.map((opt, index) => (
+                <button
+                onClick={() => setModalId(opt.modal)}
+                  key={index}
+                  className="w-full text-start hover:bg-primary p-3 transition-all duration-200 rounded-xl">
+                  {opt.name}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
       ))}
     </div>
+  );
+};
+
+const OptionSelected: React.FC<OptionSelectedProps> = ({ optionSelected }) => {
+
+  return (
+    <NoOptionSelected />
   )
 }
+
+
+

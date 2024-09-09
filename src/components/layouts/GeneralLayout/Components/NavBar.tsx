@@ -7,7 +7,7 @@ import { useSession } from "../../../../store/user";
 
 export const NavBar: React.FC<PropsLinks> = ({ links }) => {
   return (
-    <nav className="flex flex-row items-center justify-around w-full max-w-sm py-3 mx-auto rounded-overlay bg-overlay_2">
+    <nav className="w-full md:w-[10%] lg:w-[7%] xl:w-[5%] flex flex-row md:flex-col items-center justify-around py-3 mx-auto rounded-overlay bg-overlay_2">
       <LinksNav links={links} />
       <UserProfile url="/app/profile" />
     </nav>
@@ -23,10 +23,12 @@ const LinksNav: React.FC<PropsLinks> = ({ links }) => {
 const LinkNavBar: React.FC<Links> = ({ Icon, url }) => {
   return (
     <NavLink
-      className={({ isActive }) => (isActive ? " text-white" : "text-gray")}
+      className={({ isActive }) =>
+        `${isActive ? "text-white" : "text-gray"} hover:text-custom_white transition-all duration-300`
+      }
       to={`${url}`}
     >
-      <Icon size={40} className="text-3xl " />
+      <Icon size={40} className="text-3xl" />
     </NavLink>
   );
 };
