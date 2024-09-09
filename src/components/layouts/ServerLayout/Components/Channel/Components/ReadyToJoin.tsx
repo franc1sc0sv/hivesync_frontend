@@ -1,7 +1,6 @@
 import { MegaphoneIcon } from "../../../../../Icons/megaphone"
 import { ButtonCalls } from "../../../../VideocallLayout/components/button"
 import { BUTTON_TYPE } from "../../../../VideocallLayout/enum"
-import { ButtonCallsProps } from "../../../../VideocallLayout/ButtonCallProps"
 import useMicrophoneStore from "../../../../../../store/videoCall/useMicrophoneVideocalls"
 import { PiMicrophoneFill } from "react-icons/pi"
 import { PiMicrophoneSlashFill } from "react-icons/pi"
