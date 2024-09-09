@@ -74,15 +74,9 @@ const GroupOfMessages = ({ group }: { group: GroupedMessagesType }) => {
 
   const isFromCurrentUserTheMessage = id_user === user?.id;
 
-  // Clase para alinear todo el mensaje a la derecha o izquierda
   const alignmentClass = isFromCurrentUserTheMessage
     ? "flex-row-reverse items-end text-right" // Mensajes del usuario a la derecha
     : "flex-row items-start text-left"; // Mensajes del amigo a la izquierda
-
-  // Estilo de la burbuja de mensaje dependiendo del remitente
-  const bubbleStyle = {
-    backgroundColor: isFromCurrentUserTheMessage ? "#45156B" : "#28242C", // Morado para mensajes del usuario, gris oscuro para recibidos
-  };
 
   return (
     <AnimatePresence>
@@ -118,7 +112,7 @@ const GroupOfMessages = ({ group }: { group: GroupedMessagesType }) => {
               {formatDateMessage(sendAt)}
             </p>
           </div>
-          <div className="p-2 rounded-lg" style={bubbleStyle}>
+          <div className="p-2 rounded-lg bg-overlay_2">
             {messages.map((message, i) => (
               <Message message={message} key={i} />
             ))}

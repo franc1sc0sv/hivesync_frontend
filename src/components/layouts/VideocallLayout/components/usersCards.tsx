@@ -1,29 +1,48 @@
 import { useSession } from "../../../../store/user";
 import useVideoStream from "../../../../store/videoCall/useCameraStream";
+import { useScreenShare } from "../../../../store/videoCall/useScreenShare";
 
 import { UserAvatar } from "../../../Avatars/UserAvatar";
+import { SharedScreen } from "./shareScreen";
 import { UserCameraStream } from "./userCameraStream";
 
 interface UserCardProps {
   username: string;
   userColor: string;
 }
-const UserCard: React.FC<UserCardProps> = ({ username, userColor }) => {
+
+const CurrentScreen = () => {
   const { stream } = useVideoStream();
+  const { screenStream } = useScreenShare();
+  const { user } = useSession();
+
+  if (stream) {
+    return <UserCameraStream />;
+  }
+
+  if (screenStream) {
+    return <SharedScreen />;
+  }
+
+  return (
+    <UserAvatar
+      username={user?.username as string}
+      profileURl={user?.profileUrl as string}
+    />
+  );
+};
+
+const UserCard = () => {
+  const { user } = useSession();
 
   return (
     <div
-      style={{ backgroundColor: userColor }}
-      className={`w-2/5 sm:w-[240px] h-1/2 sm:h-[13.5rem] rounded-2xl flex items-center justify-center mb-4 md:mb-0 relative `}
+      style={{ backgroundColor: user?.backgroundUrl }}
+      className={` w-full h-[50%] sm:h-[13.5rem] sm:w-[21rem] rounded-2xl flex items-center justify-center  relative `}
     >
-      {stream ? (
-        <UserCameraStream />
-      ) : (
-        <UserAvatar username="Lu_Krieg" profileURl="" />
-      )}
-
+      <CurrentScreen />
       <p className="absolute pl-2 pr-2 mb-2 ml-2 text-white rounded-md left-2 2t-1 bottom-1 pb- bg-overlay_2 opacity-90">
-        {username}
+        {user?.username}
       </p>
     </div>
   );
@@ -33,7 +52,7 @@ const UserCardFriend: React.FC<UserCardProps> = ({ username, userColor }) => {
   return (
     <div
       style={{ backgroundColor: userColor }}
-      className={`opacity-50  w-2/5 h-1/2 sm:h-[13.5rem] sm:w-[240px] rounded-2xl flex items-center justify-center mb-4 md:mb-0 relative `}
+      className={`  opacity-50  w-full h-[50%]  sm:h-[13.5rem] sm:w-[21rem] rounded-2xl flex items-center justify-center relative `}
     >
       <UserAvatar profileURl="" username={username} />
 
@@ -44,18 +63,10 @@ const UserCardFriend: React.FC<UserCardProps> = ({ username, userColor }) => {
   );
 };
 
-export const UsersCalls = ({}) => {
-  const { user } = useSession();
-
+export const UsersCalls = () => {
   return (
-    <div className="flex flex-wrap justify-center w-full h-full gap-3 p-2 overflow-y-auto sm:items-center">
-      <UserCard username={user?.username as string} userColor="" />
-      <UserCardFriend username="Lu_krieg" userColor="" />
-      <UserCardFriend username="Lu_krieg" userColor="" />
-      <UserCardFriend username="Lu_krieg" userColor="" />
-      <UserCardFriend username="Lu_krieg" userColor="" />
-      <UserCardFriend username="Lu_krieg" userColor="" />
-      <UserCardFriend username="Lu_krieg" userColor="" />
+    <div className="flex flex-col items-center justify-center w-full h-full md:flex-row md:gap-3">
+      <UserCard />
       <UserCardFriend username="Lu_krieg" userColor="" />
     </div>
   );
