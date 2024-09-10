@@ -28,28 +28,22 @@ export const ServerFeaturesAccordion: React.FC<AccordionProps> = ({ name, channe
                 className="flex items-center gap-2 font-medium text-custom_white font-almarai cursor-pointer"
                 onClick={toggleAccordion}
             >
-                <IoIosArrowForward
-                    className={`transition-transform ${isOpen ? "rotate-90" : ""}`}
-                    size={20}
-                />
                 <p>{name}</p>
             </div>
 
             {/* Lista de canales */}
-            {isOpen && (
-                <div className="flex flex-col pl-6">
-                    {channels.map((channel) => (
-                        <div
-                            key={channel.id}
-                            onClick={channel.onClick}
-                            className="cursor-pointer transition-all flex gap-2 items-center p-2 rounded-overlay text-custom_white"
-                        >
-                            {<channel.icon size={30} />}
-                            <p>{channel.name}</p>
-                        </div>
-                    ))}
-                </div>
-            )}
+            <div className="flex flex-col p-2 gap-5">
+                {channels.map((channel) => (
+                    <div
+                        key={channel.id}
+                        onClick={channel.onClick}
+                        className="cursor-pointer transition-all flex gap-2 items-center rounded-overlay text-custom_white"
+                    >
+                        {<channel.icon size={30} />}
+                        <p>{channel.name}</p>
+                    </div>
+                ))}
+            </div>
         </section>
     );
 };

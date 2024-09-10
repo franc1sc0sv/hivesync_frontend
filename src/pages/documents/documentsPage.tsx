@@ -4,7 +4,6 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { pdfExporter } from "quill-to-pdf"; // Librería para convertir Quill a PDF
 import { saveAs } from 'file-saver';
-// import { saveAs } from "file-saver"; // Librería para descargar archivos
 import { Document, Packer, Paragraph, ImageRun, TextRun } from "docx";
 import logo from "/logo.png";
 import hivesyncLogo from "/hivesyncLogo.png";
@@ -21,7 +20,7 @@ const modules = {
   ],
 };
 
-export default function EditorTextoConDescarga() {
+export default function TextEditorPage() {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("Documento sin título");
   const quillRef = useRef<ReactQuill | null>(null);

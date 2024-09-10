@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { OpenAI } from 'openai'; 
+import { OpenAI } from 'openai';
 // import { Send, Smile, Bot } from 'lucide-react';
 import { SendIcon } from '../../../components/Icons/send';
 import { GoDependabot } from "react-icons/go";
@@ -8,7 +8,7 @@ import { FaRegFaceSmileWink } from "react-icons/fa6";
 
 const openai = new OpenAI({
   apiKey: import.meta.env.VITE_OPENAI_API_KEY ?? '',
-  dangerouslyAllowBrowser: true, 
+  dangerouslyAllowBrowser: true,
 });
 
 interface Message {
@@ -19,12 +19,12 @@ interface Message {
 
 export const AIPage: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
-  const [isTyping, setIsTyping] = useState(false); 
+  const [isTyping, setIsTyping] = useState(false);
 
   const fetchAIResponse = async (userMessage: string): Promise<string> => {
     const safeMessage = userMessage ?? '';
-    let retries = 5; 
-    let delay = 2000; 
+    let retries = 5;
+    let delay = 2000;
 
     for (let attempt = 1; attempt <= retries; attempt++) {
       try {
@@ -38,9 +38,9 @@ export const AIPage: React.FC = () => {
       } catch (error: any) {
         if (error.response && error.response.status === 429) {
           console.warn(`Límite de tasa alcanzado en el intento ${attempt}. Reintentando en ${delay / 1000} segundos...`);
-          const jitter = Math.random() * 1000; 
-          await new Promise((resolve) => setTimeout(resolve, delay + jitter)); 
-          delay *= 2; 
+          const jitter = Math.random() * 1000;
+          await new Promise((resolve) => setTimeout(resolve, delay + jitter));
+          delay *= 2;
         } else {
           console.error('Error al obtener la respuesta de OpenAI:', error);
           return 'Lo siento, no puedo responder en este momento.';
@@ -56,9 +56,9 @@ export const AIPage: React.FC = () => {
       { id: prevMessages.length + 1, text: newMessage, sent: true }
     ]);
 
-    setIsTyping(true); 
+    setIsTyping(true);
     const aiResponse = await fetchAIResponse(newMessage);
-    setIsTyping(false); 
+    setIsTyping(false);
 
     setMessages((prevMessages) => [
       ...prevMessages,
@@ -69,9 +69,8 @@ export const AIPage: React.FC = () => {
   const MessageBubble: React.FC<{ message: string; isSent: boolean }> = ({ message, isSent }) => (
     <div className={`flex ${isSent ? 'justify-end' : 'justify-start'} mb-4`}>
       <div
-        className={`rounded-lg px-4 py-2 max-w-[70%] ${
-          isSent ? 'bg-[#45156B] text-white' : 'bg-[#28242C] text-gray-200'
-        }`}
+        className={`rounded-lg px-4 py-2 max-w-[70%] ${isSent ? 'bg-[#45156B] text-white' : 'bg-[#28242C] text-gray-200'
+          }`}
       >
         {message}
       </div>
@@ -134,7 +133,7 @@ export const AIPage: React.FC = () => {
         {messages.map((message) => (
           <MessageBubble key={message.id} message={message.text} isSent={message.sent} />
         ))}
-        {isTyping && <TypingIndicator />} 
+        {isTyping && <TypingIndicator />}
       </div>
       <div className="p-4">
         <InputField onSendMessage={handleSendMessage} />

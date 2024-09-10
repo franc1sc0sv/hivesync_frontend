@@ -18,19 +18,19 @@ export const features = (): ChannelProps[] => {
     return [
       {
         id: 1,
-        name: "ChatGPT",
+        name: "Hivesync X ChatGPT",
         onClick: () => navigate("/app/ai"),
         icon: GoDependabot
       },
       {
         id: 2,
-        name: "Documentos",
-        onClick: () => navigate(""),
+        name: "Hivesync Docs",
+        onClick: () => navigate("/app/documents"),
         icon: IoDocumentText
       },
       {
         id: 3,
-        name: "Espacio creativo",
+        name: "Hivesync Boards",
         onClick: () => navigate(""),
         icon: PiPencilCircleLight
       },
