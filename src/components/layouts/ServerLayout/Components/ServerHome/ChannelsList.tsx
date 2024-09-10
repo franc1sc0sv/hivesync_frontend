@@ -9,7 +9,7 @@ export const ChannelList = () => {
 
   return (
     <article className="flex flex-col gap-5 overflow-y-auto">
-      <ServerFeaturesAccordion name="Herramientas Hivesync" channels={features} />
+      <ServerFeaturesAccordion name="Herramientas Hivesync" channels={features()} />
       {channelList.map((channel) => {
         return channel.category === ChannelCategory.NO_CATEGORY ? (
           <AcordeonItems
