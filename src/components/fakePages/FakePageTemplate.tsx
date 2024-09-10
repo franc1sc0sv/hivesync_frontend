@@ -10,6 +10,7 @@ interface FakePageProps {
   isOpen: boolean;
   index: number;
   title: string;
+  showArrow: boolean;
   children: React.ReactNode;
 }
 
@@ -19,6 +20,7 @@ const FakePageTemplate: React.FC<FakePageProps> = ({
   index,
   title,
   children,
+  showArrow,
 }) => {
   const { modalId } = useModal();
 
@@ -59,9 +61,12 @@ const FakePageTemplate: React.FC<FakePageProps> = ({
         >
           <div className="w-full h-screen text-center">
             <div className="flex flex-row h-[10%] items-center justify-between p-3 text-custom_white">
-              <div onClick={handleClose}>
-                <GoBackTriangle size={30} color="white" />
-              </div>
+              {showArrow && (
+                <div onClick={handleClose}>
+                  <GoBackTriangle size={30} color="white" />
+                </div>
+              )}
+
               <span className="text-2xl font-bold">{title}</span>
               <span></span>
             </div>

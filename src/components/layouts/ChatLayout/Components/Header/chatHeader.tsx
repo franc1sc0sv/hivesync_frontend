@@ -19,7 +19,7 @@ export const ChatHeader = () => {
 
   const StartCall = () => {
     addFakePage({
-      title: "Llamada",
+      title: "Llamada en curso",
       children: <VideoCallLayout />,
     });
   };

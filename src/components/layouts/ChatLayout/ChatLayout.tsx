@@ -14,7 +14,7 @@ export const ChatLayout = () => {
         <Conversation />
         <MessageInput />
 
-        <ShowFakePages />
+        <ShowFakePages showArrow={false} />
         <Notifications />
       </ChatProvider>
     </main>
