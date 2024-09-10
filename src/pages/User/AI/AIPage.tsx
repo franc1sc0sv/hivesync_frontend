@@ -17,7 +17,7 @@ interface Message {
   sent: boolean;
 }
 
-export const IaTesting: React.FC = () => {
+export const AIPage: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isTyping, setIsTyping] = useState(false); 
 
@@ -142,7 +142,5 @@ export const IaTesting: React.FC = () => {
     </div>
   );
 };
-
-export default IaTesting;
 
 

@@ -22,7 +22,6 @@
     "http-status-codes": "^2.3.0",
     "i18next": "^23.10.1",
     "i18next-http-backend": "^2.5.0",
-    "lucide-react": "^0.439.0",
     "openai": "^4.58.1",
     "react": "^18.2.0",
     "react-calendar": "^4.8.0",

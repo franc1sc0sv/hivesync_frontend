@@ -1,12 +1,15 @@
 import { useChannelList } from "../../hooks/useChannelList";
 import { AcordeonItems, AcordeonMenu } from "./AcordeonMenu/AcordeonIndex";
 import { ChannelCategory } from "../../Enums/SpecificServer";
+import { ServerFeaturesAccordion } from "./AcordeonMenu/featuresAcordeon";
+import { features } from "./AcordeonMenu/serverFeatures";
 
 export const ChannelList = () => {
   const { channelList } = useChannelList();
 
   return (
     <article className="flex flex-col gap-5 overflow-y-auto">
+      <ServerFeaturesAccordion name="Herramientas Hivesync" channels={features} />
       {channelList.map((channel) => {
         return channel.category === ChannelCategory.NO_CATEGORY ? (
           <AcordeonItems
