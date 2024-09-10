@@ -8,6 +8,7 @@ import { ServerPage } from "../../pages/User/Servers/ServerPage";
 import { ProfilePage } from "../../pages/User/Profile/Profile";
 import { SettingsPage } from "../../pages/User/UserSettings/Settings";
 import { NotificationsPage } from "../../pages/User/Notifications/NotificationsPage";
+import { AIPage } from "../../pages/User/AI/AIPage";
 
 //no le hagan caso xd ay lo borro
 import { TestingPage } from "../../pages/testing/TestingPage";
@@ -31,5 +32,8 @@ export const UserRoutes: RouteObject = {
     { path: "comunity/:id", element: <ComunityIndividualPage /> },
     { path: ":id/:id", element: <ServerPage /> }, // Servers - /server_id/channel_id
     { index: true, element: <ServerPage /> }, // Servers - /server_id/channel_id
+
+    { path: "ai", element: <AIPage /> },
+
   ],
 };
