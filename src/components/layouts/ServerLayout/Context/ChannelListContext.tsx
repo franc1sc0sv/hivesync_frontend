@@ -10,6 +10,8 @@ interface ChannelContextType {
   setChannelList: React.Dispatch<React.SetStateAction<ServerChannelsAray>>;
   toogleCategory: (category: string) => void;
   setCurrentChannel: (id: string) => void;
+  actualChannel: ChannelType | null;
+  setActualChannel: React.Dispatch<React.SetStateAction<ChannelType | null>>;
 }
 
 const obtener_canal_id_activo = () => {
@@ -41,6 +43,8 @@ export const ChannelListContext = createContext<ChannelContextType>({
   setChannelList: () => {},
   toogleCategory: () => {},
   setCurrentChannel: () => {},
+  actualChannel: null,
+  setActualChannel: () => {},
 });
 
 export const ChannelListProvider = ({
@@ -51,6 +55,7 @@ export const ChannelListProvider = ({
   channels: ChannelType[];
 }) => {
   const [channelList, setChannelList] = useState<ServerChannelsAray>([]);
+  const [actualChannel, setActualChannel] = useState<ChannelType | null>(null);
 
   const toogleCategory = (category: string) => {
     const categoryChanels = channelList.filter(
@@ -73,7 +78,16 @@ export const ChannelListProvider = ({
       });
       return { ...list, channels: formated_channels };
     });
+
     updateUrl(id);
+
+    // Buscar y establecer el actualChannel
+    const selectedChannel = new_data
+      .flatMap((list) => list.channels)
+      .find((channel) => channel.id === id);
+
+    setActualChannel(selectedChannel || null);
+
     setChannelList(new_data);
   };
 
@@ -108,6 +122,12 @@ export const ChannelListProvider = ({
     );
 
     setChannelList(formatedChannels);
+
+    // Establecer el actualChannel en el canal activo al cargar
+    const selectedChannel = formaetedChannels.find(
+      (channel) => channel.id === active_channel
+    );
+    setActualChannel(selectedChannel || null);
   }, []);
 
   return (
@@ -117,6 +137,8 @@ export const ChannelListProvider = ({
         setChannelList,
         toogleCategory,
         setCurrentChannel,
+        actualChannel,
+        setActualChannel,
       }}
     >
       {children}
