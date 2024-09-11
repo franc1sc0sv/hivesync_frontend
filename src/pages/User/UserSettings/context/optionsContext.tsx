@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import { NoOptionSelected } from "../Components/noOptionSelected";
 
 interface Option {
   option: React.ReactNode;
@@ -14,10 +15,14 @@ interface ProviderProps {
   children: React.ReactNode;
 }
 
-export const OptionsContext = createContext<ContextProps | null>(null);
+export const OptionsContext = createContext<ContextProps>({
+  component: <></>,
+  setComponent: () => {}, 
+  renderOption: () => {}, 
+});
 
 export const OptionsProvider: React.FC<ProviderProps> = ({ children }) => {
-  const [component, setComponent] = useState<React.ReactNode>(<></>);
+  const [component, setComponent] = useState<React.ReactNode>(<NoOptionSelected />);
 
   const renderOption = ({ option }: Option) => setComponent(option);
 

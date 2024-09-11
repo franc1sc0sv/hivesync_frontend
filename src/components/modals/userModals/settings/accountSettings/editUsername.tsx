@@ -10,13 +10,13 @@ export const EditUsernameModal: React.FC = () => {
     return (
         <ModalTemplate identificator="editUsername">
             <div className="flex items-center justify-center h-full">
-                <Form />
+                <EditUsernameForm />
             </div>
         </ModalTemplate>
     )
 }
 
-const Form = () => {
+export const EditUsernameForm = () => {
 
     const [message, setMessage] = useState("");
     const { setNotifications } = useNotifications();

@@ -10,13 +10,13 @@ export const EditMailModal: React.FC = () => {
     return (
         <ModalTemplate identificator="editMail">
             <div className="flex items-center justify-center h-full">
-                <Form />
+                <EditMailForm />
             </div>
         </ModalTemplate>
     )
 }
 
-const Form = () => {
+export const EditMailForm = () => {
 
     const [message, setMessage] = useState("");
     const { setNotifications } = useNotifications();

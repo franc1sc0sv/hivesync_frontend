@@ -9,7 +9,7 @@ interface Props {
 
 export const ToggleSwitch: React.FC<Props> = ({ onClick, register, name, isChecked }) => {
     return (
-        <label 
+        <label
             className="inline-flex items-center cursor-pointer">
             <input
                 type="checkbox"
@@ -19,7 +19,7 @@ export const ToggleSwitch: React.FC<Props> = ({ onClick, register, name, isCheck
                 {...register(name)}
                 onClick={onClick}
             />
-            <div className="relative w-14 h-8 bg-gray peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+            <div className="relative w-14 h-8 bg-gray peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white  after:rounded-full after:h-7 after:w-7 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
         </label>
     );
 }
