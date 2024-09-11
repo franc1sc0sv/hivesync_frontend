@@ -16,11 +16,11 @@ export const EditPictureOrCoverModal = () => {
   return (
     <div>
       <ModalTemplate identificator="editProfilePicture">
-        <EditProfilePicture />
+        <EditProfilePictureForm />
       </ModalTemplate>
 
       <ModalTemplate identificator="editCoverTheme">
-        <EditCoverTheme />
+        <EditCoverThemeForm />
       </ModalTemplate>
     </div>
   );
@@ -39,7 +39,7 @@ export const EditPictureOrCoverModal = () => {
 //   );
 // };
 
-const EditProfilePicture = () => {
+export const EditProfilePictureForm = () => {
   const [picRoute] = useState("");
 
   // const handleFileChange = (_: React.ChangeEvent<HTMLInputElement>) => {
@@ -97,7 +97,7 @@ const EditProfilePicture = () => {
   );
 };
 
-const EditCoverTheme = () => {
+export const EditCoverThemeForm = () => {
   const { user } = useSession();
 
   const api_function = async (data: any) => {

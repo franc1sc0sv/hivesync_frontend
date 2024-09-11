@@ -1,9 +1,9 @@
-import { ToggleMicrophone } from "./toggleMicroModal"
+import { ToggleMicrophoneModal } from "./toggleMicroModal"
 
 export const VoiceModals = () => {
     return (
         <>
-            <ToggleMicrophone />
+            <ToggleMicrophoneModal />
         </>
     )
 }
