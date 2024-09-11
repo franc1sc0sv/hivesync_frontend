@@ -5,11 +5,12 @@ import { InputsForms } from "./inputs";
 import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
 
 type Props = {
+  placeholder ?: string;
   register: UseFormRegister<FieldValues>;
   name?: string
 };
 
-export const PasswordInput: React.FC<Props> = ({ register, name }) => {
+export const PasswordInput: React.FC<Props> = ({ placeholder, register, name }) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const handlePassworwd = () => {
@@ -25,7 +26,7 @@ export const PasswordInput: React.FC<Props> = ({ register, name }) => {
         register={register}
         name= {name ? name : "password"}
         title="Contraseña"
-        placeholder="Digite su contraseña"
+        placeholder= {placeholder ? placeholder : "Digite su contraseña"}
         type={showPassword ? "text" : "password"}
       />
 

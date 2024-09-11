@@ -9,25 +9,27 @@ export const ToggleOnline: React.FC = () => {
   return (
     <ModalTemplate identificator="toggleOnline">
       <div className="flex items-center justify-center h-full">
-        <Form />
+        <OnlineStatusForm />
       </div>
     </ModalTemplate>
   );
 };
 
+export const OnlineStatusForm: React.FC = () => {
+
+  const api = () => console.log("hola, *llama a la api épicamente*");
+  const success = () => console.log("success");
+
+  const { register } = useCustomForm(api, success, "");
 
 
-const Form = () => {
+
   const [status, setStatus] = useState<string>(() => {
     // Obtén el estado inicial desde localStorage, con "desconectado" como valor por defecto
     const storedStatus = localStorage.getItem("localAppearAs");
     return storedStatus ? storedStatus : USER_STATUS_PROFILE.DISCONNECTED;
   });
 
-  const api = () => console.log("API llamada");
-  const success = () => console.log("Cambio de estado exitoso");
-
-  const { register } = useCustomForm(api, success, "");
 
   const handleToggle = () => {
     const newStatus = status === USER_STATUS_PROFILE.CONNECTED ? USER_STATUS_PROFILE.DISCONNECTED : USER_STATUS_PROFILE.CONNECTED;
@@ -37,18 +39,23 @@ const Form = () => {
     location.reload(); // Recargar la página para aplicar cambios
   };
 
+
   return (
-    <div className="w-full flex flex-col justify-center items-center gap-5">
-      <p className="text-2xl text-custom_white">Activa o desactiva tu estado en línea</p>
-      <ToggleSwitch 
-        name="appearAs" 
-        register={register} 
-        onClick={handleToggle} 
-        isChecked={status === USER_STATUS_PROFILE.CONNECTED} // Chequear si el estado es "conectado"
-      />
-      <p className="text-2xl text-light_purple">
-        {status === USER_STATUS_PROFILE.CONNECTED ? "Estás en línea" : "Estás desconectado"}
+    <div className="w-full max-w-3xl flex flex-col justify-center items-center gap-5 bg-overlay_2 rounded-xl p-5 md:p-8 lg:p-10">
+      <p className="text-lg md:text-2xl text-custom_white text-center">
+        Activa o desactiva tu estado en línea
       </p>
+      <div className="w-full flex flex-row md:flex-row justify-evenly items-center gap-4">
+        <p className="text-2xl text-light_purple">
+          {status === USER_STATUS_PROFILE.CONNECTED ? "Estás en línea" : "Estás desconectado"}
+        </p>
+        <ToggleSwitch
+          name="appearAs"
+          register={register}
+          onClick={handleToggle}
+          isChecked={status === USER_STATUS_PROFILE.CONNECTED} // Chequear si el estado es "conectado"
+        />
+      </div>
     </div>
   );
-};
+}

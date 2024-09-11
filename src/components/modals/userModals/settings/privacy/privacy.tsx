@@ -1,7 +1,7 @@
 
 import { ToggleOnline } from "./ToggleOnline"
 
-export const PrivacityModals = () => {
+export const PrivacyModals = () => {
   return (
     <>
       <ToggleOnline/>

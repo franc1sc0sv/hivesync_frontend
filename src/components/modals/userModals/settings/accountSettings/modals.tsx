@@ -2,6 +2,8 @@ import { EditUsernameModal } from "./editUsername"
 import { EditNameModal } from "./editName"
 import { EditMailModal } from "./editMail"
 import { EditPasswordModal } from "./editPassword"
+import { EditAboutMeModal } from "./aboutMe"
+
 
 export const AccountSettingsModals = () => {
     return (
@@ -10,6 +12,7 @@ export const AccountSettingsModals = () => {
             <EditNameModal />
             <EditMailModal />
             <EditPasswordModal />
+            <EditAboutMeModal />
         </>
     )
 }

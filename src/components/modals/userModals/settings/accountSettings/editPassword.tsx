@@ -9,13 +9,13 @@ export const EditPasswordModal: React.FC = () => {
     return (
         <ModalTemplate identificator="editPassword">
             <div className="flex items-center justify-center h-full">
-                <Form />
+                <EditPasswordForm />
             </div>
         </ModalTemplate>
     );
 }
 
-const Form = () => {
+export const EditPasswordForm = () => {
 
     const [message, setMessage] = useState("");
     const { setNotifications } = useNotifications();
@@ -76,7 +76,7 @@ const Form = () => {
             onSubmit={onSubmit}
         >
             <PasswordInput name="password" register={register} />
-            <PasswordInput name="verifyPassword" register={register} />
+            <PasswordInput name="verifyPassword" placeholder="Confirme su contraseña" register={register} />
             {message && (
                 <p className="w-full lg:w-1/2 text-md text-center lg:text-lg text-custom_white">
                     {message}

@@ -1,54 +1,31 @@
 import { useState, useEffect } from "react";
+import { useModal } from "../../../../store/useModal";
 
-import { useMediaQuery } from "@uidotdev/usehooks";
-
-
-import { options } from "../options";
-import { SettingsProps } from "../options";
+import { options } from "../optionsList";
+import { SettingsProps } from "../optionsList";
 import { useContext } from "react";
 import { OptionsContext } from "../context/optionsContext";
-
-import { useModal } from "../../../../store/useModal";
-import { UserSettingsModals } from "../../../../components/modals/userModals/settings/UserSettingsModals";
 
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
 
-import { NoOptionSelected } from "./noOptionSelected";
-
-
-interface OptionSelectedProps {
-  optionSelected: React.ReactNode;
-}
-
-interface SettingsTemplateProps extends SettingsProps {
-  setComponent: (component: React.ReactNode) => void;
-}
 
 export const MenuOptions: React.FC = () => {
-  const context = useContext(OptionsContext);
-
-  if (!context) {
-    throw new Error("MenuOptions must be used within an OptionsProvider");
-  }
-
-  const { component, setComponent } = context;
-
   return (
-    <div className="w-full flex flex-row justify-between">
+    <div className="w-full flex flex-row justify-between overflow-hidden">
       <div className="w-full lg:w-1/3 overflow-y-auto">
-        <SettingsTemplate settings={options} setComponent={setComponent} />
+        <SettingsTemplate settings={options} />
       </div>
 
       <div className="max-h-fit hidden lg:block w-3/5 ">
-        <OptionSelected optionSelected={component} />
+        <OptionSelected />
       </div>
     </div>
   );
 };
 
 
-const SettingsTemplate: React.FC<SettingsTemplateProps> = ({ settings, setComponent }) => {
+const SettingsTemplate: React.FC<SettingsProps> = ({ settings }) => {
 
   const { setModalId } = useModal();
 
@@ -56,6 +33,9 @@ const SettingsTemplate: React.FC<SettingsTemplateProps> = ({ settings, setCompon
 
 
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 768);
+
+  const context = useContext(OptionsContext);
+  const { setComponent } = context;
 
   //verificar resolución
   useEffect(() => {
@@ -122,11 +102,9 @@ const SettingsTemplate: React.FC<SettingsTemplateProps> = ({ settings, setCompon
                 <button
                   onClick={() => {
                     if (!isLargeScreen) {
-                      // Si la resolución es menor a 768px, usa setModalId
                       setModalId(opt.modal);
                     } else {
-                      // Si la resolución es mayor o igual a 768px, no hacer nada
-                      return;
+                      setComponent(opt.optionComponent);
                     }
                   }}
                   key={index}
@@ -142,10 +120,15 @@ const SettingsTemplate: React.FC<SettingsTemplateProps> = ({ settings, setCompon
   );
 };
 
-const OptionSelected: React.FC<OptionSelectedProps> = ({ optionSelected }) => {
+const OptionSelected: React.FC = () => {
+
+  const context = useContext(OptionsContext);
+  const { component } = context;
 
   return (
-    <NoOptionSelected />
+    <div className="w-full h-full flex flex-col gap-5 justify-center items-center">
+      {component}
+    </div>
   )
 }
 
