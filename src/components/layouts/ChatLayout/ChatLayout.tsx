@@ -1,3 +1,4 @@
+import { SocketContextProvider } from "../../../context/useSocket";
 import { Notifications } from "../../Alerts/Notification";
 import { ShowFakePages } from "../../fakePages/ShowFakePages";
 
@@ -9,14 +10,16 @@ import { ChatProvider } from "./Context/ChatContext";
 export const ChatLayout = () => {
   return (
     <main className="flex flex-col justify-between w-full h-screen bg-overlay_1">
-      <ChatProvider>
-        <ChatHeader />
-        <Conversation />
-        <MessageInput />
+      <SocketContextProvider namespace="chat">
+        <ChatProvider>
+          <ChatHeader />
+          <Conversation />
+          <MessageInput />
 
-        <ShowFakePages showArrow={false} />
-        <Notifications />
-      </ChatProvider>
+          <ShowFakePages showArrow={false} />
+          <Notifications />
+        </ChatProvider>
+      </SocketContextProvider>
     </main>
   );
 };

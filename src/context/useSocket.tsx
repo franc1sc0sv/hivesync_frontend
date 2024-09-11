@@ -25,15 +25,18 @@ export const useSocketContext = (): SocketContextType => {
 
 interface SocketContextProviderProps {
   children: ReactNode;
+  namespace: string;
 }
 
 export const SocketContextProvider: React.FC<SocketContextProviderProps> = ({
   children,
+  namespace,
 }) => {
   const [socket, setSocket] = useState<Socket | null>(null);
 
+  const url = import.meta.env.VITE_SOCKET + `${namespace}`;
   useEffect(() => {
-    const socketInstance = io(import.meta.env.VITE_SOCKET);
+    const socketInstance = io(url);
     setSocket(socketInstance);
   }, []);
   return (

@@ -16,7 +16,9 @@ const CurrentScreen = ({
   stream: MediaStream | null;
   videoRef: React.RefObject<HTMLVideoElement>;
 }) => {
-  if (stream) {
+  const { isCameraActive } = useCall();
+
+  if (stream && isCameraActive) {
     return <UserCameraStream stream={stream} videoRef={videoRef} />;
   }
 
@@ -46,9 +48,9 @@ const UserCard = () => {
 
 const UserCardFriend = () => {
   const { remoteStream, friend, remoteVideoRef, status } = useCall();
-
-  const PENDING_STYLES = status === "PENDING" ? "opacity-50" : "";
-  const PENDING_STYLES_BG = status === "PENDING" ? "" : friend.backgroundUrl;
+  const PENDING_STYLES = status?.status === "PENDING" ? "opacity-50" : "";
+  const PENDING_STYLES_BG =
+    status?.status === "PENDING" ? "" : friend.backgroundUrl;
 
   return (
     <div

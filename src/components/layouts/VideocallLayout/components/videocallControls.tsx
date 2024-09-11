@@ -19,6 +19,7 @@ import { useCall } from "../Context/useCall";
 export const VideoCallControlls: React.FC = () => {
   const { setNotifications } = useNotifications();
   const { removeFakePage, fakePages } = useFakePages();
+  const { endCall } = useCall();
 
   const {
     isCameraActive,
@@ -43,16 +44,18 @@ export const VideoCallControlls: React.FC = () => {
       type: BUTTON_TYPE.CAMERA,
     },
     {
-      Icon: !isShareScreenActive ? MdCoPresent : MdCancelPresentation,
+      Icon: isShareScreenActive ? MdCancelPresentation : MdCoPresent,
       onClick: () => {},
       type: BUTTON_TYPE.PRESENTATION,
     },
     {
       Icon: MdCallEnd,
       onClick: async () => {
+        endCall();
         if (lastPageId !== null) {
           removeFakePage(lastPageId);
         }
+
         setNotifications({
           severity: "info",
           message: "Llamada finalizada",
