@@ -1,14 +1,59 @@
 import { useState, useRef, useEffect } from 'react';
 import { Stage, Layer, Rect, Circle, Line, Text, RegularPolygon, Image, Transformer } from 'react-konva';
-import { FaSquare, FaCircle, FaPlay, FaPen } from 'react-icons/fa';
+import { FaSquare, FaCircle, FaPlay, FaPen, FaEraser } from 'react-icons/fa';
 import { AiOutlineDelete } from 'react-icons/ai';
 import Konva from 'konva';
 
-type RectangleProps = { x: number; y: number; width: number; height: number; fill: string; opacity: number; stroke: string; strokeWidth: number; id: string; draggable: boolean; };
-type CircleProps = { x: number; y: number; radius: number; fill: string; opacity: number; stroke: string; strokeWidth: number; id: string; draggable: boolean; };
-type TriangleProps = { x: number; y: number; sides: number; radius: number; fill: string; opacity: number; stroke: string; strokeWidth: number; id: string; draggable: boolean; };
-type LineShape = { points: number[]; stroke: string; strokeWidth: number; opacity: number; id: string; draggable: boolean; };
-type ImageShape = { image: HTMLImageElement; x: number; y: number; id: string; draggable: boolean; };
+type RectangleProps = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  fill: string;
+  opacity: number;
+  stroke: string;
+  strokeWidth: number;
+  id: string;
+  draggable: boolean;
+};
+type CircleProps = {
+  x: number;
+  y: number;
+  radius: number;
+  fill: string;
+  opacity: number;
+  stroke: string;
+  strokeWidth: number;
+  id: string;
+  draggable: boolean;
+};
+type TriangleProps = {
+  x: number;
+  y: number;
+  sides: number;
+  radius: number;
+  fill: string;
+  opacity: number;
+  stroke: string;
+  strokeWidth: number;
+  id: string;
+  draggable: boolean;
+};
+type LineShape = {
+  points: number[];
+  stroke: string;
+  strokeWidth: number;
+  opacity: number;
+  id: string;
+  draggable: boolean;
+};
+type ImageShape = {
+  image: HTMLImageElement;
+  x: number;
+  y: number;
+  id: string;
+  draggable: boolean;
+};
 type ShapeType = 'rect' | 'circle' | 'triangle' | 'line' | 'text' | 'image';
 
 export default function PizarraDigital() {
@@ -19,6 +64,7 @@ export default function PizarraDigital() {
   const [texts, setTexts] = useState<any[]>([]);
   const [images, setImages] = useState<ImageShape[]>([]);
   const [isDrawing, setIsDrawing] = useState(false);
+  const [isErasing, setIsErasing] = useState(false);
   const [selectedColor, setSelectedColor] = useState('#45156B');
   const [strokeWidth, setStrokeWidth] = useState(1);
   const [opacity, setOpacity] = useState(1);
@@ -47,19 +93,63 @@ export default function PizarraDigital() {
   }, []);
 
   const addRectangle = () => {
-    setRectangles([...rectangles, { x: 50, y: 50, width: 100, height: 100, fill: selectedColor, opacity, stroke: selectedColor, strokeWidth, id: `rect-${rectangles.length}`, draggable: true }]);
+    setRectangles([
+      ...rectangles,
+      {
+        x: 50,
+        y: 50,
+        width: 100,
+        height: 100,
+        fill: selectedColor,
+        opacity,
+        stroke: selectedColor,
+        strokeWidth,
+        id: `rect-${rectangles.length}`,
+        draggable: true,
+      },
+    ]);
   };
 
   const addCircle = () => {
-    setCircles([...circles, { x: 150, y: 150, radius: 50, fill: selectedColor, opacity, stroke: selectedColor, strokeWidth, id: `circle-${circles.length}`, draggable: true }]);
+    setCircles([
+      ...circles,
+      {
+        x: 150,
+        y: 150,
+        radius: 50,
+        fill: selectedColor,
+        opacity,
+        stroke: selectedColor,
+        strokeWidth,
+        id: `circle-${circles.length}`,
+        draggable: true,
+      },
+    ]);
   };
 
   const addTriangle = () => {
-    setTriangles([...triangles, { x: 200, y: 200, sides: 3, radius: 60, fill: selectedColor, opacity, stroke: selectedColor, strokeWidth, id: `triangle-${triangles.length}`, draggable: true }]);
+    setTriangles([
+      ...triangles,
+      {
+        x: 200,
+        y: 200,
+        sides: 3,
+        radius: 60,
+        fill: selectedColor,
+        opacity,
+        stroke: selectedColor,
+        strokeWidth,
+        id: `triangle-${triangles.length}`,
+        draggable: true,
+      },
+    ]);
   };
 
   const addText = () => {
-    setTexts([...texts, { x: 200, y: 200, text: textInput, fontSize: 20, fill: selectedColor, id: `text-${texts.length}`, draggable: true }]);
+    setTexts([
+      ...texts,
+      { x: 200, y: 200, text: textInput, fontSize: 20, fill: selectedColor, id: `text-${texts.length}`, draggable: true },
+    ]);
     setTextInput('');
   };
 
@@ -89,15 +179,22 @@ export default function PizarraDigital() {
   };
 
   const handleMouseDown = (e: any) => {
-    if (!isDrawing) return;
+    if (!isDrawing && !isErasing) return;
     const pos = getRelativePointerPosition(e.target.getStage());
-    const newLine: LineShape = { points: [pos.x, pos.y], stroke: selectedColor, strokeWidth, opacity, id: `line-${lines.length}`, draggable: true };
+    const newLine: LineShape = {
+      points: [pos.x, pos.y],
+      stroke: isErasing ? '#ffffff' : selectedColor,
+      strokeWidth: isErasing ? 20 : strokeWidth,
+      opacity,
+      id: `line-${lines.length}`,
+      draggable: true,
+    };
     setLines([...lines, newLine]);
     setCurrentLine(newLine);
   };
 
   const handleMouseMove = (e: any) => {
-    if (!isDrawing || !currentLine) return;
+    if ((!isDrawing && !isErasing) || !currentLine) return;
     const stage = e.target.getStage();
     const point = getRelativePointerPosition(stage);
     const updatedLine = { ...currentLine, points: [...currentLine.points, point.x, point.y] };
@@ -115,6 +212,13 @@ export default function PizarraDigital() {
 
   const toggleDrawing = () => {
     setIsDrawing((prev) => !prev);
+    setIsErasing(false);
+    setCurrentLine(null);
+  };
+
+  const toggleErasing = () => {
+    setIsErasing((prev) => !prev);
+    setIsDrawing(false);
     setCurrentLine(null);
   };
 
@@ -226,19 +330,62 @@ export default function PizarraDigital() {
       <div className="flex flex-col md:flex-row p-2 md:p-4 space-y-2 md:space-y-0 md:space-x-4">
         <div className="w-full md:w-72 bg-[#2E2934] rounded-lg p-3 md:p-4 space-y-3 md:space-y-4">
           <h2 className="font-semibold mb-1 md:mb-2 text-sm md:text-base">Herramientas de dibujo</h2>
-          <div className="grid grid-cols-4 gap-1 md:gap-2">
-            <button className="h-8 md:h-10 p-1 md:p-2 border rounded hover:bg-gray-600 transition" onClick={addRectangle}><FaSquare className="w-full h-full" /></button>
-            <button className="h-8 md:h-10 p-1 md:p-2 border rounded hover:bg-gray-600 transition" onClick={addCircle}><FaCircle className="w-full h-full" /></button>
-            <button className="h-8 md:h-10 p-1 md:p-2 border rounded hover:bg-gray-600 transition" onClick={addTriangle}><FaPlay className="w-full h-full" /></button>
-            <button className={`h-8 md:h-10 p-1 md:p-2 border rounded ${isDrawing ? 'bg-purple-700' : ''} hover:bg-gray-600 transition`} onClick={toggleDrawing}><FaPen className="w-full h-full" /></button>
+          <div className="grid grid-cols-5 gap-1 md:gap-2">
+            <button className="h-8 md:h-10 p-1 md:p-2 border rounded hover:bg-gray-600 transition" onClick={addRectangle}>
+              <FaSquare className="w-full h-full" />
+            </button>
+            <button className="h-8 md:h-10 p-1 md:p-2 border rounded hover:bg-gray-600 transition" onClick={addCircle}>
+              <FaCircle className="w-full h-full" />
+            </button>
+            <button className="h-8 md:h-10 p-1 md:p-2 border rounded hover:bg-gray-600 transition" onClick={addTriangle}>
+              <FaPlay className="w-full h-full" />
+            </button>
+            <button
+              className={`h-8 md:h-10 p-1 md:p-2 border rounded ${isDrawing ? 'bg-purple-700' : ''} hover:bg-gray-600 transition`}
+              onClick={toggleDrawing}
+            >
+              <FaPen className="w-full h-full" />
+            </button>
+            <button
+              className={`h-8 md:h-10 p-1 md:p-2 border rounded ${isErasing ? 'bg-purple-700' : ''} hover:bg-gray-600 transition`}
+              onClick={toggleErasing}
+            >
+              <FaEraser className="w-full h-full" />
+            </button>
           </div>
-          <input type="file" accept="image/*" onChange={handleImageUpload} className="w-full mt-2 text-sm text-gray-500" />
-          <input type="text" value={textInput} onChange={(e) => setTextInput(e.target.value)} placeholder="Escribe aquí..." className="w-full p-1 mt-2 border rounded text-black" />
-          <button className="w-full mt-2 p-1 bg-purple-700 text-white rounded hover:bg-purple-800 transition" onClick={addText}>Enviar Texto</button>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            className="w-full mt-2 text-sm text-gray-500"
+          />
+          <input
+            type="text"
+            value={textInput}
+            onChange={(e) => setTextInput(e.target.value)}
+            placeholder="Escribe aquí..."
+            className="w-full p-1 mt-2 border rounded text-black"
+          />
+          <button
+            className="w-full mt-2 p-1 bg-purple-700 text-white rounded hover:bg-purple-800 transition"
+            onClick={addText}
+          >
+            Enviar Texto
+          </button>
           <div className="flex gap-2 mt-2">
-            <button className="w-full p-1 bg-purple-700 text-white rounded hover:bg-purple-800 transition" onClick={downloadImage}>Descargar</button>
-            <button className="w-full p-1 bg-red-600 text-white rounded hover:bg-red-700 transition" onClick={deleteSelectedObject} disabled={!selectedId}>
-              <AiOutlineDelete className="w-4 h-4 mr-1" />Eliminar Seleccionado
+            <button
+              className="w-full p-1 bg-purple-700 text-white rounded hover:bg-purple-800 transition"
+              onClick={downloadImage}
+            >
+              Descargar
+            </button>
+            <button
+              className="w-full p-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+              onClick={deleteSelectedObject}
+              disabled={!selectedId}
+            >
+              <AiOutlineDelete className="w-4 h-4 mr-1" />
+              Eliminar Seleccionado
             </button>
           </div>
         </div>
@@ -259,22 +406,66 @@ export default function PizarraDigital() {
           >
             <Layer>
               {rectangles.map((rect) => (
-                <Rect key={rect.id} {...rect} onClick={() => handleSelect(rect.id)} onTap={() => handleSelect(rect.id)} onDragMove={(e) => handleDragMove(e, rect.id, 'rect')} onDragEnd={(e) => handleDragMove(e, rect.id, 'rect')} />
+                <Rect
+                  key={rect.id}
+                  {...rect}
+                  onClick={() => handleSelect(rect.id)}
+                  onTap={() => handleSelect(rect.id)}
+                  onDragMove={(e) => handleDragMove(e, rect.id, 'rect')}
+                  onDragEnd={(e) => handleDragMove(e, rect.id, 'rect')}
+                />
               ))}
               {circles.map((circle) => (
-                <Circle key={circle.id} {...circle} onClick={() => handleSelect(circle.id)} onTap={() => handleSelect(circle.id)} onDragMove={(e) => handleDragMove(e, circle.id, 'circle')} onDragEnd={(e) => handleDragMove(e, circle.id, 'circle')} />
+                <Circle
+                  key={circle.id}
+                  {...circle}
+                  onClick={() => handleSelect(circle.id)}
+                  onTap={() => handleSelect(circle.id)}
+                  onDragMove={(e) => handleDragMove(e, circle.id, 'circle')}
+                  onDragEnd={(e) => handleDragMove(e, circle.id, 'circle')}
+                />
               ))}
               {triangles.map((triangle) => (
-                <RegularPolygon key={triangle.id} {...triangle} onClick={() => handleSelect(triangle.id)} onTap={() => handleSelect(triangle.id)} onDragMove={(e) => handleDragMove(e, triangle.id, 'triangle')} onDragEnd={(e) => handleDragMove(e, triangle.id, 'triangle')} />
+                <RegularPolygon
+                  key={triangle.id}
+                  {...triangle}
+                  onClick={() => handleSelect(triangle.id)}
+                  onTap={() => handleSelect(triangle.id)}
+                  onDragMove={(e) => handleDragMove(e, triangle.id, 'triangle')}
+                  onDragEnd={(e) => handleDragMove(e, triangle.id, 'triangle')}
+                />
               ))}
               {lines.map((line) => (
-                <Line key={line.id} {...line} onDragMove={(e) => handleDragMove(e, line.id, 'line')} onDragEnd={(e) => handleDragMove(e, line.id, 'line')} />
+                <Line
+                  key={line.id}
+                  {...line}
+                  onDragMove={(e) => handleDragMove(e, line.id, 'line')}
+                  onDragEnd={(e) => handleDragMove(e, line.id, 'line')}
+                />
               ))}
               {texts.map((text) => (
-                <Text key={text.id} {...text} onClick={() => handleSelect(text.id)} onTap={() => handleSelect(text.id)} onDragMove={(e) => handleDragMove(e, text.id, 'text')} onDragEnd={(e) => handleDragMove(e, text.id, 'text')} />
+                <Text
+                  key={text.id}
+                  {...text}
+                  onClick={() => handleSelect(text.id)}
+                  onTap={() => handleSelect(text.id)}
+                  onDragMove={(e) => handleDragMove(e, text.id, 'text')}
+                  onDragEnd={(e) => handleDragMove(e, text.id, 'text')}
+                />
               ))}
               {images.map((img) => (
-                <Image key={img.id} id={img.id} image={img.image} x={img.x} y={img.y} draggable={img.draggable} onClick={() => handleSelect(img.id)} onTap={() => handleSelect(img.id)} onDragMove={(e) => handleDragMove(e, img.id, 'image')} onDragEnd={(e) => handleDragMove(e, img.id, 'image')} />
+                <Image
+                  key={img.id}
+                  id={img.id}
+                  image={img.image}
+                  x={img.x}
+                  y={img.y}
+                  draggable={img.draggable}
+                  onClick={() => handleSelect(img.id)}
+                  onTap={() => handleSelect(img.id)}
+                  onDragMove={(e) => handleDragMove(e, img.id, 'image')}
+                  onDragEnd={(e) => handleDragMove(e, img.id, 'image')}
+                />
               ))}
               {selectedId && <Transformer ref={transformerRef} />}
             </Layer>
@@ -286,19 +477,44 @@ export default function PizarraDigital() {
           <div className="space-y-2 md:space-y-3">
             <div>
               <label className="text-xs md:text-sm">Opacidad</label>
-              <input type="range" min="0" max="100" value={opacity * 100} onChange={(e) => setOpacity(Number(e.target.value) / 100)} className="w-full mt-1" />
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={opacity * 100}
+                onChange={(e) => setOpacity(Number(e.target.value) / 100)}
+                className="w-full mt-1"
+              />
             </div>
             <div>
               <label className="text-xs md:text-sm">Color</label>
-              <input type="color" value={selectedColor} onChange={(e) => setSelectedColor(e.target.value)} className="w-full mt-1" />
+              <input
+                type="color"
+                value={selectedColor}
+                onChange={(e) => setSelectedColor(e.target.value)}
+                className="w-full mt-1"
+              />
             </div>
             <div>
               <label className="text-xs md:text-sm">Grosor del trazo</label>
-              <input type="range" min="1" max="20" value={strokeWidth} onChange={(e) => setStrokeWidth(Number(e.target.value))} className="w-full mt-1" />
+              <input
+                type="range"
+                min="1"
+                max="20"
+                value={strokeWidth}
+                onChange={(e) => setStrokeWidth(Number(e.target.value))}
+                className="w-full mt-1"
+              />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-1 md:gap-2">
-            <button className="h-7 md:h-9 text-xs md:text-sm flex items-center justify-center border rounded hover:bg-gray-600 transition" onClick={deleteAllObjects}><AiOutlineDelete className="w-3 h-3 md:w-4 md:h-4 mr-1" />Eliminar todo</button>
+            <button
+              className="h-7 md:h-9 text-xs md:text-sm flex items-center justify-center border rounded hover:bg-gray-600 transition"
+              onClick={deleteAllObjects}
+            >
+              <AiOutlineDelete className="w-3 h-3 md:w-4 md:h-4 mr-1" />
+              Eliminar todo
+            </button>
           </div>
         </div>
       </div>
