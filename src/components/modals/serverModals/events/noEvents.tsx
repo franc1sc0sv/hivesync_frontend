@@ -19,7 +19,7 @@ export const NoEvents: React.FC = () => {
                 </p>
             </div>
 
-            <div className="w-full" onClick={() => setModalId("addEvent")}>
+            <div className="w-full sm:w-3/5 lg:w-1/3" onClick={() => setModalId("addEvent")}>
                 <SubmitButton text="Crear evento" isLoading={false} />
             </div>
         </div>

@@ -28,9 +28,21 @@ export const get_server = async (id: string) => {
   }
 };
 
-export const get_all_events_by_server = async (id: string) => {
+export const get_all_events_by_server = async (serverId: string) => {
   try {
-    const res = await AxiosClient.get(`/server/events/get_many/${id}`, headers());
+    const res = await AxiosClient.get(`/server/events/get_many/${serverId}`, headers());
+    return format_api_response(res);
+  } catch (e) {
+    throwError(e)
+  }
+}
+
+
+export const deleteEvent = async (serverId: string, credentials: any ) => {
+  try {
+    const res = await AxiosClient.delete(`/server/events/${serverId}` ,{
+      data: credentials,
+    } );
     return format_api_response(res);
   } catch (e) {
     throwError(e)

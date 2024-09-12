@@ -17,7 +17,10 @@ interface EventContextType {
     isLoading: boolean;
 }
 
-export const EventContext = createContext<EventContextType | null>(null);
+const EventContext = createContext<EventContextType | null>({
+    events: [],
+    isLoading: true
+});
 
 export const EventsProvider = ({ children }: { children: React.ReactNode }) => {
     const { selected_server } = useServer();
@@ -31,13 +34,14 @@ export const EventsProvider = ({ children }: { children: React.ReactNode }) => {
     useEffect(() => {
         const fetchEvents = async () => {
             const eventsList = await fecthData();
-            console.log(eventsList)
+            console.log(eventsList);
 
             // Transformar los datos antes de guardarlos en el estado, garantizando que eventDate sea un string
             const transformedEvents = eventsList.map((event: EventsProps) => ({
                 ...event,
                 eventDate: event.date.split("T")[0]
             }));
+
             setEvents(transformedEvents);
 
             if (!eventsList?.length) return;
@@ -45,6 +49,8 @@ export const EventsProvider = ({ children }: { children: React.ReactNode }) => {
 
         fetchEvents();
     }, [selected_server]);
+
+
 
     if (isLoading) return <LoadingPage />;
 
@@ -55,10 +61,8 @@ export const EventsProvider = ({ children }: { children: React.ReactNode }) => {
     );
 };
 
+
 export const useEventsList = () => {
     const context = useContext(EventContext);
-    if (!context) {
-        throw new Error("useEventsList must be used within an EventsProvider");
-    }
     return { ...context };
 };

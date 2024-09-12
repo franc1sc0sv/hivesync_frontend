@@ -3,7 +3,7 @@ import { NoEvents } from "./noEvents";
 import { ModalTemplate } from "../../ModalTemplate";
 import { AddEventModal } from "./addEventModal";
 
-import { EventsProvider, useEventsList } from "./context/eventsContext"; 
+import { EventsProvider, useEventsList} from "./context/eventsContext"; 
 import { LoadingPage } from "../../../routes/loadingPage";
 
 export const EventsModal: React.FC = () => {
@@ -25,7 +25,7 @@ const Events: React.FC = () => {
 
     return (
         <ModalTemplate identificator="events">
-            {events.length === 0 ? <NoEvents /> : <EventsList eventsList={events} />}
+            {events.length === 0 ? <NoEvents /> : <EventsList eventsList={events || []} />}
         </ModalTemplate>
     )
 }
