@@ -22,7 +22,7 @@ export const ServerFeaturesAccordion: React.FC<AccordionProps> = ({ name, channe
     };
 
     return (
-        <section className="flex flex-col gap-3">
+        <section className="flex flex-col gap-1">
             {/* Encabezado del acordeón */}
             <div
                 className="flex items-center gap-2 font-medium text-custom_white font-almarai cursor-pointer"

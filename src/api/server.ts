@@ -27,3 +27,12 @@ export const get_server = async (id: string) => {
     throwError(e);
   }
 };
+
+export const get_all_events_by_server = async (id: string) => {
+  try {
+    const res = await AxiosClient.get(`/server/events/get_many/${id}`, headers());
+    return format_api_response(res);
+  } catch (e) {
+    throwError(e)
+  }
+}

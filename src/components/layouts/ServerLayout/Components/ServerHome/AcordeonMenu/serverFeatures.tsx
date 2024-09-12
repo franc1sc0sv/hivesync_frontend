@@ -31,7 +31,7 @@ export const features = (): ChannelProps[] => {
       {
         id: 3,
         name: "Hivesync Boards",
-        onClick: () => navigate(""),
+        onClick: () => navigate("/app/whiteboard"),
         icon: PiPencilCircleLight
       },
       {

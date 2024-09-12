@@ -1,8 +1,7 @@
 
 import React, { useState } from 'react';
 import { OpenAI } from 'openai';
-// import { Send, Smile, Bot } from 'lucide-react';
-import { SendIcon } from '../../../../components/Icons/send';
+import { SendIcon } from '../../../components/Icons/send';
 import { GoDependabot } from "react-icons/go";
 import { FaRegFaceSmileWink } from "react-icons/fa6";
 

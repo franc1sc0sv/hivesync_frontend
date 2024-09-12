@@ -2,10 +2,12 @@ import { SubmitButton } from "../../../forms/Inputs/Button";
 import { CalendarIcon } from "../../../Icons/calendar";
 import { useModal } from "../../../../store/useModal";
 
+
 interface EventInfoProps {
     name: string,
-    eventDate: string
+    date: string
     description: string
+
 }
 
 interface EventProps {
@@ -25,13 +27,13 @@ const List: React.FC<EventProps> = ({ eventsList }) => {
     return (
         <div className="w-full sm:w-4/5 lg:w-3/5 mx-auto">
 
-            <div className="w-full flex flex-row justify-between lg:justify-around items-center my-5">
+            <div className="w-full flex flex-col  sm:flex-row justify-between lg:justify-around items-center my-5">
                 <p className="text-center text-custom_white text-2xl lg:text-3xl">Próximos eventos</p>
                 <button
                 onClick={() => setModalId("addEvent")}
                  className="flex justify-center items-center gap-3">
                     <CalendarIcon color="white" size={30} />
-                    <p className="text-custom_white text-xl">Agregar evento</p>
+                    <p className="text-custom_white text-lg sm:text-xl">Agregar evento</p>
                 </button>
             </div>
             <ol
@@ -46,9 +48,9 @@ const List: React.FC<EventProps> = ({ eventsList }) => {
                         <form 
                         onSubmit={() => {}}
                         className="w-full flex flex-row flex-wrap justify-between">
-                            <div className="w-3/5">
+                            <div className="w-full sm:w-3/5">
                                 <time className="mb-1 text-lg text-gray">
-                                    {event.eventDate}
+                                    {event.date}
                                 </time>
                                 <h3 className="text-2xl font-semibold text-custom_white ">
                                     {event.name}
