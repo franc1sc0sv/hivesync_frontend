@@ -2,6 +2,8 @@ import { useModal } from "../../../store/useModal";
 import { AnimatePresence, motion } from "framer-motion";
 import { CloseIcon } from "../../Icons/close";
 
+import { useDialogue } from "../../../store/useDialogue";
+
 interface DialogueProps {
   identificator: string;
   children: React.ReactNode;

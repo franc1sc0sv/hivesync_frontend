@@ -8,8 +8,9 @@ import { ServerPage } from "../../pages/User/Servers/ServerPage";
 import { ProfilePage } from "../../pages/User/Profile/Profile";
 import { SettingsPage } from "../../pages/User/UserSettings/Settings";
 import { NotificationsPage } from "../../pages/User/Notifications/NotificationsPage";
-import { AIPage } from "../../pages/User/Tools/AI/AIPage";
-import TextEditorPage from "../../pages/User/Tools/AI/documents/documentsPage";
+import { AIPage } from "../../pages/User/Tools/AIPage";
+import TextEditorPage from "../../pages/User/Tools/documents/documentsPage";
+import { WhiteBoardPage } from "../../pages/User/Tools/WhiteBoard";
 
 
 //no le hagan caso xd ay lo borro
@@ -36,6 +37,8 @@ export const UserRoutes: RouteObject = {
     { index: true, element: <ServerPage /> }, // Servers - /server_id/channel_id
 
     { path: "ai", element: <AIPage /> },
-    {path: "documents", element: <TextEditorPage />}
+    {path: "documents", element: <TextEditorPage />},
+    {path: "whiteboard", element: <WhiteBoardPage />}
+
   ],
 };
