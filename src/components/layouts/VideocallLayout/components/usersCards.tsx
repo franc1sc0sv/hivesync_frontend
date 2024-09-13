@@ -27,11 +27,16 @@ const CurrentScreen = ({
 
 const UserCard = () => {
   const { user } = useSession();
-  const { mediaStream, localVideoRef } = useCall();
+  const { mediaStream, localVideoRef, isTalking, isMicrophoneActive } =
+    useCall();
+  const border_talking =
+    isTalking && isMicrophoneActive
+      ? "border-2 border-green border-opacity-50"
+      : "border-2 border-transparent";
   return (
     <div
       style={{ backgroundColor: user?.backgroundUrl }}
-      className={` w-full h-[50%] sm:h-[13.5rem] sm:w-[21rem] rounded-2xl flex items-center justify-center  relative `}
+      className={` w-full h-[50%] sm:h-[13.5rem] sm:w-[21rem] rounded-2xl flex items-center justify-center  relative ${border_talking}   `}
     >
       <CurrentScreen
         videoRef={localVideoRef}

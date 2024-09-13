@@ -4,8 +4,9 @@ import { useSession } from "../../../../store/user";
 import { useChat } from "../../ChatLayout/Context/useChat";
 import { useSocketContext } from "../../../../context/useSocket";
 import { useFetchID } from "../../../../hooks/useFecthID";
-import { accept_call, get_call_data } from "../../../../api/calls";
+import { get_call_data } from "../../../../api/calls";
 import { LoadingPage } from "../../../routes/loadingPage";
+import { useAudioDetection } from "../../../../hooks/useAudioDetection";
 
 enum CallStatus {
   PENDING = "PENDING",
@@ -17,8 +18,15 @@ type Call = {
   roomId: string;
   status: CallStatus;
   startedAt: Date;
-  participants: string[];
+  participants: participant[];
 } | null;
+
+type participant = {
+  id: string;
+  userId: string;
+  callId: String;
+  joinedAt: Date;
+};
 
 interface CallContextType {
   callId: string | null;
@@ -49,6 +57,7 @@ interface CallContextType {
   isShareScreenActive: boolean;
 
   friend: UserInfoChat;
+  isTalking: boolean;
 }
 
 export const CallContext = createContext<CallContextType | undefined>(
@@ -64,9 +73,9 @@ export const CallProvider: React.FC<{ children: React.ReactNode }> = ({
   const [mediaStream, setMediaStream] = useState<MediaStream | null>(null);
   const [remoteStream, setRemoteStream] = useState<MediaStream | null>(null);
   const [screenStream, setScreenStream] = useState<MediaStream | null>(null);
-  const [remoteScreenStream, setRemoteScreenStream] =
-    useState<MediaStream | null>(null);
-  const [isMicrophoneActive, setIsMicrophoneActive] = useState(true);
+  const [remoteScreenStream, _] = useState<MediaStream | null>(null);
+
+  const [isMicrophoneActive, setIsMicrophoneActive] = useState(false);
   const [isCameraActive, setIsCameraActive] = useState(false);
   const [isShareScreenActive, setIsShareScreenActive] = useState(false);
 
@@ -84,43 +93,45 @@ export const CallProvider: React.FC<{ children: React.ReactNode }> = ({
   const { socket } = useSocketContext();
 
   const { fecthData, isLoading } = useFetchID({ api_function: get_call_data });
-  const { fecthData: updateCall, isLoading: isLoadingCall } = useFetchID({
-    api_function: accept_call,
-  });
+
+  const [isTalking, setIsTalking] = useState(false);
+  const isUserTalking = useAudioDetection(mediaStream);
 
   const url = import.meta.env.VITE_PEER;
-
-  const accept_call_update = () => {
-    const updater = async () => {
-      const id_room = get_id();
-      const data = await updateCall(id_room);
-      setCallId(data);
-    };
-
-    updater();
-  };
 
   const initial_logic = () => {
     if (!callId) return;
 
-    if (callId && callId !== user_id && status?.status === CallStatus.PENDING) {
+    if (
+      status?.status === CallStatus.PENDING &&
+      status.participants[0].userId !== user_id
+    ) {
       acceptCall();
       return;
     }
 
-    startCall(callId);
+    startCall();
   };
+
+  useEffect(() => {
+    if (isUserTalking) {
+      setIsTalking(true);
+    } else {
+      setIsTalking(false);
+    }
+  }, [isUserTalking]);
 
   useEffect(() => {
     const initMediaStream = async () => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
-          video: isCameraActive,
-          audio: isMicrophoneActive,
+          video: true,
+          audio: true,
         });
+
         setMediaStream(stream);
       } catch (err) {
-        console.error("Error al acceder a la cámara/micrófono:", err);
+        console.error("Error accessing camera/microphone:", err);
       }
     };
 
@@ -129,10 +140,10 @@ export const CallProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     const fetcher = async () => {
-      const id_room = get_id();
-      const data = await fecthData(id_room);
+      const id_friendship = friend.id_friendship;
+      const data = await fecthData(id_friendship);
       setStatus(data);
-      setCallId(id_room);
+      setCallId(id_friendship);
     };
     fetcher();
   }, [socket]);
@@ -148,15 +159,11 @@ export const CallProvider: React.FC<{ children: React.ReactNode }> = ({
 
     peerInstance.on("open", (id) => {
       console.log("Peer ID:", id);
+      setPeer(peerInstance);
     });
 
-    setPeer(peerInstance);
-
     peerInstance.on("call", (incomingCall: MediaConnection) => {
-      if (status?.status === CallStatus.PENDING) {
-        setCallId(incomingCall.peer);
-      }
-
+      console.log("answer");
       if (status?.status === CallStatus.IN_PROGRESS && mediaStream) {
         incomingCall.answer(mediaStream);
         incomingCall.on("stream", (remoteStream) => {
@@ -165,78 +172,58 @@ export const CallProvider: React.FC<{ children: React.ReactNode }> = ({
       }
     });
 
-    //   if (status?.status === CallStatus.PENDING) {
-    //     setCallId(call.peer);
-    //   } else {
-    //     accept_call_update();
-    //     navigator.mediaDevices
-    //       .getUserMedia({ video: isCameraActive, audio: isMicrophoneActive })
-    //       .then((stream) => {
-    //         setMediaStream(stream);
-    //         call.answer(stream);
-    //         call.on("stream", (remoteStream) => {
-    //           setRemoteStream(remoteStream);
-    //         });
-    //       });
-    //   }
-    // });
+    if (socket) {
+      socket.on("new_peer", ({ call }) => {
+        setStatus(call);
+      });
 
-    // // Listen for new peer connections and disconnections
-    // if (socket) {
-    //   socket.on("new_peer", ({ userId, peerId }) => {
-    //     if (userId !== user_id) {
-    //       // Optionally handle new peer connections here
-    //     }
-    //   });
-
-    //   socket.on("peer_left", (userId) => {
-    //     if (userId !== user_id) {
-    //       // Optionally handle peer disconnections here
-    //     }
-    //   });
-    // }
+      socket.on("peer_left", ({ call }) => {
+        setStatus(call);
+      });
+    }
   }, [status, user_id, socket]);
 
-  const startCall = async (roomId: string) => {
-    if (peer && mediaStream) {
-      const peerId = peer.id;
-      const call = peer.call(roomId, mediaStream);
+  const startCall = async () => {
+    if (!peer || !mediaStream || !callId) return;
 
-      if (call) {
-        call.on("stream", (remoteStream) => {
-          setRemoteStream(remoteStream);
-        });
+    const peerId = peer.id;
+    const call = peer.call(callId, mediaStream);
+
+    call?.on("stream", (remoteStream) => {
+      console.log("started2");
+      setRemoteStream(remoteStream);
+    });
+
+    socket?.emit(
+      "joinCall",
+      { roomId: callId, userId: user_id, peerId, source: "CREATE" },
+      (response: any) => {
+        setStatus(response.call);
       }
-
-      socket?.emit(
-        "joinCall",
-        { roomId, userId: user_id, peerId },
-        (response: any) => {
-          console.log("Respuesta del servidor:", response);
-        }
-      );
-    }
+    );
   };
 
   const acceptCall = () => {
-    if (peer && callId) {
-      navigator.mediaDevices
-        .getUserMedia({ video: isCameraActive, audio: isMicrophoneActive })
-        .then((stream) => {
-          setMediaStream(stream);
-          const call = peer.call(callId, stream);
-          call.on("stream", (remoteStream) => {
-            setRemoteStream(remoteStream);
-          });
-          accept_call_update();
+    if (!peer || !mediaStream || !callId) return;
 
-          socket?.emit("joinCall", {
-            roomId: callId,
-            userId: user_id,
-            peerId: peer?.id,
-          });
-        });
-    }
+    const incomingCall = peer?.call(callId, mediaStream);
+
+    incomingCall?.on("stream", (remoteStream) => {
+      setRemoteStream(remoteStream);
+    });
+
+    socket?.emit(
+      "joinCall",
+      {
+        roomId: callId,
+        userId: user_id,
+        peerId: peer?.id,
+        source: "ANSWER",
+      },
+      (response: any) => {
+        setStatus(response.call);
+      }
+    );
   };
 
   const endCall = () => {
@@ -254,8 +241,9 @@ export const CallProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const toggleAudio = () => {
     if (mediaStream) {
-      const audioTrack = mediaStream.getAudioTracks()[0];
-      if (audioTrack) {
+      const audioTracks = mediaStream.getAudioTracks();
+      if (audioTracks.length > 0) {
+        const audioTrack = audioTracks[0];
         audioTrack.enabled = !audioTrack.enabled;
         setIsMicrophoneActive(audioTrack.enabled);
       }
@@ -264,8 +252,9 @@ export const CallProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const toggleVideo = () => {
     if (mediaStream) {
-      const videoTrack = mediaStream.getVideoTracks()[0];
-      if (videoTrack) {
+      const videoTracks = mediaStream.getVideoTracks();
+      if (videoTracks.length > 0) {
+        const videoTrack = videoTracks[0];
         videoTrack.enabled = !videoTrack.enabled;
         setIsCameraActive(videoTrack.enabled);
       }
@@ -303,6 +292,16 @@ export const CallProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   useEffect(() => {
+    if (mediaStream && localVideoRef.current) {
+      const videoTracks = mediaStream.getVideoTracks();
+
+      if (videoTracks.length > 0) {
+        localVideoRef.current.srcObject = new MediaStream([videoTracks[0]]);
+      }
+    }
+  }, [mediaStream, isCameraActive]);
+
+  useEffect(() => {
     if (remoteStream && remoteVideoRef.current) {
       remoteVideoRef.current.srcObject = remoteStream;
     }
@@ -320,7 +319,7 @@ export const CallProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   }, [remoteScreenStream]);
 
-  if (isLoading || isLoadingCall) return <LoadingPage />;
+  if (isLoading) return <LoadingPage />;
 
   const value = {
     callId,
@@ -344,15 +343,8 @@ export const CallProvider: React.FC<{ children: React.ReactNode }> = ({
     isCameraActive,
     isShareScreenActive,
     friend,
+    isTalking,
   };
 
   return <CallContext.Provider value={value}>{children}</CallContext.Provider>;
-};
-
-const get_id = () => {
-  const currentUrl = window.location.href;
-  const urlParts = currentUrl.split("/");
-  const extractedId = urlParts[urlParts.length - 1];
-
-  return extractedId;
 };
