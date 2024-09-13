@@ -1,8 +1,6 @@
 import { CalendarIcon } from "../../../Icons/calendar";
 import { useModal } from "../../../../store/useModal";
 
-import { deleteEvent } from "../../../../api/server";
-
 import { RiArrowRightSLine } from "react-icons/ri";
 
 

@@ -3,6 +3,7 @@ import { useFetch } from "../../../../../hooks/useFetch";
 import { useServer } from "../../../../layouts/ServerLayout/hooks/useServer";
 import { LoadingPage } from "../../../../routes/loadingPage";
 import { get_all_events_by_server } from "../../../../../api/server";
+import { useModal } from "../../../../../store/useModal";
 
 
 interface EventsProps {
@@ -24,6 +25,7 @@ const EventContext = createContext<EventContextType | null>({
 
 export const EventsProvider = ({ children }: { children: React.ReactNode }) => {
     const { selected_server } = useServer();
+    const {modalId} = useModal();
 
     const { isLoading, fecthData } = useFetch({
         api_function: () => get_all_events_by_server(selected_server.id)
@@ -48,7 +50,7 @@ export const EventsProvider = ({ children }: { children: React.ReactNode }) => {
         };
 
         fetchEvents();
-    }, [selected_server]);
+    }, [modalId]);
 
 
 
