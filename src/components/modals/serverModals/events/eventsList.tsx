@@ -1,12 +1,14 @@
 import { CalendarIcon } from "../../../Icons/calendar";
 import { useModal } from "../../../../store/useModal";
-
+import { useServer } from "../../../layouts/ServerLayout/hooks/useServer";
 import { RiArrowRightSLine } from "react-icons/ri";
-
+import { delete_event } from "../../../../api/server";
+import { useNotifications } from "../../../../store/useNotifications";
 
 interface EventInfoProps {
+    id: string,
     name: string,
-    description: string
+    description: string,
     date: string
 }
 
@@ -22,7 +24,25 @@ export const EventsList: React.FC<EventProps> = ({ eventsList }) => {
 
 const List: React.FC<EventProps> = ({ eventsList }) => {
 
+    const { selected_server } = useServer();
     const { setModalId } = useModal();
+    const { setNotifications } = useNotifications();
+
+
+    const handleDelete = async (data: any) => {
+        try {
+            const res = await delete_event(selected_server.id, { event: data });
+            setNotifications({
+                message: "Evento finalizado",
+                severity: "success",
+            });
+            return setModalId("");
+
+        }
+        catch (error) {
+            console.error("Error al eliminar el evento", error);
+        }
+    };
 
     return (
         <div className="w-full sm:w-4/5 lg:w-3/5 mx-auto">
@@ -38,9 +58,9 @@ const List: React.FC<EventProps> = ({ eventsList }) => {
             </div>
             <ol
                 className="relative border-s-2 border-custom_white">
-                {eventsList.map((event, index) => (
+                {eventsList.map((event) => (
                     <li
-                        key={index}
+                        key={event.id}
                         className="mb-10 ms-4">
 
                         <div className="bg-light_purple absolute w-5 h-5 bg-gray-200 rounded-full mt-1.5 -start-3"></div>
@@ -59,15 +79,14 @@ const List: React.FC<EventProps> = ({ eventsList }) => {
                                 </p>
                             </div>
 
-                            <div className="flex justify-center items-center">
+                            <div className="w-full sm:w-auto flex justify-center items-center">
                                 <button
+                                    onClick={() => handleDelete(event.id)}
                                     type="submit"
-                                    className={`flex items-center h-14 w-full p-3 font-bold bg-primary rounded-xl text-custom_white font-almarai mx-auto`}
+                                    className={`flex items-center h-14 w-full p-3 font-bold bg-primary rounded-xl justify-between text-custom_white font-almarai mx-auto`}
                                 >
-
-                                    <p>Finalizar</p>
+                                    <p>Finalizar evento</p>
                                     <RiArrowRightSLine size={28} />
-
                                 </button>
                             </div>
                         </div>

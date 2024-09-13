@@ -8,6 +8,7 @@ import { useModal } from "../../../../../store/useModal";
 
 interface EventsProps {
     serverId: string;
+    id: string
     name: string;
     description: string;
     date: string;
@@ -20,12 +21,12 @@ interface EventContextType {
 
 const EventContext = createContext<EventContextType | null>({
     events: [],
-    isLoading: true
+    isLoading: true,
 });
 
 export const EventsProvider = ({ children }: { children: React.ReactNode }) => {
     const { selected_server } = useServer();
-    const {modalId} = useModal();
+    const { modalId } = useModal();
 
     const { isLoading, fecthData } = useFetch({
         api_function: () => get_all_events_by_server(selected_server.id)
@@ -35,24 +36,24 @@ export const EventsProvider = ({ children }: { children: React.ReactNode }) => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const eventsList = await fecthData();
-            console.log(eventsList);
+            try {
+                const eventsList = await fecthData();
 
-            // Transformar los datos antes de guardarlos en el estado, garantizando que eventDate sea un string
-            const transformedEvents = eventsList.map((event: EventsProps) => ({
-                ...event,
-                eventDate: event.date.split("T")[0]
-            }));
+                const validEventsList = Array.isArray(eventsList) ? eventsList : [];
 
-            setEvents(transformedEvents);
+                const transformedEvents = validEventsList.map((event: EventsProps) => ({
+                    ...event,
+                    eventDate: event.date.split("T")[0],
+                }));
 
-            if (!eventsList?.length) return;
+                setEvents(transformedEvents);
+            } catch (error) {
+                console.error("Error fetching events", error);
+            }
         };
 
         fetchEvents();
     }, [modalId]);
-
-
 
     if (isLoading) return <LoadingPage />;
 
@@ -68,3 +69,4 @@ export const useEventsList = () => {
     const context = useContext(EventContext);
     return { ...context };
 };
+

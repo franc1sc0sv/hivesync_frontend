@@ -37,6 +37,8 @@ export const get_all_events_by_server = async (serverId: string) => {
   }
 }
 
+//events
+
 export const create_event = async (serverId: string, data: any) => {
   try {
     const res = await AxiosClient.post(`/server/events/${serverId}`,data, headers());
@@ -46,11 +48,12 @@ export const create_event = async (serverId: string, data: any) => {
   }
 }
 
-export const deleteEvent = async (serverId: string, credentials: any ) => {
+export const delete_event = async (serverId: string, data: any) => {
   try {
-    const res = await AxiosClient.delete(`/server/events/${serverId}` ,{
-      data: credentials,
-    } );
+    const res = await AxiosClient.delete(`/server/events/${serverId}`, {
+      headers: headers().headers,
+      data: data
+    });
     return format_api_response(res);
   } catch (e) {
     throwError(e)

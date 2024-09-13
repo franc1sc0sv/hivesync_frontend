@@ -20,12 +20,12 @@ export const EventsModal: React.FC = () => {
 const Events: React.FC = () => {
 
     const { events, isLoading } = useEventsList();
-
+    
     if (isLoading) return <LoadingPage />
 
     return (
         <ModalTemplate identificator="events">
-            {events.length === 0 ? <NoEvents /> : <EventsList eventsList={events || []} />}
+            {events?.length === 0 ? <NoEvents /> : <EventsList eventsList={events || []} />}
         </ModalTemplate>
     )
 }
