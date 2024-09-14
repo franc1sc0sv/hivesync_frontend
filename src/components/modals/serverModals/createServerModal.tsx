@@ -1,13 +1,13 @@
-import { useCustomFormCreateServer } from "../../../../hooks/useFormCreateServer";
-import { SubmitButton } from "../../../forms/Inputs/Button";
+import { useCustomFormCreateServer } from "../../../hooks/useFormCreateServer";
+import { SubmitButton } from "../../forms/Inputs/Button";
 
-import { InputsForms } from "../../../forms/Inputs/inputs";
-import { ModalTemplate } from "../../ModalTemplate";
+import { InputsForms } from "../../forms/Inputs/inputs";
+import { ModalTemplate } from "../ModalTemplate";
 
-import { create_server } from "../../../../api/server";
+import { create_server } from "../../../api/server";
 import { useState } from "react";
-import { RadioInput } from "../../../forms/Inputs/Radio/InputRadio";
-import { CheckboxInput } from "../../../forms/Inputs/checkbox/checkBox";
+import { RadioInput } from "../../forms/Inputs/Radio/InputRadio";
+import { CheckboxInput } from "../../forms/Inputs/checkbox/checkBox";
 
 //icons
 import { HiUserGroup } from "react-icons/hi";

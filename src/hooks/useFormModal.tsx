@@ -16,7 +16,7 @@ export const useCustomFormModal = (api_function: (data?: any) => any) => {
       const res = await api_function(data);
 
       setNotifications({
-        message: "Creado",
+        message: "Operación realizada con éxito",
         severity: "success",
       });
 

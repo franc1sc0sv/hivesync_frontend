@@ -4,7 +4,7 @@ import { CalendarIcon } from "../../../Icons/calendar";
 
 import { useServer } from "../../../layouts/ServerLayout/hooks/useServer";
 
-import { create_event } from "../../../../api/server";
+import { create_event } from "../../../../api/events";
 import { useCustomFormModal } from "../../../../hooks/useFormModal";
 import { InputsForms } from "../../../forms/Inputs/inputs";
 import { SubmitButton } from "../../../forms/Inputs/Button";

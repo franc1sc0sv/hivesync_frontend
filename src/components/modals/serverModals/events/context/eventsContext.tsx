@@ -1,10 +1,9 @@
-import { useContext, createContext, useState, useEffect } from "react";
+import { useContext, createContext, useState, useEffect, useCallback } from "react";
 import { useFetch } from "../../../../../hooks/useFetch";
 import { useServer } from "../../../../layouts/ServerLayout/hooks/useServer";
 import { LoadingPage } from "../../../../routes/loadingPage";
-import { get_all_events_by_server } from "../../../../../api/server";
 import { useModal } from "../../../../../store/useModal";
-
+import { get_all_events_by_server } from "../../../../../api/events";
 
 interface EventsProps {
     serverId: string;
@@ -16,17 +15,24 @@ interface EventsProps {
 
 interface EventContextType {
     events: EventsProps[];
+    eventId: string;
+    setSelectedEventId: React.Dispatch<React.SetStateAction<string>>;
     isLoading: boolean;
 }
 
-const EventContext = createContext<EventContextType | null>({
-    events: [],
-    isLoading: true,
-});
+const EventContext = createContext<EventContextType | null>(
+    {
+        events: [],
+        eventId: '',
+        setSelectedEventId: () => { },
+        isLoading: false
+    }
+);
 
 export const EventsProvider = ({ children }: { children: React.ReactNode }) => {
     const { selected_server } = useServer();
     const { modalId } = useModal();
+    const [eventId, setSelectedEventId] = useState<string>("");
 
     const { isLoading, fecthData } = useFetch({
         api_function: () => get_all_events_by_server(selected_server.id)
@@ -55,10 +61,11 @@ export const EventsProvider = ({ children }: { children: React.ReactNode }) => {
         fetchEvents();
     }, [modalId]);
 
+
     if (isLoading) return <LoadingPage />;
 
     return (
-        <EventContext.Provider value={{ events, isLoading }}>
+        <EventContext.Provider value={{ events, isLoading, eventId, setSelectedEventId }}>
             {children}
         </EventContext.Provider>
     );
@@ -67,6 +74,11 @@ export const EventsProvider = ({ children }: { children: React.ReactNode }) => {
 
 export const useEventsList = () => {
     const context = useContext(EventContext);
-    return { ...context };
+
+    if (!context) {
+        throw new Error("useEventsList must be used within an EventsProvider");
+    }
+
+    return context;
 };
 
