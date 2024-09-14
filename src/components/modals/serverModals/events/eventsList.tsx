@@ -61,7 +61,7 @@ const List: React.FC<EventProps> = ({ eventsList }) => {
             </div>
             <ol
                 className="relative border-s-2 border-custom_white">
-                {eventsList.map((event) => (
+                {/* {eventsList.map((event) => (
                     <li
                         key={event.id}
                         className="mb-10 ms-4">
@@ -107,7 +107,53 @@ const List: React.FC<EventProps> = ({ eventsList }) => {
                             </div>
                         </div>
                     </li>
-                ))}
+                ))} */}
+
+
+                {eventsList
+                    .sort((a, b) => new Date(a.date) - new Date(b.date))  // Ordena de la fecha más cercana a la más lejana
+                    .map((event) => (
+                        <li key={event.id} className="mb-10 ms-4">
+                            <div className="bg-light_purple absolute w-5 h-5 bg-gray-200 rounded-full mt-1.5 -start-3"></div>
+                            <div className="w-full flex flex-row flex-wrap sm:flex-nowrap justify-between">
+                                <div className="w-full sm:w-1/2">
+                                    <time className="mb-1 text-lg text-gray">
+                                        {event.date.split("T")[0]} {/* Muestra solo la fecha sin la hora */}
+                                    </time>
+                                    <h3 className="text-2xl font-semibold text-custom_white">
+                                        {event.name}
+                                    </h3>
+                                    <p className="mb-4 text-base font-normal text-gray">
+                                        {event.description}
+                                    </p>
+                                </div>
+                                <div className="w-full sm:w-auto flex flex-row justify-center sm:justify-between items-center gap-3">
+                                    <button
+                                        onClick={() => {
+                                            setSelectedEventId(event.id);
+                                            setModalId("editEvent");
+                                        }}
+                                        type="submit"
+                                        className={`flex items-center h-14 w-full p-2 font-bold bg-primary rounded-xl justify-between text-custom_white font-almarai mx-auto text-center gap-3`}
+                                    >
+                                        <p>Editar</p>
+                                        <PencilIcon size={25} color="#fff" />
+                                    </button>
+                                    <button
+                                        onClick={() => handleDelete(event.id)}
+                                        value={event.date}
+                                        type="submit"
+                                        className={`flex items-center h-14 w-full p-2 font-bold bg-light_purple rounded-xl justify-between text-custom_white font-almarai mx-auto text-center gap-3`}
+                                    >
+                                        <p>Finalizar</p>
+                                        <CheckIcon size={20} color="#fff" />
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                    ))
+                }
+
             </ol>
         </div>
     )

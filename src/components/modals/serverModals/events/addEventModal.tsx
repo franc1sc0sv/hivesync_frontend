@@ -11,7 +11,6 @@ import { SubmitButton } from "../../../forms/Inputs/Button";
 import { TextArea } from "../../../forms/Inputs/TextArea";
 import { DateInput } from "../../../forms/Inputs/datePicker";
 
-
 export const AddEventModal: React.FC = () => {
     return (
         <ModalTemplate identificator="addEvent">

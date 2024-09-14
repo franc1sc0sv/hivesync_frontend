@@ -38,7 +38,7 @@ export const ColorPickerInput: React.FC<ColorPickerProps> = ({ register, name, i
                 </div>
             </label>
 
-            <p className="text-custom_white text-2xl font-almarai">Color seleccionado: {color}</p>
+            <p className="text-custom_white text-2xl font-almarai text-center">Color seleccionado: {color}</p>
         </div>
 
     )

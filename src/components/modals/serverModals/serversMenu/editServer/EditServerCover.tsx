@@ -43,7 +43,7 @@ const Form: React.FC = () => {
 
       <p
         onClick={() => resetColor()}
-        className="p-2 my-2 text-xl transition-all duration-300 border-2 border-overlay_1 hover:border-2 hover:border-custom_white rounded-xl"
+        className="p-2 my-2 text-xl transition-all duration-300 border-2 border-overlay_1 hover:border-2 hover:border-custom_white rounded-xl text-center"
       >
         Restablecer color de tema
       </p>

@@ -25,7 +25,7 @@ const EventContext = createContext<EventContextType | null>(
         events: [],
         eventId: '',
         setSelectedEventId: () => { },
-        isLoading: false
+        isLoading: false,
     }
 );
 
