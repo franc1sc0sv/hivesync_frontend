@@ -91,6 +91,8 @@ export const ChannelListProvider = ({
     setChannelList(new_data);
   };
 
+  
+
   useEffect(() => {
     const active_channel = obtener_canal_id_activo();
 
@@ -128,8 +130,9 @@ export const ChannelListProvider = ({
       (channel) => channel.id === active_channel
     );
     setActualChannel(selectedChannel || null);
+   
   }, []);
-
+  
   return (
     <ChannelListContext.Provider
       value={{

@@ -6,6 +6,7 @@ import {
 } from "../../../Enums/SpecificServer";
 import { useChannelList } from "../../../hooks/useChannelList";
 import { ChannelsFormated } from "../../../types/server";
+import { useHandleChannelType } from "../../../hooks/useHandleChannels";
 
 export const ItemAcordeonChannel = ({
   channel,
@@ -14,10 +15,12 @@ export const ItemAcordeonChannel = ({
   channel: ChannelsFormated;
   isCategoryOpen?: boolean;
 }) => {
-  const { setCurrentChannel } = useChannelList();
-
+  const { setCurrentChannel, actualChannel } = useChannelList();
+  const handleChannelType = useHandleChannelType(actualChannel, false)
   const handleClick = () => {
     setCurrentChannel(channel.id);
+    handleChannelType(actualChannel)
+
   };
 
   const showChannel = isCategoryOpen || (!isCategoryOpen && channel.isSelected);

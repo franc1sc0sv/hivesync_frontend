@@ -11,7 +11,7 @@ import { IaTesting } from "../../pages/testing/ia/iaTesting";
 import Docs from "../../pages/testing/Tools/Docs";
 import Excalidraw from "../../pages/testing/Tools/Excalidraw";
 import BlackBoard from "../../pages/testing/Tools/BlackBoard";
-import { PageChannelTesting } from "../../pages/testing/channel/pageChannelTesting";
+// import { PageChannelTesting } from "../../pages/testing/channel/pageChannelTesting";
 import { TranslatorPage } from "../../pages/testing/Tools/Translator";
 
 
@@ -34,7 +34,7 @@ export const HomeRoutes: RouteObject = {
     { path: "/docs", element: <Docs /> },
     { path: "/blackBoard", element: <BlackBoard /> },
     { path: "/excaliDraw", element: <Excalidraw/> },
-    { path: "/videocalls", element: <PageChannelTesting/> },
+    //{ path: "/videocalls", element: <PageChannelTesting/> },
     { path: "/translate", element: <TranslatorPage /> },
     
 

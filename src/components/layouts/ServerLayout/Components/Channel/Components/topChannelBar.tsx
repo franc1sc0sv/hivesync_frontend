@@ -1,8 +1,9 @@
-import { useChannelList } from "../../../components/layouts/ServerLayout/hooks/useChannelList";
 import { HiSpeakerWave } from "react-icons/hi2";
+import { useChannelList } from "../../../hooks/useChannelList";
 
 export const TopChannelBar = () => {
-  const { actualChannel } = useChannelList(); // Usamos el hook personalizado
+  const { actualChannel } = useChannelList(); 
+  
 
   return (
     <div className="flex items-center mb-4">
