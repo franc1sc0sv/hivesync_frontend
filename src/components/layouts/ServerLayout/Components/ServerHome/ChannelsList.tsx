@@ -3,7 +3,7 @@ import { AcordeonItems, AcordeonMenu } from "./AcordeonMenu/AcordeonIndex";
 import { ChannelCategory } from "../../Enums/SpecificServer";
 import { ServerFeaturesAccordion } from "./AcordeonMenu/featuresAcordeon";
 import { features } from "./AcordeonMenu/serverFeatures";
-import { ChannelVideocallsModal } from "../../../../modals/serverModals/channel/channelVideocallsModal";
+import { ChannelVideocallsModal } from "../../../../modals/serverModals/channel/ChannelVideocallsModal";
 
 
 export const ChannelList = () => {

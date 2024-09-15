@@ -7,6 +7,8 @@ import {
 import { useChannelList } from "../../../hooks/useChannelList";
 import { ChannelsFormated } from "../../../types/server";
 import { useHandleChannelType } from "../../../hooks/useHandleChannels";
+import { TopChannelBar } from "../../Channel/Components/topChannelBar";
+import { NoChannelSelected } from "../../Channel/Channel";
 
 export const ItemAcordeonChannel = ({
   channel,
@@ -17,18 +19,19 @@ export const ItemAcordeonChannel = ({
 }) => {
   const { setCurrentChannel, actualChannel } = useChannelList();
 
-  // Usa el hook aquí para obtener la función y pasarle los parámetros necesarios
+  
   const handleChannelType = useHandleChannelType({
     channelToCompare: actualChannel,
     isntFirsTime: false,
-    childrenFakePage: <></>,
+    //acá va el componente de chats
+    childrenFakePage: actualChannel ? <TopChannelBar /> : <NoChannelSelected />,
   });
 
   const handleClick = async () => {
     setCurrentChannel(channel.id);
     
-    // Espera a que handleChannelType complete su tarea
-    await handleChannelType(channel); // Asegúrate de que channel sea el canal correcto
+  
+    await handleChannelType(channel);
   };
 
   const showChannel = isCategoryOpen || (!isCategoryOpen && channel.isSelected);
