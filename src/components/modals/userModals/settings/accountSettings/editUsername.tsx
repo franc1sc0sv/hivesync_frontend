@@ -5,7 +5,6 @@ import { InputsForms } from "../../../../forms/Inputs/inputs";
 import { SubmitButton } from "../../../../forms/Inputs/Button";
 import { get_profile } from "../../../../../api/auth";
 import { useState } from "react";
-import { useSession } from "../../../../../store/user";
 import { useEffect } from "react";
 import { edit_username } from "../../../../../api/user_info";
 

@@ -3,7 +3,8 @@ import { NavLink } from "react-router-dom";
 import { Links, PropsLinks, PropsProfilePicture } from "../types/GeneralLayout";
 import { Link } from "react-router-dom";
 import { UserAvatar } from "../../../Avatars/UserAvatar";
-import { useSession } from "../../../../store/user";
+import { get_profile } from "../../../../api/auth";
+import { useEffect, useState } from "react";
 
 export const NavBar: React.FC<PropsLinks> = ({ links }) => {
   return (
@@ -34,7 +35,16 @@ const LinkNavBar: React.FC<Links> = ({ Icon, url }) => {
 };
 
 const UserProfile: React.FC<PropsProfilePicture> = ({ url }) => {
-  const { user } = useSession();
+  const [user, setUser] = useState<Usuario>();
+
+  useEffect(() => {
+    const fetch = async () => {
+      const fetchData = await get_profile();
+      setUser(fetchData);
+    }
+    fetch();
+  }, []);
+
   return (
     <Link to={url} className="flex flex-shrink-0">
       <UserAvatar

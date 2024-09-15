@@ -1,9 +1,13 @@
-import { useCustomForm } from "../../../../../hooks/useForm";
 import { TextArea } from "../../../../forms/Inputs/TextArea";
 import { SubmitButton } from "../../../../forms/Inputs/Button";
 import { FaFaceSmileWink } from "react-icons/fa6";
 
 import { ModalTemplate } from "../../../ModalTemplate";
+
+import { useState, useEffect } from "react";
+import { get_profile } from "../../../../../api/auth";
+import { edit_about_me } from "../../../../../api/user_info";
+import { useCustomFormModal } from "../../../../../hooks/useFormModal";
 
 export const EditAboutMeModal: React.FC = () => {
     return (
@@ -15,22 +19,23 @@ export const EditAboutMeModal: React.FC = () => {
 }
 
 export const AboutMeForm: React.FC = () => {
-    const api_function = async (data: any) => {
-      const status = data.status;
-  
-      localStorage.setItem("userStatus", status);
-    };
-  
-    const post_success_function = () => {
-      location.reload();
-      console.log("la api se llamó exitosa y épicamente");
-    };
-  
-    const { onSubmit, register, isLoading } = useCustomForm(
-      api_function,
-      post_success_function,
-      ``
-    );
+  const [fetchedData, setFetchedData] = useState<Usuario>();
+
+  const id = fetchedData?.id ? fetchedData.id : ""
+
+  const api_function = (data: any) => {
+      edit_about_me(id, data)
+  }
+
+  const { onSubmit, register, isLoading } = useCustomFormModal(api_function);
+
+  useEffect(() => {
+      const fetch = async () => {
+          const fetchData = await get_profile();
+          setFetchedData(fetchData);
+      }
+      fetch();
+  }, [])
   
     return (
       <div className="flex flex-col items-center justify-center w-full h-full gap-10">
@@ -43,9 +48,9 @@ export const AboutMeForm: React.FC = () => {
           <form onSubmit={onSubmit} className="flex flex-col items-center gap-10">
             <TextArea
               placeholder="¡Añade una descripción genial sobre ti!"
-              name="status"
+              name="about"
               register={register}
-              inputValue={""}
+              inputValue={fetchedData?.about}
             />
   
             <SubmitButton text="Guardar" isLoading={isLoading} />
