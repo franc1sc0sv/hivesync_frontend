@@ -9,7 +9,7 @@ interface FakePageProps {
   onClose: () => void;
   isOpen: boolean;
   index: number;
-  title: string;
+  title?: string | React.ReactNode ;
   showArrow: boolean;
   children: React.ReactNode;
 }
@@ -41,7 +41,8 @@ const FakePageTemplate: React.FC<FakePageProps> = ({
       }
     },
   });
-
+  const hasContent = (typeof title === 'string')
+  console.log(hasContent)
   return (
     <AnimatePresence>
       {isOpen && !isClosing && (
@@ -60,14 +61,14 @@ const FakePageTemplate: React.FC<FakePageProps> = ({
           style={{ zIndex: 100 + index }}
         >
           <div className="w-full h-screen text-center">
-            <div className="flex flex-row h-[10%] items-center justify-between p-3 text-custom_white">
-              {showArrow && (
+            <div  className={`flex flex-row ${!hasContent ? 'w-full' : 'h-[10%]'} items-center justify-between p-3 text-custom_white`}>
+              {(showArrow && hasContent) && (
                 <div onClick={handleClose}>
                   <GoBackTriangle size={30} color="white" />
                 </div>
               )}
 
-              <span className="text-2xl font-bold">{title}</span>
+              <span className="text-2xl font-bold w-full">{title}</span>
               <span></span>
             </div>
 
