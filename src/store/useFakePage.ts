@@ -2,7 +2,7 @@ import { create } from "zustand";
 
 interface FakePagesArrayProps {
   id: number;
-  title: string;
+  title: string | React.ReactNode ;
   children: React.ReactNode;
 }
 

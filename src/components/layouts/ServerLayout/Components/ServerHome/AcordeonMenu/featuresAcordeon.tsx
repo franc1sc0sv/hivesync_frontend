@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IoIosArrowForward } from "react-icons/io";
+
 import { IconType } from "react-icons";
 
 interface Channel {

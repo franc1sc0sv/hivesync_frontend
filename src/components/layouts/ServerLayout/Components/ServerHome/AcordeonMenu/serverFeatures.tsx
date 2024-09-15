@@ -4,6 +4,8 @@ import { GoDependabot } from "react-icons/go";
 import { IoDocumentText } from "react-icons/io5";
 import { PiPencilCircleLight } from "react-icons/pi";
 import { PiHandWavingFill } from "react-icons/pi";
+import useFakePages from "../../../../../../store/useFakePage";
+import { AIPage } from "../../../../../../pages/User/Tools/AIPage";
 
 interface ChannelProps {
   id: string | number;
@@ -13,13 +15,19 @@ interface ChannelProps {
 }
 
 export const features = (): ChannelProps[] => { 
+  const {addFakePage} = useFakePages()
     const navigate = useNavigate();
   
     return [
       {
         id: 1,
         name: "Hivesync X ChatGPT",
-        onClick: () => navigate("/app/ai"),
+        onClick: () => {
+          addFakePage({
+            title:<HeaderIA/>,
+            children: <AIPage />,
+          })
+        },
         icon: GoDependabot
       },
       {
@@ -43,3 +51,17 @@ export const features = (): ChannelProps[] => {
     ];
   };
   
+
+  
+//vale wea acá los voy a dejar
+const HeaderIA: React.FC = () => (
+  <div className="bg-[#28242C] p-4 flex items-center justify-between shadow-md w-full">
+  <div className="flex items-center">
+    <GoDependabot className="w-8 h-8 text-light_purple mr-2" />
+    <h1 className="text-xl font-bold text-white">ChatGPT</h1>
+  </div>
+  <div className="bg-[#28242C] px-3 py-1 rounded-full text-sm text-gray-300">
+    En línea
+  </div>
+</div>
+);

@@ -27,7 +27,7 @@ export const Channel: React.FC = () => {
   // Handler for swipe
   const handler = useSwipeHandler({
     onSwipedLeft: () => {
-      const { done } = modalGenInstance.next(); // Call the generator once
+      const { done } = modalGenInstance.next(); 
       if (done) {
         console.log("Modal action already executed.");
       }
