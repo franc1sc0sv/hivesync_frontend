@@ -1,4 +1,4 @@
-import { CreateServerModal } from "../../../../modals/serverModals/events/createServerModal";
+import { CreateServerModal } from "../../../../modals/serverModals/createServerModal";
 import { CreateServerIcon } from "./CreateServerIcon";
 import { ServerFolder } from "./ServerFolder";
 import { ServerIcon } from "./ServerIcon";

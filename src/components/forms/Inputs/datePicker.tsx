@@ -9,6 +9,7 @@ interface DateProps {
   placeholder: string;
   register: UseFormRegister<FieldValues>;
   name: string;
+  defaultValue?: Date; // Nueva prop opcional para el valor por defecto
 }
 
 export const DateInput: React.FC<DateProps> = ({
@@ -16,13 +17,24 @@ export const DateInput: React.FC<DateProps> = ({
   placeholder,
   register,
   name,
+  defaultValue, 
 }): ReactElement => {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(defaultValue || null); // Usa defaultValue si está disponible
   const [showDatePicker, setShowDatePicker] = useState<boolean>(false);
   const calendarRef = useRef<HTMLDivElement>(null);
 
+  // Efecto para actualizar la fecha seleccionada si cambia el defaultValue
+  useEffect(() => {
+    if (defaultValue) {
+      setSelectedDate(defaultValue);
+    }
+  }, [defaultValue]);
+
   // Manejo del cambio de fecha
-  const handleDateChange = (value: Date | Date[] | null, event?: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+  const handleDateChange = (
+    value: Date | Date[] | null,
+    event?: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ): void => {
     if (value instanceof Date) {
       setSelectedDate(value);
     } else if (Array.isArray(value) && value.length > 0 && value[0] instanceof Date) {
@@ -91,9 +103,3 @@ export const DateInput: React.FC<DateProps> = ({
     </div>
   );
 };
-
-
-
-
-
-

@@ -5,8 +5,6 @@ import useFakePages from "../../../../store/useFakePage";
 import { ShowFakePages } from "../../../../components/fakePages/ShowFakePages";
 import { EditProfileFakePage } from "../../../../components/fakePages/user/profile/editProfileFakePage";
 
-//mock
-import { useSession } from "../../../../store/user";
 import { formatDate } from "../../../../helpers/date";
 
 // const friendsMiniPictures = [
@@ -16,12 +14,16 @@ import { formatDate } from "../../../../helpers/date";
 //   { picture: userData.picture },
 // ];
 
-export const UserInformation = () => {
+interface ProfileProps {
+  user: Usuario
+}
+
+export const UserInformation: React.FC<ProfileProps> = ({user}) => {
   return (
     <div className="h-3/5 w-full lg:w-[90%] mx-auto flex flex-col gap-5 overflow-y-auto">
-      <MainInformation />
+      <MainInformation user={user} />
 
-      <AboutUser />
+      <AboutUser user={user} />
       {/* <UserFriends /> */}
 
       <ShowFakePages />
@@ -30,9 +32,8 @@ export const UserInformation = () => {
   );
 };
 
-const MainInformation: React.FC = () => {
+const MainInformation: React.FC<ProfileProps> = ({user}) => {
   const { addFakePage } = useFakePages();
-  const { user } = useSession();
 
   return (
     <div className="flex flex-col gap-2 p-3 rounded-lg bg-overlay_2 ">
@@ -63,8 +64,7 @@ const MainInformation: React.FC = () => {
   );
 };
 
-const AboutUser = () => {
-  const { user } = useSession();
+const AboutUser: React.FC<ProfileProps> = ({user}) => {
   return (
     <div className="flex flex-col gap-3 p-3 rounded-lg bg-overlay_2">
       <div className="flex flex-col text-custom_white">

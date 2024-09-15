@@ -12,7 +12,7 @@ interface FakePagesState {
   removeFakePage: (id: number) => void;
 }
 
-let nextId = 0;
+ let nextId = 0;
 
 const useFakePages = create<FakePagesState>((set) => ({
   fakePages: [],

@@ -13,11 +13,11 @@ import { IoIosArrowUp } from "react-icons/io";
 export const MenuOptions: React.FC = () => {
   return (
     <div className="w-full flex flex-row justify-between overflow-hidden">
-      <div className="w-full lg:w-1/3 overflow-y-auto">
+      <div className="w-full md:w-1/3 overflow-y-auto">
         <SettingsTemplate settings={options} />
       </div>
 
-      <div className="max-h-fit hidden lg:block w-3/5 ">
+      <div className="max-h-fit hidden md:block w-3/5">
         <OptionSelected />
       </div>
     </div>

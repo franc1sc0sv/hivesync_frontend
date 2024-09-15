@@ -2,15 +2,24 @@ import { EventsList } from "./eventsList";
 import { NoEvents } from "./noEvents";
 import { ModalTemplate } from "../../ModalTemplate";
 import { AddEventModal } from "./addEventModal";
+import { EditEventModal } from "./editEventModal";
+import { useModal } from "../../../../store/useModal";
+import { useServer } from "../../../layouts/ServerLayout/hooks/useServer";
 
-import { EventsProvider, useEventsList} from "./context/eventsContext"; 
+import { EventsProvider, useEventsList } from "./context/eventsContext";
 import { LoadingPage } from "../../../routes/loadingPage";
 
 export const EventsModal: React.FC = () => {
+
+    const { modalId } = useModal();
+    const {selected_server} = useServer();
+    const {eventId } = useEventsList();
+
     return (
         <div>
             <EventsProvider>
                 <Events />
+                {modalId === "editEvent" && <EditEventModal serverId={selected_server.id} eventId={eventId} />}
             </EventsProvider>
             <AddEventModal />
         </div>
@@ -20,7 +29,7 @@ export const EventsModal: React.FC = () => {
 const Events: React.FC = () => {
 
     const { events, isLoading } = useEventsList();
-    
+
     if (isLoading) return <LoadingPage />
 
     return (

@@ -3,9 +3,12 @@ import { AcordeonItems, AcordeonMenu } from "./AcordeonMenu/AcordeonIndex";
 import { ChannelCategory } from "../../Enums/SpecificServer";
 import { ServerFeaturesAccordion } from "./AcordeonMenu/featuresAcordeon";
 import { features } from "./AcordeonMenu/serverFeatures";
+import { ChannelVideocallsModal } from "../../../../modals/serverModals/channel/channelVideocallsModal";
+
 
 export const ChannelList = () => {
-  const { channelList } = useChannelList();
+  const { channelList, actualChannel } = useChannelList();
+
 
   return (
     <article className="flex flex-col gap-5 overflow-y-auto">
@@ -20,6 +23,8 @@ export const ChannelList = () => {
           <AcordeonMenu key={channel.category} CategoryChannel={channel} />
         );
       })}
+    <ChannelVideocallsModal/>
     </article>
   );
 };
+                        

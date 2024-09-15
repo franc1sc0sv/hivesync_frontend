@@ -32,8 +32,6 @@ import { LeaveServerDialogue } from "../../Alerts/dialog/serverDialogues/leaveSe
 
 import { ServerEditionModals } from "./serversMenu/editServer/ServerEditionModals"
 
-import { DeleteEventDialogue } from "../../Alerts/dialog/serverDialogues/events/deleteEventDialogue"
-
 
 export const ServerModals: React.FC = () => {
     return (
@@ -53,9 +51,8 @@ export const ServerModals: React.FC = () => {
             <SettingsMenuModal />
             <ServerSettingsModals />
 
-            <DeleteEventDialogue />
-
             <LeaveServerDialogue />
+            
         </>
     )
 }

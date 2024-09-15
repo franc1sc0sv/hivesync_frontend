@@ -1,6 +1,63 @@
 import { AxiosClient } from "../config/axios";
 import { format_api_response, headers, throwError } from "../helpers/apiHelper";
 
+//user information edit
+export const edit_username = async (data: any) => {
+  try {
+    const res = await AxiosClient.patch(
+      "/edit/username",
+      data,
+      headers()
+    );
+    return res;
+  } catch (error) {
+    console.log(error);
+    throwError(error);
+  }
+}
+
+export const edit_name = async (id: string, data: any) => {
+  try {
+    const res = await AxiosClient.patch(
+      `/user_info/user/edit/name/${id}`,
+      data,
+      headers()
+    );
+    return res;
+  } catch (error) {
+    console.log(error);
+    throwError(error);
+  }
+}
+
+export const edit_about_me = async (id: string, data: any) => {
+  try {
+    const res = await AxiosClient.patch(
+      `/user_info/user/edit/about/${id}`,
+      data,
+      headers()
+    );
+    return res;
+  } catch (error) {
+    console.log(error);
+    throwError(error);
+  }
+}
+
+export const edit_cover_color = async (id: string, data: any) => {
+  try {
+    const res = await AxiosClient.patch(
+      `/user_info/user/edit/cover/${id}`,
+      data,
+      headers()
+    );
+    return res;
+  } catch (error) {
+    console.log(error);
+    throwError(error);
+  }
+}
+
 export const get_user_username = async (data: any) => {
   try {
     const res = await AxiosClient.post(

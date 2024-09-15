@@ -2,13 +2,16 @@ import { ModalTemplate } from "../../ModalTemplate";
 
 import { AnimatePresence, motion } from "framer-motion";
 
-import { useState } from "react";
-
 import { useCustomForm } from "../../../../hooks/useForm";
 import { ImgInput } from "../../../forms/Inputs/ImgInput";
 import { ColorPickerInput } from "../../../forms/Inputs/ColorPicker";
 import { SubmitButton } from "../../../forms/Inputs/Button";
 import { useSession } from "../../../../store/user";
+
+import { useState, useEffect } from "react";
+import { get_profile } from "../../../../api/auth";
+import { useCustomFormModal } from "../../../../hooks/useFormModal";
+import { edit_cover_color } from "../../../../api/user_info";
 
 //mock
 
@@ -75,7 +78,7 @@ export const EditProfilePictureForm = () => {
               ? "Archivo seleccionado: " + picRoute
               : "Haz click para subir una foto"
           }
-          status={() => {}}
+          status={() => { }}
         />
 
         {picRoute && (
@@ -98,29 +101,30 @@ export const EditProfilePictureForm = () => {
 };
 
 export const EditCoverThemeForm = () => {
-  const { user } = useSession();
+  const [fetchedData, setFetchedData] = useState<Usuario>();
 
-  const api_function = async (data: any) => {
-    const theme = data.themeColor;
+  const id = fetchedData?.id ? fetchedData.id : ""
 
-    localStorage.setItem("themeColor", theme);
-  };
+  const api_function = (data: any) => {
+    edit_cover_color(id, data)
+  }
 
-  const post_success_function = () => {
-    location.reload();
-    console.log("la api se llamó exitosa y épicamente");
-  };
+  const { onSubmit, register, isLoading } = useCustomFormModal(api_function);
+
+  useEffect(() => {
+    const fetch = async () => {
+      const fetchData = await get_profile();
+      setFetchedData(fetchData);
+    }
+    fetch();
+  }, [])
 
   const resetColor = () => {
     localStorage.setItem("themeColor", "#45156B");
     location.reload();
   };
 
-  const { onSubmit, register, isLoading } = useCustomForm(
-    api_function,
-    post_success_function,
-    ""
-  );
+
 
   return (
     <form
@@ -129,13 +133,13 @@ export const EditCoverThemeForm = () => {
     >
       <ColorPickerInput
         register={register}
-        name="themeColor"
-        inputValue={user?.backgroundUrl}
+        name="backgroundUrl"
+        inputValue={fetchedData?.backgroundUrl}
       />
 
       <p
         onClick={() => resetColor()}
-        className="p-2 my-2 text-xl transition-all duration-300 border-2 border-overlay_1 hover:border-2 hover:border-custom_white rounded-xl"
+        className="p-2 my-2 text-xl transition-all duration-300 border-2 border-overlay_1 hover:border-2 hover:border-custom_white rounded-xl text-center"
       >
         Restablecer color de tema
       </p>

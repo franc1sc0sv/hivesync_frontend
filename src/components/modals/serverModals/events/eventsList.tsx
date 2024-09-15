@@ -1,9 +1,11 @@
 import { CalendarIcon } from "../../../Icons/calendar";
 import { useModal } from "../../../../store/useModal";
 import { useServer } from "../../../layouts/ServerLayout/hooks/useServer";
-import { RiArrowRightSLine } from "react-icons/ri";
-import { delete_event } from "../../../../api/server";
+import { useEventsList } from "./context/eventsContext";
 import { useNotifications } from "../../../../store/useNotifications";
+import { delete_event } from "../../../../api/events";
+import { PencilIcon } from "../../../Icons/pencil";
+import { CheckIcon } from "../../../Icons/check";
 
 interface EventInfoProps {
     id: string,
@@ -27,11 +29,11 @@ const List: React.FC<EventProps> = ({ eventsList }) => {
     const { selected_server } = useServer();
     const { setModalId } = useModal();
     const { setNotifications } = useNotifications();
-
+    const { setSelectedEventId } = useEventsList();
 
     const handleDelete = async (data: any) => {
         try {
-            const res = await delete_event(selected_server.id, { event: data });
+            await delete_event(selected_server.id, { event: data });
             setNotifications({
                 message: "Evento finalizado",
                 severity: "success",
@@ -43,6 +45,7 @@ const List: React.FC<EventProps> = ({ eventsList }) => {
             console.error("Error al eliminar el evento", error);
         }
     };
+
 
     return (
         <div className="w-full sm:w-4/5 lg:w-3/5 mx-auto">
@@ -58,7 +61,7 @@ const List: React.FC<EventProps> = ({ eventsList }) => {
             </div>
             <ol
                 className="relative border-s-2 border-custom_white">
-                {eventsList.map((event) => (
+                {/* {eventsList.map((event) => (
                     <li
                         key={event.id}
                         className="mb-10 ms-4">
@@ -66,8 +69,8 @@ const List: React.FC<EventProps> = ({ eventsList }) => {
                         <div className="bg-light_purple absolute w-5 h-5 bg-gray-200 rounded-full mt-1.5 -start-3"></div>
 
                         <div
-                            className="w-full flex flex-row flex-wrap justify-between">
-                            <div className="w-full sm:w-3/5">
+                            className="w-full flex flex-row flex-wrap sm:flex-nowrap justify-between">
+                            <div className="w-full sm:w-1/2">
                                 <time className="mb-1 text-lg text-gray">
                                     {event.date.split("T")[0]}
                                 </time>
@@ -79,19 +82,78 @@ const List: React.FC<EventProps> = ({ eventsList }) => {
                                 </p>
                             </div>
 
-                            <div className="w-full sm:w-auto flex justify-center items-center">
+                            <div className="w-full sm:w-auto flex flex-row justify-center sm:justify-between items-center gap-3">
+                                <button
+                                onClick={() => {
+                                    setSelectedEventId(event.id);
+                                    setModalId("editEvent");
+                                }}
+                                    type="submit"
+                                    className={`flex items-center h-14 w-full p-2 font-bold bg-primary rounded-xl justify-between text-custom_white font-almarai mx-auto text-center gap-3`}
+                                >
+                                    <p>Editar</p>
+                                    <PencilIcon size={25} color="#fff" />
+                                </button>
+
                                 <button
                                     onClick={() => handleDelete(event.id)}
+                                    value={event.date}
                                     type="submit"
-                                    className={`flex items-center h-14 w-full p-3 font-bold bg-primary rounded-xl justify-between text-custom_white font-almarai mx-auto`}
+                                    className={`flex items-center h-14 w-full p-2 font-bold bg-light_purple rounded-xl justify-between text-custom_white font-almarai mx-auto text-center gap-3`}
                                 >
-                                    <p>Finalizar evento</p>
-                                    <RiArrowRightSLine size={28} />
+                                    <p>Finalizar</p>
+                                    <CheckIcon size={20} color="#fff" />
                                 </button>
                             </div>
                         </div>
                     </li>
-                ))}
+                ))} */}
+
+
+                {eventsList
+                    .sort((a, b) => new Date(a.date) - new Date(b.date))  // Ordena de la fecha más cercana a la más lejana
+                    .map((event) => (
+                        <li key={event.id} className="mb-10 ms-4">
+                            <div className="bg-light_purple absolute w-5 h-5 bg-gray-200 rounded-full mt-1.5 -start-3"></div>
+                            <div className="w-full flex flex-row flex-wrap sm:flex-nowrap justify-between">
+                                <div className="w-full sm:w-1/2">
+                                    <time className="mb-1 text-lg text-gray">
+                                        {event.date.split("T")[0]} {/* Muestra solo la fecha sin la hora */}
+                                    </time>
+                                    <h3 className="text-2xl font-semibold text-custom_white">
+                                        {event.name}
+                                    </h3>
+                                    <p className="mb-4 text-base font-normal text-gray">
+                                        {event.description}
+                                    </p>
+                                </div>
+                                <div className="w-full sm:w-auto flex flex-row justify-center sm:justify-between items-center gap-3">
+                                    <button
+                                        onClick={() => {
+                                            setSelectedEventId(event.id);
+                                            setModalId("editEvent");
+                                        }}
+                                        type="submit"
+                                        className={`flex items-center h-14 w-full p-2 font-bold bg-primary rounded-xl justify-between text-custom_white font-almarai mx-auto text-center gap-3`}
+                                    >
+                                        <p>Editar</p>
+                                        <PencilIcon size={25} color="#fff" />
+                                    </button>
+                                    <button
+                                        onClick={() => handleDelete(event.id)}
+                                        value={event.date}
+                                        type="submit"
+                                        className={`flex items-center h-14 w-full p-2 font-bold bg-light_purple rounded-xl justify-between text-custom_white font-almarai mx-auto text-center gap-3`}
+                                    >
+                                        <p>Finalizar</p>
+                                        <CheckIcon size={20} color="#fff" />
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                    ))
+                }
+
             </ol>
         </div>
     )
