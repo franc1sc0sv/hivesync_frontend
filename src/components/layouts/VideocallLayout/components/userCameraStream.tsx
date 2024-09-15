@@ -1,33 +1,52 @@
-type Props = {
-  w?: number;
-  h?: number;
+import { UserAvatar } from "../../../Avatars/UserAvatar";
 
+type Props = {
+  username: string;
+  profileUrl: string;
   stream: MediaStream | null;
   videoRef: React.RefObject<HTMLVideoElement>;
+  isCameraOn:boolean
+  isMicrofoneOn:boolean
 };
 
 export const UserCameraStream: React.FC<Props> = ({
-  w = 7,
-  h = 7,
-  stream,
-  videoRef,
-}) => {
+    username,
+    profileUrl,
+    stream,
+    videoRef,
+    isCameraOn,
+    isMicrofoneOn
+  }
+) => {
+
+  const showCameraComponent = stream && isCameraOn 
+  const showMicrfoneComponent = stream && !isCameraOn && isMicrofoneOn
+  const showAvatarComponent = !isCameraOn && !isMicrofoneOn
+
   return (
-    <div
-      style={{
-        height: `${h}rem`,
-        width: `${w}rem`,
-      }}
-      className="grid font-medium text-white font-exo place-items-center rounded-2xl bg-secondary"
-    >
-      {stream && (
-        <video
-          ref={videoRef}
-          autoPlay
-          playsInline
-          className="absolute top-0 left-0 object-cover w-full h-full rounded-xl"
-        />
-      )}
-    </div>
+    <>
+      {showCameraComponent && <VideoAndAudioComponent videoRef={videoRef}/>}
+      {showMicrfoneComponent && <OnlyAudioComponent profileUrl={profileUrl} username={username} videoRef={videoRef}/>}
+      {showAvatarComponent && <UserAvatar username={username} profileURl={profileUrl}/> }
+    </>
+       
   );
 };
+
+const VideoAndAudioComponent = ({videoRef}:{videoRef:React.RefObject<HTMLVideoElement>}) =>{
+  return  <video
+  ref={videoRef}
+  autoPlay
+  playsInline
+  className="absolute top-0 left-0 object-cover w-full h-full rounded-xl"
+/>
+}
+const OnlyAudioComponent = ({profileUrl,username,videoRef}:{videoRef:React.RefObject<HTMLVideoElement>,username: string,  profileUrl: string}) =>{
+  return <>
+      <audio autoPlay playsInline ref={videoRef}></audio>
+      <UserAvatar username={username} profileURl={profileUrl}/>
+  </>
+}
+
+
+{/* w */}

@@ -2,9 +2,7 @@
 import { FiCamera } from "react-icons/fi";
 import { MdCallEnd } from "react-icons/md";
 import { PiMicrophoneFill, PiMicrophoneSlashFill } from "react-icons/pi";
-import { MdCoPresent } from "react-icons/md";
 import { FiCameraOff } from "react-icons/fi";
-import { MdCancelPresentation } from "react-icons/md";
 
 import { Notifications } from "../../../Alerts/Notification";
 
@@ -24,7 +22,6 @@ export const VideoCallControlls: React.FC = () => {
   const {
     isCameraActive,
     isMicrophoneActive,
-    isShareScreenActive,
     toggleAudio,
     toggleVideo,
   } = useCall();
@@ -43,11 +40,11 @@ export const VideoCallControlls: React.FC = () => {
       onClick: toggleVideo,
       type: BUTTON_TYPE.CAMERA,
     },
-    {
-      Icon: isShareScreenActive ? MdCancelPresentation : MdCoPresent,
-      onClick: () => {},
-      type: BUTTON_TYPE.PRESENTATION,
-    },
+    // {
+    //   Icon: isShareScreenActive ? MdCancelPresentation : MdCoPresent,
+    //   onClick: () => {},
+    //   type: BUTTON_TYPE.PRESENTATION,
+    // },
     {
       Icon: MdCallEnd,
       onClick: async () => {
