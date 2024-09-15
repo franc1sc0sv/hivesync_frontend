@@ -2,7 +2,7 @@ import { CreateServerModal } from "../../../../modals/serverModals/createServerM
 import { CreateServerIcon } from "./CreateServerIcon";
 import { ServerFolder } from "./ServerFolder";
 import { ServerIcon } from "./ServerIcon";
-import { CommunityButton } from "../../../GeneralLayout/buttons/Comunitybutton";
+// import { CommunityButton } from "../../../GeneralLayout/buttons/Comunitybutton";
 
 type PropsServerIcons = {
   server_data_icons: ServerDataIcons;
@@ -16,7 +16,7 @@ export const ServerIcons: React.FC<PropsServerIcons> = ({
       <div className="flex flex-col items-center gap-3 ">
         <Icons server_data_icons={server_data_icons} />
         <CreateServerIcon />
-        <CommunityButton />
+        {/* <CommunityButton /> */}
       </div>
       <CreateServerModal />
     </section>
