@@ -16,11 +16,19 @@ export const ItemAcordeonChannel = ({
   isCategoryOpen?: boolean;
 }) => {
   const { setCurrentChannel, actualChannel } = useChannelList();
-  const handleChannelType = useHandleChannelType(actualChannel, false)
-  const handleClick = () => {
-    setCurrentChannel(channel.id);
-    handleChannelType(actualChannel)
 
+  // Usa el hook aquí para obtener la función y pasarle los parámetros necesarios
+  const handleChannelType = useHandleChannelType({
+    channelToCompare: actualChannel,
+    isntFirsTime: false,
+    childrenFakePage: <></>,
+  });
+
+  const handleClick = async () => {
+    setCurrentChannel(channel.id);
+    
+    // Espera a que handleChannelType complete su tarea
+    await handleChannelType(channel); // Asegúrate de que channel sea el canal correcto
   };
 
   const showChannel = isCategoryOpen || (!isCategoryOpen && channel.isSelected);
@@ -33,7 +41,7 @@ export const ItemAcordeonChannel = ({
     (showChannel || hasNoCategory) && (
       <div
         onClick={handleClick}
-        className={` cursor-pointer transition-all flex gap-2 items-center mr-3 p-2 rounded-overlay font-almarai ${activeStyles}`}
+        className={`cursor-pointer transition-all flex gap-2 items-center mr-3 p-2 rounded-overlay font-almarai ${activeStyles}`}
       >
         <IconChannel type={channel.type} />
         <p>{channel.name}</p>
