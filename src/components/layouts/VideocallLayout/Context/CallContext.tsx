@@ -18,15 +18,19 @@ type Call = {
   roomId: string;
   status: CallStatus;
   startedAt: Date;
-  participants: participant[];
+  participants: Participant[];
+  creator_id: string;
 } | null;
 
-type participant = {
+type Participant = {
   id: string;
   userId: string;
-  callId: String;
+  callId: string;
+  isMicrofoneActive: boolean;
+  IsCameraActive: boolean;
   joinedAt: Date;
 };
+
 
 interface CallContextType {
   callId: string | null;
@@ -57,8 +61,22 @@ interface CallContextType {
   isShareScreenActive: boolean;
 
   friend: UserInfoChat;
+  
   isTalking: boolean;
+  isTalkingRemote:boolean;
+
+  isCameraActiveRemote: boolean;
+  isMicrophoneActiveRemote: boolean;
+  isUserTalkingRemote: boolean;
 }
+
+
+type InputData = {
+  IsCameraActive: boolean;
+  isMicrofoneActive: boolean;
+  userId: string;
+  roomId: string;
+};
 
 export const CallContext = createContext<CallContextType | undefined>(
   undefined
@@ -67,9 +85,6 @@ export const CallContext = createContext<CallContextType | undefined>(
 export const CallProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [callId, setCallId] = useState<string | null>(null);
-  const [status, setStatus] = useState<Call>(null);
-
   const [mediaStream, setMediaStream] = useState<MediaStream | null>(null);
   const [remoteStream, setRemoteStream] = useState<MediaStream | null>(null);
   const [screenStream, setScreenStream] = useState<MediaStream | null>(null);
@@ -85,8 +100,13 @@ export const CallProvider: React.FC<{ children: React.ReactNode }> = ({
   const remoteScreenRef = useRef<HTMLVideoElement | null>(null);
 
   const [peer, setPeer] = useState<Peer | null>(null);
+
   const { friend } = useChat();
   const { user } = useSession();
+
+  const [callId] = useState<string>(friend.id_friendship);
+  const [friend_id] = useState<string>(friend.id_user);
+  const [status, setStatus] = useState<Call>(null);
 
   const user_id = user?.id as string;
 
@@ -95,23 +115,18 @@ export const CallProvider: React.FC<{ children: React.ReactNode }> = ({
   const { fecthData, isLoading } = useFetchID({ api_function: get_call_data });
 
   const [isTalking, setIsTalking] = useState(false);
+  const [isTalkingRemote, setIsTalkingRemote] = useState(false);
+
   const isUserTalking = useAudioDetection(mediaStream);
+  const isUserTalkingRemote = useAudioDetection(remoteStream);
+
+  // const [isUserTalkingRemote, setisUserTalkingRemote]
+
+  const [isCameraActiveRemote, setIsCameraActiveRemote] = useState<boolean>(false);
+
+  const [isMicrophoneActiveRemote, setIsMicrophoneActiveRemote] = useState<boolean>(false);
 
   const url = import.meta.env.VITE_PEER;
-
-  const initial_logic = () => {
-    if (!callId) return;
-
-    if (
-      status?.status === CallStatus.PENDING &&
-      status.participants[0].userId !== user_id
-    ) {
-      acceptCall();
-      return;
-    }
-
-    startCall();
-  };
 
   useEffect(() => {
     if (isUserTalking) {
@@ -119,7 +134,13 @@ export const CallProvider: React.FC<{ children: React.ReactNode }> = ({
     } else {
       setIsTalking(false);
     }
-  }, [isUserTalking]);
+
+    if (isUserTalkingRemote) {
+      setIsTalkingRemote(true);
+    } else {
+      setIsTalkingRemote(false);
+    }
+  }, [isUserTalking,isUserTalkingRemote]);
 
   useEffect(() => {
     const initMediaStream = async () => {
@@ -140,15 +161,25 @@ export const CallProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     const fetcher = async () => {
-      const id_friendship = friend.id_friendship;
-      const data = await fecthData(id_friendship);
+      const data = await fecthData(callId);
       setStatus(data);
-      setCallId(id_friendship);
     };
     fetcher();
   }, [socket]);
 
-  useEffect(initial_logic, [callId, user_id, mediaStream]);
+  useEffect(()=>{
+    if (!callId) return;
+
+    if (
+      status?.status === CallStatus.PENDING &&
+      status.participants[0].userId !== user_id
+    ) {
+      acceptCall();
+      return;
+    }
+
+    startCall();
+  }, [callId, user_id, mediaStream]);
 
   useEffect(() => {
     const peerInstance = new Peer(user_id, {
@@ -162,41 +193,111 @@ export const CallProvider: React.FC<{ children: React.ReactNode }> = ({
       setPeer(peerInstance);
     });
 
-    peerInstance.on("call", (incomingCall: MediaConnection) => {
-      console.log("answer");
-      if (status?.status === CallStatus.IN_PROGRESS && mediaStream) {
-        incomingCall.answer(mediaStream);
-        incomingCall.on("stream", (remoteStream) => {
-          setRemoteStream(remoteStream);
-        });
-      }
+    peerInstance.on("error", (error) => {
+      console.error(error.message);
+      console.error(error.stack);
+      console.error(error.type);
     });
 
+    return () => {
+      if (peerInstance) {
+        peerInstance.destroy();
+        console.log("Peer destroyed on cleanup.");
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (peer) {
+      peer.on("call", (incomingCall: MediaConnection) => {
+        console.log("Incoming call from peer:", incomingCall.peer);
+
+        if (mediaStream) {
+          incomingCall.answer(mediaStream);
+
+          incomingCall.on("stream", (stream) => {
+            console.log("Recibiendo stream remoto:", stream);
+            setRemoteStream(stream);
+          });
+
+          incomingCall.on("close", () => {
+            console.log("La llamada ha terminado.");
+          });
+
+          incomingCall.on("error", (error) => {
+            console.error("Error durante la llamada:", error);
+          });
+        } else {
+          console.error(
+            "No hay mediaStream disponible para contestar la llamada."
+          );
+        }
+      });
+    }
+
     if (socket) {
-      socket.on("new_peer", ({ call }) => {
+      socket.on("new_peer", ({ call }: { call: Call }) => {
         setStatus(call);
+
+        if (!call) return;
+        if (peer && mediaStream) {
+          const callConnection = peer.call(friend_id, mediaStream);
+          
+          if (callConnection) {
+            callConnection.on("stream", (remoteStream) => {
+              setRemoteStream(remoteStream);
+            });
+
+            callConnection.on("error", (err) => {
+              console.error("Error en la llamada:", err);
+            });
+         }
+        }
       });
 
       socket.on("peer_left", ({ call }) => {
         setStatus(call);
       });
+
+      socket.on("newUsersParams", ({ participant }: { participant: Participant }) => {    
+        setIsCameraActiveRemote(participant.IsCameraActive);
+        setIsMicrophoneActiveRemote(participant.isMicrofoneActive);
+      });
+    
+
     }
-  }, [status, user_id, socket]);
+  }, [socket, peer, mediaStream]);
+
+  useEffect(()=>{
+    if (socket && status?.id) {
+      const data: InputData = {
+        IsCameraActive: isCameraActive,
+        isMicrofoneActive: isMicrophoneActive,
+        roomId:status.id,
+        userId:user_id
+      }
+
+  
+      socket.emit("updateParams",{data}, ((participant:Participant) => {
+        console.log(participant)
+      }));
+    }
+  },[isMicrophoneActive, isCameraActive])
+
 
   const startCall = async () => {
-    if (!peer || !mediaStream || !callId) return;
+    if (!mediaStream || !callId || !socket) return;
 
-    const peerId = peer.id;
-    const call = peer.call(callId, mediaStream);
+    const data:InputData = {
+      IsCameraActive: isCameraActive,
+      isMicrofoneActive: isMicrophoneActive,
+      roomId:callId,
+      userId:user_id
+    }
 
-    call?.on("stream", (remoteStream) => {
-      console.log("started2");
-      setRemoteStream(remoteStream);
-    });
-
-    socket?.emit(
+    socket.emit(
       "joinCall",
-      { roomId: callId, userId: user_id, peerId, source: "CREATE" },
+      { data, source: "CREATE" },
       (response: any) => {
         setStatus(response.call);
       }
@@ -204,20 +305,19 @@ export const CallProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const acceptCall = () => {
-    if (!peer || !mediaStream || !callId) return;
+    if (!mediaStream || !callId || !socket) return;
 
-    const incomingCall = peer?.call(callId, mediaStream);
+    const data:InputData = {
+      IsCameraActive: isCameraActive,
+      isMicrofoneActive: isMicrophoneActive,
+      roomId:callId,
+      userId:user_id
+    }
 
-    incomingCall?.on("stream", (remoteStream) => {
-      setRemoteStream(remoteStream);
-    });
-
-    socket?.emit(
+    socket.emit(
       "joinCall",
       {
-        roomId: callId,
-        userId: user_id,
-        peerId: peer?.id,
+        data,
         source: "ANSWER",
       },
       (response: any) => {
@@ -233,8 +333,20 @@ export const CallProvider: React.FC<{ children: React.ReactNode }> = ({
       setRemoteStream(null);
       setStatus(null);
 
+      if (peer) {
+        peer.destroy();
+        console.log("Peer destroyed on endCall.");
+        setPeer(null);
+      }
+
       if (socket && callId) {
-        socket.emit("leaveCall", { roomId: callId, userId: user_id });
+        socket.emit(
+          "leaveCall",
+          { roomId: callId, userId: user_id },
+          (response: any) => {
+            setStatus(response.call);
+          }
+        );
       }
     }
   };
@@ -303,9 +415,14 @@ export const CallProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     if (remoteStream && remoteVideoRef.current) {
-      remoteVideoRef.current.srcObject = remoteStream;
+      const videoTracks = remoteStream.getVideoTracks();
+      const audioTracks = remoteStream.getAudioTracks();
+
+      if (videoTracks.length > 0 && audioTracks.length > 0) {
+        remoteVideoRef.current.srcObject = new MediaStream([videoTracks[0],audioTracks[0]]);
+      }
     }
-  }, [remoteStream]);
+  }, [remoteStream, isCameraActiveRemote]);
 
   useEffect(() => {
     if (screenStream && localScreenRef.current) {
@@ -344,6 +461,10 @@ export const CallProvider: React.FC<{ children: React.ReactNode }> = ({
     isShareScreenActive,
     friend,
     isTalking,
+    isTalkingRemote,
+    isMicrophoneActiveRemote,
+    isCameraActiveRemote,
+    isUserTalkingRemote
   };
 
   return <CallContext.Provider value={value}>{children}</CallContext.Provider>;
