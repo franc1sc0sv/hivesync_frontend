@@ -1,9 +1,13 @@
 import { ModalTemplate } from "../../../ModalTemplate";
 import { useNotifications } from "../../../../../store/useNotifications";
-import { useCustomForm } from "../../../../../hooks/useForm";
+import { useCustomFormModal } from "../../../../../hooks/useFormModal";
 import { InputsForms } from "../../../../forms/Inputs/inputs";
 import { SubmitButton } from "../../../../forms/Inputs/Button";
+import { get_profile } from "../../../../../api/auth";
 import { useState } from "react";
+import { useSession } from "../../../../../store/user";
+import { useEffect } from "react";
+import { edit_username } from "../../../../../api/user_info";
 
 
 export const EditUsernameModal: React.FC = () => {
@@ -17,45 +21,29 @@ export const EditUsernameModal: React.FC = () => {
 }
 
 export const EditUsernameForm = () => {
+    const [fetchedData, setFetchedData] = useState<Usuario>();
 
-    const [message, setMessage] = useState("");
-    const { setNotifications } = useNotifications();
+    const { onSubmit, register, isLoading } = useCustomFormModal(edit_username);
 
-    const api_function = async (data: any) => {
-        const username = data.username;
-        if (username.trim().length === 0) {
-            setMessage("Los campos no deben quedar vacíos");
-            return;
+    useEffect(() => {
+        const fetch = async () => {
+            const fetchData = await get_profile();
+            setFetchedData(fetchData);
         }
-        localStorage.setItem("username", username);
-        location.reload();
-        setNotifications({
-            message: "Los cambios han sido guardados exitosamente",
-            severity: "success" 
-        })
-    }
-
-    const post_success_function = () => {
-        console.log("la api se llamó exitosa y épicamente");
-    }
-
-    const { onSubmit, register, isLoading } = useCustomForm(
-        api_function,
-        post_success_function,
-        ``
-    );
+        fetch();
+    }, [])
 
     return (
         <form
             className="w-4/5 sm:w-3/5 lg:w-1/3 flex flex-col justify-center items-center gap-10"
             onSubmit={onSubmit}>
             <InputsForms
+                inputValue={fetchedData?.username}
                 title="Editar nombre de usuario"
                 name="username"
                 placeholder="Escribe un usuario"
                 register={register}
             />
-            {message !== "" && <p className="text-lg text-custom_white text-center">{message}</p>}
             <SubmitButton text="Guardar cambios" isLoading={isLoading} />
         </form>
     )

@@ -4,6 +4,7 @@ import { useSession } from "../../../store/user";
 import { MenuOptions } from "./Components/OptionsMenu";
 import { OptionsProvider } from "./context/optionsContext";
 import { UserSettingsModals } from "../../../components/modals/userModals/settings/UserSettingsModals";
+import { Notifications } from "../../../components/Alerts/Notification";
 
 export const SettingsPage: React.FC = () => {
   const { logout } = useSession();
@@ -25,6 +26,7 @@ export const SettingsPage: React.FC = () => {
         </button>
       </div>
       <UserSettingsModals />
+      <Notifications />
     </GeneralLayout>
   );
 };

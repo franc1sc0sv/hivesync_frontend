@@ -1,6 +1,21 @@
 import { AxiosClient } from "../config/axios";
 import { format_api_response, headers, throwError } from "../helpers/apiHelper";
 
+//user information edit
+export const edit_username = async (data: any) => {
+  try {
+    const res = await AxiosClient.patch(
+      "/edit/username",
+      data,
+      headers()
+    );
+    return res;
+  } catch (error) {
+    console.log(error);
+    throwError(error);
+  }
+}
+
 export const get_user_username = async (data: any) => {
   try {
     const res = await AxiosClient.post(
