@@ -3,7 +3,6 @@ import { SettingsIcon } from "../../Icons/settings";
 import { CalendarIcon } from "../../Icons/calendar";
 import { FolderIcon } from "../../Icons/folder";
 import { CategoryIcon } from "../../Icons/category";
-import { ExitIcon } from "../../Icons/exit";
 import { PencilIcon } from "../../Icons/pencil";
 
 import { ModalTemplate } from "../ModalTemplate";
@@ -50,18 +49,10 @@ const serverOptions: MenuProps[] = [
   },
 ];
 
-const leaveServer = [
-  {
-    icon: <ExitIcon size={30} color="white" />,
-    name: "Abandonar servidor",
-    modal: "leaveServer",
-  }
-]
-
 export const ServerInfoModal: React.FC = () => {
   return (
     <ModalTemplate identificator="serverInfo">
-      <div className="flex flex-col gap-10 w-full sm:w-4/5 mx-auto">
+      <div className="flex flex-col w-full gap-10 mx-auto sm:w-4/5">
         <ServerCover />
         <ServerDetails />
         <ServerOptions />
@@ -102,7 +93,7 @@ const ServerCover: React.FC = () => {
     <div className="flex flex-col gap-5">
       <div className="w-full mx-auto text-gray-900 rounded-lg ">
         {/* cover  */}
-        <div className="w-full relative overflow-hidden rounded-xl h-36 bg-secondary"></div>
+        <div className="relative w-full overflow-hidden rounded-xl h-36 bg-secondary"></div>
 
         {/* icon */}
         <div className="absolute ml-5 -mt-16 overflow-hidden w-28 h-28 rounded-2xl">
@@ -128,11 +119,7 @@ const ServerDetails: React.FC = () => {
       </p>
 
       <div className="flex flex-row gap-5">
-        <div className="flex flex-row items-center gap-2">
-          <div className="w-3 h-3 p-1 rounded-full bg-green"></div>
-          <p className="text-lg text-custom_white text-almarai">1 en línea</p>
-        </div>
-
+      
         <div className="flex flex-row items-center gap-2">
           <div className="w-3 h-3 p-1 rounded-full bg-gray"></div>
           <p className="text-lg text-custom_white text-almarai">1 miembro/s</p>
@@ -147,7 +134,6 @@ const ServerOptions = () => {
     <>
       <OptionsTemplate options={quickOptions} />
       <OptionsTemplate options={serverOptions} />
-      <OptionsTemplate options={leaveServer} />
     </>
 
   );

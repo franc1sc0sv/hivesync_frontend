@@ -1,9 +1,8 @@
 import { ModalTemplate } from "../../ModalTemplate"
 import { useModal } from "../../../../store/useModal"
 
-import { PencilIcon } from "../../../Icons/pencil";
-import { ColorPaletteIcon } from "../../../Icons/colorPalette";
-import { PadlockIcon } from "../../../Icons/padlock";
+// import { PencilIcon } from "../../../Icons/pencil";
+// import { ColorPaletteIcon } from "../../../Icons/colorPalette";
 import { DeleteIcon } from "../../../Icons/delete";
 import { FolderIcon } from "../../../Icons/folder";
 import { CategoryIcon } from "../../../Icons/category";
@@ -11,18 +10,18 @@ import { CategoryIcon } from "../../../Icons/category";
 import { MenuProps, OptionsTemplateProps } from "../types/menuProps";
 
 
-const generalOptions: MenuProps[] = [
-    {
-        icon: <PencilIcon size={30} color="white" />,
-        name: "General",
-        modal: "generalSettings",
-    },
-    {
-        icon: <ColorPaletteIcon size={30} color="white" />,
-        name: "Apariencia",
-        modal: "serverAppearanceSettings",
-    },
-];
+// const generalOptions: MenuProps[] = [
+//     {
+//         icon: <PencilIcon size={30} color="white" />,
+//         name: "General",
+//         modal: "generalSettings",
+//     },
+//     {
+//         icon: <ColorPaletteIcon size={30} color="white" />,
+//         name: "Apariencia",
+//         modal: "serverAppearanceSettings",
+//     },
+// ];
 
 const serverOptions: MenuProps[] = [
         {
@@ -39,23 +38,18 @@ const serverOptions: MenuProps[] = [
 
 const advancedOptions: MenuProps[] = [
     {
-        icon: <PadlockIcon size={30} color="white" />,
-        name: "Privacidad",
-        modal: "privacySettings",
-    },
-    {
         icon: <DeleteIcon size={30} color="white" />,
         name: "Eliminar servidor",
-        modal: "deleteServer",
+        modal: "delete_server",
     },
 ];
 
 export const SettingsMenuModal = () => {
     return (
         <ModalTemplate identificator="serverSettings">
-            <div className="w-full sm:w-3/5 mx-auto flex flex-col gap-3">
-                <p className="text-2xl text-custom_white">Ajustes generales</p>
-                <Settings options={generalOptions} />
+            <div className="flex flex-col w-full gap-3 mx-auto sm:w-3/5">
+                {/* <p className="text-2xl text-custom_white">Ajustes generales</p>
+                <Settings options={generalOptions} /> */}
                 <p className="text-2xl text-custom_white">Ajustes de servidor</p>
                 <Settings options={serverOptions} />
                 <p className="text-2xl text-custom_white">Ajustes avanzados</p>

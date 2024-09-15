@@ -7,7 +7,7 @@ import { ChannelVideocallsModal } from "../../../../modals/serverModals/channel/
 
 
 export const ChannelList = () => {
-  const { channelList, actualChannel } = useChannelList();
+  const { channelList } = useChannelList();
 
 
   return (

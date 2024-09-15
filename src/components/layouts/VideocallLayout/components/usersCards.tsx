@@ -23,7 +23,7 @@ const UserCard = () => {
   return (
     <div
       style={{ backgroundColor: PENDING_STYLES_BG }}
-      className={`w-full max-w-xs h-full max-h-[320px] rounded-2xl duration-100 ease-in-out transition-all flex items-center justify-center  relative ${border_talking}   `}
+      className={`w-full max-w-xs h-full  max-h-[320px] rounded-2xl duration-100 ease-in-out transition-all flex items-center justify-center  relative ${border_talking}   `}
     >
       <UserCameraStream
         isMicrofoneOn={isMicrophoneActive}

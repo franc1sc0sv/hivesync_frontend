@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 
 export const NavBar: React.FC<PropsLinks> = ({ links }) => {
   return (
-    <nav className="w-full md:w-[10%] lg:w-[7%] xl:w-[5%] flex flex-row md:flex-col items-center justify-around py-3 mx-auto rounded-overlay bg-overlay_2">
+    <nav className="w-full max-h-[250px] md:w-[10%] lg:w-[7%] xl:w-[5%] flex flex-row md:flex-col items-center justify-around py-3 mx-auto rounded-overlay bg-overlay_2">
       <LinksNav links={links} />
       <UserProfile url="/app/profile" />
     </nav>

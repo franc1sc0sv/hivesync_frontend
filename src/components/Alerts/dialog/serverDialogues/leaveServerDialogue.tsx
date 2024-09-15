@@ -6,7 +6,7 @@ import { useNotifications } from "../../../../store/useNotifications";
 
 export const LeaveServerDialogue: React.FC = () => {
   return (
-    <DialogueTemplate identificator="leaveServer">
+    <DialogueTemplate identificator="delete_server">
       <Dialogue />
     </DialogueTemplate>
   );

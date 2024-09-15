@@ -31,8 +31,9 @@ const AreServersLayout = () => {
       navigate(get_last_server());
     }
   }, []);
+
   return (
-    <article className={`flex justify-center h-full md:h-[95%] gap-3 ${stylesServers}`}>
+    <article className={`flex justify-center h-full gap-3 overflow-hidden ${stylesServers}`}>
       <ServerIcons server_data_icons={server_data} />
       <ChannelListProvider channels={selected_server.channels}>
         <ServerHome specific_server_data={selected_server} />

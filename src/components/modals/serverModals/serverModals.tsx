@@ -37,7 +37,7 @@ export const ServerModals: React.FC = () => {
     return (
         <>
             <ServerInfoModal />
-            {/* edit information, cover and picture */}
+
             <ServerEditionModals /> 
 
             <MembersListModal />

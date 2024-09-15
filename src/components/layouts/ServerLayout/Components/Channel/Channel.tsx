@@ -17,17 +17,15 @@ export const Channel: React.FC = () => {
 
   const handleModal = useHandleChannelType({
     channelToCompare: actualChannel,
-    childrenFakePage: actualChannel ? <TopChannelBar /> : <NoChannelSelected />, // Fake page if no channel selected
+    childrenFakePage: actualChannel ? <TopChannelBar /> : <NoChannelSelected />, 
     isntFirsTime: false,
   });
-
-  // Create the generator instance
+  
   const modalGenInstance = modalGenerator();
-
-  // Handler for swipe
+  
   const handler = useSwipeHandler({
     onSwipedLeft: () => {
-      const { done } = modalGenInstance.next(); // Call the generator once
+      const { done } = modalGenInstance.next(); 
       if (done) {
         console.log("Modal action already executed.");
       }
@@ -40,7 +38,7 @@ export const Channel: React.FC = () => {
         {...handler}
         className="w-full ml-auto rounded-tl-lg rounded-bl-lg bg-overlay_2 screen_overlay"
         onClick={() => {
-          const { done } = modalGenInstance.next(); // Call the generator on click
+          const { done } = modalGenInstance.next(); 
           if (done) {
             console.log("Modal action already executed.");
           }
@@ -53,11 +51,11 @@ export const Channel: React.FC = () => {
 
 export const NoChannelSelected: React.FC = () => {
   return (
-    <section className="flex flex-col justify-center items-center w-full h-full gap-6 p-4 rounded-overlay ">
-      <div className="flex flex-col gap-10 justify-center items-center">
-        <div className="flex flex-col items-center rounded-lg justify-evenly gap-5 p-4">
+    <section className="flex flex-col items-center justify-center w-full h-full gap-6 p-4 rounded-overlay ">
+      <div className="flex flex-col items-center justify-center gap-10">
+        <div className="flex flex-col items-center gap-5 p-4 rounded-lg justify-evenly">
           <MegaphoneIcon size={60} color="#fff" />
-          <h1 className="text-3xl text-custom_white font-almarai text-center">
+          <h1 className="text-3xl text-center text-custom_white font-almarai">
             No te quedes en silencio
           </h1>
           <p className="text-xl text-center text-custom_white">
