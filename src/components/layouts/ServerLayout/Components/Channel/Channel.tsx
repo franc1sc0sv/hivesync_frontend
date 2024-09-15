@@ -1,4 +1,4 @@
-import useFakePages from "../../../../../store/useFakePage";
+
 import { ShowFakePages } from "../../../../fakePages/ShowFakePages";
 import { useSwipeHandler } from "../../hooks/useFakePageSwipeHandler";
 import { useChannelList } from "../../hooks/useChannelList";
@@ -8,7 +8,7 @@ import { TopChannelBar } from "./Components/topChannelBar";
 
 export const Channel: React.FC = () => {
   const { actualChannel } = useChannelList();
-  const { addFakePage } = useFakePages();
+ 
 
  
   function* modalGenerator() {

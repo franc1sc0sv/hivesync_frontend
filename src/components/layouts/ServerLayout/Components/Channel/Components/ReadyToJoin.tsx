@@ -6,11 +6,15 @@ import { PiMicrophoneFill } from "react-icons/pi"
 import { PiMicrophoneSlashFill } from "react-icons/pi"
 import { useHandleChannelType } from "../../../hooks/useHandleChannels"
 import { useChannelList } from "../../../hooks/useChannelList"
+import useFakePages from "../../../../../../store/useFakePage"
+import { Children } from "react"
+import { TopChannelBar } from "./topChannelBar"
 
 
 export function ReadyToJoin() {
   const {actualChannel} = useChannelList();
   const { isMicrophoneActive, toggleMicrophone } = useMicrophoneStore();
+  const {addFakePage} = useFakePages()
   
 
   
@@ -25,7 +29,12 @@ export function ReadyToJoin() {
     type: BUTTON_TYPE.MICROPHONE,
   }
 
-
+  const handleClick = () =>{
+    addFakePage({
+      title:"",
+      children: <TopChannelBar/>
+    })
+  }
   return (
 
      <section className="flex flex-col items-center justify-center h-full w-full bg-gray-900 text-white">
@@ -40,7 +49,9 @@ export function ReadyToJoin() {
         <div className="bg-gray-900 rounded-full flex flex-center justify-between">
           <article className="flex items-center justify-center w-full mt-4 space-x-1">
             <ButtonCalls type={microfone.type} Icon={microfone.Icon} onClick={handleToggleMicrophone}/>
-            <div className="bg-green-500 rounded-xl flex items-center justify-center px-4 py-2 bg-primary text-white">
+            <div className="bg-green-500 rounded-xl flex items-center justify-center px-4 py-2 bg-primary text-white"
+            onClick={handleClick}
+            >
               <p>Unirme al canal de voz</p>
             </div>
             <div className="bg-gray-700 rounded-full flex items-center justify-center w-12 h-12 bg-overlay_2"></div>
