@@ -128,7 +128,7 @@ export const ServerProvider = ({ children }: { children: ReactNode }) => {
       set_ultimo_servidor(specific_server);
     };
     loader();
-  }, [modalId]);
+  }, []);
 
   if (isLoading || isLoadingID) return <LoadingPage />;
 

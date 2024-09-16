@@ -26,12 +26,13 @@ export const EditEventModal: React.FC<Props> = ({ serverId }) => {
 
     return (
         <ModalTemplate identificator="editEvent">
-            <AddEventForm serverId={serverId} eventId={eventId} />
+            <EditEventForm serverId={serverId} eventId={eventId} />
         </ModalTemplate>
     );
 };
 
-const AddEventForm: React.FC<Props> = ({ serverId, eventId }) => {
+const EditEventForm: React.FC<Props> = ({ serverId, eventId }) => {
+
     const [eventData, setEventData] = useState<EventInfoProps>();
 
     useEffect(() => {

@@ -131,7 +131,7 @@ export const ChannelListProvider = ({
     );
     setActualChannel(selectedChannel || null);
    
-  }, []);
+  }, [channels]);
   
   return (
     <ChannelListContext.Provider

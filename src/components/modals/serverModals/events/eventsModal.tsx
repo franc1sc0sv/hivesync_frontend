@@ -5,9 +5,7 @@ import { AddEventModal } from "./addEventModal";
 import { EditEventModal } from "./editEventModal";
 import { useModal } from "../../../../store/useModal";
 import { useServer } from "../../../layouts/ServerLayout/hooks/useServer";
-
 import { EventsProvider, useEventsList } from "./context/eventsContext";
-import { LoadingPage } from "../../../routes/loadingPage";
 
 export const EventsModal: React.FC = () => {
 
@@ -28,9 +26,7 @@ export const EventsModal: React.FC = () => {
 
 const Events: React.FC = () => {
 
-    const { events, isLoading } = useEventsList();
-
-    if (isLoading) return <LoadingPage />
+    const { events } = useEventsList();
 
     return (
         <ModalTemplate identificator="events">

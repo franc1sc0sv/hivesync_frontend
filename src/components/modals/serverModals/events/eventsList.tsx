@@ -6,6 +6,7 @@ import { useNotifications } from "../../../../store/useNotifications";
 import { delete_event } from "../../../../api/events";
 import { PencilIcon } from "../../../Icons/pencil";
 import { CheckIcon } from "../../../Icons/check";
+import { useEffect } from "react";
 
 interface EventInfoProps {
     id: string,
@@ -29,7 +30,7 @@ const List: React.FC<EventProps> = ({ eventsList }) => {
     const { selected_server } = useServer();
     const { setModalId } = useModal();
     const { setNotifications } = useNotifications();
-    const { setSelectedEventId } = useEventsList();
+    const { setSelectedEventId, fetchEvents } = useEventsList();
 
     const handleDelete = async (data: any) => {
         try {
@@ -38,6 +39,7 @@ const List: React.FC<EventProps> = ({ eventsList }) => {
                 message: "Evento finalizado",
                 severity: "success",
             });
+            fetchEvents();
             return setModalId("");
 
         }
@@ -45,7 +47,6 @@ const List: React.FC<EventProps> = ({ eventsList }) => {
             console.error("Error al eliminar el evento", error);
         }
     };
-
 
     return (
         <div className="w-full sm:w-4/5 lg:w-3/5 mx-auto">

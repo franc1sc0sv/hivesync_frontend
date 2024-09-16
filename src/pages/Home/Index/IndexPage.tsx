@@ -134,7 +134,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon: Icon, title, descriptio
     className="bg-[#2E2934] p-6 rounded-lg shadow-lg"
     whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
   >
-    <Icon className="w-12 h-12 text-[#6B2A8A] mb-4" />
+    <Icon className="mx-auto w-12 h-12 text-light_purple mb-4" />
     <h3 className="text-xl font-semibold mb-2">{title}</h3>
     <p className="text-gray-300">{description}</p>
   </motion.div>
@@ -149,12 +149,12 @@ export const IndexPage = () => {
       }}
     >
       <header className="flex justify-between items-center py-6 px-8">
-        <img src="/hivesyncLogo.png" alt="HiveSync Logo" className="h-8 w-auto sm:h-10" />
+        <img src="/hivesyncLogo.png" alt="HiveSync Logo" className="h-8 w-auto sm:h-10 lg:h-12" />
         <div className="flex space-x-4">
           <Link to="/login">
             <motion.button
               {...animations.scale}
-              className="px-4 py-2 sm:px-6 sm:py-2 border border-[#6B2A8A] rounded-full text-xs sm:text-sm font-medium hover:bg-[#6B2A8A] transition-colors"
+              className="px-4 py-2 sm:px-6 sm:py-2 border border-light_purple rounded-full text-xs sm:text-sm font-medium hover:bg-light_purple transition-colors"
             >
               Iniciar sesión
             </motion.button>
@@ -162,7 +162,7 @@ export const IndexPage = () => {
           <Link to="signup">
             <motion.button
               {...animations.scale}
-              className="px-4 py-2 sm:px-6 sm:py-2 bg-[#6B2A8A] rounded-full text-xs sm:text-sm font-medium hover:bg-[#8A4BA8] transition-colors"
+              className="px-4 py-2 sm:px-6 sm:py-2 bg-light_purple rounded-full text-xs sm:text-sm font-medium hover:bg-light_purple transition-colors"
             >
               Empieza ahora
             </motion.button>
@@ -206,17 +206,17 @@ export const IndexPage = () => {
           animate="animate"
           variants={animations.fadeIn}
         >
-          <Link to="signup">
+          {/* <Link to="signup">
             <motion.button
               {...animations.scale}
               className="px-8 py-3 bg-[#6B2A8A] rounded-full text-base sm:text-lg font-medium hover:bg-[#8A4BA8] transition-colors"
             >
-              Comienza tu prueba gratis
+              Prueba lagratis
             </motion.button>
-          </Link>
+          </Link> */}
           <motion.button
             {...animations.scale}
-            className="px-8 py-3 border border-[#6B2A8A] rounded-full text-base sm:text-lg font-medium hover:bg-[#6B2A8A] transition-colors"
+            className="px-8 py-3 bg-light_purple rounded-full text-base sm:text-lg font-medium  transition-colors"
             onClick={() => {
               const flashCardsElement = document.getElementById('flash-cards');
               if (flashCardsElement) {
@@ -233,7 +233,7 @@ export const IndexPage = () => {
         <Link to="signup">
           <motion.button
             {...animations.scale}
-            className="mt-8 px-8 py-3 bg-[#6B2A8A] rounded-full text-base sm:text-lg font-medium hover:bg-[#8A4BA8] transition-colors"
+            className="mt-8 px-8 py-3 bg-light_purple rounded-full text-base sm:text-lg font-medium hover:bg-primary transition-colors"
           >
             Prueba estas herramientas hoy
           </motion.button>
@@ -320,7 +320,7 @@ export const IndexPage = () => {
       </motion.div>
 
       <footer className="py-6 px-4 text-center text-xs sm:text-sm text-gray-400">
-        <p>© 2023 HiveSync. All rights reserved.</p>
+        <p>© 2024 HiveSync. All rights reserved.</p>
         <div className="mt-4 flex justify-center space-x-4">
           <a href="#" className="hover:text-[#6B2A8A] transition-colors">Privacy Policy</a>
           <a href="#" className="hover:text-[#6B2A8A] transition-colors">Terms of Service</a>

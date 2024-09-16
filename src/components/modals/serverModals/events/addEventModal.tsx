@@ -11,6 +11,8 @@ import { SubmitButton } from "../../../forms/Inputs/Button";
 import { TextArea } from "../../../forms/Inputs/TextArea";
 import { DateInput } from "../../../forms/Inputs/datePicker";
 
+import { useEventsList } from "./context/eventsContext";
+
 export const AddEventModal: React.FC = () => {
     return (
         <ModalTemplate identificator="addEvent">
@@ -21,10 +23,17 @@ export const AddEventModal: React.FC = () => {
 
 const AddEventForm: React.FC = () => {
 
+    const { fetchEvents } = useEventsList();
+
     const { selected_server } = useServer();
 
-    const api_function = (data: any) => {
-        create_event(selected_server.id, data);
+    const api_function = async (data: any) => {
+        try {
+            create_event(selected_server.id, data);
+            fetchEvents();
+        } catch (error) {
+            console.log(error);
+        }
     }
     const { onSubmit, register, isLoading } = useCustomFormModal(api_function);
 

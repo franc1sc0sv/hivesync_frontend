@@ -4,8 +4,8 @@ import { SingUpForm } from "./SingUpForm";
 
 export const SingUpPage = () => {
   return (
-    <div className="flex flex-col items-center justify-center w-full py-10 bg-overlay_1">
-      <div className="flex flex-col justify-center items-center gap-10 w-[80%] max-w-lg">
+    <div className="h-screen flex flex-col items-center justify-center w-full py-5 bg-overlay_1">
+      <div className="flex flex-col justify-center items-center gap-10 lg:gap-3 w-[80%] max-w-lg">
         <HeaderForm />
         <SingUpForm />
         <Notifications />

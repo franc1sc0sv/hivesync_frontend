@@ -2,6 +2,8 @@ import { CalendarIcon } from "../../../../Icons/calendar";
 import { RightTriangleIcon } from "../../../../Icons/rightTriangle";
 import { UsersGroupIcon } from "../../../../Icons/usersGroup";
 
+import { useEventsList } from "../../../../modals/serverModals/events/context/eventsContext";
+
 import { useModal } from "../../../../../store/useModal";
 
 
@@ -9,8 +11,16 @@ export const HeaderServer = ({ name }: { name: string }) => {
 
   const { setModalId } = useModal();
 
+  const { fetchEvents } = useEventsList();
+
+  const handleEvents = () => {
+    fetchEvents();
+    setModalId("events");
+  };
+
+
   return (
-      <article className="flex flex-col gap-3 ">
+    <article className="flex flex-col gap-3 ">
 
       <div
         className="flex items-center gap-2 w-fit"
@@ -32,12 +42,12 @@ export const HeaderServer = ({ name }: { name: string }) => {
 
         <button
           className="flex items-center justify-center w-12 h-12 p-2 rounded-full bg-overlay_1"
-          onClick={() => setModalId("events")}
+          onClick={handleEvents}
         >
           <CalendarIcon size={24} color="white" />
         </button>
       </div>
 
-      </article>
+    </article>
   );
 };
