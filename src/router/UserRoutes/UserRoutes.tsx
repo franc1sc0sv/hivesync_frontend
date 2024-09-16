@@ -37,10 +37,11 @@ export const UserRoutes: RouteObject = {
     { path: ":id/:id", element: <ServerPage /> }, // Servers - /server_id/channel_id
     { index: true, element: <ServerPage /> }, // Servers - /server_id/channel_id
 
-    
-    {path: "documents", element: <TextEditorPage />},
-    {path: "whiteboard", element: <WhiteBoardPage />},
-    {path: "translate", element: <TranslatorPage />}
+
+    { path: "ai", element: <AIPage /> },
+    { path: "documents", element: <TextEditorPage /> },
+    { path: "whiteboard", element: <WhiteBoardPage /> },
+    { path: "translate", element: <TranslatorPage /> }
 
 
 
