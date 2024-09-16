@@ -13,6 +13,7 @@ import Excalidraw from "../../pages/testing/Tools/Excalidraw";
 import BlackBoard from "../../pages/testing/Tools/BlackBoard";
 // import { PageChannelTesting } from "../../pages/testing/channel/pageChannelTesting";
 import { TranslatorPage } from "../../pages/testing/Tools/Translator";
+import { ChangeAvatarModal } from "../../pages/testing/imgPicker";
 
 
 export const HomeRoutes: RouteObject = {
@@ -36,6 +37,9 @@ export const HomeRoutes: RouteObject = {
     { path: "/excaliDraw", element: <Excalidraw/> },
     //{ path: "/videocalls", element: <PageChannelTesting/> },
     { path: "/translate", element: <TranslatorPage /> },
+    { path: "/img", element: <ChangeAvatarModal /> },
+
+
     
 
   ],

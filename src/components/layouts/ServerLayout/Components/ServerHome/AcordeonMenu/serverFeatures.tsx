@@ -6,6 +6,8 @@ import { PiPencilCircleLight } from "react-icons/pi";
 import { PiHandWavingFill } from "react-icons/pi";
 import useFakePages from "../../../../../../store/useFakePage";
 import { AIPage } from "../../../../../../pages/User/Tools/AIPage";
+import { MdOutlineTranslate } from "react-icons/md";
+
 
 interface ChannelProps {
   id: string | number;
@@ -44,6 +46,12 @@ export const features = (): ChannelProps[] => {
       },
       {
         id: 4,
+        name: "Hivesync Translator",
+        onClick: () => navigate("/app/translate"),
+        icon: MdOutlineTranslate
+      },
+      {
+        id: 5,
         name: "Hivesync Signs",
         onClick: () => window.location.href = "https://hivesync-signs.vercel.app/",
         icon: PiHandWavingFill

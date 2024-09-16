@@ -9,8 +9,9 @@ import { ProfilePage } from "../../pages/User/Profile/Profile";
 import { SettingsPage } from "../../pages/User/UserSettings/Settings";
 import { NotificationsPage } from "../../pages/User/Notifications/NotificationsPage";
 import { AIPage } from "../../pages/User/Tools/AIPage";
-import TextEditorPage from "../../pages/User/Tools/documents/documentsPage";
+import TextEditorPage from "../../pages/User/Tools/documentsPage";
 import { WhiteBoardPage } from "../../pages/User/Tools/WhiteBoard";
+import { TranslatorPage } from "../../pages/User/Tools/TranslatorPage";
 
 
 //no le hagan caso xd ay lo borro
@@ -38,7 +39,9 @@ export const UserRoutes: RouteObject = {
 
     
     {path: "documents", element: <TextEditorPage />},
-    {path: "whiteboard", element: <WhiteBoardPage />}
+    {path: "whiteboard", element: <WhiteBoardPage />},
+    {path: "translate", element: <TranslatorPage />}
+
 
 
   ],
