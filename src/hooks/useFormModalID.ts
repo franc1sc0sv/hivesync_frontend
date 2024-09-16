@@ -1,38 +1,41 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { API_RESPONSE_ERROR_CLASS } from "../class/api_responses_instances";
 import { useNotifications } from "../store/useNotifications";
-import { useNavigate } from "react-router-dom";
 import { useModal } from "../store/useModal";
 
-export const useToogleAPI = ({
-  api_function,
-  url = "",
-}: {
-  api_function: (data?: any) => any;
-  url?: string;
-}) => {
+export const useCustomFormModalID = (
+  api_function: (id: string, data?: any) => any,
+  id: string,
+  default_values: any = {}
+) => {
+  const { register, handleSubmit, setValue } = useForm({
+    defaultValues: { ...default_values },
+  });
   const [isLoading, setIsloading] = useState(false);
-  const [data, setData] = useState<any>(null);
-  const [succes, setSucces] = useState(false);
-
   const { setNotifications } = useNotifications();
-  const navigate = useNavigate();
   const { setModalId } = useModal();
 
   const onSubmit = async (data: any) => {
     try {
       setIsloading(true);
-      const res = await api_function(data);
-      setData(res);
+      const res = await api_function(data, id);
 
-      setSucces(true);
+      setNotifications({
+        message: "Operación realizada con éxito",
+        severity: "success",
+      });
+
       setIsloading(false);
       setModalId("");
-
-      if (url) {
-        navigate(url);
+      return res;
+    } catch (e: any) {
+      if (e.message) {
+        setNotifications(e);
+        setIsloading(false);
+        return;
       }
-    } catch (e) {
+
       if (e instanceof API_RESPONSE_ERROR_CLASS) {
         setNotifications({
           message: e.DATA.message,
@@ -46,11 +49,9 @@ export const useToogleAPI = ({
         message: "Error desconocido",
         severity: "error",
       });
-
-      setSucces(false);
       setIsloading(false);
     }
   };
 
-  return { onSubmit, succes, isLoading, data };
+  return { onSubmit: handleSubmit(onSubmit), register, isLoading, setValue };
 };

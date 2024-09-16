@@ -36,7 +36,7 @@ export const SelectionInput: React.FC<PropsSelect> = ({
     <div className="flex flex-col w-full max-w-[320px] gap-3 font-almarai  ">
       <p className="text-xl font-bold text-custom_white ">{text}</p>
       <div
-        className="relative w-full p-2 rounded-lg cursor-default bg-overlay_2 "
+        className="relative w-full p-2 cursor-default rounded-overlay bg-overlay_2 "
 
       >
         <p className="w-full max-w-lg truncate ... py-2 rounded-lg text-body px-14 text-gray">
@@ -64,7 +64,7 @@ const Options = ({ options, show }: { options: Options; show: boolean }) => {
       {show && (
         <motion.div
           key={Number(show)}
-          className="absolute flex flex-col w-full gap-5 p-4 text-white rounded-lg shadow-xl bg-overlay_2 z-50 "
+          className="absolute z-50 flex flex-col w-full gap-5 p-4 text-white rounded-lg shadow-xl bg-overlay_2 "
           initial={initialAnimation}
           animate={animateAnimation}
           exit={exitAnimation}

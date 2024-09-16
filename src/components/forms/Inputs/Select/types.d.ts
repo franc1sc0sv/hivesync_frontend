@@ -1,6 +1,7 @@
 type Option = {
-  name: string;
   id: string;
+  name: string;
+  serverId: string;
 };
 
 type Options = Option[];
@@ -13,5 +14,5 @@ type PropsSelect = {
   Icon: IconType;
   StrokeIcon: boolean;
   options: Options;
-  setValue: UseFormSetValue<FieldValues>
+  setValue: UseFormSetValue<FieldValues>;
 };

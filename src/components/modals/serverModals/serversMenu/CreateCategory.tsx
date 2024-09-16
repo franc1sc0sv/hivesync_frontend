@@ -1,15 +1,14 @@
-import { v4 as uuidv4 } from "uuid";
-
 import { ModalTemplate } from "../../ModalTemplate";
 import { InputsForms } from "../../../forms/Inputs/inputs";
 import { SubmitButton } from "../../../forms/Inputs/Button";
+import { create_category } from "../../../../api/server";
 import { useServer } from "../../../layouts/ServerLayout/hooks/useServer";
-import { useCustomFormModal } from "../../../../hooks/useFormModal";
+import { useCustomFormModalID } from "../../../../hooks/useFormModalID";
 
 export const CreateCategory: React.FC = () => {
   return (
     <ModalTemplate identificator="CreateCategory">
-      <div className="h-full flex flex-col  justify-center items-center gap-5">
+      <div className="flex flex-col items-center justify-center h-full gap-5">
         <ModalHeader />
         <ModalForm />
       </div>
@@ -28,50 +27,8 @@ const ModalHeader = () => {
 };
 
 const ModalForm = () => {
-  const { selected_server } = useServer();
-
-  const api_function = (data: any) => {
-    const existingCategories = JSON.parse(
-      localStorage.getItem("serverCategories") || "[]"
-    );
-
-    const category = data.category.trim();
-    console.log(existingCategories, category);
-
-    existingCategories.some((category: any) => category.name === category);
-
-    if (category.length < 3) {
-      throw {
-        message: "nombre muy corto",
-        severity: "warning",
-      };
-    }
-
-    console.log(
-      existingCategories.some((category: any) => category.name === category)
-    );
-
-    if (
-      existingCategories.some((category: any) => category.name === category)
-    ) {
-      throw {
-        message: "nombre ya en uso",
-        severity: "warning",
-      };
-    }
-
-    const newCategory = {
-      id: uuidv4(),
-      name: category,
-      serverID: selected_server.id,
-    };
-
-    const updatedCategories = [...existingCategories, newCategory];
-    localStorage.setItem("serverCategories", JSON.stringify(updatedCategories));
-    return true;
-  };
-
-  const { register, isLoading, onSubmit } = useCustomFormModal(api_function);
+  const {selected_server:{id}} = useServer()
+  const { register, isLoading, onSubmit } = useCustomFormModalID(create_category, id);
 
   return (
     <form
@@ -81,7 +38,7 @@ const ModalForm = () => {
       <InputsForms
         title="Nombre de la categoria"
         register={register}
-        name="category"
+        name="name"
         placeholder="Nombre de la categoria"
       />
 

@@ -28,3 +28,63 @@ export const get_server = async (id: string) => {
   }
 };
 
+// Categories
+
+export const get_all_category = async (id_server: string) => {
+  try {
+    const res = await AxiosClient.get(
+      `/server/categories/${id_server}`,
+      headers()
+    );
+    return format_api_response(res);
+  } catch (e) {
+    throwError(e);
+  }
+};
+
+export const create_category = async (data: any, id_server: string) => {
+  try {
+    const res = await AxiosClient.post(
+      `/server/categories/${id_server}`,
+      data,
+      headers()
+    );
+    return format_api_response(res);
+  } catch (e) {
+    throwError(e);
+  }
+};
+
+export const delete_category = async (id: string) => {
+  try {
+    const res = await AxiosClient.delete(`/server/categories/${id}`, headers());
+    return format_api_response(res);
+  } catch (e) {
+    throwError(e);
+  }
+};
+
+export const get_category = async (id: String) => {
+  try {
+    const res = await AxiosClient.get(
+      `/server/categories/get_one/${id}`,
+      headers()
+    );
+    return format_api_response(res);
+  } catch (e) {
+    throwError(e);
+  }
+};
+
+export const patch_category = async (data: any, id: string) => {
+  try {
+    const res = await AxiosClient.patch(
+      `/server/categories/${id}`,
+      data,
+      headers()
+    );
+    return format_api_response(res);
+  } catch (e) {
+    throwError(e);
+  }
+};

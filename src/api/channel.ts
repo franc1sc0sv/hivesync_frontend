@@ -18,3 +18,16 @@ export const send_message = async (data: any) => {
     throwError(e);
   }
 };
+
+export const create_channel = async (data: any, id: string) => {
+  try {
+    const res = await AxiosClient.post(
+      `/channels/management/${id}`,
+      data,
+      headers()
+    );
+    return format_api_response(res);
+  } catch (e) {
+    throwError(e);
+  }
+};

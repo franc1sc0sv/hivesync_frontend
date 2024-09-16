@@ -5,20 +5,19 @@ import { SubmitButton } from "../../../forms/Inputs/Button";
 import { SelectInput } from "../../../forms/Inputs/Select/Select";
 
 import { BiSolidCategory } from "react-icons/bi";
-import {
-  getCategories,
-  getChannels,
-} from "../../../layouts/ServerLayout/Context/ServerContext";
 import { useServer } from "../../../layouts/ServerLayout/hooks/useServer";
 import { RadioInput } from "../../../forms/Inputs/Radio/InputRadio";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChannelTypeEnum } from "../../../layouts/ServerLayout/Enums/SpecificServer";
 
-import { v4 as uuidv4 } from "uuid";
-import { useCustomFormCreateServer } from "../../../../hooks/useFormCreateServer";
 
 import { HiSpeakerWave } from "react-icons/hi2";
 import { HiHashtag } from "react-icons/hi";
+import { useCustomFormModalID } from "../../../../hooks/useFormModalID";
+import { useFetchID } from "../../../../hooks/useFecthID";
+import { get_all_category } from "../../../../api/server";
+import { create_channel } from "../../../../api/channel";
+
 
 const options = [
   {
@@ -57,77 +56,51 @@ const ModalHeader = () => {
 };
 
 const ModalForm = () => {
-  const { selected_server } = useServer();
-
-  const categorias_por_server = getCategories().filter(
-    (server: any) => server.serverID === selected_server.id
-  );
-
-  const api_function = (data: any) => {
-    const category = data.category?.trim() || "";
-    const name = data.name?.trim() || "";
-    const type = data.type?.trim() || "";
-
-    if (!name || !category || !type) {
-      throw {
-        message: "Todos los campos deben ser completados.",
-        severity: "warning",
-      };
-    }
-
-    if (name.length < 3) {
-      throw {
-        message: "El nombre debe tener al menos 3 caracteres.",
-        severity: "warning",
-      };
-    }
-
-    const newChannel = {
-      id: uuidv4(),
-      name: data.name,
-      categoryID: data.category,
-      serverID: selected_server.id,
-      type: data.type,
-    };
-
-    const updatedChannels = [...getChannels(), newChannel];
-    localStorage.setItem("serverChannels", JSON.stringify(updatedChannels));
-
-    const url = `/app/${selected_server.id}/${newChannel.id}`;
-
-    return { url: url };
-  };
+  const { selected_server:{id} } = useServer();
 
   const { register, isLoading, onSubmit, setValue } =
-    useCustomFormCreateServer(api_function);
+    useCustomFormModalID(create_channel,id);
 
-  const [selectedOption, setSelectedOption] = useState<string>("option1");
+  const {isLoading:isLoadingCategories,fecthData} = useFetchID({api_function:get_all_category})
+
+  const [selectedOption, setSelectedOption] = useState<string>("");
+  const [categories, setCategories] = useState<Option[]>([]);
 
   const handleOptionChange = (value: string) => {
     setValue("type", value);
     setSelectedOption(value);
   };
 
+  useEffect(()=>{    
+    const fetcher = async ()=>{
+      const data = await fecthData(id)
+      setCategories(data)
+    }
+    fetcher()
+  },[])
+
   return (
     <form
       onSubmit={onSubmit}
       className="flex flex-col items-center justify-center w-full px-1 overflow-y-auto gap-9"
     >
-      <InputsForms
-        title="Nombre del canal"
-        register={register}
-        name="name"
-        placeholder="Nombre del canal"
-      />
+      <div className="w-[320px] ">
+        <InputsForms
+          title="Nombre del canal"
+          register={register}
+          name="name"
+          placeholder="Nombre del canal"
+        />
+      </div>
 
       <SelectInput
         StrokeIcon={false}
-        name="category"
+        name="CategoryID"
         Icon={BiSolidCategory}
         text={"Categoria"}
         required
         setValue={setValue}
-        options={categorias_por_server}
+        options={categories}
         placeholder={"Categorias"}
       />
 
@@ -138,8 +111,11 @@ const ModalForm = () => {
         selectedValue={selectedOption}
         onChange={handleOptionChange}
       />
+      
+      <div className="w-[320px] ">
+        <SubmitButton text="Crear" isLoading={isLoading || isLoadingCategories} />
+      </div>
 
-      <SubmitButton text="Crear" isLoading={isLoading} />
     </form>
   );
 };

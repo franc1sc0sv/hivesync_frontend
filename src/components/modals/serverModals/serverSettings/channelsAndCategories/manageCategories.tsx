@@ -1,63 +1,92 @@
-import { useModal } from "../../../../../store/useModal"
-import { ModalTemplate } from "../../../ModalTemplate"
-import { CategoryIcon } from "../../../../Icons/category"
+import { useModal } from "../../../../../store/useModal";
+import { ModalTemplate } from "../../../ModalTemplate";
+import { CategoryIcon } from "../../../../Icons/category";
+import { useFetchID } from "../../../../../hooks/useFecthID";
+import { useEffect, useState } from "react";
+import { get_all_category } from "../../../../../api/server";
+import { useServer } from "../../../../layouts/ServerLayout/hooks/useServer";
+import { LoadingPage } from "../../../../routes/loadingPage";
+import { useStoreId } from "../../../../../store/useStoreId";
 
-interface CategoriesProps {
-    name: string
-}
+import { MdEdit } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 
 interface CategoriesListProps {
-    category: CategoriesProps[]
+  category: Option[];
 }
-
-const categories: CategoriesProps[] = [
-    {
-        name: "a"
-    }
-]
 
 export const ManageCategories: React.FC = () => {
-    return (
-        <ModalTemplate identificator="manageCategories">
-            <div className="flex flex-col gap-5">
-                <Header />
-                <CategoriesList category={categories} />
-            </div>
-        </ModalTemplate>
-    )
-}
+  const {
+    selected_server: { id },
+  } = useServer();
+  const { isLoading, fecthData } = useFetchID({
+    api_function: get_all_category,
+  });
+  const [categories, setCategories] = useState<Option[]>([]);
+
+  useEffect(() => {
+    const fetcher = async () => {
+      const data = await fecthData(id);
+      setCategories(data);
+    };
+    fetcher();
+  }, []);
+
+  if (isLoading) return <LoadingPage />;
+
+  return (
+    <ModalTemplate identificator="manageCategories">
+      <div className="flex flex-col gap-5">
+        <Header />
+        <CategoriesList category={categories} />
+      </div>
+    </ModalTemplate>
+  );
+};
 
 const Header: React.FC = () => {
-
-    const { setModalId } = useModal();
-
-    return (
-        <div className="w-full flex flex-row justify-center items-center">
-            <button
-                onClick={() => setModalId("CreateCategory")}
-                className="flex gap-3">
-                <CategoryIcon size={40} color="#fff" />
-                <p className="text-custom_white text-2xl">Agregar categoría</p>
-            </button>
-        </div>
-    )
-}
+  return (
+    <div className="flex flex-row items-center justify-center w-full gap-2">
+      <CategoryIcon size={40} color="#fff" />
+      <p className="text-2xl text-custom_white">Gestionar Categorias</p>
+    </div>
+  );
+};
 
 const CategoriesList: React.FC<CategoriesListProps> = ({ category }) => {
-    return (
-        <div className="flex flex-col gap-3 p-3 bg-overlay_2 rounded-xl">
-            {category.map((option: any, index: number) => (
-                <div
-                    className="flex flex-row items-center gap-3"
-                    key={index}
-                >
-                    <div>
-                        <div className="w-8 h-8 bg-light_purple p-3 rounded-full">
-                        </div>
-                    </div>
-                    <p className="text-custom_white">{option.name}</p>
-                </div>
-            ))}
-        </div>
-    )
-}
+  return (
+    <div className="flex flex-col gap-3 p-3 bg-overlay_2 rounded-xl">
+      {category.map((option, i: number) => (
+        <CategorieComponent option={option} key={i} />
+      ))}
+    </div>
+  );
+};
+
+const CategorieComponent = ({ option }: { option: Option }) => {
+  const { setID } = useStoreId();
+  const { setModalId } = useModal();
+
+  const HandleEdit = () => {
+    setID(option.id);
+    setModalId("EditCategoriesModal");
+  };
+
+  const HandleDelete = () => {
+    setID(option.id);
+    setModalId("DeleteCategoriesModal");
+  };
+
+  return (
+    <div className="flex flex-row items-center justify-between gap-3">
+      <div className="flex items-center gap-2 ">
+        <div className="w-8 h-8 p-3 rounded-full bg-primary"></div>
+        <p className="text-custom_white">{option.name}</p>
+      </div>
+      <div className="flex gap-2">
+        <MdEdit onClick={HandleEdit} color="white" size={24} />
+        <MdDelete onClick={HandleDelete} color="white" size={24} />
+      </div>
+    </div>
+  );
+};

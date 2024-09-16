@@ -5,6 +5,7 @@ import { useFetchID } from "../../../../hooks/useFecthID";
 import { CategoryType, ChannelType, SpecificServerType } from "../types/server";
 import { LoadingPage } from "../../../routes/loadingPage";
 import { useNavigate } from "react-router-dom";
+import { useModal } from "../../../../store/useModal";
 
 interface ServerContextProps {
   server_data: ServerDataIcons;
@@ -101,6 +102,7 @@ export const ServerProvider = ({ children }: { children: ReactNode }) => {
   });
 
   const [server_data, setServerData] = useState<ServerDataIcons>([]);
+  const {modalId} = useModal()
 
   const [selected_server, setSelectedServer] =
     useState<SpecificServerType>(defaultData);
@@ -126,7 +128,7 @@ export const ServerProvider = ({ children }: { children: ReactNode }) => {
       set_ultimo_servidor(specific_server);
     };
     loader();
-  }, []);
+  }, [modalId]);
 
   if (isLoading || isLoadingID) return <LoadingPage />;
 
@@ -137,16 +139,4 @@ export const ServerProvider = ({ children }: { children: ReactNode }) => {
       {children}
     </ServerContext.Provider>
   );
-};
-
-export const getChannels = () => {
-  const channels = JSON.parse(localStorage.getItem("serverChannels") || "[]");
-  return channels;
-};
-
-export const getCategories = () => {
-  const categories = JSON.parse(
-    localStorage.getItem("serverCategories") || "[]"
-  );
-  return categories;
 };
