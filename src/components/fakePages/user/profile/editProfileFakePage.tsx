@@ -47,7 +47,7 @@ const ProfileCover: React.FC = () => {
       </div>
       <div
         className="relative flex items-center justify-center w-24 h-24 ml-5 -mt-20 overflow-hidden rounded-2xl"
-        onClick={() => setModalId("editProfilePicture")}
+        onClick={() => setModalId("changeAvatar")}
       >
         <UserAvatar
           profileURl={user?.profileUrl as string}

@@ -9,6 +9,7 @@ import { EditNameForm } from "../../../components/modals/userModals/settings/acc
 import { EditMailForm } from "../../../components/modals/userModals/settings/accountSettings/editMail";
 import { EditPasswordForm } from "../../../components/modals/userModals/settings/accountSettings/editPassword";
 import { EditProfilePictureForm } from "../../../components/modals/userModals/profile/EditPictureOrCoverModal";
+import { ChangeAvatar } from "../../../components/modals/userModals/settings/accountSettings/changeAvatar/changeAvatar";
 import { AboutMeForm } from "../../../components/modals/userModals/settings/accountSettings/aboutMe";
 
 //privacy settings
@@ -73,8 +74,8 @@ export const options: MenuProps[] = [
       },
       {
         name: "Foto de perfil",
-        modal: "editProfilePicture",
-        optionComponent: <EditProfilePictureForm />
+        modal: "changeAvatar",
+        optionComponent: <ChangeAvatar />
       },
       {
         name: "Eliminar mi cuenta",

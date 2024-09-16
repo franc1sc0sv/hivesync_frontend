@@ -6,20 +6,21 @@ import { useCustomForm } from "../../../../hooks/useForm";
 import { ImgInput } from "../../../forms/Inputs/ImgInput";
 import { ColorPickerInput } from "../../../forms/Inputs/ColorPicker";
 import { SubmitButton } from "../../../forms/Inputs/Button";
-import { useSession } from "../../../../store/user";
 
 import { useState, useEffect } from "react";
 import { get_profile } from "../../../../api/auth";
 import { useCustomFormModal } from "../../../../hooks/useFormModal";
 import { edit_cover_color } from "../../../../api/user_info";
 
+import { ChangeAvatar } from "../settings/accountSettings/changeAvatar/changeAvatar";
+
 //mock
 
 export const EditPictureOrCoverModal = () => {
   return (
     <div>
-      <ModalTemplate identificator="editProfilePicture">
-        <EditProfilePictureForm />
+      <ModalTemplate identificator="changeAvatar">
+        <ChangeAvatar />
       </ModalTemplate>
 
       <ModalTemplate identificator="editCoverTheme">
