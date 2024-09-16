@@ -12,8 +12,6 @@ interface ServerContextProps {
   setServerData: React.Dispatch<React.SetStateAction<ServerDataIcons>>;
   selected_server: SpecificServerType;
   setSelectedServer: React.Dispatch<React.SetStateAction<SpecificServerType>>;
-  shouldFetch: boolean;
-  setShouldFetch: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const defaultData: SpecificServerType = {
@@ -34,11 +32,9 @@ const defaultData: SpecificServerType = {
 
 export const ServerContext = createContext<ServerContextProps>({
   server_data: [],
-  setServerData: () => { },
+  setServerData: () => {},
   selected_server: defaultData,
-  shouldFetch: false,
-  setSelectedServer: () => { },
-  setShouldFetch: () => { }
+  setSelectedServer: () => {},
 });
 
 const format_servers = (data: ServerDataIcons) => {
@@ -106,9 +102,8 @@ export const ServerProvider = ({ children }: { children: ReactNode }) => {
     transformData: format_specific_server,
   });
 
-  const [shouldFetch, setShouldFetch] = useState(true);
   const [server_data, setServerData] = useState<ServerDataIcons>([]);
-  const { modalId } = useModal()
+  const {modalId} = useModal()
 
   const [selected_server, setSelectedServer] =
     useState<SpecificServerType>(defaultData);
@@ -132,23 +127,15 @@ export const ServerProvider = ({ children }: { children: ReactNode }) => {
       setSelectedServer(specific_server);
 
       set_ultimo_servidor(specific_server);
-
-      setShouldFetch(false);
     };
-    if (shouldFetch) {
-      loader();
-    }
-  }, [shouldFetch]);
+    loader();
+  }, []);
 
-  if (isLoading || isLoadingID || shouldFetch) {
-    setTimeout(() => {
-      <LoadingPage />
-    }, 1000)
-  };
+  if (isLoading || isLoadingID) return <LoadingPage />;
 
   return (
     <ServerContext.Provider
-      value={{ selected_server, server_data, setSelectedServer, setServerData,shouldFetch, setShouldFetch }}
+      value={{ selected_server, server_data, setSelectedServer, setServerData }}
     >
       {children}
     </ServerContext.Provider>

@@ -95,11 +95,11 @@ const ServerInformation: React.FC = () => {
 
 const Form: React.FC = () => {
 
-  const { selected_server, setShouldFetch } = useServer();
+  const { selected_server } = useServer();
 
   const api_function = async (data: any) => {
     edit_server_name(selected_server.id, data);
-    setShouldFetch(true);
+    // setShouldFetch(true);
   };
 
   const { onSubmit, register, isLoading } = useCustomFormModal(api_function)

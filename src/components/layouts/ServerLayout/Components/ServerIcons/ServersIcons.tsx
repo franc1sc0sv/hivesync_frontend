@@ -12,8 +12,8 @@ type PropsServerIcons = {
 export const ServerIcons: React.FC<PropsServerIcons> = ({
   server_data_icons,
 }) => {
-  const { setShouldFetch } = useServer();
-  setShouldFetch(true);
+  // const { setShouldFetch } = useServer();
+  // setShouldFetch(true);
   return (
     <section className="h-[95vh] gap-4 py-4 overflow-y-auto min-w-20 w-[20%] max-w-28 bg-overlay_2 rounded-overlay">
       <div className="flex flex-col items-center gap-3 ">

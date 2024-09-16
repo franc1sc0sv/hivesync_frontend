@@ -154,7 +154,7 @@ export const IndexPage = () => {
           <Link to="/login">
             <motion.button
               {...animations.scale}
-              className="px-4 py-2 sm:px-6 sm:py-2 border border-light_purple rounded-full text-xs sm:text-sm font-medium hover:bg-light_purple transition-colors"
+              className="px-4 py-2 sm:px-6 sm:py-2 border-2 border-light_purple rounded-full text-xs sm:text-sm font-medium hover:bg-light_purple transition-colors"
             >
               Iniciar sesión
             </motion.button>

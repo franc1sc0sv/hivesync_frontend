@@ -1,7 +1,6 @@
 import { DialogueTemplate } from "../dialogueModalTemplate";
 import { useModal } from "../../../../store/useModal";
 import { SadFaceIcon } from "../../../Icons/sadFace";
-import { useNotifications } from "../../../../store/useNotifications";
 import { useServer } from "../../../layouts/ServerLayout/hooks/useServer";
 import { delete_server } from "../../../../api/server";
 import { useNavigate } from "react-router-dom";
