@@ -12,6 +12,8 @@ interface ServerContextProps {
   setServerData: React.Dispatch<React.SetStateAction<ServerDataIcons>>;
   selected_server: SpecificServerType;
   setSelectedServer: React.Dispatch<React.SetStateAction<SpecificServerType>>;
+  shouldFetch: boolean;
+  setShouldFetch: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const defaultData: SpecificServerType = {
@@ -22,6 +24,7 @@ const defaultData: SpecificServerType = {
   id_user: "",
   createdAt: "",
   url: "",
+  backgroundUrl: "",
   tags: [],
   categories: [],
   events: [],
@@ -31,9 +34,11 @@ const defaultData: SpecificServerType = {
 
 export const ServerContext = createContext<ServerContextProps>({
   server_data: [],
-  setServerData: () => {},
+  setServerData: () => { },
   selected_server: defaultData,
-  setSelectedServer: () => {},
+  shouldFetch: false,
+  setSelectedServer: () => { },
+  setShouldFetch: () => { }
 });
 
 const format_servers = (data: ServerDataIcons) => {
@@ -101,8 +106,9 @@ export const ServerProvider = ({ children }: { children: ReactNode }) => {
     transformData: format_specific_server,
   });
 
+  const [shouldFetch, setShouldFetch] = useState(true);
   const [server_data, setServerData] = useState<ServerDataIcons>([]);
-  const {modalId} = useModal()
+  const { modalId } = useModal()
 
   const [selected_server, setSelectedServer] =
     useState<SpecificServerType>(defaultData);
@@ -126,15 +132,23 @@ export const ServerProvider = ({ children }: { children: ReactNode }) => {
       setSelectedServer(specific_server);
 
       set_ultimo_servidor(specific_server);
-    };
-    loader();
-  }, []);
 
-  if (isLoading || isLoadingID) return <LoadingPage />;
+      setShouldFetch(false);
+    };
+    if (shouldFetch) {
+      loader();
+    }
+  }, [shouldFetch]);
+
+  if (isLoading || isLoadingID || shouldFetch) {
+    setTimeout(() => {
+      <LoadingPage />
+    }, 1000)
+  };
 
   return (
     <ServerContext.Provider
-      value={{ selected_server, server_data, setSelectedServer, setServerData }}
+      value={{ selected_server, server_data, setSelectedServer, setServerData,shouldFetch, setShouldFetch }}
     >
       {children}
     </ServerContext.Provider>

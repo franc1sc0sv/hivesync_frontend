@@ -3,6 +3,7 @@ import { CreateServerIcon } from "./CreateServerIcon";
 import { ServerFolder } from "./ServerFolder";
 import { ServerIcon } from "./ServerIcon";
 // import { CommunityButton } from "../../../GeneralLayout/buttons/Comunitybutton";
+import { useServer } from "../../hooks/useServer";
 
 type PropsServerIcons = {
   server_data_icons: ServerDataIcons;
@@ -11,8 +12,10 @@ type PropsServerIcons = {
 export const ServerIcons: React.FC<PropsServerIcons> = ({
   server_data_icons,
 }) => {
+  const { setShouldFetch } = useServer();
+  setShouldFetch(true);
   return (
-    <section className="h-full gap-4 py-4 overflow-y-auto min-w-20 w-[20%] max-w-28 bg-overlay_2 rounded-overlay">
+    <section className="h-[95vh] gap-4 py-4 overflow-y-auto min-w-20 w-[20%] max-w-28 bg-overlay_2 rounded-overlay">
       <div className="flex flex-col items-center gap-3 ">
         <Icons server_data_icons={server_data_icons} />
         <CreateServerIcon />

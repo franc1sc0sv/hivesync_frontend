@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { API_RESPONSE_ERROR_CLASS } from "../class/api_responses_instances";
 import { useNotifications } from "../store/useNotifications";
 import { useModal } from "../store/useModal";
+import { useNavigate } from "react-router-dom";
 
 export const useCustomFormModal = (api_function: (data?: any) => any) => {
   const { register, handleSubmit, setValue } = useForm();
@@ -14,14 +15,12 @@ export const useCustomFormModal = (api_function: (data?: any) => any) => {
     try {
       setIsloading(true);
       const res = await api_function(data);
-
+      setIsloading(false);
+      setModalId("");
       setNotifications({
         message: "Operación realizada con éxito",
         severity: "success",
       });
-
-      setIsloading(false);
-      setModalId("");
       return res;
     } catch (e: any) {
       if (e.message) {
@@ -45,6 +44,7 @@ export const useCustomFormModal = (api_function: (data?: any) => any) => {
       });
       setIsloading(false);
     }
+
   };
 
   return { onSubmit: handleSubmit(onSubmit), register, isLoading, setValue };

@@ -30,6 +30,7 @@ type SpecificServerType = {
   id_user: string;
   createdAt: string;
   url: string;
+  backgroundUrl: string
 
   tags: any[];
   categories: CategoryType[];

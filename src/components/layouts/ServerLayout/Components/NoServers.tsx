@@ -2,7 +2,7 @@ import { ServersGroupIcon } from "../../../Icons/server";
 
 export const NoServers = () => {
   return (
-    <section className="flex flex-col justify-center items-center w-full h-full gap-6 p-4 bg-overlay_2 rounded-overlay ">
+    <section className="flex flex-col justify-center items-center w-full h-[95vh] gap-6 p-4 bg-overlay_2 rounded-overlay ">
       <div className="flex flex-col gap-10 justify-center items-center">
 
         <div className="flex flex-col items-center rounded-lg justify-evenly gap-5 p-4">

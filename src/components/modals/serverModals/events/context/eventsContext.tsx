@@ -64,7 +64,7 @@ export const EventsProvider = ({ children }: { children: React.ReactNode }) => {
     }, [modalId]);
 
     if (isLoading) {
-        console.log("waaa")
+        console.log("events loading")
     }
 
     return (

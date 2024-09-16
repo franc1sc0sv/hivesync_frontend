@@ -2,16 +2,18 @@ import { useModal } from "../../../store/useModal";
 import { AnimatePresence, motion } from "framer-motion";
 import { CloseIcon } from "../../Icons/close";
 
-import { useDialogue } from "../../../store/useDialogue";
+import { CustomizedButton } from "../../buttons/customizedButton";
 
 interface DialogueProps {
   identificator: string;
   children: React.ReactNode;
+  onAccept: () => any,
 }
 
 export const DialogueTemplate: React.FC<DialogueProps> = ({
   identificator,
   children,
+  onAccept,
 }) => {
   const { modalId, setModalId } = useModal();
 
@@ -75,7 +77,23 @@ export const DialogueTemplate: React.FC<DialogueProps> = ({
                 </button>
               </div>
               {/* Modal body */}
-              <div>{children}</div>
+              <div>
+                {children}
+                <div className="flex flex-row justify-between w-full gap-5 p-3">
+                  <CustomizedButton
+                    text="Confirmar"
+                    color="#9333ea"
+                    displayIcon={false}
+                    onAction={onAccept}
+                  />
+                  <CustomizedButton
+                    text="Cancelar"
+                    color="#382C6C"
+                    displayIcon={false}
+                    onAction={onClose}
+                  />
+                </div>
+              </div>
             </motion.div>
           </motion.div>
         </motion.div>

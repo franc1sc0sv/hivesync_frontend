@@ -28,7 +28,7 @@ import { CreateChannel } from "./serversMenu/CreateChannel";
 import { SettingsMenuModal } from "./serverSettings/serverSettingsMenu";
 import { ServerSettingsModals } from "./serverSettings/serverSettingsModals";
 
-import { LeaveServerDialogue } from "../../Alerts/dialog/serverDialogues/leaveServerDialogue";
+import { DeleteServerDialogue } from "../../Alerts/dialog/serverDialogues/deleteServer";
 
 import { ServerEditionModals } from "./serversMenu/editServer/ServerEditionModals";
 import { EditCategories } from "./serverSettings/channelsAndCategories/EditCategories";
@@ -55,7 +55,7 @@ export const ServerModals: React.FC = () => {
       <SettingsMenuModal />
       <ServerSettingsModals />
 
-      <LeaveServerDialogue />
+      <DeleteServerDialogue />
     </>
   );
 };

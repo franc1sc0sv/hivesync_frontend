@@ -1,8 +1,10 @@
 import { ModalTemplate } from "../../../ModalTemplate";
 import { useModal } from "../../../../../store/useModal";
 
-import { useCustomForm } from "../../../../../hooks/useForm";
+import { edit_server_name } from "../../../../../api/server";
+import { useCustomFormModal } from "../../../../../hooks/useFormModal";
 import { useServer } from "../../../../layouts/ServerLayout/hooks/useServer";
+import { useGetColorLuminance } from "../../../../../hooks/useGetColorLuminance";
 
 import { SubmitButton } from "../../../../forms/Inputs/Button";
 import { InputsForms } from "../../../../forms/Inputs/inputs";
@@ -12,6 +14,7 @@ import { PencilIcon } from "../../../../Icons/pencil";
 
 //mock
 import { ServerIcon } from "../../serverInfoModal";
+import { replace, useNavigate } from "react-router-dom";
 
 export const EditServerModal: React.FC = () => {
   return (
@@ -36,13 +39,15 @@ const ServerCover = () => {
   const { selected_server } = useServer();
   const { setModalId } = useModal();
 
+  const buttonColor = useGetColorLuminance(selected_server.backgroundUrl);
+
   return (
     <div className="w-4/5 mx-auto text-gray-900 rounded-lg sm:w-3/5 lg:w-1/3">
       <div
-        // style={{ backgroundColor: user?.backgroundUrl }}
-        className={`relative overflow-hidden rounded-xl h-36 bg-secondary`}
+        style={{ backgroundColor: selected_server.backgroundUrl }}
+        className={`relative overflow-hidden rounded-xl h-36`}
       >
-        <EditCoverThemeButton />
+        <EditCoverThemeButton buttonColor={buttonColor} />
       </div>
       <div
         className="relative flex items-center justify-center w-24 h-24 ml-5 -mt-20 overflow-hidden rounded-2xl"
@@ -62,14 +67,14 @@ const ServerCover = () => {
   );
 };
 
-const EditCoverThemeButton: React.FC = () => {
+const EditCoverThemeButton = ({ buttonColor }: { buttonColor: string }) => {
   const { setModalId } = useModal();
   return (
     <div
       className="absolute top-0 right-0 z-50 p-3"
       onClick={() => setModalId("editCoverColor")}
     >
-      <PencilIcon size={30} color="white" />
+      <PencilIcon size={30} color={buttonColor} />
     </div>
   );
 };
@@ -83,36 +88,21 @@ const ServerInformation: React.FC = () => {
         <p className="text-2xl text-custom_white text-start">
           {selected_server?.name}
         </p>
-        {/* <p className="text-md text-gray text-start">{user?.username}</p> */}
       </div>
     </div>
   );
 };
 
 const Form: React.FC = () => {
-  const { selected_server } = useServer();
 
-  const api_function = async (_: any) => {
-    //   const displayName = data.name;
-    //   const aboutUser = data.aboutMe;
-    //   localStorage.setItem("name", displayName);
-    //   localStorage.setItem("aboutUser", aboutUser);
+  const { selected_server, setShouldFetch } = useServer();
+
+  const api_function = async (data: any) => {
+    edit_server_name(selected_server.id, data);
+    setShouldFetch(true);
   };
 
-  const post_success_function = async () => {
-    //   await location.reload();
-    //   setNotifications({
-    //     message: "ayuda",
-    //     severity: "info",
-    //   });
-    //   console.log("la api se llamó exitosa y épicamente");
-  };
-
-  const { onSubmit, register, isLoading } = useCustomForm(
-    api_function,
-    post_success_function,
-    ""
-  );
+  const { onSubmit, register, isLoading } = useCustomFormModal(api_function)
 
   return (
     <form
@@ -120,10 +110,10 @@ const Form: React.FC = () => {
       className="flex flex-col items-center justify-center w-4/5 gap-5 px-1 mx-auto overflow-y-auto sm:w-3/5 lg:w-1/3"
     >
       <InputsForms
-        title="Nombre"
+        title="Nombre del servidor"
         register={register}
         name="name"
-        placeholder="Nombre del servidor"
+        placeholder="Escribe un nombre"
         inputValue={selected_server?.name}
       />
 

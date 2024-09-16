@@ -10,6 +10,7 @@ import { ModalTemplate } from "../ModalTemplate";
 import { useServer } from "../../layouts/ServerLayout/hooks/useServer";
 import { useModal } from "../../../store/useModal";
 
+import { useEffect } from "react";
 import { MenuProps, OptionsTemplateProps } from "./types/menuProps";
 
 const quickOptions: MenuProps[] = [
@@ -89,11 +90,19 @@ const OptionsTemplate: React.FC<OptionsTemplateProps> = ({ options }) => {
 const ServerCover: React.FC = () => {
   const { selected_server } = useServer();
 
+
+  useEffect(() => {
+    console.log(selected_server)
+  })
+  
+
   return (
     <div className="flex flex-col gap-5">
       <div className="w-full mx-auto text-gray-900 rounded-lg ">
         {/* cover  */}
-        <div className="relative w-full overflow-hidden rounded-xl h-36 bg-secondary"></div>
+        <div 
+        style={{ backgroundColor: selected_server.backgroundUrl }}
+        className={`relative w-full overflow-hidden rounded-xl h-36`}></div>
 
         {/* icon */}
         <div className="absolute ml-5 -mt-16 overflow-hidden w-28 h-28 rounded-2xl">

@@ -28,6 +28,34 @@ export const get_server = async (id: string) => {
   }
 };
 
+//server edition
+export const edit_server_name = async (id: string, data: any) => {
+  try {
+    const res = await AxiosClient.patch(`/server/management/edit/name/${id}`, data, headers());
+    return format_api_response(res);
+  } catch (e) {
+    throwError(e);
+  }
+};
+
+export const edit_server_cover = async (id: string, data: any) => {
+  try {
+    const res = await AxiosClient.patch(`/server/management/edit/cover/${id}`, data, headers());
+    return format_api_response(res);
+  } catch (e) {
+    throwError(e);
+  }
+};
+
+export const delete_server = async (id: string) => {
+  try {
+    const res = await AxiosClient.delete(`/server/management/${id}`, headers());
+    return format_api_response(res);
+  } catch (e) {
+    throwError(e);
+  }
+};
+
 // Categories
 
 export const get_all_category = async (id_server: string) => {
