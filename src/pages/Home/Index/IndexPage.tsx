@@ -1,108 +1,332 @@
 import { Link } from "react-router-dom";
+import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { TiMessages, TiGroup, TiThList, TiWorld, TiClipboard, TiTick } from 'react-icons/ti';
+
+const animations = {
+  fadeIn: {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0, transition: { duration: 0.8 } }
+  },
+  float: {
+    animate: {
+      y: [0, -20, 0],
+      transition: {
+        duration: 2,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
+  },
+  scale: {
+    whileHover: { scale: 1.05 },
+    whileTap: { scale: 0.95 }
+  }
+}
+
+interface TypewriterProps {
+  text: string;
+  delay?: number;
+}
+
+const Typewriter: React.FC<TypewriterProps> = ({ text, delay = 50 }) => {
+  const [displayText, setDisplayText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (currentIndex < text.length) {
+      const timer = setTimeout(() => {
+        setDisplayText(prev => prev + text[currentIndex]);
+        setCurrentIndex(prev => prev + 1);
+      }, delay);
+      return () => clearTimeout(timer);
+    }
+  }, [text, delay, currentIndex]);
+
+  return <span>{displayText}</span>;
+}
+
+const ImageCarousel = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const images = [
+    { src: "/Screenshot1.png", text: "Chat en tiempo real" },
+    { src: "/Screenshot2.png", text: "Gestión de notificaciones" },
+    { src: "/Screenshot3.png", text: "Creación de grupos personalizados" },
+    { src: "/Screenshot4.png", text: "Interfaz intuitiva y fácil de usar" },
+    { src: "/Screenshot5.png", text: "Colaboración sin límites" },
+    { src: "/Screenshot1.png", text: "Traducción instantánea" },
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % images.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="relative w-full max-w-6xl mx-auto overflow-hidden rounded-lg shadow-lg mt-16">
+      <div
+        className="flex transition-transform duration-500 ease-in-out"
+        style={{ transform: `translateX(-${currentSlide * (100 / images.length)}%)` }}
+      >
+        {images.map((image, index) => (
+          <div key={index} className="w-1/3 flex-shrink-0 p-2 relative">
+            <img
+              src={image.src}
+              alt={`Screenshot ${index + 1}`}
+              className="w-full h-auto rounded-lg shadow-md"
+            />
+          </div>
+        ))}
+      </div>
+      <button
+        className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-[#6B2A8A] text-white p-2 rounded-full"
+        onClick={() => setCurrentSlide((prev) => (prev - 1 + images.length) % images.length)}
+      >
+        &#10094;
+      </button>
+      <button
+        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-[#6B2A8A] text-white p-2 rounded-full"
+        onClick={() => setCurrentSlide((prev) => (prev + 1) % images.length)}
+      >
+        &#10095;
+      </button>
+    </div>
+  );
+}
+
+const CompanyLogos = () => {
+  const companies = [
+    { name: "Apple", logo: "/apple-logo.png" },
+    { name: "Google", logo: "/google.png" },
+    { name: "GitHub", logo: "/github.png" },
+    { name: "Spotify", logo: "/spotify.png" },
+    { name: "NVIDIA", logo: "/nvidia.png" },
+  ];
+
+  return (
+    <div className="mt-16">
+      <h2 className="text-2xl font-bold mb-8 text-center text-[#fffff]">Elegido por las empresas más reconocidas.</h2>
+      <div className="flex flex-wrap justify-center items-center gap-8">
+        {companies.map((company, index) => (
+          <motion.img
+            key={index}
+            src={company.logo}
+            alt={`${company.name} logo`}
+            className="h-12 w-auto transition-all duration-300"
+            whileHover={{ scale: 1.1 }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+interface FeatureCardProps {
+  icon: React.ComponentType<{ className?: string }>;
+  title: string;
+  description: string;
+}
+
+const FeatureCard: React.FC<FeatureCardProps> = ({ icon: Icon, title, description }) => (
+  <motion.div
+    className="bg-[#2E2934] p-6 rounded-lg shadow-lg"
+    whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+  >
+    <Icon className="w-12 h-12 text-[#6B2A8A] mb-4" />
+    <h3 className="text-xl font-semibold mb-2">{title}</h3>
+    <p className="text-gray-300">{description}</p>
+  </motion.div>
+);
 
 export const IndexPage = () => {
   return (
-    <main className="flex flex-col w-full bg-overlay_1 min-h-screen relative">
-      {/* Contenedor Principal */}
-      <div className="relative z-20 p-6">
-        {/* Cabecera */}
-        <div className="flex flex-row justify-between items-center mb-10">
-          <img className="h-8 p-1" src="/logo.png" alt="Logo" />
-          <div className="flex flex-row-reverse gap-3">
-            <Link
-              className="text-white rounded-sm text-xl p-2 font-almarai bg-primary"
-              to={"signup"}
+    <div
+      className="min-h-screen flex flex-col justify-between text-white overflow-hidden"
+      style={{
+        background: `linear-gradient(to bottom, #000000, #19161D, #2E2934, #6B2A8A, #2E2934, #000000)`,
+      }}
+    >
+      <header className="flex justify-between items-center py-6 px-8">
+        <img src="/hivesyncLogo.png" alt="HiveSync Logo" className="h-8 w-auto sm:h-10" />
+        <div className="flex space-x-4">
+          <Link to="/login">
+            <motion.button
+              {...animations.scale}
+              className="px-4 py-2 sm:px-6 sm:py-2 border border-[#6B2A8A] rounded-full text-xs sm:text-sm font-medium hover:bg-[#6B2A8A] transition-colors"
             >
-              Empezar
-            </Link>
-            <Link
-              className="text-white text-xl p-2 font-almarai hover:bg-overlay_2 rounded-sm"
-              to={"/login"}
+              Iniciar sesión
+            </motion.button>
+          </Link>
+          <Link to="signup">
+            <motion.button
+              {...animations.scale}
+              className="px-4 py-2 sm:px-6 sm:py-2 bg-[#6B2A8A] rounded-full text-xs sm:text-sm font-medium hover:bg-[#8A4BA8] transition-colors"
             >
-              Iniciar Sesion
-            </Link>
-          </div>
+              Empieza ahora
+            </motion.button>
+          </Link>
         </div>
+      </header>
 
-        {/* Contenido Principal con Imágenes */}
-        <div className="relative p-4 flex items-start">
-          {/* Texto principal */}
-          <div className="text-white text-4xl relative z-20">
-            <p className="font-anaheim">Donde los Grupos Manejan Su</p>
-            <p className="font-amiko font-bold">Eficacia</p>
-
-            <p className="font-almarai text-white text-base mb-4">
-              Usa Llamadas, canales de texto, FlashCards, Crea Grupos y explora
-              Diferentes espacios en una interfaz intuitiva de forma gratuita
-            </p>
-            <p className="font-almarai text-white text-base mb-6">
-              Consideramos las herramientas y recursos diseñados para optimizar
-              la interacción entre equipos y mejorar la gestión de proyectos y
-              aprendizaje.
-            </p>
-
-            {/* Barra y Botón */}
-            <div className="bg-primary w-14 h-3 rounded-md mb-4"></div>
-            <div className="text-white bg-primary rounded-sm p-2 w-40 flex justify-between items-center">
-              <p className="font-anami text-sm">Usar HiveSync</p>
-              <img className="h-4" src="/flecha.png" alt="Flecha" />
-            </div>
-
-            {/* Subtítulo y Texto */}
-            <p className="font-amiko text-white text-xl mt-8 font-extrabold">
-              Conéctate, Comunica, Colabora.
-            </p>
-            <p className="font-almarai text-white text-base mt-2">
-              HiveSync ofrece comunicación integrada a través de chat de texto,
-              voz y video en una plataforma unificada, con funciones de
-              organización como canales y roles para una experiencia eficaz.
-            </p>
-
-            {/* Tres cuadros alineados bajo el texto */}
-            <div className="flex justify-between mt-4 relative">
-  {/* Lado Izquierdo: Tres cuadros */}
-  <div className="flex flex-col">
-    {/* Primer cuadro ocupa la izquierda */}
-    <div className="flex">
-      <div className="bg-[#2E2934] h-[150px] w-[200px] mr-1 rounded-md"></div>
-      {/* Columna de dos cuadros pequeños a la derecha */}
-      <div className="flex flex-col space-y-1">
-        <div className="bg-[#2E2934] h-[75px] w-[118px] rounded-md"></div>
-        <div className="bg-[#2E2934] h-[72px] w-[118px] rounded-md"></div>
-      </div>
-    </div>
-  </div>
-
-  {/* Imagen nudo.png posicionada entre el tercer cuadro y el espacio derecho */}
-  <div className="absolute left-[50%] top-[100%] transform translate-x-[-25%] translate-y-[-50%] z-10">
-    <img className="w-32 h-auto" src="/nudo.png" alt="Nudo" />
-  </div>
-</div>
-          </div>
-
-          {/* Imágenes organizadas con posición absoluta */}
-          <div
-            className="absolute right-0 top-0 grid grid-cols-2 gap-4 opacity-90"
-            style={{ transform: "translateX(20px)" }}
+      <main className="flex flex-col items-center justify-center flex-grow px-4 text-center">
+        <motion.h1
+          className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6"
+          initial="initial"
+          animate="animate"
+          variants={animations.fadeIn}
+        >
+          <Typewriter text="HiveSync" />
+        </motion.h1>
+        <motion.p
+          className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl"
+          initial="initial"
+          animate="animate"
+          variants={animations.fadeIn}
+        >
+          <Typewriter text="La colaboración del futuro, hoy." delay={30} />
+        </motion.p>
+        <motion.div
+          className="text-sm sm:text-md md:text-lg text-gray-300 mb-12 max-w-3xl"
+          initial="initial"
+          animate="animate"
+          variants={animations.fadeIn}
+        >
+          <p className="mb-4">
+            Lleva la colaboración a un nuevo nivel con HiveSync, tu aliado digital.
+          </p>
+          <p>
+            Crea grupos personalizados, explora espacios colaborativos y aprovecha nuestra interfaz intuitiva para llevar la eficiencia de tu equipo al siguiente nivel. Todo en un solo lugar y sin complicaciones.
+          </p>
+        </motion.div>
+        <motion.div
+          className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 mb-12"
+          initial="initial"
+          animate="animate"
+          variants={animations.fadeIn}
+        >
+          <Link to="signup">
+            <motion.button
+              {...animations.scale}
+              className="px-8 py-3 bg-[#6B2A8A] rounded-full text-base sm:text-lg font-medium hover:bg-[#8A4BA8] transition-colors"
+            >
+              Comienza tu prueba gratis
+            </motion.button>
+          </Link>
+          <motion.button
+            {...animations.scale}
+            className="px-8 py-3 border border-[#6B2A8A] rounded-full text-base sm:text-lg font-medium hover:bg-[#6B2A8A] transition-colors"
+            onClick={() => {
+              const flashCardsElement = document.getElementById('flash-cards');
+              if (flashCardsElement) {
+                flashCardsElement.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
           >
-            <img className="w-32 h-auto" src="/moneda.png" alt="Moneda" />
-            <img className="w-32 h-auto" src="/esferaN.png" alt="EsferaN" />
-            <img className="w-32 h-auto" src="/esfera.png" alt="Esfera" />
-            <img className="w-32 h-auto" src="/cono.png" alt="Cono" />
-          </div>
-        </div>
+            Descubre más
+          </motion.button>
+        </motion.div>
 
-        {/* Texto y Cuadro "Tu aprendizaje al Lado de Todos" */}
-        <div className="relative mt-12">
-          <div className="bg-[#45156B] w-64 h-36 flex items-center justify-center">
-            {/* Texto centrado dentro del cuadro morado pero desplazado hacia la derecha */}
-            <div className="font-amiko text-white text-xl relative transform translate-x-[50%]">
-              <p>Tu aprendizaje al</p>
-              <p>Lado de Todos</p>
-            </div>
+        <ImageCarousel />
+
+        <Link to="signup">
+          <motion.button
+            {...animations.scale}
+            className="mt-8 px-8 py-3 bg-[#6B2A8A] rounded-full text-base sm:text-lg font-medium hover:bg-[#8A4BA8] transition-colors"
+          >
+            Prueba estas herramientas hoy
+          </motion.button>
+        </Link>
+
+        <motion.section
+          id="flash-cards" // Asegúrate de que este id esté correctamente asignado
+          className="mt-24 w-full max-w-6xl"
+          initial="initial"
+          animate="animate"
+          variants={animations.fadeIn}
+        >
+          <h2 className="text-3xl font-bold mb-12 text-center">Características Destacadas</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <FeatureCard
+              icon={TiMessages}
+              title="Chat en Tiempo Real"
+              description="Mantén la conversación fluida con mensajería instantánea, ideal para equipos en constante movimiento."
+            />
+            <FeatureCard
+              icon={TiTick}
+              title="Gestión de Tareas y Proyectos"
+              description="Controla tus proyectos de principio a fin con herramientas de organización y asignación de tareas."
+            />
+            <FeatureCard
+              icon={TiWorld}
+              title="Traducción Instantánea"
+              description="Conéctate con tu equipo global gracias a la traducción automática, sin importar el idioma."
+            />
+            <FeatureCard
+              icon={TiGroup}
+              title="Creación de Grupos Personalizados"
+              description="Divide y organiza a tu equipo en grupos personalizados para una colaboración más efectiva."
+            />
+            <FeatureCard
+              icon={TiThList}
+              title="Interfaz Intuitiva y Personalizable"
+              description="Una interfaz intuitiva que se adapta a tu estilo de trabajo y hace que todo sea más simple"
+            />
+            <FeatureCard
+              icon={TiClipboard}
+              title="Todo en un Solo Lugar"
+              description="Accede a todas tus herramientas desde un solo lugar y mantén tu flujo de trabajo organizado."
+            />
           </div>
+        </motion.section>
+
+        <CompanyLogos />
+      </main>
+
+      <motion.div
+        className="relative h-80 sm:h-96 md:h-120 mt-12 overflow-hidden"
+        initial="initial"
+        animate="animate"
+        variants={animations.fadeIn}
+      >
+        {['esferaN.png', 'esfera.png', 'cono.png', 'moneda.png'].map((img, index) => (
+          <motion.img
+            key={img}
+            src={`/${img}`}
+            alt={img.replace('.png', '')}
+            className={`absolute w-16 sm:w-20 md:w-24 lg:w-32`}
+            variants={animations.float}
+            animate={{
+              y: [0, -30, 0],
+              x: [0, 15, 0],
+              rotate: [0, 10, 0],
+              transition: {
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut",
+                times: [0, 0.5, 1],
+                repeatType: "reverse"
+              }
+            }}
+            style={{
+              zIndex: 4 - index,
+              filter: `brightness(${100 + index * 10}%) hue-rotate(${index * 30}deg)`,
+              left: `${15 + index * 20}%`,
+              top: `${20 + (index % 2) * 40}%`,
+            }}
+          />
+        ))}
+      </motion.div>
+
+      <footer className="py-6 px-4 text-center text-xs sm:text-sm text-gray-400">
+        <p>© 2023 HiveSync. All rights reserved.</p>
+        <div className="mt-4 flex justify-center space-x-4">
+          <a href="#" className="hover:text-[#6B2A8A] transition-colors">Privacy Policy</a>
+          <a href="#" className="hover:text-[#6B2A8A] transition-colors">Terms of Service</a>
+          <a href="#" className="hover:text-[#6B2A8A] transition-colors">Contact Us</a>
         </div>
-      </div>
-    </main>
+      </footer>
+    </div>
   );
 };
