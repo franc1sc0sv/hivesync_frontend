@@ -5,7 +5,6 @@ import { useFetchID } from "../../../../hooks/useFecthID";
 import { CategoryType, ChannelType, SpecificServerType } from "../types/server";
 import { LoadingPage } from "../../../routes/loadingPage";
 import { useNavigate } from "react-router-dom";
-import { useModal } from "../../../../store/useModal";
 
 interface ServerContextProps {
   server_data: ServerDataIcons;
@@ -103,7 +102,6 @@ export const ServerProvider = ({ children }: { children: ReactNode }) => {
   });
 
   const [server_data, setServerData] = useState<ServerDataIcons>([]);
-  const {modalId} = useModal()
 
   const [selected_server, setSelectedServer] =
     useState<SpecificServerType>(defaultData);

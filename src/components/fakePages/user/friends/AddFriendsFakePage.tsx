@@ -1,11 +1,8 @@
-import { FaPaperclip } from "react-icons/fa6";
-
 import { SearchBar } from "../../../forms/Inputs/SearchBar";
 import { SubmitButton } from "../../../forms/Inputs/Button";
 
 import { InviteByLinkModal } from "../../../modals/userModals/profile/inviteFriendsByLink";
 import { useFormData } from "../../../../hooks/useFormData";
-import { useModal } from "../../../../store/useModal";
 import { get_user_username } from "../../../../api/user_info";
 import { LoadingPage } from "../../../routes/loadingPage";
 import { Notifications } from "../../../Alerts/Notification";
@@ -25,7 +22,6 @@ export const AddFriendsFakePage: React.FC = () => {
   return (
     <>
       <div className="w-full h-full">
-        <ShareLinkButtons />
         <SendFriendsRequest
           data={data}
           isLoading={isLoading}
@@ -38,25 +34,6 @@ export const AddFriendsFakePage: React.FC = () => {
       <Notifications />
       <ExternalProfilePublicModal user={data} />
     </>
-  );
-};
-
-const ShareLinkButtons: React.FC = () => {
-  const { setModalId } = useModal();
-  return (
-    <div className="flex flex-row items-center justify-center w-full gap-5 mt-2">
-      <button
-        className="flex flex-col items-center gap-2 sm:h-1/4"
-        onClick={() => {
-          setModalId("inviteByLink");
-        }}
-      >
-        <div className="p-4 rounded-full bg-overlay_2">
-          <FaPaperclip size={25} fill="white" />
-        </div>
-        <h2 className="text-custom_white text-md">Copiar link de invitación</h2>
-      </button>
-    </div>
   );
 };
 
