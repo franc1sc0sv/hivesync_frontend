@@ -58,13 +58,13 @@ export const ChatHeader = () => {
         </div>
       </div>
 
-      <div className="flex gap-5 w-[30%]">
+      <div className="flex justify-center items-center gap-5">
         <ButtonHover handleClick={handleVoiceCall}>
-          <PhoneIcon size={24} color="#fff" />
+          <PhoneIcon size={30} color="#fff" />
         </ButtonHover>
 
         <ButtonHover handleClick={handleVideoCall}>
-          <WebCameraIcon size={24} color="#fff" />
+          <WebCameraIcon size={30} color="#fff" />
         </ButtonHover>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { GeneralLayout } from "../../../components/layouts/GeneralLayout/GeneralLayout";
-import { RightButton } from "./Components/RigthButton";
+// import { RightButton } from "./Components/RigthButton";
 
 import { Notifications } from "../../../components/Alerts/Notification";
 
@@ -9,7 +9,7 @@ import { AddFriendModal } from "../../../components/modals/userModals/friends/Ad
 
 export const NotificationsPage = () => {
   return (
-    <GeneralLayout title="Notificaciones" RightComponent={RightButton}>
+    <GeneralLayout title="Notificaciones">
       <Notifications />
       <AddFriendModal />
       <NotificationProvider>

@@ -77,11 +77,6 @@ export const options: MenuProps[] = [
         modal: "changeAvatar",
         optionComponent: <ChangeAvatar />
       },
-      {
-        name: "Eliminar mi cuenta",
-        modal: "editProfilePicture",
-        optionComponent: <EditProfilePictureForm />
-      },
     ]
   },
   {
