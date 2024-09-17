@@ -1,4 +1,3 @@
-
 import { ShowFakePages } from "../../../../fakePages/ShowFakePages";
 import { useSwipeHandler } from "../../hooks/useFakePageSwipeHandler";
 import { useChannelList } from "../../hooks/useChannelList";
@@ -8,24 +7,21 @@ import { TopChannelBar } from "./Components/topChannelBar";
 
 export const Channel: React.FC = () => {
   const { actualChannel } = useChannelList();
- 
 
- 
   function* modalGenerator() {
-    yield handleModal(actualChannel);
+    yield handleModal();
   }
 
   const handleModal = useHandleChannelType({
     channelToCompare: actualChannel,
-    childrenFakePage: actualChannel ? <TopChannelBar /> : <NoChannelSelected />, 
-    isntFirsTime: false,
+    childrenFakePage: actualChannel ? <TopChannelBar /> : <NoChannelSelected />,
   });
-  
+
   const modalGenInstance = modalGenerator();
-  
+
   const handler = useSwipeHandler({
     onSwipedLeft: () => {
-      const { done } = modalGenInstance.next(); 
+      const { done } = modalGenInstance.next();
       if (done) {
         console.log("Modal action already executed.");
       }
@@ -38,7 +34,7 @@ export const Channel: React.FC = () => {
         {...handler}
         className="w-full ml-auto rounded-tl-lg rounded-bl-lg bg-overlay_2 screen_overlay"
         onClick={() => {
-          const { done } = modalGenInstance.next(); 
+          const { done } = modalGenInstance.next();
           if (done) {
             console.log("Modal action already executed.");
           }

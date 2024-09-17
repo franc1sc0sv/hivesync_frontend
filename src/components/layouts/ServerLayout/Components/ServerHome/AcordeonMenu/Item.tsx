@@ -4,7 +4,6 @@ import {
   ChannelCategory,
   ChannelTypeEnum,
 } from "../../../Enums/SpecificServer";
-import { useChannelList } from "../../../hooks/useChannelList";
 import { ChannelsFormated } from "../../../types/server";
 import { useHandleChannelType } from "../../../hooks/useHandleChannels";
 import { TopChannelBar } from "../../Channel/Components/topChannelBar";
@@ -17,21 +16,13 @@ export const ItemAcordeonChannel = ({
   channel: ChannelsFormated;
   isCategoryOpen?: boolean;
 }) => {
-  const { setCurrentChannel, actualChannel } = useChannelList();
-
-  
   const handleChannelType = useHandleChannelType({
-    channelToCompare: actualChannel,
-    isntFirsTime: false,
-    //acá va el componente de chats
-    childrenFakePage: actualChannel ? <TopChannelBar /> : <NoChannelSelected />,
+    channelToCompare: channel,
+    childrenFakePage: channel ? <TopChannelBar /> : <NoChannelSelected />,
   });
 
   const handleClick = async () => {
-    setCurrentChannel(channel.id);
-    
-  
-    await handleChannelType(channel);
+    handleChannelType();
   };
 
   const showChannel = isCategoryOpen || (!isCategoryOpen && channel.isSelected);

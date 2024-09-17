@@ -82,12 +82,7 @@ const obtener_servidor_activo = (servers: ServerDataIcons) => {
 const set_ultimo_servidor = (specific_server: SpecificServerType) => {
   if (!specific_server.id) return;
 
-  const firtsChannelID = specific_server.channels[0].id;
-  const serverID = specific_server.id;
-
-  const serverURL = `/app/${serverID}/${firtsChannelID}`;
-
-  localStorage.setItem("lastserver", serverURL);
+  localStorage.setItem("lastserver", specific_server.url);
 };
 
 export const ServerProvider = ({ children }: { children: ReactNode }) => {

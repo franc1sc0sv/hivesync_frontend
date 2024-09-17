@@ -11,11 +11,27 @@ import { useStoreId } from "../../../../../store/useStoreId";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 
-interface CategoriesListProps {
-  category: Option[];
-}
-
 export const ManageCategories: React.FC = () => {
+  return (
+    <ModalTemplate identificator="manageCategories">
+      <div className="flex flex-col gap-5">
+        <Header />
+        <CategoriesList />
+      </div>
+    </ModalTemplate>
+  );
+};
+
+const Header: React.FC = () => {
+  return (
+    <div className="flex flex-row items-center justify-center w-full gap-2">
+      <CategoryIcon size={40} color="#fff" />
+      <p className="text-2xl text-custom_white">Gestionar Categorias</p>
+    </div>
+  );
+};
+
+const CategoriesList = () => {
   const {
     selected_server: { id },
   } = useServer();
@@ -35,32 +51,16 @@ export const ManageCategories: React.FC = () => {
   if (isLoading) return <LoadingPage />;
 
   return (
-    <ModalTemplate identificator="manageCategories">
-      <div className="flex flex-col gap-5">
-        <Header />
-        <CategoriesList category={categories} />
-      </div>
-    </ModalTemplate>
-  );
-};
-
-const Header: React.FC = () => {
-  return (
-    <div className="flex flex-row items-center justify-center w-full gap-2">
-      <CategoryIcon size={40} color="#fff" />
-      <p className="text-2xl text-custom_white">Gestionar Categorias</p>
-    </div>
-  );
-};
-
-const CategoriesList: React.FC<CategoriesListProps> = ({ category }) => {
-  return (
     <div className="flex flex-col gap-3 p-3 bg-overlay_2 rounded-xl">
-      {category.map((option, i: number) => (
-        <CategorieComponent option={option} key={i} />
-      ))}
+      <ContainerComponent categories={categories} />
     </div>
   );
+};
+
+const ContainerComponent = ({ categories }: { categories: Option[] }) => {
+  return categories.map((option, i: number) => (
+    <CategorieComponent option={option} key={i} />
+  ));
 };
 
 const CategorieComponent = ({ option }: { option: Option }) => {

@@ -7,7 +7,6 @@ export const ShowFakePages = ({
   showArrow?: boolean;
 }) => {
   const { fakePages, removeFakePage } = useFakePages();
-  console.log(fakePages.length)
   return (
     <>
       {fakePages.map((page) => (

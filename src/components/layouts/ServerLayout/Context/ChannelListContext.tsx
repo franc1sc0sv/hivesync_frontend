@@ -79,19 +79,19 @@ export const ChannelListProvider = ({
       return { ...list, channels: formated_channels };
     });
 
-    updateUrl(id);
-
     // Buscar y establecer el actualChannel
     const selectedChannel = new_data
       .flatMap((list) => list.channels)
       .find((channel) => channel.id === id);
 
+    if (selectedChannel?.type === "VIDEO") return;
+
+    updateUrl(id);
+
     setActualChannel(selectedChannel || null);
 
     setChannelList(new_data);
   };
-
-  
 
   useEffect(() => {
     const active_channel = obtener_canal_id_activo();
@@ -130,9 +130,8 @@ export const ChannelListProvider = ({
       (channel) => channel.id === active_channel
     );
     setActualChannel(selectedChannel || null);
-   
   }, [channels]);
-  
+
   return (
     <ChannelListContext.Provider
       value={{
