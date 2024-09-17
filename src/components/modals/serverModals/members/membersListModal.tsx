@@ -2,11 +2,34 @@ import { ModalTemplate } from "../../ModalTemplate";
 import { useModal } from "../../../../store/useModal";
 
 import { UserAddIcon } from "../../../Icons/userAdd";
+import { useFetchID } from "../../../../hooks/useFecthID";
+import { get_all_memebrs } from "../../../../api/server";
+import { useEffect, useState } from "react";
+import { useServer } from "../../../layouts/ServerLayout/hooks/useServer";
+import { LoadingPage } from "../../../routes/loadingPage";
+import { Server } from "http";
+import { UserAvatar } from "../../../Avatars/UserAvatar";
 
-const temporaryRoute =
-  "https://static.fundacion-affinity.org/cdn/farfuture/PVbbIC-0M9y4fPbbCsdvAD8bcjjtbFc0NSP3lRwlWcE/mtime:1643275542/sites/default/files/los-10-sonidos-principales-del-perro.jpg";
+import { GiCrenelCrown } from "react-icons/gi";
+import { useSession } from "../../../../store/user";
 
-const members = [{ username: "arsene_lupin", picture: temporaryRoute }];
+type ServerMember = {
+  id: string;
+  id_user: string;
+  role: string;
+  joinedAt: string; // ISO 8601 date string
+  serverId: string;
+  isActiveInServer: boolean;
+  server: Server;
+  user: {
+    profileUrl: string;
+    backgroundUrl: string;
+    name: string;
+    createdAt: string;
+    about: string;
+    username: string;
+  };
+};
 
 export const MembersListModal: React.FC = () => {
   return (
@@ -16,14 +39,33 @@ export const MembersListModal: React.FC = () => {
   );
 };
 
-const MembersList: React.FC = () => {
+const MembersList = () => {
+  const [members, setMembers] = useState<ServerMember[]>([]);
+
+  const { fecthData, isLoading } = useFetchID({
+    api_function: get_all_memebrs,
+  });
+  const {
+    selected_server: { id },
+  } = useServer();
+
+  useEffect(() => {
+    const fetcher = async () => {
+      const members = await fecthData(id);
+      setMembers(members);
+    };
+    fetcher();
+  }, []);
+
+  if (isLoading) return <LoadingPage />;
+
   return (
     <div className="h-full w-full lg:w-3/5 mx-auto p-1 flex flex-col gap-5">
       <p className="text-2xl text-custom_white text-center">
         Miembros del servidor
       </p>
       <Header />
-      <List />
+      <List members={members} />
     </div>
   );
 };
@@ -46,24 +88,38 @@ const Header: React.FC = () => {
   );
 };
 
-const List: React.FC = () => {
+const List = ({ members }: { members: ServerMember[] }) => {
+  const { user } = useSession();
+
   return (
-    <div className="h-4/5 overflow-y-auto">
-      {members.map((member, index) => (
+    <div className="h-4/5 overflow-y-auto gap-4 flex flex-col">
+      {members.map((member, i) => (
         <div
-          key={index}
-          className="flex flex-row items-center justify-between p-3 my-2 rounded-xl bg-overlay_2"
+          key={i}
+          style={{
+            borderColor:
+              user?.id === member.id_user ? "#f6f1aa" : "transparent",
+          }}
+          className="flex flex-row items-center gap-2 px-5 p-3 justify-between rounded-xl bg-overlay_2 border-2"
         >
-          <div className="flex flex-row items-center gap-5 rounded-2xl">
-            <img
-              className="object-cover object-center w-14 h-14 rounded-full"
-              src={member.picture}
-              alt="Profile picture"
+          <div className="flex flex-row items-center gap-5">
+            <UserAvatar
+              w={4}
+              h={4}
+              fontSize={2}
+              profileURl={member.user.profileUrl}
+              username={member.user.username}
             />
-            <p className="text-xl text-custom_white font-almarai">
-              {member.username}
-            </p>
+            <div className="flex flex-row items-center gap-5 rounded-2xl">
+              <p className="text-xl text-custom_white font-almarai">
+                {member.user.username}
+              </p>
+            </div>
           </div>
+
+          {member.role === "ADMIN" && (
+            <GiCrenelCrown size={40} color="#f6f1aa" />
+          )}
         </div>
       ))}
     </div>

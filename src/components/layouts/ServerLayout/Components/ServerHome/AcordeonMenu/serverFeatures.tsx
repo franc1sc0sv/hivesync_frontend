@@ -4,10 +4,8 @@ import { GoDependabot } from "react-icons/go";
 import { IoDocumentText } from "react-icons/io5";
 import { PiPencilCircleLight } from "react-icons/pi";
 import { PiHandWavingFill } from "react-icons/pi";
-import useFakePages from "../../../../../../store/useFakePage";
-import { AIPage } from "../../../../../../pages/User/Tools/AIPage";
-import { MdOutlineTranslate } from "react-icons/md";
 
+import { MdOutlineTranslate } from "react-icons/md";
 
 interface ChannelProps {
   id: string | number;
@@ -17,38 +15,38 @@ interface ChannelProps {
 }
 
 export const features = (): ChannelProps[] => {
-
   const navigate = useNavigate();
   return [
     {
       id: 1,
       name: "Hivesync X ChatGPT",
       onClick: () => navigate("/app/ai"),
-      icon: GoDependabot
+      icon: GoDependabot,
     },
     {
       id: 2,
       name: "Hivesync Docs",
       onClick: () => navigate("/app/documents"),
-      icon: IoDocumentText
+      icon: IoDocumentText,
     },
     {
       id: 3,
       name: "Hivesync Boards",
       onClick: () => navigate("/app/whiteboard"),
-      icon: PiPencilCircleLight
+      icon: PiPencilCircleLight,
     },
     {
       id: 4,
       name: "Hivesync Translator",
       onClick: () => navigate("/app/translate"),
-      icon: MdOutlineTranslate
+      icon: MdOutlineTranslate,
     },
     {
       id: 5,
       name: "Hivesync Signs",
-      onClick: () => window.location.href = "https://hivesync-signs.vercel.app/",
-      icon: PiHandWavingFill
+      onClick: () =>
+        (window.location.href = "https://hivesync-signs.vercel.app/"),
+      icon: PiHandWavingFill,
     },
   ];
 };

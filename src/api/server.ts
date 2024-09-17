@@ -31,7 +31,11 @@ export const get_server = async (id: string) => {
 //server edition
 export const edit_server_name = async (id: string, data: any) => {
   try {
-    const res = await AxiosClient.patch(`/server/management/edit/name/${id}`, data, headers());
+    const res = await AxiosClient.patch(
+      `/server/management/edit/name/${id}`,
+      data,
+      headers()
+    );
     return format_api_response(res);
   } catch (e) {
     throwError(e);
@@ -40,7 +44,11 @@ export const edit_server_name = async (id: string, data: any) => {
 
 export const edit_server_cover = async (id: string, data: any) => {
   try {
-    const res = await AxiosClient.patch(`/server/management/edit/cover/${id}`, data, headers());
+    const res = await AxiosClient.patch(
+      `/server/management/edit/cover/${id}`,
+      data,
+      headers()
+    );
     return format_api_response(res);
   } catch (e) {
     throwError(e);
@@ -108,6 +116,56 @@ export const patch_category = async (data: any, id: string) => {
   try {
     const res = await AxiosClient.patch(
       `/server/categories/${id}`,
+      data,
+      headers()
+    );
+    return format_api_response(res);
+  } catch (e) {
+    throwError(e);
+  }
+};
+
+//Members
+
+export const get_all_memebrs = async (id: string) => {
+  try {
+    const res = await AxiosClient.get(`/server/members/${id}`, headers());
+    return format_api_response(res);
+  } catch (e) {
+    throwError(e);
+  }
+};
+
+export const create_invitation_server = async (data: any, id: string) => {
+  try {
+    const res = await AxiosClient.post(
+      `/server/members/invitation/create/${id}`,
+      data,
+      headers()
+    );
+    return format_api_response(res);
+  } catch (e) {
+    throwError(e);
+  }
+};
+
+export const accept_invitation_server = async (data: any, id: string) => {
+  try {
+    const res = await AxiosClient.patch(
+      `/server/members/invitation/accept/${id}`,
+      data,
+      headers()
+    );
+    return format_api_response(res);
+  } catch (e) {
+    throwError(e);
+  }
+};
+
+export const reject_invitation_server = async (data: any, id: string) => {
+  try {
+    const res = await AxiosClient.patch(
+      `/server/members/invitation/reject/${id}`,
       data,
       headers()
     );

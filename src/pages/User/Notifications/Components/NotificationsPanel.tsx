@@ -4,6 +4,7 @@ import { UserAvatar } from "../../../../components/Avatars/UserAvatar";
 import { BellIcon } from "../../../../components/Icons/bell";
 import { formatTimeDifference } from "../../../../helpers/date";
 import { useAddFriendsData } from "../../../../store/useAddFriendsData";
+import { useAddMembers } from "../../../../store/useAddMembers";
 import { useModal } from "../../../../store/useModal";
 import { useNotificationsContext } from "../context/useNotifications";
 import { NotificationProps } from "../types/NotificationProps";
@@ -58,6 +59,7 @@ const NotificationItem = ({
 }) => {
   const { setModalId } = useModal();
   const { setFriendsData } = useAddFriendsData();
+  const { setMemberData } = useAddMembers();
 
   const handleClick = () => {
     if (!notification.data?.id_request) return;
@@ -65,6 +67,12 @@ const NotificationItem = ({
       const data = { id_notification: notification.id, ...notification.data };
       setFriendsData(data);
       setModalId("AddFriendModal");
+    }
+
+    if (notification.category === "invitation") {
+      const data = { id_notification: notification.id, ...notification.data };
+      setMemberData(data);
+      setModalId("NotifiactionMemberModal");
     }
   };
 
@@ -79,8 +87,8 @@ const NotificationItem = ({
             fontSize={2}
             h={4}
             w={4}
-            profileURl={notification.data.profile_url}
-            username={notification.data.username_who_sent}
+            profileURl={notification.data.user.profileUrl}
+            username={notification.data.user.username}
           />
         </div>
 

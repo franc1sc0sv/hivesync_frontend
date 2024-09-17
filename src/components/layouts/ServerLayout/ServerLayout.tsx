@@ -48,7 +48,9 @@ const AreServersLayout = () => {
 
 export const NoServersLayout = () => {
   return (
-    <article className={`flex h-full gap-3 w-full`}>
+    <article
+      className={`flex justify-center h-[80vh] md:h-[95vh] gap-3 overflow-hidden `}
+    >
       <ServerIcons server_data_icons={[]} />
       <NoServers />
       <Notifications />

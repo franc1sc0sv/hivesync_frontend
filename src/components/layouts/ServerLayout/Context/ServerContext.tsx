@@ -3,8 +3,8 @@ import { useFetch } from "../../../../hooks/useFetch";
 import { get_all_servers_by_user, get_server } from "../../../../api/server";
 import { useFetchID } from "../../../../hooks/useFecthID";
 import { CategoryType, ChannelType, SpecificServerType } from "../types/server";
-import { LoadingPage } from "../../../routes/loadingPage";
 import { useNavigate } from "react-router-dom";
+import { useModal } from "../../../../store/useModal";
 
 interface ServerContextProps {
   server_data: ServerDataIcons;
@@ -91,18 +91,18 @@ const set_ultimo_servidor = (specific_server: SpecificServerType) => {
 };
 
 export const ServerProvider = ({ children }: { children: ReactNode }) => {
-  const { isLoading, fecthData } = useFetch({
+  const { fecthData } = useFetch({
     api_function: get_all_servers_by_user,
     transformData: format_servers,
   });
 
-  const { isLoading: isLoadingID, fecthData: fechtDataID } = useFetchID({
+  const { fecthData: fechtDataID } = useFetchID({
     api_function: get_server,
     transformData: format_specific_server,
   });
 
   const [server_data, setServerData] = useState<ServerDataIcons>([]);
-
+  const { modalId } = useModal();
   const [selected_server, setSelectedServer] =
     useState<SpecificServerType>(defaultData);
 
@@ -127,9 +127,7 @@ export const ServerProvider = ({ children }: { children: ReactNode }) => {
       set_ultimo_servidor(specific_server);
     };
     loader();
-  }, []);
-
-  if (isLoading || isLoadingID) return <LoadingPage />;
+  }, [modalId]);
 
   return (
     <ServerContext.Provider
