@@ -218,12 +218,12 @@ export const WhiteBoardPage: React.FC = () => {
   }, [selectedId]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#19161D] to-[#2E2934] text-white">
-      <header className="bg-[#19161D] p-2 md:p-4 flex justify-between items-center">
+    <div className="h-full w-full bg-gradient-to-br text-white">
+      {/* <header className="bg-[#19161D] p-2 md:p-4 flex justify-between items-center">
         <h1 className="text-lg md:text-2xl font-bold">Hivesync Boards</h1>
-      </header>
+      </header> */}
 
-      <div className="flex flex-col md:flex-row p-2 md:p-4 space-y-2 md:space-y-0 md:space-x-4">
+      <div className="flex flex-col md:flex-row p-2 md:p-4 space-y-2 md:space-x-4">
         <div className="w-full md:w-72 bg-[#2E2934] rounded-lg p-3 md:p-4 space-y-3 md:space-y-4">
           <h2 className="font-semibold mb-1 md:mb-2 text-sm md:text-base">Herramientas de dibujo</h2>
           <div className="grid grid-cols-4 gap-1 md:gap-2">

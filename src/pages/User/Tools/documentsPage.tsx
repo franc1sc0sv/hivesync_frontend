@@ -90,9 +90,9 @@ export default function TextEditorPage() {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-overlay_1">
+    <div className="flex flex-col h-full w-full bg-overlay_1">
       {/* Barra superior */}
-      <header className="p-4 shadow-sm bg-overlay_4 border-b border-overlay_2">
+      <header className="p-4 shadow-sm">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-2">
           <input
             type="text"
@@ -135,12 +135,12 @@ export default function TextEditorPage() {
       </div>
 
       {/* Footer */}
-      <footer className="p-4 flex justify-center items-center bg-overlay_4">
+      {/* <footer className="p-4 flex justify-center items-center bg-overlay_4">
         <div className="flex items-center space-x-2">
           <img src={hivesyncLogo} alt="HiveSync Logo" className="h-8" />
           <img src={logo} alt="Logo" className="h-8" />
         </div>
-      </footer>
+      </footer> */}
     </div>
   );
 }

@@ -53,16 +53,8 @@ export const TranslatorPage: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col  justify-center items-center bg-overlay_1">
-      {/* Este div estará en la parte superior hasta que haya scroll */}
-      <div className='w-full flex flex-row justify-between items-center  absolute top-0 p-2'>
-        <div onClick={() => navigate(-1)}>
-          <GoBackTriangle size={40} color='#fff' />
-
-        </div>
-      </div>
-
       <div className="w-full max-w-md p-8 space-y-6 bg-[#28242C] rounded-2xl shadow-lg mt-6">
-        <h1 className="text-2xl font-bold text-center text-[#FFFFFE]">Traductor</h1>
+        {/* <h1 className="text-2xl font-bold text-center text-[#FFFFFE]">Traductor</h1> */}
 
         <div className="flex justify-between space-x-4">
           <TextField

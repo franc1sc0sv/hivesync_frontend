@@ -4,6 +4,10 @@ import { EditPictureOrCoverModal } from "../../../modals/userModals/profile/Edit
 
 import { useNotifications } from "../../../../store/useNotifications";
 
+import { get_profile } from "../../../../api/auth";
+import { useState, useEffect } from "react";
+import { LoadingPage } from "../../../routes/loadingPage";
+
 //form utils
 import { useCustomForm } from "../../../../hooks/useForm";
 import { SubmitButton } from "../../../forms/Inputs/Button";
@@ -17,23 +21,38 @@ import { PencilIcon } from "../../../Icons/pencil";
 import { UserAvatar } from "../../../Avatars/UserAvatar";
 import { useSession } from "../../../../store/user";
 
-// componente activado en UserInformation
+
+interface Props {
+  user: Usuario
+}
 
 export const EditProfileFakePage: React.FC = () => {
+
+  const [fetchedData, setFetchedData] = useState<Usuario>();
+
+  useEffect(() => {
+    const fetch = async () => {
+      const fetchData = await get_profile();
+      setFetchedData(fetchData);
+    }
+    fetch();
+  }, [])
+
+  if (!fetchedData) return <LoadingPage />;
+
   return (
-    <div className="flex items-center justify-center w-full h-full rounded-xl">
-      <div className="w-full max-w-[320px] flex flex-col gap-5 m-5 h-full py-5">
-        <ProfileCover />
-        <UserInformation />
-        <EditProfileForm />
+    <div className="flex justify-center w-full h-full rounded-xl">
+      <div className="w-4/5 lg:w-1/3 flex flex-col gap-3">
+        <ProfileCover user={fetchedData} />
+        <UserInformation user={fetchedData} />
+        <EditProfileForm user={fetchedData} />
         <EditPictureOrCoverModal />
       </div>
     </div>
   );
 };
 
-const ProfileCover: React.FC = () => {
-  const { user } = useSession();
+const ProfileCover: React.FC<Props> = ({ user }) => {
 
   const { setModalId } = useModal();
 
@@ -75,8 +94,7 @@ const EditCoverThemeButton: React.FC = () => {
   );
 };
 
-const UserInformation: React.FC = () => {
-  const { user } = useSession();
+const UserInformation: React.FC<Props> = ({ user }) => {
 
   return (
     <div className="w-full">
@@ -88,7 +106,7 @@ const UserInformation: React.FC = () => {
   );
 };
 
-const EditProfileForm: React.FC = () => {
+const EditProfileForm: React.FC<Props> = () => {
   const { setNotifications } = useNotifications();
 
   const api_function = async (data: any) => {
@@ -118,7 +136,7 @@ const EditProfileForm: React.FC = () => {
   return (
     <form
       onSubmit={onSubmit}
-      className="flex flex-col w-full h-full gap-5 p-5 px-1 text-start"
+      className="flex flex-col w-full h-3/5 gap-5 p-5 px-1 text-start"
     >
       <InputsForms
         title="Nombre"
