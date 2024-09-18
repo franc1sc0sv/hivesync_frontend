@@ -9,28 +9,24 @@ import { OptionsContext } from "../context/optionsContext";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
 
-
 export const MenuOptions: React.FC = () => {
   return (
-    <div className="w-full flex flex-row justify-between overflow-hidden">
-      <div className="w-full md:w-1/3 overflow-y-auto">
+    <div className="flex flex-row justify-between w-full overflow-hidden">
+      <div className="w-full overflow-y-auto md:w-1/3">
         <SettingsTemplate settings={options} />
       </div>
 
-      <div className="max-h-fit hidden md:block w-3/5">
+      <div className="hidden w-3/5 max-h-fit md:block">
         <OptionSelected />
       </div>
     </div>
   );
 };
 
-
 const SettingsTemplate: React.FC<SettingsProps> = ({ settings }) => {
-
   const { setModalId } = useModal();
 
   const [settingsState, setSettingsState] = useState(settings);
-
 
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 768);
 
@@ -51,7 +47,6 @@ const SettingsTemplate: React.FC<SettingsProps> = ({ settings }) => {
     };
   }, []);
 
-
   const handleToggle = (index: number) => {
     setSettingsState((prevState) => {
       const newSettings = prevState.map((setting, i) => {
@@ -65,11 +60,11 @@ const SettingsTemplate: React.FC<SettingsProps> = ({ settings }) => {
   };
 
   return (
-    <div className="w-full flex flex-col gap-3 md:gap-8">
+    <div className="flex flex-col w-full gap-3 md:gap-8">
       {settingsState.map((option, index) => (
         <div
           key={index}
-          className={`w-full relative flex flex-col gap-3 p-5 bg-overlay_2 hover:bg-gray-700 rounded-lg shadow-lg transition-all duration-300 ease-in-out transform border-4 border-overlay_2 hover:border-primary flex-shrink-0`}
+          className={`w-full relative  gap-3 px-5 py-2 bg-overlay_2 hover:bg-gray-700 rounded-lg shadow-lg transition-all duration-300 ease-in-out transform border-4 border-overlay_2 hover:border-primary`}
         >
           {/* card header */}
           <div
@@ -78,7 +73,7 @@ const SettingsTemplate: React.FC<SettingsProps> = ({ settings }) => {
           >
             <div className="flex flex-row items-center justify-center gap-3">
               {option.icon}
-              <p className="text-custom_white text-lg font-medium">
+              <p className="text-lg font-medium text-custom_white">
                 {option.name}
               </p>
             </div>
@@ -97,7 +92,7 @@ const SettingsTemplate: React.FC<SettingsProps> = ({ settings }) => {
               transition: "max-height 0.3s ease-in-out",
             }}
           >
-            <div className="w-full flex flex-col justify-start bg-gray-800 rounded-lg text-custom_white gap-5 p-3">
+            <div className="flex flex-col justify-start w-full gap-2 pt-3 bg-gray-800 rounded-lg text-custom_white">
               {option.options.map((opt, index) => (
                 <button
                   onClick={() => {
@@ -108,7 +103,8 @@ const SettingsTemplate: React.FC<SettingsProps> = ({ settings }) => {
                     }
                   }}
                   key={index}
-                  className="w-full text-start hover:bg-primary p-3 transition-all duration-200 rounded-xl">
+                  className="w-full transition-all duration-200 text-start hover:bg-primary rounded-xl"
+                >
                   {opt.name}
                 </button>
               ))}
@@ -121,16 +117,12 @@ const SettingsTemplate: React.FC<SettingsProps> = ({ settings }) => {
 };
 
 const OptionSelected: React.FC = () => {
-
   const context = useContext(OptionsContext);
   const { component } = context;
 
   return (
-    <div className="w-full h-full flex flex-col gap-5 justify-center items-center">
+    <div className="flex flex-col items-center justify-center w-full h-full gap-5">
       {component}
     </div>
-  )
-}
-
-
-
+  );
+};
