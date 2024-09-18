@@ -3,7 +3,8 @@ import { useSwipeHandler } from "../../hooks/useFakePageSwipeHandler";
 import { useChannelList } from "../../hooks/useChannelList";
 import { useHandleChannelType } from "../../hooks/useHandleChannels";
 import { MegaphoneIcon } from "../../../../Icons/megaphone";
-import { TopChannelBar } from "./Components/topChannelBar";
+import { VideoChannelServer } from "./Components/ChannelsLayouts/VideoChannelServer";
+import { TextChannelServer } from "./Components/ChannelsLayouts/TextChannelServer";
 
 export const Channel: React.FC = () => {
   const { actualChannel } = useChannelList();
@@ -14,7 +15,12 @@ export const Channel: React.FC = () => {
 
   const handleModal = useHandleChannelType({
     channelToCompare: actualChannel,
-    childrenFakePage: actualChannel ? <TopChannelBar /> : <NoChannelSelected />,
+    childrenFakePage:
+      actualChannel?.type === "VIDEO" ? (
+        <VideoChannelServer />
+      ) : (
+        <TextChannelServer />
+      ),
   });
 
   const modalGenInstance = modalGenerator();

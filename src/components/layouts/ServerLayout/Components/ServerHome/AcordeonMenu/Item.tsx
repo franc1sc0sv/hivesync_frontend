@@ -6,8 +6,9 @@ import {
 } from "../../../Enums/SpecificServer";
 import { ChannelsFormated } from "../../../types/server";
 import { useHandleChannelType } from "../../../hooks/useHandleChannels";
-import { TopChannelBar } from "../../Channel/Components/topChannelBar";
-import { NoChannelSelected } from "../../Channel/Channel";
+
+import { VideoChannelServer } from "../../Channel/Components/ChannelsLayouts/VideoChannelServer";
+import { TextChannelServer } from "../../Channel/Components/ChannelsLayouts/TextChannelServer";
 
 export const ItemAcordeonChannel = ({
   channel,
@@ -18,7 +19,12 @@ export const ItemAcordeonChannel = ({
 }) => {
   const handleChannelType = useHandleChannelType({
     channelToCompare: channel,
-    childrenFakePage: channel ? <TopChannelBar /> : <NoChannelSelected />,
+    childrenFakePage:
+      channel?.type === "VIDEO" ? (
+        <VideoChannelServer />
+      ) : (
+        <TextChannelServer />
+      ),
   });
 
   const handleClick = async () => {

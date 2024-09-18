@@ -3,24 +3,25 @@ import { HiMicrophone } from "react-icons/hi";
 import { useChannelList } from "../../../hooks/useChannelList";
 
 export const TopChannelBar = () => {
-  const { actualChannel } = useChannelList(); 
+  const { actualChannel } = useChannelList();
 
-  // Use a ternary operator to set the icon and channel name
-  const icon = actualChannel
-    ? (actualChannel.type === 'TEXT' 
-        ? <HiHashtag className="text-2xl mr-2" /> 
-        : <HiMicrophone className="text-2xl mr-2" />)
-    : null;
+  const icon = actualChannel ? (
+    actualChannel.type === "TEXT" ? (
+      <HiHashtag className="mr-2 text-2xl" />
+    ) : (
+      <HiMicrophone className="mr-2 text-2xl" />
+    )
+  ) : null;
 
-  const channelName = actualChannel ? actualChannel.name : "No channel selected";
+  const channelName = actualChannel
+    ? actualChannel.name
+    : "No channel selected";
 
   return (
-    <div className="h-full w-full flex justify-center items-center ">
+    <div className="flex items-center justify-center w-full h-full ">
       <div className="flex items-center mb-4 text-white">
         {icon}
-        <h2 className="text-xl font-semibold">
-          {channelName}
-        </h2>
+        <h2 className="text-xl font-semibold">{channelName}</h2>
       </div>
     </div>
   );

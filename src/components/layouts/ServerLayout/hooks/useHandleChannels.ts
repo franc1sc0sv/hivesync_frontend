@@ -24,7 +24,6 @@ export const useHandleChannelType = ({
   //averiguamos que tipo de coso es para ejecutar que hook para renderizarle
   const handleModal = () => {
     if (!channelToCompare) return;
-    console.log(channelToCompare);
 
     if (channelToCompare.type === CHANNEL_TYPE_TEXT) {
       setCurrentChannel(channelToCompare.id);
@@ -35,7 +34,10 @@ export const useHandleChannelType = ({
 
       if (!pageExists) {
         childrenFakePage &&
-          addFakePage({ title: "", children: childrenFakePage });
+          addFakePage({
+            title: channelToCompare.name,
+            children: childrenFakePage,
+          });
       }
     } else if (channelToCompare.type === CHANNEL_TYPE_VIDEO) {
       setChannelID({ id: channelToCompare.id, name: channelToCompare.name });
