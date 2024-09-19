@@ -46,7 +46,7 @@ export const Channel: React.FC = () => {
           }
         }}
       ></div>
-      <ShowFakePages />
+      <ShowFakePages showArrow={!(actualChannel?.type === "VIDEO")} />
     </div>
   );
 };

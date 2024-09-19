@@ -1,20 +1,23 @@
 import { useChannelList } from "../../../hooks/useChannelList";
 import useFakePages from "../../../../../../store/useFakePage";
-import { TopChannelBar } from "./topChannelBar";
 
 import { HiMiniSpeakerWave } from "react-icons/hi2";
 import { useChannelID } from "../../../hooks/useChannelID";
+import { VideoChannelServer } from "./ChannelsLayouts/VideoChannelServer";
+import { useModal } from "../../../../../../store/useModal";
 
 export function ReadyToJoin() {
   const { setCurrentChannel } = useChannelList();
   const { channelData } = useChannelID();
   const { addFakePage } = useFakePages();
+  const { setModalId } = useModal();
 
   const handleClick = () => {
-    setCurrentChannel(channelData?.id as string);
+    setModalId("");
+    setCurrentChannel(channelData?.id as string, true);
     addFakePage({
-      title: "",
-      children: <TopChannelBar />,
+      title: channelData?.name,
+      children: <VideoChannelServer />,
     });
   };
   return (
