@@ -31,7 +31,6 @@ export const RecoverPage: React.FC = () => {
         <div className="min-h-screen flex flex-col items-center justify-center px-4" style={{
             background: 'linear-gradient(to bottom, #000000, #19161D, #2E2934)'
         }}>
-            {/* Contenedor del icono goBackTriangle */}
             <div 
                 className="absolute top-4 left-4 cursor-pointer" 
                 onClick={handleGoBack}  // Añade el evento de clic para navegar

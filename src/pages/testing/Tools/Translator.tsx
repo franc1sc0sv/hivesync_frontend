@@ -54,7 +54,6 @@ export const TranslatorPage: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col  justify-center items-center bg-overlay_1">
       <div className="w-full max-w-md p-8 space-y-6 bg-[#28242C] rounded-2xl shadow-lg mt-6">
-        {/* <h1 className="text-2xl font-bold text-center text-[#FFFFFE]">Traductor</h1> */}
 
         <div className="flex justify-between space-x-4">
           <TextField
@@ -83,6 +82,13 @@ export const TranslatorPage: React.FC = () => {
             <MenuItem value="es">Español</MenuItem>
             <MenuItem value="en">Inglés</MenuItem>
             <MenuItem value="fr">Francés</MenuItem>
+            <MenuItem value="de">Alemán</MenuItem>
+            <MenuItem value="it">Italiano</MenuItem>
+            <MenuItem value="pt">Portugués</MenuItem>
+            <MenuItem value="ja">Japonés</MenuItem>
+            <MenuItem value="zh">Chino</MenuItem>
+            <MenuItem value="ru">Ruso</MenuItem>
+            <MenuItem value="ar">Árabe</MenuItem>
           </TextField>
 
           <TextField
@@ -111,6 +117,13 @@ export const TranslatorPage: React.FC = () => {
             <MenuItem value="es">Español</MenuItem>
             <MenuItem value="en">Inglés</MenuItem>
             <MenuItem value="fr">Francés</MenuItem>
+            <MenuItem value="de">Alemán</MenuItem>
+            <MenuItem value="it">Italiano</MenuItem>
+            <MenuItem value="pt">Portugués</MenuItem>
+            <MenuItem value="ja">Japonés</MenuItem>
+            <MenuItem value="zh">Chino (Simplificado)</MenuItem>
+            <MenuItem value="ru">Ruso</MenuItem>
+            <MenuItem value="ar">Árabe</MenuItem>
           </TextField>
         </div>
 
@@ -136,6 +149,5 @@ export const TranslatorPage: React.FC = () => {
         />
       </div>
     </div>
-
   );
 };
