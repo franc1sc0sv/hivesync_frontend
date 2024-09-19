@@ -1,8 +1,9 @@
-import { useSession } from "../../../../store/user";
-
-import { useCall } from "../Context/useCall";
-
 import { AiOutlineAudioMuted } from "react-icons/ai";
+import { useSession } from "../../../../store/user";
+import { CallParticipantsParams } from "../Context/CallContextChannel";
+
+import { useCall } from "../Context/useCallChannel";
+
 import { UserCameraStream } from "./userCameraStream";
 
 const UserCard = () => {
@@ -42,50 +43,45 @@ const UserCard = () => {
   );
 };
 
-const UserCardFriend = () => {
-  const {
-    remoteStream,
-    friend,
-    remoteVideoRef,
-    status,
-    isUserTalkingRemote,
-    isCameraActiveRemote,
-    isMicrophoneActiveRemote,
-  } = useCall();
+const UserCardExternal = ({
+  participant,
+}: {
+  participant: CallParticipantsParams;
+}) => {
+  const { user: current_user } = useSession();
 
-  const PENDING_STYLES = status?.status === "PENDING" ? "opacity-50" : "";
-  const PENDING_STYLES_BG =
-    status?.status === "PENDING" || isCameraActiveRemote
-      ? ""
-      : friend.backgroundUrl;
+  const { callControls, isUserTalking, user, userId, mediaStream, videoRef } =
+    participant;
+
+  const { IsCameraActive, isMicrofoneActive } = callControls;
+  const { backgroundUrl, username, profileUrl } = user;
 
   const borderTalking =
-    isUserTalkingRemote && isMicrophoneActiveRemote
+    isUserTalking && isMicrofoneActive
       ? "animate-pulse border-4 border-green"
       : "border-2 border-transparent";
 
-  const currentUser = status?.participants?.filter(
-    (participant) => participant.userId === friend.id_user
-  );
   const isCurrentUserActive =
-    !isMicrophoneActiveRemote && currentUser?.length !== 0;
+    !isMicrofoneActive && !(current_user?.id === userId);
+
+  if (userId === current_user?.id) return <></>;
 
   return (
     <div
-      style={{ backgroundColor: PENDING_STYLES_BG }}
-      className={`w-full max-w-xs h-full max-h-[320px] rounded-2xl flex items-center justify-center relative ${PENDING_STYLES} ${borderTalking}`}
+      style={{ backgroundColor: backgroundUrl }}
+      className={`w-full max-w-xs h-full max-h-[320px] rounded-2xl flex items-center justify-center relative ${borderTalking}`}
     >
       <UserCameraStream
-        isMicrofoneOn={isMicrophoneActiveRemote}
-        isCameraOn={isCameraActiveRemote}
-        videoRef={remoteVideoRef}
-        profileUrl={friend.profileUrl}
-        username={friend.username}
-        stream={remoteStream}
+        isMicrofoneOn={isMicrofoneActive}
+        isCameraOn={IsCameraActive}
+        videoRef={videoRef as React.RefObject<HTMLVideoElement>}
+        profileUrl={profileUrl}
+        username={username}
+        stream={mediaStream}
       />
 
       <p className="absolute pt-1 pb-1 pl-2 pr-2 mb-2 ml-2 text-white rounded-md left-2 bottom-2 bg-overlay_2 opacity-90">
-        {friend.username}
+        {username}
       </p>
 
       {isCurrentUserActive && (
@@ -100,8 +96,16 @@ const UserCardFriend = () => {
 export const UsersCalls = () => {
   return (
     <div className="flex flex-col items-center justify-center w-full h-full gap-8 md:flex-row">
-      <UserCardFriend />
+      <CallParticipantContainer />
       <UserCard />
     </div>
   );
+};
+
+const CallParticipantContainer = () => {
+  const { CallParticipants } = useCall();
+
+  return CallParticipants.map((participant, i) => {
+    return <UserCardExternal key={i} participant={participant} />;
+  });
 };

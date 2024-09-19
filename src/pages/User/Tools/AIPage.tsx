@@ -29,9 +29,9 @@ export const AIPage: React.FC = () => {
     for (let attempt = 1; attempt <= retries; attempt++) {
       try {
         const response = await openai.chat.completions.create({
-          model: 'gpt-3.5-turbo',
+          model: 'gpt-4o',
           messages: [{ role: 'user', content: safeMessage }],
-          max_tokens: 50,
+          max_tokens: 100,
         });
         return response.choices[0].message.content ?? 'No se recibió una respuesta adecuada de la IA.';
       } catch (error: any) {
@@ -64,7 +64,7 @@ export const AIPage: React.FC = () => {
   const MessageBubble: React.FC<{ message: string; isSent: boolean }> = ({ message, isSent }) => (
     <div className={`flex ${isSent ? 'justify-end' : 'justify-start'} mb-4`}>
       <div
-        className={`rounded-lg px-4 py-2 max-w-[70%] ${isSent ? 'bg-[#45156B] text-white' : 'bg-[#28242C] text-gray-200'
+        className={`rounded-lg text-start px-4 py-2 max-w-[70%] ${isSent ? 'bg-[#45156B] text-white' : 'bg-[#28242C] text-gray-200'
           }`}
       >
         {message}
@@ -72,7 +72,7 @@ export const AIPage: React.FC = () => {
     </div>
   );
   const TypingIndicator: React.FC = () => (
-    <div className="text-gray-400 text-sm italic mb-2">Escribiendo...</div>
+    <div className="text-gray-400 text-sm text-start italic mb-2w">Escribiendo...</div>
   );
   const InputField: React.FC<{ onSendMessage: (message: string) => void }> = ({ onSendMessage }) => {
     const [message, setMessage] = useState<string>('');

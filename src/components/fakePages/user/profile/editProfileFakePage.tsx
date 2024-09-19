@@ -2,14 +2,14 @@
 import { useModal } from "../../../../store/useModal";
 import { EditPictureOrCoverModal } from "../../../modals/userModals/profile/EditPictureOrCoverModal";
 
-import { useNotifications } from "../../../../store/useNotifications";
-
+import { edit_username_about } from "../../../../api/user_info";
 import { get_profile } from "../../../../api/auth";
 import { useState, useEffect } from "react";
 import { LoadingPage } from "../../../routes/loadingPage";
+import { useNavigate } from "react-router-dom";
 
 //form utils
-import { useCustomForm } from "../../../../hooks/useForm";
+import { useCustomFormModal } from "../../../../hooks/useFormModal";
 import { SubmitButton } from "../../../forms/Inputs/Button";
 import { InputsForms } from "../../../forms/Inputs/inputs";
 import { TextArea } from "../../../forms/Inputs/TextArea";
@@ -19,7 +19,6 @@ import { PencilIcon } from "../../../Icons/pencil";
 
 //mock
 import { UserAvatar } from "../../../Avatars/UserAvatar";
-import { useSession } from "../../../../store/user";
 
 
 interface Props {
@@ -107,31 +106,30 @@ const UserInformation: React.FC<Props> = ({ user }) => {
 };
 
 const EditProfileForm: React.FC<Props> = () => {
-  const { setNotifications } = useNotifications();
 
-  const api_function = async (data: any) => {
-    const displayName = data.name;
-    const aboutUser = data.aboutMe;
+  const navigate = useNavigate();
 
-    localStorage.setItem("name", displayName);
-    localStorage.setItem("aboutUser", aboutUser);
-  };
+  const [fetchedData, setFetchedData] = useState<Usuario>();
 
-  const post_success_function = async () => {
-    await location.reload();
-    setNotifications({
-      message: "ayuda",
-      severity: "info",
-    });
-    console.log("la api se llamó exitosa y épicamente");
-  };
-  const { user } = useSession();
+  const api_function = (data: any) => {
+    if (fetchedData) {
+      edit_username_about(fetchedData?.id, data);
+      navigate(0);
+    }
+  }
 
-  const { onSubmit, register, isLoading } = useCustomForm(
-    api_function,
-    post_success_function,
-    ""
-  );
+  const { onSubmit, register, isLoading } = useCustomFormModal(api_function);
+
+  useEffect(() => {
+    const fetch = async () => {
+      const fetchData = await get_profile();
+      setFetchedData(fetchData);
+    }
+    fetch();
+  }, [])
+
+  if (!fetchedData) return;
+
 
   return (
     <form
@@ -139,19 +137,19 @@ const EditProfileForm: React.FC<Props> = () => {
       className="flex flex-col w-full h-3/5 gap-5 p-5 px-1 text-start"
     >
       <InputsForms
-        title="Nombre"
+        title="Usuario"
         register={register}
-        name="name"
-        placeholder="Nombre a mostrar"
-        inputValue={user?.name}
+        name="username"
+        placeholder="Nombre de usuario"
+        inputValue={fetchedData?.username}
       />
 
       <TextArea
         title="Sobre mí"
-        name="aboutMe"
+        name="about"
         placeholder="Agrega una genial descripción"
         register={register}
-        inputValue={user?.about}
+        inputValue={fetchedData?.about}
       />
       <SubmitButton text="Guardar cambios" isLoading={isLoading} />
     </form>

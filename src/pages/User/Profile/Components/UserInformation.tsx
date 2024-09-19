@@ -38,8 +38,8 @@ const MainInformation: React.FC<ProfileProps> = ({user}) => {
   return (
     <div className="flex flex-col gap-2 p-3 rounded-lg bg-overlay_2 ">
       <div className="flex flex-col gap-1">
-        <p className="text-2xl text-custom_white ">{user?.name}</p>
-        <p className="text-sm text-gray ">{user?.username}</p>
+        <p className="text-2xl text-custom_white ">{user?.username}</p>
+        <p className="text-sm text-gray ">{user?.name}</p>
       </div>
 
       <div className="flex w-full gap-5 lg:justify-start">

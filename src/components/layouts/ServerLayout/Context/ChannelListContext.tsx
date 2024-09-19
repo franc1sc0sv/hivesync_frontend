@@ -9,7 +9,7 @@ interface ChannelContextType {
   channelList: ServerChannelsAray;
   setChannelList: React.Dispatch<React.SetStateAction<ServerChannelsAray>>;
   toogleCategory: (category: string) => void;
-  setCurrentChannel: (id: string) => void;
+  setCurrentChannel: (id: string, source?: boolean) => void;
   actualChannel: ChannelType | null;
   setActualChannel: React.Dispatch<React.SetStateAction<ChannelType | null>>;
 }
@@ -71,7 +71,7 @@ export const ChannelListProvider = ({
     setChannelList(new_data);
   };
 
-  const setCurrentChannel = (id: string) => {
+  const setCurrentChannel = (id: string, source: boolean = false) => {
     const new_data = channelList.map((list) => {
       const formated_channels = list.channels.map((channel) => {
         return { ...channel, isSelected: id === channel.id };
@@ -84,7 +84,7 @@ export const ChannelListProvider = ({
       .flatMap((list) => list.channels)
       .find((channel) => channel.id === id);
 
-    if (selectedChannel?.type === "VIDEO") return;
+    if (selectedChannel?.type === "VIDEO" && !source) return;
 
     updateUrl(id);
 

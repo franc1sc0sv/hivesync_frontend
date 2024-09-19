@@ -86,7 +86,6 @@ export const ChatProviderChannel = ({ children }: { children: ReactNode }) => {
       setMessages(newdata);
     });
   };
-  console.log(messages);
 
   if (isLoadingMessages) return <LoadingPage />;
   return (
