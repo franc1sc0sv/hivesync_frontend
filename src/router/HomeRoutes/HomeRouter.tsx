@@ -14,7 +14,7 @@ import BlackBoard from "../../pages/testing/Tools/BlackBoard";
 // import { PageChannelTesting } from "../../pages/testing/channel/pageChannelTesting";
 import { TranslatorPage } from "../../pages/testing/Tools/Translator";
 import { ChangeAvatarModal } from "../../pages/testing/imgPicker";
-
+import { ResetPasswordPage } from "../../pages/Auth/Recover/ResetPassword";
 
 export const HomeRoutes: RouteObject = {
   caseSensitive: true,
@@ -29,6 +29,7 @@ export const HomeRoutes: RouteObject = {
     { path: "/login", element: <LoginPage /> },
     { path: "/signup", element: <SingUpPage /> },
     { path: "/recover", element: <RecoverPage /> },
+    { path: "/reset-password", element: <ResetPasswordPage /> },
 
     //testing
     { path: "/iaTesting", element: <IaTesting /> },
