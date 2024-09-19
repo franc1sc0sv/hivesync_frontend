@@ -75,7 +75,7 @@ const GroupOfMessages = ({ group }: { group: GroupedMessagesType }) => {
   const isFromCurrentUserTheMessage = id_user === user?.id;
 
   const alignmentClass = isFromCurrentUserTheMessage
-    ? "flex-row-reverse items-end text-right" // Mensajes del usuario a la derecha
+    ? "flex-row-reverse items-start text-right" // Mensajes del usuario a la derecha
     : "flex-row items-start text-left"; // Mensajes del amigo a la izquierda
 
   return (
@@ -112,7 +112,7 @@ const GroupOfMessages = ({ group }: { group: GroupedMessagesType }) => {
               {formatDateMessage(sendAt)}
             </p>
           </div>
-          <div className="p-2 rounded-lg bg-overlay_2">
+          <div className="p-2 rounded-lg ">
             {messages.map((message, i) => (
               <Message message={message} key={i} />
             ))}

@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { SendIcon } from "../../../../components/Icons/send";
 
-import { useSendMessage } from "../../../../hooks/useSendMessage";
 import { useChat } from "../Context/useChat";
+import { useSendMessage } from "../../../../hooks/useSendMessage";
 
 export const MessageInput: React.FC = () => {
-  const { onSubmit, register, setValue } = useSendMessage();
+  const { friend, send_message } = useChat();
 
-  const { friend } = useChat();
+  const { onSubmit, register, setValue } = useSendMessage(send_message);
 
   useEffect(() => {
     const token = localStorage.getItem("token");

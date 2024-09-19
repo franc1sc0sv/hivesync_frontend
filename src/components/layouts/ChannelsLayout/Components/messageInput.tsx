@@ -5,9 +5,9 @@ import { useSendMessage } from "../../../../hooks/useSendMessage";
 import { useChat } from "../Context/useChat";
 
 export const MessageInput: React.FC = () => {
-  const { onSubmit, register, setValue } = useSendMessage();
+  const { channel, send_message } = useChat();
 
-  const { channel } = useChat();
+  const { onSubmit, register, setValue } = useSendMessage(send_message);
 
   useEffect(() => {
     const token = localStorage.getItem("token");

@@ -1,16 +1,14 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNotifications } from "../store/useNotifications";
 import { useSession } from "../store/user";
-import { useChat } from "../components/layouts/ChannelsLayout/Context/useChat";
+import { useNotifications } from "../store/useNotifications";
 
-export const useSendMessage = () => {
+export const useSendMessage = (send_message: (datos: any) => {}) => {
   const { register, handleSubmit, reset, setValue } = useForm();
   const { user } = useSession();
   const [isLoading, setIsloading] = useState(false);
 
   const { setNotifications } = useNotifications();
-  const { send_message } = useChat();
   const onSubmit = async (data: any) => {
     try {
       setIsloading(true);

@@ -10,6 +10,7 @@ type GroupedMessagesType = {
   id_user: string;
   sendAt: string;
   messages: MessageFormatedArray;
+  user: UserInfo;
 };
 
 type MessageFormated = {

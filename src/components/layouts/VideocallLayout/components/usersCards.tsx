@@ -53,6 +53,8 @@ const UserCardFriend = () => {
     isMicrophoneActiveRemote,
   } = useCall();
 
+  console.log();
+
   const PENDING_STYLES = status?.status === "PENDING" ? "opacity-50" : "";
   const PENDING_STYLES_BG =
     status?.status === "PENDING" || isCameraActiveRemote

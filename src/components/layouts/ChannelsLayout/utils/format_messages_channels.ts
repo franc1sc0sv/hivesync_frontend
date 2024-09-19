@@ -7,18 +7,17 @@ export function addMessageToGroupedMessages({
 }): GroupedMessagesTypeArray {
   const updatedMessages = [...messages];
 
-  const findGroupIndex = (id_user: string, sendAt: string): number => {
-    return updatedMessages.findIndex((group) => {
-      if (group.id_user === id_user) {
-        const previousDate = new Date(group.sendAt);
-        const currentDate = new Date(sendAt);
-        const timeDifference =
-          (currentDate.getTime() - previousDate.getTime()) / 60000;
-        return timeDifference <= 1;
-      }
-      return false;
-    });
-  };
+  const lastIndex = updatedMessages.length - 1;
+  const lastIndexFromUser =
+    updatedMessages[lastIndex].id_user === newMessage.id_sender;
+
+  const previousDate = new Date(updatedMessages[lastIndex].sendAt);
+
+  const currentDate = new Date(newMessage.sendAt);
+  const timeDifference =
+    (currentDate.getTime() - previousDate.getTime()) / 60000;
+
+  const isTheLastIndexRangeHour = timeDifference <= 1;
 
   const userMap: Record<string, UserInfo> = {};
   updatedMessages.forEach((group) => {
@@ -27,12 +26,9 @@ export function addMessageToGroupedMessages({
     }
   });
 
-  const groupIndex = findGroupIndex(newMessage.id_sender, newMessage.sendAt);
+  if (lastIndexFromUser && isTheLastIndexRangeHour) {
+    const group = updatedMessages[lastIndex];
 
-  if (groupIndex !== -1) {
-    const group = updatedMessages[groupIndex];
-
-    // Validar si el ID del mensaje ya existe en el grupo
     const messageExists = group.messages.some(
       (message) => message.id === newMessage.id
     );
@@ -44,7 +40,6 @@ export function addMessageToGroupedMessages({
       });
     }
   } else {
-    // Crear un nuevo grupo si no existe un grupo adecuado
     const newGroup: GroupedMessagesType = {
       id_user: newMessage.id_sender,
       sendAt: newMessage.sendAt,
@@ -66,11 +61,6 @@ export function addMessageToGroupedMessages({
     };
     updatedMessages.push(newGroup);
   }
-
-  // Ordenar los grupos por la fecha de envío
-  updatedMessages.sort(
-    (a, b) => new Date(a.sendAt).getTime() - new Date(b.sendAt).getTime()
-  );
 
   return updatedMessages;
 }
