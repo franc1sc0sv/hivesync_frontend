@@ -40,11 +40,38 @@ export const edit_about_me = async (id: string, data: any) => {
   }
 };
 
+export const edit_username_about = async (id: string, data: any) => {
+  try {
+    const res = await AxiosClient.patch(
+      `/edit/username-about/${id}`,
+      data,
+      headers()
+    );
+    return res;
+  } catch (error) {
+    console.log(error);
+    throwError(error);
+  }
+};
+
 export const edit_cover_color = async (id: string, data: any) => {
   try {
     const res = await AxiosClient.patch(
       `/user_info/user/edit/cover/${id}`,
       data,
+      headers()
+    );
+    return res;
+  } catch (error) {
+    console.log(error);
+    throwError(error);
+  }
+};
+
+export const reset_cover_color = async (id: string) => {
+  try {
+    const res = await AxiosClient.patch(
+      `/user_info/user/edit/reset-cover-color/${id}`,
       headers()
     );
     return res;

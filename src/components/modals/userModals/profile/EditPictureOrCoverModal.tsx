@@ -10,11 +10,16 @@ import { SubmitButton } from "../../../forms/Inputs/Button";
 import { useState, useEffect } from "react";
 import { get_profile } from "../../../../api/auth";
 import { useCustomFormModal } from "../../../../hooks/useFormModal";
-import { edit_cover_color } from "../../../../api/user_info";
+import { edit_cover_color, reset_cover_color } from "../../../../api/user_info";
 
 import { ChangeAvatar } from "../settings/accountSettings/changeAvatar/changeAvatar";
 
-//mock
+import { useLocation, useNavigate } from "react-router-dom";
+
+
+interface ResetCover {
+  id: string;
+}
 
 export const EditPictureOrCoverModal = () => {
   return (
@@ -30,18 +35,6 @@ export const EditPictureOrCoverModal = () => {
   );
 };
 
-// const ModalHeader = () => {
-//   return (
-//     <div className="flex flex-col items-center justify-center gap-2">
-//       <p className="text-2xl font-bold text-center font-amiko text-custom_white">
-//         Sube tu foto de perfil
-//       </p>
-//       <p className="text-sm text-center font-almarai text-custom_white">
-//         Dale identidad a tu perfil con una foto
-//       </p>
-//     </div>
-//   );
-// };
 
 export const EditProfilePictureForm = () => {
   const [picRoute] = useState("");
@@ -104,10 +97,16 @@ export const EditProfilePictureForm = () => {
 export const EditCoverThemeForm = () => {
   const [fetchedData, setFetchedData] = useState<Usuario>();
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const id = fetchedData?.id ? fetchedData.id : ""
 
   const api_function = (data: any) => {
     edit_cover_color(id, data)
+    if (location.pathname !== "/app/profile/settings") {
+      navigate(0);
+    }
   }
 
   const { onSubmit, register, isLoading } = useCustomFormModal(api_function);
@@ -120,31 +119,45 @@ export const EditCoverThemeForm = () => {
     fetch();
   }, [])
 
-  const resetColor = () => {
-    localStorage.setItem("themeColor", "#45156B");
-    location.reload();
-  };
-
+  if (!fetchedData) return;
 
 
   return (
-    <form
-      onSubmit={onSubmit}
-      className="flex flex-col items-center justify-center w-full h-full gap-5 p-4 mx-auto text-white lg:w-1/2"
-    >
-      <ColorPickerInput
-        register={register}
-        name="backgroundUrl"
-        inputValue={fetchedData?.backgroundUrl}
-      />
-
-      <p
-        onClick={() => resetColor()}
-        className="p-2 my-2 text-xl transition-all duration-300 border-2 border-overlay_1 hover:border-2 hover:border-custom_white rounded-xl text-center"
+    <>
+      <form
+        onSubmit={onSubmit}
+        className="flex flex-col items-center justify-center w-full h-full gap-5 p-4 mx-auto text-white lg:w-1/2"
       >
-        Restablecer color de tema
-      </p>
-      <SubmitButton text="Guardar cambios" isLoading={isLoading} />
-    </form>
+        <ColorPickerInput
+          register={register}
+          name="backgroundUrl"
+          inputValue={fetchedData?.backgroundUrl}
+        />
+
+        <SubmitButton text="Guardar cambios" isLoading={isLoading} />
+      </form>
+      <ResetCoverColor id={fetchedData?.id} />
+
+    </>
   );
 };
+
+const ResetCoverColor: React.FC<ResetCover> = ({ id }) => {
+
+  const navigate = useNavigate();
+
+  const resetColor = (id: string) => {
+    reset_cover_color(id);
+    navigate(0);
+  }
+
+  return (
+    <button
+      onClick={() => resetColor(id)}
+      className="p-2 my-2 text-xl transition-all duration-300 border-2 border-overlay_1 hover:border-2 hover:border-custom_white rounded-xl text-center text-custom_white"
+    >
+      Restablecer color de tema
+    </button>
+
+  )
+}
