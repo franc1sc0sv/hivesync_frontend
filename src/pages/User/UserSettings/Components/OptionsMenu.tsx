@@ -64,7 +64,7 @@ const SettingsTemplate: React.FC<SettingsProps> = ({ settings }) => {
       {settingsState.map((option, index) => (
         <div
           key={index}
-          className={`w-full relative  gap-3 px-5 py-2 bg-overlay_2 hover:bg-gray-700 rounded-lg shadow-lg transition-all duration-300 ease-in-out transform border-4 border-overlay_2 hover:border-primary`}
+          className={`w-full relative gap-3 px-5 py-2 bg-overlay_2 hover:bg-gray-700 rounded-lg shadow-lg transition-all duration-300 ease-in-out transform border-4 border-overlay_2 hover:border-primary`}
         >
           {/* card header */}
           <div

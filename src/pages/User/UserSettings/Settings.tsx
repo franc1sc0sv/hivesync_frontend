@@ -11,7 +11,7 @@ export const SettingsPage: React.FC = () => {
 
   return (
     <GeneralLayout title="Ajustes">
-      <div className="flex flex-col justify-between h-full gap-y-3">
+      <div className="flex flex-col max-md:justify-between h-full md:h-[85vh] gap-y-3">
         <div className="flex flex-col justify-between gap-2 overflow-y-auto">
           <OptionsProvider>
             <MenuOptions />
