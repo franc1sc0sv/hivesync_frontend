@@ -92,7 +92,7 @@ const SettingsTemplate: React.FC<SettingsProps> = ({ settings }) => {
               transition: "max-height 0.3s ease-in-out",
             }}
           >
-            <div className="flex flex-col justify-start w-full gap-2 pt-3 bg-gray-800 rounded-lg text-custom_white">
+            <div className="flex flex-col justify-start w-full gap-5 pt-3 bg-gray-800 rounded-lg text-custom_white">
               {option.options.map((opt, index) => (
                 <button
                   onClick={() => {

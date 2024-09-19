@@ -3,6 +3,9 @@ import { useSearchParams } from 'react-router-dom';
 import { resetPassword } from '../../../api/resetPassword'; // La función que interactúa con el backend
 import { RiEyeCloseLine, RiEyeLine, RiArrowRightSLine } from 'react-icons/ri';
 
+import { GoBackTriangle } from '../../../components/Icons/goBackTriangle';
+import { useNavigate } from 'react-router-dom';
+
 export const ResetPasswordPage: React.FC = () => {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -11,6 +14,8 @@ export const ResetPasswordPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+
+  const navigate = useNavigate();
 
   const token = searchParams.get('token');
 
@@ -48,9 +53,19 @@ export const ResetPasswordPage: React.FC = () => {
 
   const iconStyles = "absolute right-3 top-1/2 text-xl cursor-pointer text-white transform -translate-y-[30%]";
 
+  const handleGoBack = () => {
+    navigate('/login');  // Navega a la página principal
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12" 
-         style={{ background: 'linear-gradient(to bottom, #000000, #19161D, #2E2934)' }}>
+    <div className="min-h-screen flex items-center justify-center px-4 py-12"
+      style={{ background: 'linear-gradient(to bottom, #000000, #19161D, #2E2934)' }}>
+      <div
+        className="absolute top-4 left-4 cursor-pointer"
+        onClick={handleGoBack}  // Añade el evento de clic para navegar
+      >
+        <GoBackTriangle size={40} color='#fff' />
+      </div>
       <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl bg-[#19161D] p-8 rounded-lg shadow-lg">
         <div className="text-center mb-8">
           <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2">
