@@ -34,7 +34,7 @@ export const SocketContextProvider: React.FC<SocketContextProviderProps> = ({
 }) => {
   const [socket, setSocket] = useState<Socket | null>(null);
 
-  const url = import.meta.env.VITE_SOCKET + `${namespace}`;
+  const url = import.meta.env.VITE_SOCKET + `/${namespace}`;
   useEffect(() => {
     const socketInstance = io(url);
     setSocket(socketInstance);

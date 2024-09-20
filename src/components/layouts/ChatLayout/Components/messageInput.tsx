@@ -3,17 +3,17 @@ import { SendIcon } from "../../../../components/Icons/send";
 
 import { useChat } from "../Context/useChat";
 import { useSendMessage } from "../../../../hooks/useSendMessage";
+import { useSession } from "../../../../store/user";
 
 export const MessageInput: React.FC = () => {
   const { friend, send_message } = useChat();
+  const { user } = useSession();
 
   const { onSubmit, register, setValue } = useSendMessage(send_message);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-
     setValue("room", friend.id_friendship);
-    setValue("token", token);
+    setValue("id", user?.id);
   }, [onSubmit]);
 
   return (

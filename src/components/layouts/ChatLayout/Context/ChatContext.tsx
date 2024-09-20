@@ -73,7 +73,6 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
       try {
         const id_friend = get_id();
         const friend = await fecthData(id_friend);
-
         const messages = await fecthDataMessages(friend.id_friendship);
         setMessages(messages);
         setFriend(friend);
@@ -85,6 +84,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   useEffect(() => {
+    if (!friend.id_friendship) return;
     const roomId = friend.id_friendship;
 
     if (socket && roomId) {
@@ -94,8 +94,9 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (!socket) return;
-    console.log("afwff");
+
     const handleNewMessage = async (newMessage: any) => {
+      console.log("afwff");
       if (user?.id !== newMessage.id_sender) {
         const sound = new Audio(notificationSound);
         sound.volume = 0.1;

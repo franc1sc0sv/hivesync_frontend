@@ -1,23 +1,12 @@
 import { UserIcon } from "../../../components/Icons/user";
-import { ShieldIcon } from "../../../components/Icons/shield";
-import { MicrophoneIcon } from "../../../components/Icons/microphone";
 import { ColorPaletteIcon } from "../../../components/Icons/colorPalette";
-
 
 //account settings
 import { EditUsernameForm } from "../../../components/modals/userModals/settings/accountSettings/editUsername";
 import { EditNameForm } from "../../../components/modals/userModals/settings/accountSettings/editName";
-import { EditMailForm } from "../../../components/modals/userModals/settings/accountSettings/editMail";
-import { EditPasswordForm } from "../../../components/modals/userModals/settings/accountSettings/editPassword";
-import { EditProfilePictureForm } from "../../../components/modals/userModals/profile/EditPictureOrCoverModal";
+
 import { ChangeAvatar } from "../../../components/modals/userModals/settings/accountSettings/changeAvatar/changeAvatar";
 import { AboutMeForm } from "../../../components/modals/userModals/settings/accountSettings/aboutMe";
-
-//privacy settings
-import { OnlineStatusForm } from "../../../components/modals/userModals/settings/privacy/ToggleOnline";
-
-//voice settings
-import { MicrophoneStatusForm } from "../../../components/modals/userModals/settings/voiceSettings/toggleMicroModal";
 
 //appearance settings
 import { ToggleTransitionForm } from "../../../components/modals/userModals/settings/appearance/transition";
@@ -29,18 +18,15 @@ export interface MenuProps {
   name: string;
   toggleOptions: boolean;
   options: {
-    name: string,
-    modal: string
-    //componente a renderizar sin modal en desktop
+    name: string;
+    modal: string;
     optionComponent: React.ReactNode;
   }[];
-
 }
 
 export interface SettingsProps {
-  settings: MenuProps[]
+  settings: MenuProps[];
 }
-
 
 export const options: MenuProps[] = [
   {
@@ -51,34 +37,24 @@ export const options: MenuProps[] = [
       {
         name: "Nombre de usuario",
         modal: "editUsername",
-        optionComponent: <EditUsernameForm />
+        optionComponent: <EditUsernameForm />,
       },
       {
         name: "Tu nombre",
         modal: "editName",
-        optionComponent: <EditNameForm />
-      },
-      {
-        name: "Correo electrónico",
-        modal: "editMail",
-        optionComponent: <EditMailForm />
-      },
-      {
-        name: "Contraseña",
-        modal: "editPassword",
-        optionComponent: <EditPasswordForm />
+        optionComponent: <EditNameForm />,
       },
       {
         name: "Sobre mí",
         modal: "aboutMe",
-        optionComponent: <AboutMeForm />
+        optionComponent: <AboutMeForm />,
       },
       {
         name: "Foto de perfil",
         modal: "changeAvatar",
-        optionComponent: <ChangeAvatar />
+        optionComponent: <ChangeAvatar />,
       },
-    ]
+    ],
   },
   {
     icon: <ColorPaletteIcon size={30} color="white" />,
@@ -88,14 +64,14 @@ export const options: MenuProps[] = [
       {
         name: "Modificar color del tema de la portada",
         modal: "editCoverTheme",
-        optionComponent: <EditCoverThemeForm />
+        optionComponent: <EditCoverThemeForm />,
       },
       {
         name: "Transición al navegar por HiveSync",
         modal: "editTransition",
-        optionComponent: <ToggleTransitionForm />
-      }
-    ]
+        optionComponent: <ToggleTransitionForm />,
+      },
+    ],
   },
   //{
   //   icon: <ShieldIcon size={30} color="white" />,
@@ -121,5 +97,4 @@ export const options: MenuProps[] = [
   //     }
   //   ]
   // },
-
-]
+];

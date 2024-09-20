@@ -3,11 +3,9 @@ import { create } from "zustand";
 type FriendsData = {
   id_request: string;
   id_who_sent: string;
-  username_who_sent: string;
-  profile_url: string;
-  background_url: string;
   id_notification: string;
-};
+  user: UserProfile;
+} | null;
 
 type Props = {
   friendsData: FriendsData;
@@ -15,14 +13,7 @@ type Props = {
 };
 
 const useAddFriendsData = create<Props>((set) => ({
-  friendsData: {
-    id_request: "",
-    id_who_sent: "",
-    username_who_sent: "",
-    profile_url: "",
-    background_url: "",
-    id_notification: "",
-  },
+  friendsData: null,
   setFriendsData: (value) => set({ friendsData: value }),
 }));
 

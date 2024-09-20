@@ -14,12 +14,12 @@ export const AddFriendModal = () => {
 
   return (
     <ModalTemplate identificator="AddFriendModal">
-      <div className="w-full h-full flex flex-col justify-between items-center p-3">
-        <div className="w-4/5 sm:w-4/5 lg:w-3/5 flex flex-col justify-center items-center gap-4">
+      <div className="flex flex-col items-center justify-between w-full h-full p-3">
+        <div className="flex flex-col items-center justify-center w-4/5 gap-4 sm:w-4/5 lg:w-3/5">
           <ProfileCover
-            backgroundUrl={friendsData.background_url}
-            profileUrl={friendsData.profile_url}
-            username={friendsData.username_who_sent}
+            backgroundUrl={friendsData?.user.backgroundUrl as string}
+            profileUrl={friendsData?.user.profileUrl as string}
+            username={friendsData?.user.username as string}
             show_config={false}
           />
           <MainInformation />
@@ -36,12 +36,12 @@ const MainInformation: React.FC = () => {
 
   return (
     <div className="w-full lg:w-[90%]">
-      <p className="text-left text-xl text-white font-extralight font-amiko">
+      <p className="text-xl text-left text-white font-extralight font-amiko">
         <span
           // style={{ color: friendsData.background_url }}
           className="font-extrabold text-light_purple"
         >
-          {friendsData.username_who_sent + " "}
+          {friendsData?.user.username + " "}
         </span>
         te ha enviado una solicitud de amistad
       </p>
@@ -63,8 +63,8 @@ const ButtonsActions = () => {
   });
 
   const data = {
-    requestId: friendsData.id_request,
-    notificationId: friendsData.id_notification,
+    requestId: friendsData?.id_request,
+    notificationId: friendsData?.id_notification,
   };
 
   const acceptRequest = async () => {
@@ -91,7 +91,7 @@ const ButtonsContainer = ({
   declineRequest: () => Promise<void>;
 }) => {
   return (
-    <div className="flex w-4/5 lg:w-1/2 mx-auto gap-5">
+    <div className="flex w-4/5 gap-5 mx-auto lg:w-1/2">
       <CustomizedButton
         text="Aceptar"
         color="#382C6C"
