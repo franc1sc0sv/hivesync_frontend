@@ -1,32 +1,20 @@
-import { useState } from 'react';
-import { TextField, MenuItem } from '@mui/material';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { GoBackTriangle } from '../../../components/Icons/goBackTriangle';
+import { useState } from "react";
+import { TextField, MenuItem } from "@mui/material";
+import axios from "axios";
 
 export const TranslatorPage: React.FC = () => {
-
-  const [sourceText, setSourceText] = useState('');
-  const [translatedText, setTranslatedText] = useState('');
-  const [sourceLang, setSourceLang] = useState('es');
-  const [targetLang, setTargetLang] = useState('en');
-
-  const navigate = useNavigate();
+  const [sourceText, setSourceText] = useState("");
+  const [translatedText, setTranslatedText] = useState("");
+  const [sourceLang, setSourceLang] = useState("es");
+  const [targetLang, setTargetLang] = useState("en");
 
   const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 
   const handleTranslate = async () => {
     if (!sourceText.trim()) {
-      alert('Por favor, ingresa algún texto para traducir.');
+      alert("Por favor, ingresa algún texto para traducir.");
       return;
     }
-
-    const data = {
-      q: sourceText,
-      source: sourceLang,
-      target: targetLang,
-      format: 'text',
-    };
 
     try {
       const response = await axios.post(
@@ -37,24 +25,24 @@ export const TranslatorPage: React.FC = () => {
             q: sourceText,
             source: sourceLang,
             target: targetLang,
-            format: 'text',
-            key: API_KEY
-          }
+            format: "text",
+            key: API_KEY,
+          },
         }
       );
 
       setTranslatedText(response.data.data.translations[0].translatedText);
     } catch (error) {
-      console.error('Error al realizar la traducción:', error);
-      alert('Hubo un error al traducir el texto. Inténtalo de nuevo más tarde.');
+      console.error("Error al realizar la traducción:", error);
+      alert(
+        "Hubo un error al traducir el texto. Inténtalo de nuevo más tarde."
+      );
     }
   };
 
-
   return (
-    <div className="min-h-screen flex flex-col  justify-center items-center bg-overlay_1">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-overlay_1">
       <div className="w-full max-w-md p-8 space-y-6 bg-[#28242C] rounded-2xl shadow-lg mt-6">
-
         <div className="flex justify-between space-x-4">
           <TextField
             select
@@ -63,19 +51,19 @@ export const TranslatorPage: React.FC = () => {
             onChange={(e) => setSourceLang(e.target.value)}
             fullWidth
             InputLabelProps={{
-              style: { color: '#FFF' },
+              style: { color: "#FFF" },
             }}
             sx={{
-              backgroundColor: '#19161D',
-              color: '#FFF',
-              '& .MuiInputBase-root': {
-                color: '#FFFFFE',
+              backgroundColor: "#19161D",
+              color: "#FFF",
+              "& .MuiInputBase-root": {
+                color: "#FFFFFE",
               },
-              '& .Mui-focused .MuiInputLabel-root': {
-                color: '#FFF',
+              "& .Mui-focused .MuiInputLabel-root": {
+                color: "#FFF",
               },
-              '& .MuiSvgIcon-root': {
-                color: '#FFF',
+              "& .MuiSvgIcon-root": {
+                color: "#FFF",
               },
             }}
           >
@@ -98,19 +86,19 @@ export const TranslatorPage: React.FC = () => {
             onChange={(e) => setTargetLang(e.target.value)}
             fullWidth
             InputLabelProps={{
-              style: { color: '#FFF' },
+              style: { color: "#FFF" },
             }}
             sx={{
-              backgroundColor: '#19161D',
-              color: '#FFF',
-              '& .MuiInputBase-root': {
-                color: '#FFFFFE',
+              backgroundColor: "#19161D",
+              color: "#FFF",
+              "& .MuiInputBase-root": {
+                color: "#FFFFFE",
               },
-              '& .Mui-focused .MuiInputLabel-root': {
-                color: '#FFF',
+              "& .Mui-focused .MuiInputLabel-root": {
+                color: "#FFF",
               },
-              '& .MuiSvgIcon-root': {
-                color: '#FFF',
+              "& .MuiSvgIcon-root": {
+                color: "#FFF",
               },
             }}
           >

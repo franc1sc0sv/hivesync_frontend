@@ -1,12 +1,9 @@
-
 import { useRef, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { pdfExporter } from "quill-to-pdf"; // Librería para convertir Quill a PDF
-import { saveAs } from 'file-saver';
+import { saveAs } from "file-saver";
 import { Document, Packer, Paragraph, ImageRun, TextRun } from "docx";
-import logo from "/logo.png";
-import hivesyncLogo from "/hivesyncLogo.png";
 
 // Configuración de los módulos de Quill
 const modules = {
@@ -90,13 +87,13 @@ export default function TextEditorPage() {
   };
 
   return (
-    <div className="flex flex-col h-full w-full bg-overlay_1">
+    <div className="flex flex-col w-full h-full bg-overlay_1">
       {/* Barra superior */}
       <header className="p-4 shadow-sm">
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-2">
+        <div className="flex flex-col items-center justify-between gap-2 sm:flex-row">
           <input
             type="text"
-            className="w-full sm:max-w-xs border-none rounded p-2 focus:outline-none focus:ring-2 focus:ring-light_purple font-amiko text-custom_white bg-primary"
+            className="w-full p-2 border-none rounded sm:max-w-xs focus:outline-none focus:ring-2 focus:ring-light_purple font-amiko text-custom_white bg-primary"
             placeholder="Documento sin título"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -104,13 +101,13 @@ export default function TextEditorPage() {
           <div className="flex gap-2">
             <button
               onClick={exportToPDF}
-              className="flex items-center border-none rounded-md px-4 py-2 text-sm hover:bg-primary-light transition duration-200 bg-primary text-custom_white font-almarai"
+              className="flex items-center px-4 py-2 text-sm transition duration-200 border-none rounded-md hover:bg-primary-light bg-primary text-custom_white font-almarai"
             >
               Exportar a PDF
             </button>
             <button
               onClick={exportToWord}
-              className="flex items-center border-none rounded-md px-4 py-2 text-sm hover:bg-primary-light transition duration-200 bg-primary text-custom_white font-almarai"
+              className="flex items-center px-4 py-2 text-sm transition duration-200 border-none rounded-md hover:bg-primary-light bg-primary text-custom_white font-almarai"
             >
               Exportar a Word
             </button>
@@ -135,7 +132,7 @@ export default function TextEditorPage() {
       </div>
 
       {/* Footer */}
-      {/* <footer className="p-4 flex justify-center items-center bg-overlay_4">
+      {/* <footer className="flex items-center justify-center p-4 bg-overlay_4">
         <div className="flex items-center space-x-2">
           <img src={hivesyncLogo} alt="HiveSync Logo" className="h-8" />
           <img src={logo} alt="Logo" className="h-8" />

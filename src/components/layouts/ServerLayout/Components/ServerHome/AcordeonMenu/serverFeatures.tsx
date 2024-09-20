@@ -1,6 +1,4 @@
-import { useNavigate } from "react-router-dom";
 import { IconType } from "react-icons";
-import { GoDependabot } from "react-icons/go";
 import { RiOpenaiFill } from "react-icons/ri";
 import { IoDocumentText } from "react-icons/io5";
 import { PiPencilCircleLight } from "react-icons/pi";
@@ -27,43 +25,49 @@ export const features = (): ChannelProps[] => {
     {
       id: 1,
       name: "Hivesync X ChatGPT",
-      onClick: () => addFakePage({ title: <GptHeader />, children: <AIPage /> }),
+      onClick: () =>
+        addFakePage({ title: <GptHeader />, children: <AIPage /> }),
       icon: RiOpenaiFill,
     },
     {
       id: 2,
       name: "Hivesync Docs",
-      onClick: () => addFakePage({ title: "Hivesync Docs", children: <TextEditorPage />}),
+      onClick: () =>
+        addFakePage({ title: "Hivesync Docs", children: <TextEditorPage /> }),
       icon: IoDocumentText,
     },
     {
       id: 3,
       name: "Hivesync Boards",
-      onClick: () => addFakePage({ title: "Hivesync Boards", children: <WhiteBoardPage />}),
+      onClick: () =>
+        addFakePage({ title: "Hivesync Boards", children: <WhiteBoardPage /> }),
       icon: PiPencilCircleLight,
     },
     {
       id: 4,
       name: "Hivesync Translator",
-      onClick: () => addFakePage({ title: "Hivesync Translate", children: <TranslatorPage />}),
+      onClick: () =>
+        addFakePage({
+          title: "Hivesync Translate",
+          children: <TranslatorPage />,
+        }),
       icon: MdOutlineTranslate,
     },
     {
       id: 5,
       name: "Hivesync Signs",
       onClick: () =>
-        (window.open("https://hivesync-signs.vercel.app/", "_blank")),
+        window.open("https://hivesync-signs.vercel.app/", "_blank"),
       icon: PiHandWavingFill,
     },
   ];
 };
 
-
 const GptHeader = () => {
   return (
-    <div className="w-fit mx-auto flex items-center gap-2">
-      <RiOpenaiFill className="w-10 h-10 text-light_purple mr-2" />
+    <div className="flex items-center gap-2 mx-auto w-fit">
+      <RiOpenaiFill className="w-10 h-10 mr-2 text-light_purple" />
       <h1 className="text-xl font-bold text-white">ChatGPT</h1>
     </div>
-  )
-}
+  );
+};

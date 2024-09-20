@@ -17,9 +17,11 @@ export const DateInput: React.FC<DateProps> = ({
   placeholder,
   register,
   name,
-  defaultValue, 
+  defaultValue,
 }): ReactElement => {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(defaultValue || null); // Usa defaultValue si está disponible
+  const [selectedDate, setSelectedDate] = useState<Date | null>(
+    defaultValue || null
+  ); // Usa defaultValue si está disponible
   const [showDatePicker, setShowDatePicker] = useState<boolean>(false);
   const calendarRef = useRef<HTMLDivElement>(null);
 
@@ -33,11 +35,15 @@ export const DateInput: React.FC<DateProps> = ({
   // Manejo del cambio de fecha
   const handleDateChange = (
     value: Date | Date[] | null,
-    event?: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    _?: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ): void => {
     if (value instanceof Date) {
       setSelectedDate(value);
-    } else if (Array.isArray(value) && value.length > 0 && value[0] instanceof Date) {
+    } else if (
+      Array.isArray(value) &&
+      value.length > 0 &&
+      value[0] instanceof Date
+    ) {
       setSelectedDate(value[0]);
     } else {
       setSelectedDate(null);
@@ -88,7 +94,9 @@ export const DateInput: React.FC<DateProps> = ({
           <div className="absolute left-0 right-0 z-10 mt-2 top-full">
             <Calendar
               value={selectedDate || undefined}
-              onChange={(value) => handleDateChange(value as Date | Date[] | null)}
+              onChange={(value) =>
+                handleDateChange(value as Date | Date[] | null)
+              }
               className="rounded-xl"
             />
           </div>

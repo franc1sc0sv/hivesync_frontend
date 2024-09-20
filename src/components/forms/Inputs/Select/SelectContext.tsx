@@ -9,13 +9,17 @@ interface Props {
 export const SelectContext = createContext<Props>({
   showOptions: false,
   setShowOptions: () => {},
-  value: { name: "", id: "" },
+  value: { name: "", id: "", serverId: "" },
   setValue: () => {},
 });
 
 export const SelectProvider = ({ children }: { children: ReactNode }) => {
   const [showOptions, setShowOptions] = useState<boolean>(false);
-  const [value, setValue] = useState<Option>({ name: "", id: "" });
+  const [value, setValue] = useState<Option>({
+    name: "",
+    id: "",
+    serverId: "",
+  });
 
   return (
     <SelectContext.Provider

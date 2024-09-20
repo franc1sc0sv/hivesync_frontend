@@ -28,8 +28,14 @@ export const ServerFeaturesAccordion: React.FC<AccordionProps> = ({
 
   return (
     <section className="flex flex-col gap-1">
-      <div className="flex items-center gap-2 font-medium text-custom_white cursor-pointer" onClick={toggleAccordion}>
-        <IoIosArrowForward className={`transition-all ${rotateStyle}`} size={20} />
+      <div
+        className="flex items-center gap-2 font-medium cursor-pointer text-custom_white"
+        onClick={toggleAccordion}
+      >
+        <IoIosArrowForward
+          className={`transition-all ${rotateStyle}`}
+          size={20}
+        />
         <p>{name}</p>
       </div>
 

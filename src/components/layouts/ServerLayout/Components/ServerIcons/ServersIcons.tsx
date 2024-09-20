@@ -3,7 +3,6 @@ import { CreateServerIcon } from "./CreateServerIcon";
 import { ServerFolder } from "./ServerFolder";
 import { ServerIcon } from "./ServerIcon";
 // import { CommunityButton } from "../../../GeneralLayout/buttons/Comunitybutton";
-import { useServer } from "../../hooks/useServer";
 
 type PropsServerIcons = {
   server_data_icons: ServerDataIcons;

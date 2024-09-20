@@ -15,27 +15,28 @@ export const EditCoverModal: React.FC = () => {
 };
 
 const Form: React.FC = () => {
-  const { selected_server, setShouldFetch } = useServer();
+  const { selected_server } = useServer();
 
   const api_function = (data: any) => {
-    edit_server_cover(selected_server.id, data)
-    setShouldFetch(true);
+    edit_server_cover(selected_server.id, data);
   };
 
-  const { onSubmit, register, isLoading } = useCustomFormModal(api_function)
+  const { onSubmit, register, isLoading } = useCustomFormModal(api_function);
 
   return (
     <form
       onSubmit={onSubmit}
       className="flex flex-col items-center justify-center w-full h-full gap-5 p-4 mx-auto text-white sm:w-4/5 lg:w-1/2 "
     >
-      <ColorPickerInput 
-      inputValue={selected_server.backgroundUrl}
-      register={register} name="color" />
+      <ColorPickerInput
+        inputValue={selected_server.backgroundUrl}
+        register={register}
+        name="color"
+      />
       <p
         // onClick={() => resetColor()}
         onClick={() => {}}
-        className="p-2 my-2 text-xl transition-all duration-300 border-2 border-overlay_1 hover:border-2 hover:border-custom_white rounded-xl text-center"
+        className="p-2 my-2 text-xl text-center transition-all duration-300 border-2 border-overlay_1 hover:border-2 hover:border-custom_white rounded-xl"
       >
         Restablecer color de tema
       </p>

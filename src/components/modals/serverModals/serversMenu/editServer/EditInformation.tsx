@@ -14,7 +14,6 @@ import { PencilIcon } from "../../../../Icons/pencil";
 
 //mock
 import { ServerIcon } from "../../serverInfoModal";
-import { replace, useNavigate } from "react-router-dom";
 
 export const EditServerModal: React.FC = () => {
   return (
@@ -94,7 +93,6 @@ const ServerInformation: React.FC = () => {
 };
 
 const Form: React.FC = () => {
-
   const { selected_server } = useServer();
 
   const api_function = async (data: any) => {
@@ -102,7 +100,7 @@ const Form: React.FC = () => {
     // setShouldFetch(true);
   };
 
-  const { onSubmit, register, isLoading } = useCustomFormModal(api_function)
+  const { onSubmit, register, isLoading } = useCustomFormModal(api_function);
 
   return (
     <form

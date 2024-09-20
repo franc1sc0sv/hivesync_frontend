@@ -73,28 +73,4 @@ export const options: MenuProps[] = [
       },
     ],
   },
-  //{
-  //   icon: <ShieldIcon size={30} color="white" />,
-  //   name: "Privacidad",
-  //   toggleOptions: false,
-  //   options: [
-  //     {
-  //       name: "Estado en Linea",
-  //       modal: "toggleOnline",
-  //       optionComponent: <OnlineStatusForm />
-  //     }
-  //   ]
-  // },
-  // {
-  //   icon: <MicrophoneIcon size={30} color="white" />,
-  //   name: "Voz",
-  //   toggleOptions: false,
-  //   options: [
-  //     {
-  //       name: "Micrófono",
-  //       modal: "toggleMicro",
-  //       optionComponent: <MicrophoneStatusForm />
-  //     }
-  //   ]
-  // },
 ];

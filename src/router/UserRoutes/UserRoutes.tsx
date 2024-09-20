@@ -13,9 +13,7 @@ import TextEditorPage from "../../pages/User/Tools/documentsPage";
 import { WhiteBoardPage } from "../../pages/User/Tools/WhiteBoard";
 import { TranslatorPage } from "../../pages/User/Tools/TranslatorPage";
 
-
 //no le hagan caso xd ay lo borro
-import { TestingPage } from "../../pages/testing/TestingPage";
 import { ComunityPage } from "../../pages/Home/Comunity/ComunityPage";
 
 export const UserRoutes: RouteObject = {
@@ -25,7 +23,6 @@ export const UserRoutes: RouteObject = {
   children: [
     { path: "@me", element: <DirectMessagesPage /> }, // Bandeja entrada DM
     { path: ":id", element: <ChatPage /> }, //Chats individuales
-    { path: "test", element: <TestingPage /> },
 
     { path: "@notifications", element: <NotificationsPage /> }, //Notificaciones
 
@@ -37,13 +34,9 @@ export const UserRoutes: RouteObject = {
     { path: ":id/:id", element: <ServerPage /> }, // Servers - /server_id/channel_id
     { index: true, element: <ServerPage /> }, // Servers - /server_id/channel_id
 
-
     { path: "ai", element: <AIPage /> },
     { path: "documents", element: <TextEditorPage /> },
     { path: "whiteboard", element: <WhiteBoardPage /> },
-    { path: "translate", element: <TranslatorPage /> }
-
-
-
+    { path: "translate", element: <TranslatorPage /> },
   ],
 };
